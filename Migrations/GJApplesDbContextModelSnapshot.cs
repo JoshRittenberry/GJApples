@@ -37,6 +37,9 @@ namespace GJApples.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("text");
@@ -51,6 +54,7 @@ namespace GJApples.Migrations
                             Id = 1,
                             CostPerPound = 1.20m,
                             ImageUrl = "url_to_honeycrisp_image",
+                            IsActive = true,
                             Type = "Honeycrisp"
                         },
                         new
@@ -58,6 +62,7 @@ namespace GJApples.Migrations
                             Id = 2,
                             CostPerPound = 0.95m,
                             ImageUrl = "url_to_granny_smith_image",
+                            IsActive = true,
                             Type = "Granny Smith"
                         },
                         new
@@ -65,6 +70,7 @@ namespace GJApples.Migrations
                             Id = 3,
                             CostPerPound = 1.10m,
                             ImageUrl = "url_to_fuji_image",
+                            IsActive = true,
                             Type = "Fuji"
                         },
                         new
@@ -72,6 +78,7 @@ namespace GJApples.Migrations
                             Id = 4,
                             CostPerPound = 0.85m,
                             ImageUrl = "url_to_gala_image",
+                            IsActive = true,
                             Type = "Gala"
                         },
                         new
@@ -79,6 +86,7 @@ namespace GJApples.Migrations
                             Id = 5,
                             CostPerPound = 1.15m,
                             ImageUrl = "url_to_pink_lady_image",
+                            IsActive = true,
                             Type = "Pink Lady"
                         },
                         new
@@ -86,6 +94,7 @@ namespace GJApples.Migrations
                             Id = 6,
                             CostPerPound = 0.90m,
                             ImageUrl = "url_to_braeburn_image",
+                            IsActive = true,
                             Type = "Braeburn"
                         },
                         new
@@ -93,6 +102,7 @@ namespace GJApples.Migrations
                             Id = 7,
                             CostPerPound = 0.80m,
                             ImageUrl = "url_to_red_delicious_image",
+                            IsActive = true,
                             Type = "Red Delicious"
                         },
                         new
@@ -100,6 +110,7 @@ namespace GJApples.Migrations
                             Id = 8,
                             CostPerPound = 0.85m,
                             ImageUrl = "url_to_golden_delicious_image",
+                            IsActive = true,
                             Type = "Golden Delicious"
                         });
                 });
@@ -726,11 +737,11 @@ namespace GJApples.Migrations
                     b.Property<int>("AppleVarietyId")
                         .HasColumnType("integer");
 
-                    b.Property<DateOnly>("DatePlanted")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("DatePlanted")
+                        .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateOnly?>("DateRemoved")
-                        .HasColumnType("date");
+                    b.Property<DateTime?>("DateRemoved")
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
@@ -743,123 +754,123 @@ namespace GJApples.Migrations
                         {
                             Id = 1,
                             AppleVarietyId = 1,
-                            DatePlanted = new DateOnly(2015, 5, 10)
+                            DatePlanted = new DateTime(2015, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
                             AppleVarietyId = 1,
-                            DatePlanted = new DateOnly(2016, 6, 15)
+                            DatePlanted = new DateTime(2016, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
                             AppleVarietyId = 2,
-                            DatePlanted = new DateOnly(2017, 7, 20)
+                            DatePlanted = new DateTime(2017, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
                             AppleVarietyId = 2,
-                            DatePlanted = new DateOnly(2018, 8, 25),
-                            DateRemoved = new DateOnly(2023, 1, 30)
+                            DatePlanted = new DateTime(2018, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateRemoved = new DateTime(2023, 1, 30, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
                             AppleVarietyId = 3,
-                            DatePlanted = new DateOnly(2019, 9, 30)
+                            DatePlanted = new DateTime(2019, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 6,
                             AppleVarietyId = 3,
-                            DatePlanted = new DateOnly(2020, 10, 5)
+                            DatePlanted = new DateTime(2020, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 7,
                             AppleVarietyId = 4,
-                            DatePlanted = new DateOnly(2021, 11, 10)
+                            DatePlanted = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 8,
                             AppleVarietyId = 4,
-                            DatePlanted = new DateOnly(2022, 12, 15)
+                            DatePlanted = new DateTime(2022, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 9,
                             AppleVarietyId = 5,
-                            DatePlanted = new DateOnly(2016, 3, 20)
+                            DatePlanted = new DateTime(2016, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 10,
                             AppleVarietyId = 5,
-                            DatePlanted = new DateOnly(2017, 4, 25)
+                            DatePlanted = new DateTime(2017, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 11,
                             AppleVarietyId = 6,
-                            DatePlanted = new DateOnly(2018, 5, 30)
+                            DatePlanted = new DateTime(2018, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 12,
                             AppleVarietyId = 6,
-                            DatePlanted = new DateOnly(2019, 6, 5)
+                            DatePlanted = new DateTime(2019, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 13,
                             AppleVarietyId = 7,
-                            DatePlanted = new DateOnly(2020, 7, 10)
+                            DatePlanted = new DateTime(2020, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 14,
                             AppleVarietyId = 7,
-                            DatePlanted = new DateOnly(2021, 8, 15)
+                            DatePlanted = new DateTime(2021, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 15,
                             AppleVarietyId = 8,
-                            DatePlanted = new DateOnly(2022, 9, 20)
+                            DatePlanted = new DateTime(2022, 9, 20, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 16,
                             AppleVarietyId = 8,
-                            DatePlanted = new DateOnly(2023, 10, 25)
+                            DatePlanted = new DateTime(2023, 10, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 17,
                             AppleVarietyId = 1,
-                            DatePlanted = new DateOnly(2017, 11, 30)
+                            DatePlanted = new DateTime(2017, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 18,
                             AppleVarietyId = 2,
-                            DatePlanted = new DateOnly(2018, 12, 5),
-                            DateRemoved = new DateOnly(2023, 2, 10)
+                            DatePlanted = new DateTime(2018, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateRemoved = new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 19,
                             AppleVarietyId = 3,
-                            DatePlanted = new DateOnly(2019, 1, 10)
+                            DatePlanted = new DateTime(2019, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 20,
                             AppleVarietyId = 4,
-                            DatePlanted = new DateOnly(2020, 2, 15)
+                            DatePlanted = new DateTime(2020, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -1492,28 +1503,28 @@ namespace GJApples.Migrations
                         new
                         {
                             Id = "c3aaeb97-d2ba-4a53-a521-4eea61e59b35",
-                            ConcurrencyStamp = "9f6224a8-8547-4199-963b-0806c68006ff",
+                            ConcurrencyStamp = "f30a19fd-c5c0-4930-88ac-b7598b5b3b88",
                             Name = "Admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
                             Id = "8b2b3a2d-62f6-4f2b-8b3d-45b6a1f3b5b4",
-                            ConcurrencyStamp = "589a696d-6443-4e27-a5e6-c0f73dfc3aeb",
+                            ConcurrencyStamp = "865c1305-3139-4a2b-9f93-0186d6b98d9c",
                             Name = "Harvester",
                             NormalizedName = "harvester"
                         },
                         new
                         {
                             Id = "f65f1f30-d0b1-4f59-a3c8-eb1f2e6757d3",
-                            ConcurrencyStamp = "aec6329e-cdfb-486a-a378-94016e344c32",
+                            ConcurrencyStamp = "d0d49e9e-4cc7-4203-9219-949fd14cd612",
                             Name = "OrderPicker",
                             NormalizedName = "orderpicker"
                         },
                         new
                         {
                             Id = "d4f146bf-70c8-4d02-98ec-0b5f4b9d213f",
-                            ConcurrencyStamp = "01aeb43a-c1c6-487b-b360-8cffdea30a35",
+                            ConcurrencyStamp = "e060d163-73bd-43e0-b1ea-a573088ad36f",
                             Name = "Customer",
                             NormalizedName = "customer"
                         });
@@ -1612,13 +1623,13 @@ namespace GJApples.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "44b4f84b-0e55-4ffa-9a70-9e7203cc7366",
+                            ConcurrencyStamp = "581a5a6b-083d-4ff0-8e0d-4228f24426c2",
                             Email = "admin@gjapples.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAECGDIcd//XK0Z5D/ed1JnyfeGSUIgM/B77UeMevW4KFO3NHSl5yfwdAKZKz6GoTmSA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIUfztd6FLxmGIkUlab+5EUWjLrFH8uEL/0rCh2WXUP+xWPcv3ab9Q9HiMea2JKBNw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5fcf96c6-8770-45f0-ac46-f13d7196fc9f",
+                            SecurityStamp = "57bf3b6a-a045-4e2f-87c3-d290daa6bd26",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         },
@@ -1626,13 +1637,13 @@ namespace GJApples.Migrations
                         {
                             Id = "8c3605d2-c0da-4592-8879-0c71dc3c02c4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "da54327d-bf84-4577-8451-3e42fa770bb1",
+                            ConcurrencyStamp = "588e04b7-abab-4f3b-a706-35a54029577b",
                             Email = "josh@gjapples.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAENLHy1KrjKcWtIt4+B6gH6YBR5AF6XxFwEwngVqE7YJVimeoblECKUsnGGp45QsXDA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM9vXPRaHNK96Qj7DNumhU2cbYWgw5I13/qYyDp8d/fSz5+a6Oe8Q3gqGAaUdsFizw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "19ddc7a5-c342-4c80-84eb-da379d8f1495",
+                            SecurityStamp = "7bec3a53-b5b3-4cc8-80cf-240c1a99b8c4",
                             TwoFactorEnabled = false,
                             UserName = "Josh"
                         },
@@ -1640,13 +1651,13 @@ namespace GJApples.Migrations
                         {
                             Id = "3a64b2c1-7780-40f1-a393-8edb30c4b2ab",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2c0e9b72-0c2b-41c3-ae1c-bcaa6d1dfb15",
+                            ConcurrencyStamp = "5b771c10-7358-46d3-b56a-596e434de3c2",
                             Email = "haley@gjapples.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEJNJe9DoKE893oJ1tm4/gHwsit3K8Pptyis9SL9Ru79w+SEL1QFiqIlgrmODmDoFfA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGGfbeAuTJyLLPhJb7HZ3vXzTPkIiolgs++ZQpZvmq9dBcolGiE5i3EcjY+osrETXA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e8b6db6e-ce09-4fbc-9e88-4f7a17f65261",
+                            SecurityStamp = "b43e347f-020f-4143-8b39-6692de251c15",
                             TwoFactorEnabled = false,
                             UserName = "Haley"
                         },
@@ -1654,13 +1665,13 @@ namespace GJApples.Migrations
                         {
                             Id = "83aab5f4-67ba-4da9-940e-fef0ce8597bd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e7dcbf3b-d1fe-4893-8257-524d19a33bd9",
+                            ConcurrencyStamp = "177d55fa-7059-403f-9799-08c6af625ea0",
                             Email = "chris@gjapples.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEBcO4XdbYKFzo3q8XKThEwDq2wod4lHcgoSkSMbX7m4+1VfO0N6z//ItNMT/1LDFlQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG/ITYECPHP91+4wn6pzmqGim8JS8tcCHIFfQvur7GApQFcggPcOZLstV+yGH785BQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ffcdd47e-ce46-4e5a-87af-09b42fe4a52b",
+                            SecurityStamp = "eee8819c-f642-4198-b82c-e6470a01b96d",
                             TwoFactorEnabled = false,
                             UserName = "Chris"
                         },
@@ -1668,13 +1679,13 @@ namespace GJApples.Migrations
                         {
                             Id = "03d8deac-3687-4274-82c1-e1d32392d2de",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6d72324f-3fdf-4531-9678-56f9f664bfe5",
+                            ConcurrencyStamp = "95351039-1374-4658-8d8a-438ab8e4ef9e",
                             Email = "kyle@gjapples.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEGZ1II+6L/4Td4sQYT3gwRtpfEEzChT8qltZ83+453UFLHCxAbbZMOjWY/kj2bSzgw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHloNg0ANazpVhj6scL3Ehc29NxsW95MT4VtTLm1C7SRQqiU9CoM1IAnp2I4fGoNsg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a20d6647-bd28-41ed-a3c0-52791df89c6e",
+                            SecurityStamp = "e1bd32a1-e208-4766-b2c9-1e630c569082",
                             TwoFactorEnabled = false,
                             UserName = "Kyle"
                         },
@@ -1682,13 +1693,13 @@ namespace GJApples.Migrations
                         {
                             Id = "c8c02266-41e6-414d-a1fc-14bbefef86a0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "05e7c0da-cb02-4ca1-a581-caccfad110cd",
+                            ConcurrencyStamp = "741a7a02-1e9c-48f0-b1bc-07f4ecdf59f9",
                             Email = "debbie@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEHfBMIPqQNtlVYddXOrhTkDOAXYe7CNRNofV72wMS8W4xBeJGOpUEyShEex+JeKGqQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJgdXZIkrbKHDKf7/2sTPr8EAkcBqUKQNMPYXWyX3oiCP9HzN9MIsHcbN/W386/usQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a3f1f837-3445-4e5a-b420-caae346bc065",
+                            SecurityStamp = "cdb63400-f769-4032-97aa-67a621029c40",
                             TwoFactorEnabled = false,
                             UserName = "Debbie"
                         },
@@ -1696,13 +1707,13 @@ namespace GJApples.Migrations
                         {
                             Id = "bc3a3871-4800-4061-8182-b965c9c109bc",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c82fb5dd-6c75-4f7d-b990-8d82526cce07",
+                            ConcurrencyStamp = "251a38de-360a-4162-9fe8-89b728449405",
                             Email = "aaron@yahoo.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEK+XHgca2jOapPUzmDky21wVCf7ys+3tPanLqQjtsrN+8cLHqEYJA9fi3cU8bqPQ1A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECEW2jlNfzuxBGJ6NlxJ93nqfHFGeC/FgmrPegeReVUesBaChfO7/lWFilooj7aNbA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1bc94f82-c6a4-447d-b78a-45fbd4f3f511",
+                            SecurityStamp = "495a6f00-d28e-42cd-a63c-0158f508af1c",
                             TwoFactorEnabled = false,
                             UserName = "Aaron"
                         });

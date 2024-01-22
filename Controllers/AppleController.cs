@@ -1,4 +1,5 @@
 using GJApples.Data;
+using GJApples.Models;
 using GJApples.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +35,7 @@ public class AppleController : ControllerBase
                 Type = a.Type,
                 ImageUrl = a.ImageUrl,
                 CostPerPound = a.CostPerPound,
+                IsActive = a.IsActive,
                 Trees = isAuthorized ? a.Trees
                     .Where(t => t.DateRemoved == null)
                     .Select(t => new TreeDTO
@@ -88,6 +90,7 @@ public class AppleController : ControllerBase
             Type = appleVariety.Type,
             ImageUrl = appleVariety.ImageUrl,
             CostPerPound = appleVariety.CostPerPound,
+            IsActive = appleVariety.IsActive,
             Trees = appleVariety.Trees
                     .Where(t => t.DateRemoved == null)
                     .Select(t => new TreeDTO
@@ -118,4 +121,31 @@ public class AppleController : ControllerBase
             }).ToList()
         });
     }
+
+    [HttpPost]
+    [Authorize(Roles = "Admin")]
+    public IActionResult CreateNewAppleVariety(AppleVariety appleVariety)
+    {
+        var matchingAppleVariety = _dbContext
+            .AppleVarieties
+            .SingleOrDefault(a => a.Type.ToLower() == appleVariety.Type.ToLower().Trim());
+
+        if (matchingAppleVariety != null)
+        {
+            return BadRequest();
+        }
+
+        if (appleVariety.Type == null && appleVariety.CostPerPound == 0)
+        {
+            return BadRequest();
+        }
+
+        appleVariety.IsActive = true;
+        _dbContext.AppleVarieties.Add(appleVariety);
+        _dbContext.SaveChanges();
+
+        return Created($"/api/apple/{appleVariety.Id}", appleVariety);
+    }
+
+
 }

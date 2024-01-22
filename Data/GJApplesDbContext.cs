@@ -211,56 +211,64 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
                 Id = 1,
                 Type = "Honeycrisp",
                 ImageUrl = "url_to_honeycrisp_image",
-                CostPerPound = 1.20m
+                CostPerPound = 1.20m,
+                IsActive = true,
             },
             new AppleVariety
             {
                 Id = 2,
                 Type = "Granny Smith",
                 ImageUrl = "url_to_granny_smith_image",
-                CostPerPound = 0.95m
+                CostPerPound = 0.95m,
+                IsActive = true,
             },
             new AppleVariety
             {
                 Id = 3,
                 Type = "Fuji",
                 ImageUrl = "url_to_fuji_image",
-                CostPerPound = 1.10m
+                CostPerPound = 1.10m,
+                IsActive = true,
             },
             new AppleVariety
             {
                 Id = 4,
                 Type = "Gala",
                 ImageUrl = "url_to_gala_image",
-                CostPerPound = 0.85m
+                CostPerPound = 0.85m,
+                IsActive = true,
             },
             new AppleVariety
             {
                 Id = 5,
                 Type = "Pink Lady",
                 ImageUrl = "url_to_pink_lady_image",
-                CostPerPound = 1.15m
+                CostPerPound = 1.15m,
+                IsActive = true,
             },
             new AppleVariety
             {
                 Id = 6,
                 Type = "Braeburn",
                 ImageUrl = "url_to_braeburn_image",
-                CostPerPound = 0.90m
+                CostPerPound = 0.90m,
+                IsActive = true,
             },
             new AppleVariety
             {
                 Id = 7,
                 Type = "Red Delicious",
                 ImageUrl = "url_to_red_delicious_image",
-                CostPerPound = 0.80m
+                CostPerPound = 0.80m,
+                IsActive = true,
             },
             new AppleVariety
             {
                 Id = 8,
                 Type = "Golden Delicious",
                 ImageUrl = "url_to_golden_delicious_image",
-                CostPerPound = 0.85m
+                CostPerPound = 0.85m,
+                IsActive = true,
             }
         );
 
