@@ -147,5 +147,55 @@ public class AppleController : ControllerBase
         return Created($"/api/apple/{appleVariety.Id}", appleVariety);
     }
 
+    [HttpPut("{id}")]
+    // [Authorize(Roles = "Admin")]
+    public IActionResult EditAppleVariety(AppleVariety appleVariety, int id)
+    {
+        var appleVarietyToUpdate = _dbContext
+            .AppleVarieties
+            .SingleOrDefault(a => a.Id == id);
 
+        if (appleVariety == null)
+        {
+            return NotFound();
+        }
+
+        bool isUpdated = false;
+
+        // Update Type
+        if (!string.IsNullOrWhiteSpace(appleVariety.Type) && appleVariety.Type != appleVarietyToUpdate.Type)
+        {
+            appleVarietyToUpdate.Type = appleVariety.Type.Trim();
+            isUpdated = true;
+        }
+        // Update ImageUrl
+        if (!string.IsNullOrWhiteSpace(appleVariety.ImageUrl) && appleVariety.ImageUrl != appleVarietyToUpdate.ImageUrl)
+        {
+            appleVarietyToUpdate.ImageUrl = appleVariety.ImageUrl.Trim();
+            isUpdated = true;
+        }
+        // Update CostPerPound
+        if (appleVariety.CostPerPound != 0 && appleVariety.CostPerPound != appleVarietyToUpdate.CostPerPound)
+        {
+            appleVarietyToUpdate.CostPerPound = appleVariety.CostPerPound;
+            isUpdated = true;
+        }
+        // Update IsActive
+        if (appleVariety.IsActive != appleVarietyToUpdate.IsActive)
+        {
+            appleVarietyToUpdate.IsActive = appleVariety.IsActive;
+            isUpdated = true;
+        }
+        // Save Changes
+        if (isUpdated)
+        {
+            _dbContext.SaveChanges();
+            return Ok(appleVarietyToUpdate);
+        }
+        // Cancel Changes (if everything matches)
+        else
+        {
+            return NoContent();
+        }
+    }
 }
