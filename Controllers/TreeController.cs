@@ -60,12 +60,65 @@ public class TreeController : ControllerBase
                         Address = isAuthorized ? thr.Employee.Address : null,
                         Email = isAuthorized ? thr.Employee.IdentityUser.Email : null,
                         UserName = isAuthorized ? thr.Employee.IdentityUser.UserName : null,
-                        IdentityUserId = isAuthorized ? thr.Employee.IdentityUserId : null,
                     },
                     HarvestDate = thr.HarvestDate,
                     PoundsHarvested = thr.PoundsHarvested
                 }).ToList()
             }).ToList()
         );
+    }
+
+    [HttpGet("{id}")]
+    // [Authorize]
+    public IActionResult Get(int id)
+    {
+        var tree = _dbContext
+            .Trees
+            .Include(t => t.AppleVariety)
+            .Include(t => t.TreeHarvestReports)
+                .ThenInclude(thr => thr.Employee)
+                .ThenInclude(e => e.IdentityUser)
+            .SingleOrDefault(t => t.Id == id);
+
+        if (tree == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(new TreeDTO
+        {
+            Id = tree.Id,
+            AppleVarietyId = tree.AppleVarietyId,
+            AppleVariety = new AppleVarietyDTO
+            {
+                Id = tree.AppleVariety.Id,
+                Type = tree.AppleVariety.Type,
+                ImageUrl = tree.AppleVariety.ImageUrl,
+                CostPerPound = tree.AppleVariety.CostPerPound,
+                IsActive = tree.AppleVariety.IsActive,
+                Trees = null,
+                OrderItems = null
+            },
+            DatePlanted = tree.DatePlanted,
+            DateRemoved = tree.DateRemoved,
+            TreeHarvestReports = tree.TreeHarvestReports.Select(thr => new TreeHarvestReportDTO
+            {
+                Id = thr.Id,
+                TreeId = thr.TreeId,
+                Tree = null,
+                EmployeeUserProfileId = thr.EmployeeUserProfileId,
+                Employee = new UserProfileDTO
+                {
+                    Id = thr.Employee.Id,
+                    FirstName = thr.Employee.FirstName,
+                    LastName = thr.Employee.LastName,
+                    Address = thr.Employee.Address,
+                    Email = thr.Employee.IdentityUser.Email,
+                    UserName = thr.Employee.IdentityUser.UserName,
+                },
+                HarvestDate = thr.HarvestDate,
+                PoundsHarvested = thr.PoundsHarvested
+            }).ToList()
+        });
     }
 }
