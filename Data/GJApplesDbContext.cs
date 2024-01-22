@@ -206,6 +206,88 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             }
         );
 
+        modelBuilder.Entity<AppleVariety>().HasData(
+            new AppleVariety
+            {
+                Id = 1,
+                Type = "Honeycrisp",
+                ImageUrl = "url_to_honeycrisp_image",
+                CostPerPound = 1.20m
+            },
+            new AppleVariety
+            {
+                Id = 2,
+                Type = "Granny Smith",
+                ImageUrl = "url_to_granny_smith_image",
+                CostPerPound = 0.95m
+            },
+            new AppleVariety
+            {
+                Id = 3,
+                Type = "Fuji",
+                ImageUrl = "url_to_fuji_image",
+                CostPerPound = 1.10m
+            },
+            new AppleVariety
+            {
+                Id = 4,
+                Type = "Gala",
+                ImageUrl = "url_to_gala_image",
+                CostPerPound = 0.85m
+            },
+            new AppleVariety
+            {
+                Id = 5,
+                Type = "Pink Lady",
+                ImageUrl = "url_to_pink_lady_image",
+                CostPerPound = 1.15m
+            },
+            new AppleVariety
+            {
+                Id = 6,
+                Type = "Braeburn",
+                ImageUrl = "url_to_braeburn_image",
+                CostPerPound = 0.90m
+            },
+            new AppleVariety
+            {
+                Id = 7,
+                Type = "Red Delicious",
+                ImageUrl = "url_to_red_delicious_image",
+                CostPerPound = 0.80m
+            },
+            new AppleVariety
+            {
+                Id = 8,
+                Type = "Golden Delicious",
+                ImageUrl = "url_to_golden_delicious_image",
+                CostPerPound = 0.85m
+            }
+        );
+
+        modelBuilder.Entity<Tree>().HasData(
+            new Tree { Id = 1, AppleVarietyId = 1, DatePlanted = new DateOnly(2015, 5, 10) },
+            new Tree { Id = 2, AppleVarietyId = 1, DatePlanted = new DateOnly(2016, 6, 15) },
+            new Tree { Id = 3, AppleVarietyId = 2, DatePlanted = new DateOnly(2017, 7, 20) },
+            new Tree { Id = 4, AppleVarietyId = 2, DatePlanted = new DateOnly(2018, 8, 25), DateRemoved = new DateOnly(2023, 1, 30) },
+            new Tree { Id = 5, AppleVarietyId = 3, DatePlanted = new DateOnly(2019, 9, 30) },
+            new Tree { Id = 6, AppleVarietyId = 3, DatePlanted = new DateOnly(2020, 10, 5) },
+            new Tree { Id = 7, AppleVarietyId = 4, DatePlanted = new DateOnly(2021, 11, 10) },
+            new Tree { Id = 8, AppleVarietyId = 4, DatePlanted = new DateOnly(2022, 12, 15) },
+            new Tree { Id = 9, AppleVarietyId = 5, DatePlanted = new DateOnly(2016, 3, 20) },
+            new Tree { Id = 10, AppleVarietyId = 5, DatePlanted = new DateOnly(2017, 4, 25) },
+            new Tree { Id = 11, AppleVarietyId = 6, DatePlanted = new DateOnly(2018, 5, 30) },
+            new Tree { Id = 12, AppleVarietyId = 6, DatePlanted = new DateOnly(2019, 6, 5) },
+            new Tree { Id = 13, AppleVarietyId = 7, DatePlanted = new DateOnly(2020, 7, 10) },
+            new Tree { Id = 14, AppleVarietyId = 7, DatePlanted = new DateOnly(2021, 8, 15) },
+            new Tree { Id = 15, AppleVarietyId = 8, DatePlanted = new DateOnly(2022, 9, 20) },
+            new Tree { Id = 16, AppleVarietyId = 8, DatePlanted = new DateOnly(2023, 10, 25) },
+            new Tree { Id = 17, AppleVarietyId = 1, DatePlanted = new DateOnly(2017, 11, 30) },
+            new Tree { Id = 18, AppleVarietyId = 2, DatePlanted = new DateOnly(2018, 12, 5), DateRemoved = new DateOnly(2023, 2, 10) },
+            new Tree { Id = 19, AppleVarietyId = 3, DatePlanted = new DateOnly(2019, 1, 10) },
+            new Tree { Id = 20, AppleVarietyId = 4, DatePlanted = new DateOnly(2020, 2, 15) }
+        );
+
 
         // dotnet ef migrations add InitialCreate
         // dotnet ef database update
