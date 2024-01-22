@@ -1127,11 +1127,5 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             new OrderItem { Id = 49, OrderId = 11, AppleVarietyId = 8, Pounds = 2.5m },
             new OrderItem { Id = 50, OrderId = 11, AppleVarietyId = 6, Pounds = 0.5m }
         );
-
-        // dotnet ef migrations add InitialCreate
-        // dotnet ef database update
-
-        // Seed Database
-
     }
 }
