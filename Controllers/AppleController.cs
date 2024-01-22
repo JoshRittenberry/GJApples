@@ -148,7 +148,7 @@ public class AppleController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    // [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public IActionResult EditAppleVariety(AppleVariety appleVariety, int id)
     {
         var appleVarietyToUpdate = _dbContext
@@ -197,5 +197,23 @@ public class AppleController : ControllerBase
         {
             return NoContent();
         }
+    }
+
+    [HttpPut("{id}/changestatus")]
+    // [Authorize(Roles = "Admin")]
+    public IActionResult EditAppleVarietyActiveStatus(int id)
+    {
+        var appleVarietyToUpdate = _dbContext
+            .AppleVarieties
+            .SingleOrDefault(a => a.Id == id);
+
+        if (appleVarietyToUpdate == null)
+        {
+            return NotFound();
+        }
+
+        appleVarietyToUpdate.IsActive = !appleVarietyToUpdate.IsActive;
+        _dbContext.SaveChanges();
+        return NoContent();
     }
 }
