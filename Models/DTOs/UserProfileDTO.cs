@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using GJApples.ModelsDTOs;
 using Microsoft.AspNetCore.Identity;
 
 namespace GJApples.Models.DTOs;

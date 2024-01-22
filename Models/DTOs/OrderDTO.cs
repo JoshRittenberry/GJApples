@@ -1,20 +1,21 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace GJApples.Models;
+using GJApples.Models.DTOs;
+namespace GJApples.Models.DTO;
 
-public class Order
+public class OrderDTO
 {
     public int Id { get; set; }
 
     [ForeignKey("Customer")]
     public int CustomerUserProfileId { get; set; }
 
-    public UserProfile Customer { get; set; }
+    public UserProfileDTO Customer { get; set; }
 
     [ForeignKey("Employee")]
     public int EmployeeUserProfileId { get; set; }
 
-    public UserProfile Employee { get; set; }
+    public UserProfileDTO Employee { get; set; }
 
     public DateTime DateOrdered { get; set; }
     public DateTime? DateCompleted { get; set; }
@@ -27,5 +28,5 @@ public class Order
         }
     }
 
-    public List<OrderItem> OrderItems { get; set; }
+    public List<OrderItemDTO> OrderItems { get; set; }
 }

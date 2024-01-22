@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using GJApples.Models;
-namespace HouseRules.Models;
+using System.ComponentModel.DataAnnotations.Schema;
+namespace GJApples.Models;
 
 public class TreeHarvestReport
 {
@@ -9,7 +9,8 @@ public class TreeHarvestReport
     public int TreeId { get; set; }
     public Tree Tree { get; set; }
     [Required]
-    public int UserProfileId { get; set; }
+    [ForeignKey("Employee")]
+    public int EmployeeUserProfileId { get; set; }
     public UserProfile Employee { get; set; }
     [Required]
     public DateTime HarvestDate { get; set; }

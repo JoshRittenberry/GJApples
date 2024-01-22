@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-namespace HouseRules.Models;
+namespace GJApples.Models;
 
 public class AppleVariety
 {
