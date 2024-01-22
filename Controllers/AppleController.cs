@@ -18,8 +18,18 @@ public class AppleController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public IActionResult Get()
     {
+        List<string> rolesToCheck = new List<string>
+        {
+            "Admin",
+            "Harvester",
+            "OrderPicker"
+        };
+
+        bool isEmployeeOrAdmin = rolesToCheck.Any(role => User.IsInRole(role));
+
         return Ok(_dbContext
             .AppleVarieties
                 .Include(a => a.Trees)
@@ -41,14 +51,14 @@ public class AppleController : ControllerBase
                         DateRemoved = t.DateRemoved,
                         TreeHarvestReports = null
                     }).ToList(),
-                OrderItems = a.OrderItems.Select(oi => new OrderItemDTO
+                OrderItems = isEmployeeOrAdmin ? a.OrderItems.Select(oi => new OrderItemDTO
                 {
                     Id = oi.Id,
                     OrderId = oi.OrderId,
                     AppleVarietyId = oi.AppleVarietyId,
                     AppleVariety = null,
                     Pounds = oi.Pounds
-                }).ToList()
+                }).ToList() : null
             }).ToList()
         );
     }

@@ -8,11 +8,13 @@ public class AppleVariety
     public string Type { get; set; }
     public string ImageUrl { get; set; }
     [Required]
-    public decimal PoundsOnHand
+    public decimal? PoundsOnHand
     {
         get
         {
-            return Trees.Sum(t => t.TreeHarvestReports.Sum(th => th.PoundsHarvested)) - OrderItems.Sum(oi => oi.Pounds);
+            decimal HarvestedTotal = Trees.Sum(t => t.TreeHarvestReports.Sum(th => th.PoundsHarvested));
+            decimal OrderedTotal = OrderItems.Sum(oi => oi.Pounds);
+            return HarvestedTotal - OrderedTotal;
         }
     }
     [Required]
