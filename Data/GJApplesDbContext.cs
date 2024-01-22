@@ -390,6 +390,489 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             }
         );
 
+        modelBuilder.Entity<TreeHarvestReport>().HasData(
+            new TreeHarvestReport
+            {
+                Id = 1,
+                TreeId = 1,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 45.5M
+            },
+            new TreeHarvestReport
+            {
+                Id = 2,
+                TreeId = 1,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 23M
+            },
+            new TreeHarvestReport
+            {
+                Id = 3,
+                TreeId = 2,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 32.25M
+            },
+            new TreeHarvestReport
+            {
+                Id = 4,
+                TreeId = 2,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 50M
+            },
+            new TreeHarvestReport
+            {
+                Id = 5,
+                TreeId = 3,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 58.75M
+            },
+            new TreeHarvestReport
+            {
+
+                Id = 6,
+                TreeId = 3,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 54M
+            },
+            new TreeHarvestReport
+            {
+                Id = 7,
+                TreeId = 4,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 57M
+            },
+            new TreeHarvestReport
+            {
+                Id = 8,
+                TreeId = 5,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 28M
+            },
+            new TreeHarvestReport
+            {
+                Id = 9,
+                TreeId = 5,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 38M
+            },
+            new TreeHarvestReport
+            {
+                Id = 10,
+                TreeId = 6,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 28M
+            },
+            new TreeHarvestReport
+            {
+                Id = 11,
+                TreeId = 6,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 45M
+            },
+            new TreeHarvestReport
+            {
+                Id = 12,
+                TreeId = 7,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 30M
+            },
+            new TreeHarvestReport
+            {
+                Id = 13,
+                TreeId = 7,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 49M
+            },
+            new TreeHarvestReport
+            {
+                Id = 14,
+                TreeId = 8,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 52M
+            },
+            new TreeHarvestReport
+            {
+                Id = 15,
+                TreeId = 8,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 38M
+            },
+            new TreeHarvestReport
+            {
+                Id = 16,
+                TreeId = 9,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 56M
+            },
+            new TreeHarvestReport
+            {
+                Id = 17,
+                TreeId = 9,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 27M
+            },
+            new TreeHarvestReport
+            {
+                Id = 18,
+                TreeId = 10,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 50M
+            },
+            new TreeHarvestReport
+            {
+                Id = 19,
+                TreeId = 10,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 16M
+            },
+            new TreeHarvestReport
+            {
+                Id = 20,
+                TreeId = 11,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 15M
+            },
+            new TreeHarvestReport
+            {
+                Id = 21,
+                TreeId = 11,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 35M
+            },
+            new TreeHarvestReport
+            {
+                Id = 22,
+                TreeId = 12,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 26M
+            },
+            new TreeHarvestReport
+            {
+                Id = 23,
+                TreeId = 12,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 56M
+            },
+            new TreeHarvestReport
+            {
+                Id = 24,
+                TreeId = 13,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 31M
+            },
+            new TreeHarvestReport
+            {
+                Id = 25,
+                TreeId = 13,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 50M
+            },
+            new TreeHarvestReport
+            {
+                Id = 26,
+                TreeId = 14,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 40M
+            },
+            new TreeHarvestReport
+            {
+                Id = 27,
+                TreeId = 14,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 38M
+            },
+            new TreeHarvestReport
+            {
+                Id = 28,
+                TreeId = 15,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 46M
+            },
+            new TreeHarvestReport
+            {
+                Id = 29,
+                TreeId = 15,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 24M
+            },
+            new TreeHarvestReport
+            {
+                Id = 30,
+                TreeId = 16,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 41M
+            },
+            new TreeHarvestReport
+            {
+                Id = 31,
+                TreeId = 16,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 46M
+            },
+            new TreeHarvestReport
+            {
+                Id = 32,
+                TreeId = 17,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 42M
+            },
+            new TreeHarvestReport
+            {
+                Id = 33,
+                TreeId = 17,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 52M
+            },
+            new TreeHarvestReport
+            {
+                Id = 34,
+                TreeId = 18,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 55M
+            },
+            new TreeHarvestReport
+            {
+                Id = 35,
+                TreeId = 19,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 51M
+            },
+            new TreeHarvestReport
+            {
+                Id = 36,
+                TreeId = 19,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 19M
+            },
+            new TreeHarvestReport
+            {
+                Id = 37,
+                TreeId = 20,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 7),
+                PoundsHarvested = 26M
+            },
+            new TreeHarvestReport
+            {
+                Id = 38,
+                TreeId = 20,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 14),
+                PoundsHarvested = 50M
+            },
+            new TreeHarvestReport
+            {
+                Id = 39,
+                TreeId = 1,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 16M
+            },
+            new TreeHarvestReport
+            {
+                Id = 40,
+                TreeId = 1,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 28),
+                PoundsHarvested = 43M
+            },
+            new TreeHarvestReport
+            {
+                Id = 41,
+                TreeId = 2,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 26M
+            },
+            new TreeHarvestReport
+            {
+                Id = 42,
+                TreeId = 2,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 28),
+                PoundsHarvested = 18M
+            },
+            new TreeHarvestReport
+            {
+                Id = 43,
+                TreeId = 3,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 50M
+            },
+            new TreeHarvestReport
+            {
+                Id = 44,
+                TreeId = 3,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 28),
+                PoundsHarvested = 56M
+            },
+            new TreeHarvestReport
+            {
+                Id = 45,
+                TreeId = 4,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 58M
+            },
+            new TreeHarvestReport
+            {
+                Id = 46,
+                TreeId = 5,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 31M
+            },
+            new TreeHarvestReport
+            {
+                Id = 47,
+                TreeId = 6,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 28M
+            },
+            new TreeHarvestReport
+            {
+                Id = 48,
+                TreeId = 7,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 51M
+            },
+            new TreeHarvestReport
+            {
+                Id = 49,
+                TreeId = 8,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 41M
+            },
+            new TreeHarvestReport
+            {
+                Id = 50,
+                TreeId = 9,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 27M
+            },
+            new TreeHarvestReport
+            {
+                Id = 51,
+                TreeId = 10,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 25M
+            },
+            new TreeHarvestReport
+            {
+                Id = 52,
+                TreeId = 11,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 16M
+            },
+            new TreeHarvestReport
+            {
+                Id = 53,
+                TreeId = 12,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 41M
+            },
+            new TreeHarvestReport
+            {
+                Id = 54,
+                TreeId = 13,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 19M
+            },
+            new TreeHarvestReport
+            {
+                Id = 55,
+                TreeId = 14,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 42M
+            },
+            new TreeHarvestReport
+            {
+                Id = 56,
+                TreeId = 15,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 37M
+            },
+            new TreeHarvestReport
+            {
+                Id = 57,
+                TreeId = 16,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 20M
+            },
+            new TreeHarvestReport
+            {
+                Id = 58,
+                TreeId = 17,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 26M
+            },
+            new TreeHarvestReport
+            {
+                Id = 59,
+                TreeId = 18,
+                EmployeeUserProfileId = 2,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 23M
+            },
+            new TreeHarvestReport
+            {
+                Id = 60,
+                TreeId = 19,
+                EmployeeUserProfileId = 3,
+                HarvestDate = new DateTime(2023, 1, 21),
+                PoundsHarvested = 17M
+            }
+        );
 
         // dotnet ef migrations add InitialCreate
         // dotnet ef database update
