@@ -6,7 +6,7 @@ public class Tree
     public int Id { get; set; }
     [Required]
     public int AppleVarietyId { get; set; }
-    public AppleVariety AppleVariety { get; set; }
+    public AppleVariety? AppleVariety { get; set; }
     [Required]
     public DateTime DatePlanted { get; set; }
     public DateTime? DateRemoved { get; set; }

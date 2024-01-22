@@ -69,7 +69,7 @@ public class TreeController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    // [Authorize]
+    [Authorize]
     public IActionResult Get(int id)
     {
         var tree = _dbContext
@@ -120,5 +120,15 @@ public class TreeController : ControllerBase
                 PoundsHarvested = thr.PoundsHarvested
             }).ToList()
         });
+    }
+
+    [HttpPost]
+    // [Authorize(Roles = "Admin")]
+    public IActionResult CreateNewTree(Tree tree)
+    {
+        _dbContext.Trees.Add(tree);
+        _dbContext.SaveChanges();
+
+        return Created($"/api/tree/{tree.Id}", tree);
     }
 }
