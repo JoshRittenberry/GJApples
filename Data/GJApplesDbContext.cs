@@ -53,7 +53,6 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             }
         });
 
-        // Assuming _configuration["HarvesterPassword"], _configuration["OrderPickerPassword"], and _configuration["CustomerPassword"] are set
         var passwordHasher = new PasswordHasher<IdentityUser>();
 
         modelBuilder.Entity<IdentityUser>().HasData(new IdentityUser[]
@@ -872,6 +871,261 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
                 HarvestDate = new DateTime(2023, 1, 21),
                 PoundsHarvested = 17M
             }
+        );
+
+        modelBuilder.Entity<Order>().HasData(
+            new Order
+            {
+                Id = 1,
+                CustomerUserProfileId = 6,
+                DateOrdered = new DateTime(2023, 8, 11),
+                Canceled = true
+            },
+            new Order
+            {
+                Id = 2,
+                CustomerUserProfileId = 6,
+                DateOrdered = new DateTime(2023, 9, 14),
+                Canceled = true
+            },
+            new Order
+            {
+                Id = 3,
+                CustomerUserProfileId = 7,
+                DateOrdered = new DateTime(2023, 12, 24),
+                Canceled = true
+            },
+            new Order
+            {
+                Id = 4,
+                CustomerUserProfileId = 6,
+                DateOrdered = new DateTime(2023, 10, 3),
+                Canceled = true
+            },
+            new Order
+            {
+                Id = 5,
+                CustomerUserProfileId = 7,
+                DateOrdered = new DateTime(2023, 5, 30),
+                Canceled = true
+            },
+            new Order
+            {
+                Id = 6,
+                CustomerUserProfileId = 7,
+                EmployeeUserProfileId = 3,
+                DateOrdered = new DateTime(2023, 3, 23),
+                DateCompleted = new DateTime(2023, 4, 15),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 7,
+                CustomerUserProfileId = 7,
+                EmployeeUserProfileId = 2,
+                DateOrdered = new DateTime(2023, 7, 22),
+                DateCompleted = new DateTime(2023, 11, 23),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 8,
+                CustomerUserProfileId = 7,
+                EmployeeUserProfileId = 3,
+                DateOrdered = new DateTime(2023, 10, 10),
+                DateCompleted = new DateTime(2023, 10, 28),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 9,
+                CustomerUserProfileId = 6,
+                EmployeeUserProfileId = 3,
+                DateOrdered = new DateTime(2023, 1, 5),
+                DateCompleted = new DateTime(2023, 5, 30),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 10,
+                CustomerUserProfileId = 7,
+                EmployeeUserProfileId = 3,
+                DateOrdered = new DateTime(2023, 4, 8),
+                DateCompleted = new DateTime(2023, 11, 14),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 11,
+                CustomerUserProfileId = 6,
+                EmployeeUserProfileId = 3,
+                DateOrdered = new DateTime(2023, 3, 26),
+                DateCompleted = new DateTime(2023, 9, 24),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 12,
+                CustomerUserProfileId = 6,
+                EmployeeUserProfileId = 3,
+                DateOrdered = new DateTime(2023, 10, 15),
+                DateCompleted = new DateTime(2023, 10, 15),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 13,
+                CustomerUserProfileId = 7,
+                EmployeeUserProfileId = 3,
+                DateOrdered = new DateTime(2023, 9, 29),
+                DateCompleted = new DateTime(2023, 11, 5),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 14,
+                CustomerUserProfileId = 6,
+                EmployeeUserProfileId = 2,
+                DateOrdered = new DateTime(2023, 3, 15),
+                DateCompleted = new DateTime(2023, 9, 19),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 15,
+                CustomerUserProfileId = 7,
+                EmployeeUserProfileId = 3,
+                DateOrdered = new DateTime(2023, 9, 14),
+                DateCompleted = new DateTime(2023, 9, 26),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 16,
+                CustomerUserProfileId = 6,
+                EmployeeUserProfileId = 3,
+                DateOrdered = new DateTime(2023, 3, 15),
+                DateCompleted = new DateTime(2023, 11, 29),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 17,
+                CustomerUserProfileId = 7,
+                EmployeeUserProfileId = 2,
+                DateOrdered = new DateTime(2023, 5, 3),
+                DateCompleted = new DateTime(2023, 12, 27),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 18,
+                CustomerUserProfileId = 6,
+                DateOrdered = new DateTime(2023, 11, 5),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 19,
+                CustomerUserProfileId = 7,
+                DateOrdered = new DateTime(2023, 6, 24),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 20,
+                CustomerUserProfileId = 6,
+                DateOrdered = new DateTime(2023, 4, 20),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 21,
+                CustomerUserProfileId = 7,
+                DateOrdered = new DateTime(2023, 9, 8),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 22,
+                CustomerUserProfileId = 7,
+                DateOrdered = new DateTime(2023, 5, 24),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 23,
+                CustomerUserProfileId = 7,
+                DateOrdered = new DateTime(2023, 5, 7),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 24,
+                CustomerUserProfileId = 6,
+                DateOrdered = new DateTime(2023, 5, 27),
+                Canceled = false
+            },
+            new Order
+            {
+                Id = 25,
+                CustomerUserProfileId = 6,
+                DateOrdered = new DateTime(2023, 10, 8),
+                Canceled = false
+            }
+        );
+
+        modelBuilder.Entity<OrderItem>().HasData(
+            new OrderItem { Id = 1, OrderId = 1, AppleVarietyId = 1, Pounds = 1.5m },
+            new OrderItem { Id = 2, OrderId = 1, AppleVarietyId = 3, Pounds = 1.0m },
+            new OrderItem { Id = 3, OrderId = 1, AppleVarietyId = 4, Pounds = 0.5m },
+            new OrderItem { Id = 4, OrderId = 1, AppleVarietyId = 6, Pounds = 2.5m },
+            new OrderItem { Id = 5, OrderId = 2, AppleVarietyId = 2, Pounds = 2.0m },
+            new OrderItem { Id = 6, OrderId = 2, AppleVarietyId = 8, Pounds = 3.0m },
+            new OrderItem { Id = 7, OrderId = 2, AppleVarietyId = 4, Pounds = 0.5m },
+            new OrderItem { Id = 8, OrderId = 2, AppleVarietyId = 6, Pounds = 1.0m },
+            new OrderItem { Id = 9, OrderId = 3, AppleVarietyId = 7, Pounds = 4.0m },
+            new OrderItem { Id = 10, OrderId = 3, AppleVarietyId = 4, Pounds = 1.5m },
+            new OrderItem { Id = 11, OrderId = 3, AppleVarietyId = 2, Pounds = 0.5m },
+            new OrderItem { Id = 12, OrderId = 3, AppleVarietyId = 1, Pounds = 1.5m },
+            new OrderItem { Id = 13, OrderId = 4, AppleVarietyId = 3, Pounds = 4.5m },
+            new OrderItem { Id = 14, OrderId = 4, AppleVarietyId = 8, Pounds = 3.0m },
+            new OrderItem { Id = 15, OrderId = 4, AppleVarietyId = 5, Pounds = 1.0m },
+            new OrderItem { Id = 16, OrderId = 4, AppleVarietyId = 1, Pounds = 4.5m },
+            new OrderItem { Id = 17, OrderId = 4, AppleVarietyId = 2, Pounds = 4.5m },
+            new OrderItem { Id = 18, OrderId = 4, AppleVarietyId = 7, Pounds = 3.0m },
+            new OrderItem { Id = 19, OrderId = 5, AppleVarietyId = 6, Pounds = 3.5m },
+            new OrderItem { Id = 20, OrderId = 5, AppleVarietyId = 7, Pounds = 1.5m },
+            new OrderItem { Id = 21, OrderId = 5, AppleVarietyId = 1, Pounds = 4.0m },
+            new OrderItem { Id = 22, OrderId = 5, AppleVarietyId = 4, Pounds = 2.5m },
+            new OrderItem { Id = 23, OrderId = 6, AppleVarietyId = 1, Pounds = 1.0m },
+            new OrderItem { Id = 24, OrderId = 6, AppleVarietyId = 8, Pounds = 4.0m },
+            new OrderItem { Id = 25, OrderId = 6, AppleVarietyId = 2, Pounds = 4.5m },
+            new OrderItem { Id = 26, OrderId = 7, AppleVarietyId = 3, Pounds = 0.5m },
+            new OrderItem { Id = 27, OrderId = 7, AppleVarietyId = 4, Pounds = 1.0m },
+            new OrderItem { Id = 28, OrderId = 8, AppleVarietyId = 8, Pounds = 0.5m },
+            new OrderItem { Id = 29, OrderId = 8, AppleVarietyId = 3, Pounds = 3.0m },
+            new OrderItem { Id = 30, OrderId = 8, AppleVarietyId = 2, Pounds = 2.5m },
+            new OrderItem { Id = 31, OrderId = 8, AppleVarietyId = 4, Pounds = 4.0m },
+            new OrderItem { Id = 32, OrderId = 8, AppleVarietyId = 1, Pounds = 4.5m },
+            new OrderItem { Id = 33, OrderId = 8, AppleVarietyId = 6, Pounds = 1.0m },
+            new OrderItem { Id = 34, OrderId = 8, AppleVarietyId = 5, Pounds = 2.0m },
+            new OrderItem { Id = 35, OrderId = 8, AppleVarietyId = 7, Pounds = 0.5m },
+            new OrderItem { Id = 36, OrderId = 9, AppleVarietyId = 3, Pounds = 0.5m },
+            new OrderItem { Id = 37, OrderId = 9, AppleVarietyId = 8, Pounds = 0.5m },
+            new OrderItem { Id = 38, OrderId = 9, AppleVarietyId = 5, Pounds = 2.5m },
+            new OrderItem { Id = 39, OrderId = 9, AppleVarietyId = 7, Pounds = 0.5m },
+            new OrderItem { Id = 40, OrderId = 9, AppleVarietyId = 6, Pounds = 3.5m },
+            new OrderItem { Id = 41, OrderId = 10, AppleVarietyId = 5, Pounds = 3.0m },
+            new OrderItem { Id = 42, OrderId = 10, AppleVarietyId = 3, Pounds = 4.0m },
+            new OrderItem { Id = 43, OrderId = 10, AppleVarietyId = 1, Pounds = 4.0m },
+            new OrderItem { Id = 44, OrderId = 10, AppleVarietyId = 7, Pounds = 4.0m },
+            new OrderItem { Id = 45, OrderId = 10, AppleVarietyId = 4, Pounds = 4.5m },
+            new OrderItem { Id = 46, OrderId = 10, AppleVarietyId = 6, Pounds = 4.5m },
+            new OrderItem { Id = 47, OrderId = 10, AppleVarietyId = 8, Pounds = 2.0m },
+            new OrderItem { Id = 48, OrderId = 11, AppleVarietyId = 1, Pounds = 2.0m },
+            new OrderItem { Id = 49, OrderId = 11, AppleVarietyId = 8, Pounds = 2.5m },
+            new OrderItem { Id = 50, OrderId = 11, AppleVarietyId = 6, Pounds = 0.5m }
         );
 
         // dotnet ef migrations add InitialCreate

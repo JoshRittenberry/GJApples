@@ -5,20 +5,22 @@ namespace GJApples.Models;
 public class Order
 {
     public int Id { get; set; }
-
+    [Required]
     [ForeignKey("Customer")]
     public int CustomerUserProfileId { get; set; }
 
     public UserProfile Customer { get; set; }
 
     [ForeignKey("Employee")]
-    public int EmployeeUserProfileId { get; set; }
+    public int? EmployeeUserProfileId { get; set; }
 
     public UserProfile Employee { get; set; }
 
+    [Required]
     public DateTime DateOrdered { get; set; }
     public DateTime? DateCompleted { get; set; }
-
+    [Required]
+    public bool Canceled { get; set; }
     public decimal TotalCost
     {
         get

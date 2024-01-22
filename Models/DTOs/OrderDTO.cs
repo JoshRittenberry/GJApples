@@ -13,13 +13,13 @@ public class OrderDTO
     public UserProfileDTO Customer { get; set; }
 
     [ForeignKey("Employee")]
-    public int EmployeeUserProfileId { get; set; }
+    public int? EmployeeUserProfileId { get; set; }
 
     public UserProfileDTO Employee { get; set; }
 
     public DateTime DateOrdered { get; set; }
     public DateTime? DateCompleted { get; set; }
-
+    public bool Canceled { get; set; }
     public decimal TotalCost
     {
         get
