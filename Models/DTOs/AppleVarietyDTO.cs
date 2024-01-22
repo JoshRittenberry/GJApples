@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 namespace GJApples.Models.DTO;
 
 public class AppleVarietyDTO
@@ -10,9 +11,13 @@ public class AppleVarietyDTO
     {
         get
         {
+            if (Trees == null || OrderItems == null)
+            {
+                return 0M;
+            }
             decimal HarvestedTotal = Trees.Sum(t => t.TreeHarvestReports.Sum(th => th.PoundsHarvested));
-            decimal OrderedTotal = OrderItems.Sum(oi => oi.Pounds);
-            return HarvestedTotal - OrderedTotal;
+            decimal PoundsOrdered = OrderItems.Sum(oi => oi.Pounds);
+            return HarvestedTotal - PoundsOrdered;
         }
     }
     public decimal CostPerPound { get; set; }

@@ -21,18 +21,12 @@ public class AppleController : ControllerBase
     [AllowAnonymous]
     public IActionResult Get()
     {
-        List<string> rolesToCheck = new List<string>
-        {
-            "Admin",
-            "Harvester",
-            "OrderPicker"
-        };
-
-        bool isEmployeeOrAdmin = rolesToCheck.Any(role => User.IsInRole(role));
+        bool isAuthorized = User.Identity.IsAuthenticated;
 
         return Ok(_dbContext
             .AppleVarieties
                 .Include(a => a.Trees)
+                    .ThenInclude(t => t.TreeHarvestReports)
                 .Include(a => a.OrderItems)
             .Select(a => new AppleVarietyDTO
             {
@@ -40,7 +34,7 @@ public class AppleController : ControllerBase
                 Type = a.Type,
                 ImageUrl = a.ImageUrl,
                 CostPerPound = a.CostPerPound,
-                Trees = a.Trees
+                Trees = isAuthorized ? a.Trees
                     .Where(t => t.DateRemoved == null)
                     .Select(t => new TreeDTO
                     {
@@ -49,9 +43,18 @@ public class AppleController : ControllerBase
                         AppleVariety = null,
                         DatePlanted = t.DatePlanted,
                         DateRemoved = t.DateRemoved,
-                        TreeHarvestReports = null
-                    }).ToList(),
-                OrderItems = isEmployeeOrAdmin ? a.OrderItems.Select(oi => new OrderItemDTO
+                        TreeHarvestReports = t.TreeHarvestReports.Select(thr => new TreeHarvestReportDTO
+                        {
+                            Id = thr.Id,
+                            TreeId = thr.TreeId,
+                            Tree = null,
+                            EmployeeUserProfileId = thr.EmployeeUserProfileId,
+                            Employee = null,
+                            HarvestDate = thr.HarvestDate,
+                            PoundsHarvested = thr.PoundsHarvested
+                        }).ToList()
+                    }).ToList() : null,
+                OrderItems = isAuthorized ? a.OrderItems.Select(oi => new OrderItemDTO
                 {
                     Id = oi.Id,
                     OrderId = oi.OrderId,
