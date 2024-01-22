@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-namespace GJApples.Models.DTO;
+namespace GJApples.Models.DTOs;
 
 public class AppleVarietyDTO
 {

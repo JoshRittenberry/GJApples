@@ -1,0 +1,71 @@
+using GJApples.Data;
+using GJApples.Models;
+using GJApples.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace GJApples.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class TreeController : ControllerBase
+{
+    private GJApplesDbContext _dbContext;
+
+    public TreeController(GJApplesDbContext context)
+    {
+        _dbContext = context;
+    }
+
+    [HttpGet]
+    [AllowAnonymous]
+    public IActionResult Get()
+    {
+        bool isAuthorized = User.Identity.IsAuthenticated && User.IsInRole("Admin");
+
+        return Ok(_dbContext
+            .Trees
+            .Include(t => t.AppleVariety)
+            .Include(t => t.TreeHarvestReports)
+                .ThenInclude(thr => thr.Employee)
+                .ThenInclude(e => e.IdentityUser)
+            .Select(t => new TreeDTO
+            {
+                Id = t.Id,
+                AppleVarietyId = t.AppleVarietyId,
+                AppleVariety = new AppleVarietyDTO
+                {
+                    Id = t.AppleVariety.Id,
+                    Type = t.AppleVariety.Type,
+                    ImageUrl = t.AppleVariety.ImageUrl,
+                    CostPerPound = t.AppleVariety.CostPerPound,
+                    IsActive = t.AppleVariety.IsActive,
+                    Trees = null,
+                    OrderItems = null
+                },
+                DatePlanted = t.DatePlanted,
+                DateRemoved = t.DateRemoved,
+                TreeHarvestReports = t.TreeHarvestReports.Select(thr => new TreeHarvestReportDTO
+                {
+                    Id = thr.Id,
+                    TreeId = thr.TreeId,
+                    Tree = null,
+                    EmployeeUserProfileId = thr.EmployeeUserProfileId,
+                    Employee = new UserProfileDTO
+                    {
+                        Id = thr.Employee.Id,
+                        FirstName = thr.Employee.FirstName,
+                        LastName = thr.Employee.LastName,
+                        Address = isAuthorized ? thr.Employee.Address : null,
+                        Email = isAuthorized ? thr.Employee.IdentityUser.Email : null,
+                        UserName = isAuthorized ? thr.Employee.IdentityUser.UserName : null,
+                        IdentityUserId = isAuthorized ? thr.Employee.IdentityUserId : null,
+                    },
+                    HarvestDate = thr.HarvestDate,
+                    PoundsHarvested = thr.PoundsHarvested
+                }).ToList()
+            }).ToList()
+        );
+    }
+}

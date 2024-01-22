@@ -1,6 +1,6 @@
 using GJApples.Data;
 using GJApples.Models;
-using GJApples.Models.DTO;
+using GJApples.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -218,7 +218,7 @@ public class AppleController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    // [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public IActionResult DeleteAppleVariety(int id)
     {
         var appleVarietyToDelete = _dbContext

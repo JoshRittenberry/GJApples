@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using GJApples.Models.DTOs;
-namespace GJApples.Models.DTO;
+namespace GJApples.Models.DTOs;
 
 public class TreeHarvestReportDTO
 {

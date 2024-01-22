@@ -10,5 +10,5 @@ public class Tree
     [Required]
     public DateTime DatePlanted { get; set; }
     public DateTime? DateRemoved { get; set; }
-    public List<TreeHarvestReport> TreeHarvestReports { get; set; }
+    public List<TreeHarvestReport>? TreeHarvestReports { get; set; }
 }

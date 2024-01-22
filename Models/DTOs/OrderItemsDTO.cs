@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-namespace GJApples.Models.DTO;
+namespace GJApples.Models.DTOs;
 
 public class OrderItemDTO
 {
