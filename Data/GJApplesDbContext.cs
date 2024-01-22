@@ -269,123 +269,123 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             {
                 Id = 1,
                 AppleVarietyId = 1,
-                DatePlanted = new DateOnly(2015, 5, 10)
+                DatePlanted = new DateTime(2015, 5, 10)
             },
             new Tree
             {
                 Id = 2,
                 AppleVarietyId = 1,
-                DatePlanted = new DateOnly(2016, 6, 15)
+                DatePlanted = new DateTime(2016, 6, 15)
             },
             new Tree
             {
                 Id = 3,
                 AppleVarietyId = 2,
-                DatePlanted = new DateOnly(2017, 7, 20)
+                DatePlanted = new DateTime(2017, 7, 20)
             },
             new Tree
             {
                 Id = 4,
                 AppleVarietyId = 2,
-                DatePlanted = new DateOnly(2018, 8, 25),
-                DateRemoved = new DateOnly(2023, 1, 30)
+                DatePlanted = new DateTime(2018, 8, 25),
+                DateRemoved = new DateTime(2023, 1, 30)
             },
             new Tree
             {
                 Id = 5,
                 AppleVarietyId = 3,
-                DatePlanted = new DateOnly(2019, 9, 30)
+                DatePlanted = new DateTime(2019, 9, 30)
             },
             new Tree
             {
                 Id = 6,
                 AppleVarietyId = 3,
-                DatePlanted = new DateOnly(2020, 10, 5)
+                DatePlanted = new DateTime(2020, 10, 5)
             },
             new Tree
             {
                 Id = 7,
                 AppleVarietyId = 4,
-                DatePlanted = new DateOnly(2021, 11, 10)
+                DatePlanted = new DateTime(2021, 11, 10)
             },
             new Tree
             {
                 Id = 8,
                 AppleVarietyId = 4,
-                DatePlanted = new DateOnly(2022, 12, 15)
+                DatePlanted = new DateTime(2022, 12, 15)
             },
             new Tree
             {
                 Id = 9,
                 AppleVarietyId = 5,
-                DatePlanted = new DateOnly(2016, 3, 20)
+                DatePlanted = new DateTime(2016, 3, 20)
             },
             new Tree
             {
                 Id = 10,
                 AppleVarietyId = 5,
-                DatePlanted = new DateOnly(2017, 4, 25)
+                DatePlanted = new DateTime(2017, 4, 25)
             },
             new Tree
             {
                 Id = 11,
                 AppleVarietyId = 6,
-                DatePlanted = new DateOnly(2018, 5, 30)
+                DatePlanted = new DateTime(2018, 5, 30)
             },
             new Tree
             {
                 Id = 12,
                 AppleVarietyId = 6,
-                DatePlanted = new DateOnly(2019, 6, 5)
+                DatePlanted = new DateTime(2019, 6, 5)
             },
             new Tree
             {
                 Id = 13,
                 AppleVarietyId = 7,
-                DatePlanted = new DateOnly(2020, 7, 10)
+                DatePlanted = new DateTime(2020, 7, 10)
             },
             new Tree
             {
                 Id = 14,
                 AppleVarietyId = 7,
-                DatePlanted = new DateOnly(2021, 8, 15)
+                DatePlanted = new DateTime(2021, 8, 15)
             },
             new Tree
             {
                 Id = 15,
                 AppleVarietyId = 8,
-                DatePlanted = new DateOnly(2022, 9, 20)
+                DatePlanted = new DateTime(2022, 9, 20)
             },
             new Tree
             {
                 Id = 16,
                 AppleVarietyId = 8,
-                DatePlanted = new DateOnly(2023, 10, 25)
+                DatePlanted = new DateTime(2023, 10, 25)
             },
             new Tree
             {
                 Id = 17,
                 AppleVarietyId = 1,
-                DatePlanted = new DateOnly(2017, 11, 30)
+                DatePlanted = new DateTime(2017, 11, 30)
             },
             new Tree
             {
                 Id = 18,
                 AppleVarietyId = 2,
-                DatePlanted = new DateOnly(2018, 12, 5),
-                DateRemoved = new DateOnly(2023, 2, 10)
+                DatePlanted = new DateTime(2018, 12, 5),
+                DateRemoved = new DateTime(2023, 2, 10)
             },
             new Tree
             {
                 Id = 19,
                 AppleVarietyId = 3,
-                DatePlanted = new DateOnly(2019, 1, 10)
+                DatePlanted = new DateTime(2019, 1, 10)
             },
             new Tree
             {
                 Id = 20,
                 AppleVarietyId = 4,
-                DatePlanted = new DateOnly(2020, 2, 15)
+                DatePlanted = new DateTime(2020, 2, 15)
             }
         );
 

@@ -9,4 +9,5 @@ public class AppleVarietyDTO
     public decimal PoundsOnHand { get; set; }
     public decimal CostPerPound { get; set; }
     public List<TreeDTO> Trees { get; set; }
+    public List<OrderItemDTO> OrderItems { get; set; }
 }

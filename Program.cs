@@ -5,12 +5,6 @@ using GJApples.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-// Login Info:
-// Email: admina@strator.comx
-// Password: password
-
 builder.Services.AddControllers().AddJsonOptions(opts =>
 {
     opts.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
@@ -42,7 +36,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddIdentityCore<IdentityUser>(config =>
             {
-                //for demonstration only - change these for other projects
                 config.Password.RequireDigit = false;
                 config.Password.RequiredLength = 8;
                 config.Password.RequireLowercase = false;
@@ -58,7 +51,6 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // allows our api endpoints to access the database through Entity Framework Core
 builder.Services.AddNpgsql<GJApplesDbContext>(builder.Configuration["GJApplesDbConnectionString"]);
-
 
 var app = builder.Build();
 

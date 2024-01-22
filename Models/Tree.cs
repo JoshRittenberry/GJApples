@@ -8,7 +8,7 @@ public class Tree
     public int AppleVarietyId { get; set; }
     public AppleVariety AppleVariety { get; set; }
     [Required]
-    public DateOnly DatePlanted { get; set; }
-    public DateOnly? DateRemoved { get; set; }
+    public DateTime DatePlanted { get; set; }
+    public DateTime? DateRemoved { get; set; }
     public List<TreeHarvestReport> TreeHarvestReports { get; set; }
 }
