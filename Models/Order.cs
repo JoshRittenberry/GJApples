@@ -8,16 +8,11 @@ public class Order
     [Required]
     [ForeignKey("Customer")]
     public int CustomerUserProfileId { get; set; }
-
-    public UserProfile Customer { get; set; }
-
+    public UserProfile? Customer { get; set; }
     [ForeignKey("Employee")]
     public int? EmployeeUserProfileId { get; set; }
-
-    public UserProfile Employee { get; set; }
-
-    [Required]
-    public DateTime DateOrdered { get; set; }
+    public UserProfile? Employee { get; set; }
+    public DateTime? DateOrdered { get; set; }
     public DateTime? DateCompleted { get; set; }
     [Required]
     public bool Canceled { get; set; }
@@ -33,6 +28,5 @@ public class Order
             return OrderItems.Sum(oi => oi.TotalItemCost);
         }
     }
-
-    public List<OrderItem> OrderItems { get; set; }
+    public List<OrderItem>? OrderItems { get; set; }
 }

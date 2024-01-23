@@ -325,7 +325,7 @@ public class TreeController : ControllerBase
         var employeeUserName = User.Identity.Name;
 
         // Find User
-        var employee = _dbContext
+        UserProfile employee = _dbContext
             .UserProfiles
             .SingleOrDefault(u => u.IdentityUser.UserName == employeeUserName);
 

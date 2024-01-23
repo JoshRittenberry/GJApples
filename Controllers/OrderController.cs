@@ -20,7 +20,7 @@ public class OrderController : ControllerBase
 
     [HttpGet]
     [Authorize]
-    public IActionResult Get()
+    public IActionResult GetSubmittedOrders()
     {
         return Ok(_dbContext
             .Orders
@@ -62,7 +62,7 @@ public class OrderController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    // [Authorize]
+    [Authorize]
     public IActionResult GetOrderById(int id)
     {
         var order = _dbContext
@@ -109,4 +109,30 @@ public class OrderController : ControllerBase
             }).ToList()
         });
     }
+
+    [HttpPost]
+    [Authorize(Roles = "Customer")]
+    public IActionResult CreateNewOrder()
+    {
+        var customerUserName = User.Identity.Name;
+        UserProfile customer = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == customerUserName);
+
+        if (customer == null)
+        {
+            return BadRequest();
+        }
+
+        Order order = new Order
+        {
+            CustomerUserProfileId = customer.Id,
+            Canceled = false
+        };
+
+        _dbContext.Orders.Add(order);
+        _dbContext.SaveChanges();
+
+        return Ok();
+}
 }
