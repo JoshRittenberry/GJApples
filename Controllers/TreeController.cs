@@ -305,10 +305,98 @@ public class TreeController : ControllerBase
             _dbContext.SaveChanges();
             return Ok(treeToUpdate);
         }
-        // Cancel Changes (if everything matches)
+        // Cancel Changes (if no changes were made)
         else
         {
             return NoContent();
+        }
+    }
+
+    [HttpPut("harvestreports/{id}")]
+    [Authorize(Roles = "Admin,Harveester")]
+    public IActionResult EditHarvestReport(TreeHarvestReport treeHarvestReport, int id)
+    {
+        // Find TreeHarvestReport
+        var treeHarvestReportToUpdate = _dbContext
+            .TreeHarvestReports
+            .SingleOrDefault(thr => thr.Id == id);
+
+        // Find Username
+        var employeeUserName = User.Identity.Name;
+
+        // Find User
+        var employee = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == employeeUserName);
+
+        // Check if the user is an Admin
+        bool isUserAdmin = User.IsInRole("Admin");
+
+        // If the TreeHarvestReport or User/Employee doesn't exist cancel changes
+        if (treeHarvestReportToUpdate == null || employee == null)
+        {
+            return NotFound();
+        }
+
+        // If the User/Employee isn't the creator of the report, or an Admin, forbid them from making changes
+        if (employee.Id != treeHarvestReportToUpdate.EmployeeUserProfileId || !isUserAdmin)
+        {
+            return BadRequest();
+        }
+
+        // If the User/Employee is the creator of the report, or is an Admin, allow changes to be made
+        if (employee.Id == treeHarvestReportToUpdate.EmployeeUserProfileId || isUserAdmin)
+        {
+            bool isUpdated = false;
+
+            // Update TreeId
+            if (treeHarvestReport.TreeId != null && treeHarvestReport.TreeId != treeHarvestReportToUpdate.TreeId)
+            {
+                treeHarvestReportToUpdate.TreeId = treeHarvestReport.TreeId;
+                isUpdated = true;
+            }
+            // Update EmployeeId only if the user is an Admin
+            if (isUserAdmin && treeHarvestReport.EmployeeUserProfileId != null && treeHarvestReport.EmployeeUserProfileId != treeHarvestReportToUpdate.EmployeeUserProfileId)
+            {
+                treeHarvestReportToUpdate.EmployeeUserProfileId = treeHarvestReport.EmployeeUserProfileId;
+                isUpdated = true;
+            }
+            // Update HarvestDate
+            if (treeHarvestReport.HarvestDate != null && treeHarvestReport.HarvestDate != treeHarvestReportToUpdate.HarvestDate)
+            {
+                if (treeHarvestReport.HarvestDate == DateTime.MinValue)
+                {
+                    treeHarvestReportToUpdate.HarvestDate = treeHarvestReportToUpdate.HarvestDate;
+                }
+                else
+                {
+                    treeHarvestReportToUpdate.HarvestDate = treeHarvestReport.HarvestDate;
+                    isUpdated = true;
+                }
+            }
+            // Update PoundsHarvested
+            if (treeHarvestReport.PoundsHarvested != null && treeHarvestReport.PoundsHarvested != treeHarvestReportToUpdate.PoundsHarvested)
+            {
+                treeHarvestReportToUpdate.PoundsHarvested = treeHarvestReport.PoundsHarvested;
+                isUpdated = true;
+            }
+            // Save Changes
+            if (isUpdated)
+            {
+                _dbContext.SaveChanges();
+                return Ok(treeHarvestReportToUpdate);
+            }
+            // Cancel Changes (if no changes were made)
+            else
+            {
+                return NoContent();
+            }
+        }
+
+        // If no changes were made, something must have went wrong, send a BadRequest
+        else
+        {
+            return BadRequest();
         }
     }
 
