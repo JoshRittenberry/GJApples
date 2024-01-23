@@ -7,7 +7,7 @@ public class TreeHarvestReportDTO
     public int Id { get; set; }
     [Required]
     public int TreeId { get; set; }
-    public Tree Tree { get; set; }
+    public TreeDTO Tree { get; set; }
     [Required]
     [ForeignKey("Employee")]
     public int EmployeeUserProfileId { get; set; }

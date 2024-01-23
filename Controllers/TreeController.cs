@@ -70,7 +70,7 @@ public class TreeController : ControllerBase
 
     [HttpGet("{id}")]
     [Authorize]
-    public IActionResult Get(int id)
+    public IActionResult GetTreeById(int id)
     {
         var tree = _dbContext
             .Trees
@@ -122,6 +122,108 @@ public class TreeController : ControllerBase
         });
     }
 
+    [HttpGet("harvestreports")]
+    [Authorize(Roles = "Admin,Harvester")]
+    public IActionResult GetTreeHarvestReports()
+    {
+        return Ok(_dbContext
+            .TreeHarvestReports
+                .Include(thr => thr.Tree)
+                    .ThenInclude(t => t.AppleVariety)
+                .Include(thr => thr.Employee)
+                    .ThenInclude(e => e.IdentityUser)
+            .Select(thr => new TreeHarvestReportDTO
+            {
+                Id = thr.Id,
+                TreeId = thr.TreeId,
+                Tree = new TreeDTO
+                {
+                    Id = thr.Tree.Id,
+                    AppleVarietyId = thr.Tree.AppleVarietyId,
+                    AppleVariety = new AppleVarietyDTO
+                    {
+                        Id = thr.Tree.AppleVariety.Id,
+                        Type = thr.Tree.AppleVariety.Type,
+                        ImageUrl = thr.Tree.AppleVariety.ImageUrl,
+                        CostPerPound = thr.Tree.AppleVariety.CostPerPound,
+                        IsActive = thr.Tree.AppleVariety.IsActive,
+                        Trees = null,
+                        OrderItems = null
+                    },
+                    DatePlanted = thr.Tree.DatePlanted,
+                    DateRemoved = thr.Tree.DateRemoved,
+                    TreeHarvestReports = null
+                },
+                EmployeeUserProfileId = thr.EmployeeUserProfileId,
+                Employee = new UserProfileDTO
+                {
+                    Id = thr.Employee.Id,
+                    FirstName = thr.Employee.FirstName,
+                    LastName = thr.Employee.LastName,
+                    Address = thr.Employee.Address,
+                    Email = thr.Employee.IdentityUser.Email,
+                    UserName = thr.Employee.IdentityUser.UserName,
+                },
+                HarvestDate = thr.HarvestDate,
+                PoundsHarvested = thr.PoundsHarvested
+            }).ToList()
+        );
+    }
+
+    [HttpGet("harvestreports/{id}")]
+    [Authorize(Roles = "Admin,Harvester")]
+    public IActionResult GetTreeHarvestReportById(int id)
+    {
+        var treeHarvestReport = _dbContext
+            .TreeHarvestReports
+                .Include(thr => thr.Tree)
+                    .ThenInclude(t => t.AppleVariety)
+                .Include(thr => thr.Employee)
+                    .ThenInclude(e => e.IdentityUser)
+            .SingleOrDefault(thr => thr.Id == id);
+
+        if (treeHarvestReport == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(new TreeHarvestReportDTO
+        {
+            Id = treeHarvestReport.Id,
+            TreeId = treeHarvestReport.TreeId,
+            Tree = new TreeDTO
+            {
+                Id = treeHarvestReport.Tree.Id,
+                AppleVarietyId = treeHarvestReport.Tree.AppleVarietyId,
+                AppleVariety = new AppleVarietyDTO
+                {
+                    Id = treeHarvestReport.Tree.AppleVariety.Id,
+                    Type = treeHarvestReport.Tree.AppleVariety.Type,
+                    ImageUrl = treeHarvestReport.Tree.AppleVariety.ImageUrl,
+                    CostPerPound = treeHarvestReport.Tree.AppleVariety.CostPerPound,
+                    IsActive = treeHarvestReport.Tree.AppleVariety.IsActive,
+                    Trees = null,
+                    OrderItems = null
+                },
+                DatePlanted = treeHarvestReport.Tree.DatePlanted,
+                DateRemoved = treeHarvestReport.Tree.DateRemoved,
+                TreeHarvestReports = null
+            },
+            EmployeeUserProfileId = treeHarvestReport.EmployeeUserProfileId,
+            Employee = new UserProfileDTO
+            {
+                Id = treeHarvestReport.Employee.Id,
+                FirstName = treeHarvestReport.Employee.FirstName,
+                LastName = treeHarvestReport.Employee.LastName,
+                Address = treeHarvestReport.Employee.Address,
+                Email = treeHarvestReport.Employee.IdentityUser.Email,
+                UserName = treeHarvestReport.Employee.IdentityUser.UserName,
+            },
+            HarvestDate = treeHarvestReport.HarvestDate,
+            PoundsHarvested = treeHarvestReport.PoundsHarvested
+        });
+    }
+
     [HttpPost]
     [Authorize(Roles = "Admin")]
     public IActionResult CreateNewTree(Tree tree)
@@ -130,6 +232,24 @@ public class TreeController : ControllerBase
         _dbContext.SaveChanges();
 
         return Created($"/api/tree/{tree.Id}", tree);
+    }
+
+    [HttpPost("harvestreport")]
+    [Authorize(Roles = "Admin,Harvester")]
+    public IActionResult CreateHarvestReport(TreeHarvestReport treeHarvestReport)
+    {
+        var tree = _dbContext.Trees.SingleOrDefault(t => t.Id == treeHarvestReport.TreeId);
+        var employee = _dbContext.Trees.SingleOrDefault(u => u.Id == treeHarvestReport.EmployeeUserProfileId);
+
+        if (tree == null || employee == null || treeHarvestReport.HarvestDate == null || treeHarvestReport.HarvestDate == DateTime.MinValue || treeHarvestReport.PoundsHarvested == null || treeHarvestReport.PoundsHarvested < 0)
+        {
+            return BadRequest();
+        }
+
+        _dbContext.TreeHarvestReports.Add(treeHarvestReport);
+        _dbContext.SaveChanges();
+
+        return Created($"/api/treeHarvestReports/{treeHarvestReport.Id}", treeHarvestReport);
     }
 
     [HttpPut("{id}")]
