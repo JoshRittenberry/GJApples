@@ -19,13 +19,18 @@ public class OrderDTO
     public DateTime DateOrdered { get; set; }
     public DateTime? DateCompleted { get; set; }
     public bool Canceled { get; set; }
-    public decimal TotalCost
+    public decimal? TotalCost
     {
         get
         {
-            return OrderItems.Sum(oi => oi.Pounds * oi.AppleVariety.CostPerPound);
+            if (OrderItems == null)
+            {
+                return null;
+            }
+
+            return OrderItems.Sum(oi => oi.TotalItemCost);
         }
     }
 
-    public List<OrderItemDTO> OrderItems { get; set; }
+    public List<OrderItemDTO>? OrderItems { get; set; }
 }

@@ -21,11 +21,16 @@ public class Order
     public DateTime? DateCompleted { get; set; }
     [Required]
     public bool Canceled { get; set; }
-    public decimal TotalCost
+    public decimal? TotalCost
     {
         get
         {
-            return OrderItems.Sum(oi => oi.Pounds * oi.AppleVariety.CostPerPound);
+            if (OrderItems == null)
+            {
+                return null;
+            }
+
+            return OrderItems.Sum(oi => oi.TotalItemCost);
         }
     }
 

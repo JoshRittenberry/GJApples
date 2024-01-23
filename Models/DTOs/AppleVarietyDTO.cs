@@ -13,7 +13,7 @@ public class AppleVarietyDTO
         {
             if (Trees == null || OrderItems == null)
             {
-                return 0M;
+                return null;
             }
             decimal HarvestedTotal = Trees.Sum(t => t.TreeHarvestReports.Sum(th => th.PoundsHarvested));
             decimal PoundsOrdered = OrderItems.Sum(oi => oi.Pounds);

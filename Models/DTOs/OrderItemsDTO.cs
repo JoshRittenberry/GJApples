@@ -8,4 +8,16 @@ public class OrderItemDTO
     public int AppleVarietyId { get; set; }
     public AppleVarietyDTO AppleVariety { get; set; }
     public decimal Pounds { get; set; }
+    public decimal? TotalItemCost
+    {
+        get
+        {
+            if (AppleVariety == null)
+            {
+                return null;
+            }
+            
+            return AppleVariety.CostPerPound * Pounds;
+        }
+    }
 }

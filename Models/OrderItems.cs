@@ -11,4 +11,16 @@ public class OrderItem
     public AppleVariety AppleVariety { get; set; }
     [Required]
     public decimal Pounds { get; set; }
+    public decimal? TotalItemCost
+    {
+        get
+        {
+            if (AppleVariety == null)
+            {
+                return null;
+            }
+
+            return AppleVariety.CostPerPound * Pounds;
+        }
+    }
 }
