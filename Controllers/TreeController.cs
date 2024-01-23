@@ -123,12 +123,72 @@ public class TreeController : ControllerBase
     }
 
     [HttpPost]
-    // [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public IActionResult CreateNewTree(Tree tree)
     {
         _dbContext.Trees.Add(tree);
         _dbContext.SaveChanges();
 
         return Created($"/api/tree/{tree.Id}", tree);
+    }
+
+    [HttpPut("{id}")]
+    // [Authorize(Roles = "Admin")]
+    public IActionResult EditTree(Tree tree, int id)
+    {
+        var treeToUpdate = _dbContext
+            .Trees
+            .SingleOrDefault(t => t.Id == id);
+
+        if (treeToUpdate == null)
+        {
+            return NotFound();
+        }
+
+        bool isUpdated = false;
+
+        // Update AppleVarietyId
+        if (tree.AppleVarietyId != null && tree.AppleVarietyId != treeToUpdate.AppleVarietyId)
+        {
+            treeToUpdate.AppleVarietyId = tree.AppleVarietyId;
+            isUpdated = true;
+        }
+        // Update DatePlanted
+        if (tree.DatePlanted != null && tree.DatePlanted != treeToUpdate.DatePlanted)
+        {
+            if (tree.DatePlanted == DateTime.MinValue)
+            {
+                treeToUpdate.DatePlanted = treeToUpdate.DatePlanted;
+            }
+            else
+            {
+                treeToUpdate.DatePlanted = tree.DatePlanted;
+                isUpdated = true;
+            }
+        }
+        // Update DateRemoved
+        if (tree.DateRemoved != null && tree.DateRemoved != treeToUpdate.DateRemoved)
+        {
+            if (tree.DatePlanted == DateTime.MinValue)
+            {
+                treeToUpdate.DateRemoved = treeToUpdate.DateRemoved;
+            }
+            else
+            {
+                treeToUpdate.DateRemoved = tree.DateRemoved;
+                isUpdated = true;
+            }
+        }
+        // Save Changes
+        if (isUpdated)
+        {
+            _dbContext.SaveChanges();
+            return Ok(treeToUpdate);
+        }
+        // Cancel Changes (if everything matches)
+        else
+        {
+            return NoContent();
+        }
     }
 }
