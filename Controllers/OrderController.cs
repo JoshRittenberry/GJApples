@@ -134,5 +134,45 @@ public class OrderController : ControllerBase
         _dbContext.SaveChanges();
 
         return Ok();
-}
+    }
+
+    // Submit Order (Add a DateOrdered Value)
+    [HttpPut("{id}/submit")]
+    [Authorize(Roles = "Customer")]
+    public IActionResult SubmitOrder(int id)
+    {
+        // Find Order
+        var orderToUpdate = _dbContext
+            .Orders
+            .SingleOrDefault(o => o.Id == id);
+
+        // Find Customer UserName
+        var customerUserName = User.Identity.Name;
+
+        // Find Customer UserProfile
+        UserProfile customer = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == customerUserName);
+
+        if (orderToUpdate == null || customer == null)
+        {
+            return NotFound();
+        }
+
+        if (customer.Id != orderToUpdate.CustomerUserProfileId)
+        {
+            return BadRequest();
+        }
+
+        orderToUpdate.DateOrdered = DateTime.Now;
+        _dbContext.SaveChanges();
+
+        return Ok(orderToUpdate);
+    }
+
+    // Cancel an Order
+
+    // Assign an Order to an Order Picker
+
+    // Complete an Order (Add a DateCompleted Value)
 }

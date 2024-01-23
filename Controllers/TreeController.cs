@@ -228,6 +228,11 @@ public class TreeController : ControllerBase
     [Authorize(Roles = "Admin")]
     public IActionResult CreateNewTree(Tree tree)
     {
+        if (tree.DatePlanted == null || tree.DatePlanted == DateTime.MinValue)
+        {
+            tree.DatePlanted = DateTime.Now;
+        }
+
         _dbContext.Trees.Add(tree);
         _dbContext.SaveChanges();
 
@@ -324,12 +329,12 @@ public class TreeController : ControllerBase
         // Find Username
         var employeeUserName = User.Identity.Name;
 
-        // Find User
+        // Find UserProfile
         UserProfile employee = _dbContext
             .UserProfiles
             .SingleOrDefault(u => u.IdentityUser.UserName == employeeUserName);
 
-        // Check if the user is an Admin
+        // Check if the User is an Admin
         bool isUserAdmin = User.IsInRole("Admin");
 
         // If the TreeHarvestReport or User/Employee doesn't exist cancel changes
