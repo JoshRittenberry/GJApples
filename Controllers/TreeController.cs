@@ -133,7 +133,7 @@ public class TreeController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    // [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public IActionResult EditTree(Tree tree, int id)
     {
         var treeToUpdate = _dbContext
@@ -190,5 +190,43 @@ public class TreeController : ControllerBase
         {
             return NoContent();
         }
+    }
+
+    [HttpPut("{id}/remove")]
+    [Authorize(Roles = "Admin")]
+    public IActionResult RemoveTree(int id)
+    {
+        var treeToUpdate = _dbContext
+            .Trees
+            .SingleOrDefault(t => t.Id == id);
+
+        if (treeToUpdate == null)
+        {
+            return NotFound();
+        }
+
+        treeToUpdate.DateRemoved = DateTime.Today;
+        _dbContext.SaveChanges();
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
+    public IActionResult DeleteTree(int id)
+    {
+        var treeToUpdate = _dbContext
+            .Trees
+            .SingleOrDefault(t => t.Id == id);
+
+        if (treeToUpdate == null)
+        {
+            return NotFound();
+        }
+
+        _dbContext.Remove(treeToUpdate);
+        _dbContext.SaveChanges();
+
+        return NoContent();
     }
 }
