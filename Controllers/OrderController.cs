@@ -205,7 +205,31 @@ public class OrderController : ControllerBase
     }
 
     // Assign an Order to an Order Picker
-    
+    [HttpPut("{id}/assignorderpicker")]
+    [Authorize(Roles = "Admin,AssignOrderPicker")]
+    public IActionResult AssignOrderPicker(int id, [FromQuery] int? employeeId)
+    {
+        // Find Order
+        var orderToUpdate = _dbContext
+            .Orders
+            .SingleOrDefault(o => o.Id == id);
+
+        // Find Customer UserProfile
+        UserProfile orderPicker = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.Id == employeeId);
+
+        if (orderToUpdate == null || orderPicker == null)
+        {
+            return NotFound();
+        }
+
+        orderToUpdate.EmployeeUserProfileId = employeeId;
+        _dbContext.SaveChanges();
+
+        return Ok(orderToUpdate);
+    }
 
     // Complete an Order (Add a DateCompleted Value)
+
 }
