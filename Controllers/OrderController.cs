@@ -171,8 +171,41 @@ public class OrderController : ControllerBase
     }
 
     // Cancel an Order
+    [HttpPut("{id}/cancel")]
+    [Authorize(Roles = "Customer")]
+    public IActionResult CancelOrder(int id)
+    {
+        // Find Order
+        var orderToUpdate = _dbContext
+            .Orders
+            .SingleOrDefault(o => o.Id == id);
+
+        // Find Customer UserName
+        var customerUserName = User.Identity.Name;
+
+        // Find Customer UserProfile
+        UserProfile customer = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == customerUserName);
+
+        if (orderToUpdate == null || customer == null)
+        {
+            return NotFound();
+        }
+
+        if (customer.Id != orderToUpdate.CustomerUserProfileId)
+        {
+            return BadRequest();
+        }
+
+        orderToUpdate.Canceled = true;
+        _dbContext.SaveChanges();
+
+        return Ok(orderToUpdate);
+    }
 
     // Assign an Order to an Order Picker
+    
 
     // Complete an Order (Add a DateCompleted Value)
 }
