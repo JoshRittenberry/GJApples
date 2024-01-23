@@ -231,5 +231,38 @@ public class OrderController : ControllerBase
     }
 
     // Complete an Order (Add a DateCompleted Value)
+    [HttpPut("{id}/complete")]
+    [Authorize(Roles = "Admin,OrderPicker")]
+    public IActionResult CompleteOrder(int id)
+    {
+        // Find Order
+        var orderToUpdate = _dbContext
+            .Orders
+            .SingleOrDefault(o => o.Id == id);
 
+        // Find Customer UserName
+        var employeeUserName = User.Identity.Name;
+
+        // Find Customer UserProfile
+        UserProfile employee = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == employeeUserName);
+
+        bool isEmployeeAdmin = User.IsInRole("Admin");
+
+        if (orderToUpdate == null || employee == null)
+        {
+            return NotFound();
+        }
+
+        if (employee.Id != orderToUpdate.EmployeeUserProfileId || !isEmployeeAdmin)
+        {
+            return BadRequest();
+        }
+
+        orderToUpdate.DateCompleted = DateTime.Now;
+        _dbContext.SaveChanges();
+
+        return Ok(orderToUpdate);
+    }
 }
