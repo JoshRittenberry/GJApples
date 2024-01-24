@@ -1,14 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using GJApples.Models.DTOs;
-namespace GJApples.Models.DTO;
+namespace GJApples.Models.DTOs;
 
 public class TreeHarvestReportDTO
 {
     public int Id { get; set; }
     [Required]
     public int TreeId { get; set; }
-    public Tree Tree { get; set; }
+    public TreeDTO Tree { get; set; }
     [Required]
     [ForeignKey("Employee")]
     public int EmployeeUserProfileId { get; set; }
@@ -16,5 +15,6 @@ public class TreeHarvestReportDTO
     [Required]
     public DateTime HarvestDate { get; set; }
     [Required]
+    [Range(0, 999)]
     public decimal PoundsHarvested { get; set; }
 }

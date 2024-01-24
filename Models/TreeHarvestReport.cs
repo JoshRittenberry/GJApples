@@ -15,5 +15,6 @@ public class TreeHarvestReport
     [Required]
     public DateTime HarvestDate { get; set; }
     [Required]
+    [Range(0, 999)]
     public decimal PoundsHarvested { get; set; }
 }

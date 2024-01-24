@@ -1,32 +1,30 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using GJApples.Models.DTOs;
-namespace GJApples.Models.DTO;
+namespace GJApples.Models.DTOs;
 
 public class OrderDTO
 {
     public int Id { get; set; }
-
     [ForeignKey("Customer")]
     public int CustomerUserProfileId { get; set; }
-
-    public UserProfileDTO Customer { get; set; }
-
+    public UserProfileDTO? Customer { get; set; }
     [ForeignKey("Employee")]
     public int? EmployeeUserProfileId { get; set; }
-
-    public UserProfileDTO Employee { get; set; }
-
-    public DateTime DateOrdered { get; set; }
+    public UserProfileDTO? Employee { get; set; }
+    public DateTime? DateOrdered { get; set; }
     public DateTime? DateCompleted { get; set; }
     public bool Canceled { get; set; }
-    public decimal TotalCost
+    public decimal? TotalCost
     {
         get
         {
-            return OrderItems.Sum(oi => oi.Pounds * oi.AppleVariety.CostPerPound);
+            if (OrderItems == null)
+            {
+                return null;
+            }
+
+            return OrderItems.Sum(oi => oi.TotalItemCost);
         }
     }
-
-    public List<OrderItemDTO> OrderItems { get; set; }
+    public List<OrderItemDTO>? OrderItems { get; set; }
 }

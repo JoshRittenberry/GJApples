@@ -18,7 +18,8 @@ namespace GJApples.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Type = table.Column<string>(type: "text", nullable: false),
                     ImageUrl = table.Column<string>(type: "text", nullable: false),
-                    CostPerPound = table.Column<decimal>(type: "numeric", nullable: false)
+                    CostPerPound = table.Column<decimal>(type: "numeric", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -71,8 +72,8 @@ namespace GJApples.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     AppleVarietyId = table.Column<int>(type: "integer", nullable: false),
-                    DatePlanted = table.Column<DateOnly>(type: "date", nullable: false),
-                    DateRemoved = table.Column<DateOnly>(type: "date", nullable: true)
+                    DatePlanted = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DateRemoved = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -221,7 +222,7 @@ namespace GJApples.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CustomerUserProfileId = table.Column<int>(type: "integer", nullable: false),
                     EmployeeUserProfileId = table.Column<int>(type: "integer", nullable: true),
-                    DateOrdered = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DateOrdered = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     DateCompleted = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     Canceled = table.Column<bool>(type: "boolean", nullable: false)
                 },
@@ -298,17 +299,17 @@ namespace GJApples.Migrations
 
             migrationBuilder.InsertData(
                 table: "AppleVarieties",
-                columns: new[] { "Id", "CostPerPound", "ImageUrl", "Type" },
+                columns: new[] { "Id", "CostPerPound", "ImageUrl", "IsActive", "Type" },
                 values: new object[,]
                 {
-                    { 1, 1.20m, "url_to_honeycrisp_image", "Honeycrisp" },
-                    { 2, 0.95m, "url_to_granny_smith_image", "Granny Smith" },
-                    { 3, 1.10m, "url_to_fuji_image", "Fuji" },
-                    { 4, 0.85m, "url_to_gala_image", "Gala" },
-                    { 5, 1.15m, "url_to_pink_lady_image", "Pink Lady" },
-                    { 6, 0.90m, "url_to_braeburn_image", "Braeburn" },
-                    { 7, 0.80m, "url_to_red_delicious_image", "Red Delicious" },
-                    { 8, 0.85m, "url_to_golden_delicious_image", "Golden Delicious" }
+                    { 1, 1.20m, "url_to_honeycrisp_image", true, "Honeycrisp" },
+                    { 2, 0.95m, "url_to_granny_smith_image", true, "Granny Smith" },
+                    { 3, 1.10m, "url_to_fuji_image", true, "Fuji" },
+                    { 4, 0.85m, "url_to_gala_image", true, "Gala" },
+                    { 5, 1.15m, "url_to_pink_lady_image", true, "Pink Lady" },
+                    { 6, 0.90m, "url_to_braeburn_image", true, "Braeburn" },
+                    { 7, 0.80m, "url_to_red_delicious_image", true, "Red Delicious" },
+                    { 8, 0.85m, "url_to_golden_delicious_image", true, "Golden Delicious" }
                 });
 
             migrationBuilder.InsertData(
@@ -316,10 +317,10 @@ namespace GJApples.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "8b2b3a2d-62f6-4f2b-8b3d-45b6a1f3b5b4", "589a696d-6443-4e27-a5e6-c0f73dfc3aeb", "Harvester", "harvester" },
-                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "9f6224a8-8547-4199-963b-0806c68006ff", "Admin", "admin" },
-                    { "d4f146bf-70c8-4d02-98ec-0b5f4b9d213f", "01aeb43a-c1c6-487b-b360-8cffdea30a35", "Customer", "customer" },
-                    { "f65f1f30-d0b1-4f59-a3c8-eb1f2e6757d3", "aec6329e-cdfb-486a-a378-94016e344c32", "OrderPicker", "orderpicker" }
+                    { "8b2b3a2d-62f6-4f2b-8b3d-45b6a1f3b5b4", "8a2ec8f2-5371-446b-84ff-fecc89546820", "Harvester", "harvester" },
+                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "0addc1cf-d69f-42a4-87d9-704348c0ba7f", "Admin", "admin" },
+                    { "d4f146bf-70c8-4d02-98ec-0b5f4b9d213f", "ca9b5e7a-891a-4be7-966c-45e3db85e628", "Customer", "customer" },
+                    { "f65f1f30-d0b1-4f59-a3c8-eb1f2e6757d3", "f523cba2-fddb-45ae-8c46-30327e36bf93", "OrderPicker", "orderpicker" }
                 });
 
             migrationBuilder.InsertData(
@@ -327,13 +328,13 @@ namespace GJApples.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "03d8deac-3687-4274-82c1-e1d32392d2de", 0, "6d72324f-3fdf-4531-9678-56f9f664bfe5", "kyle@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEGZ1II+6L/4Td4sQYT3gwRtpfEEzChT8qltZ83+453UFLHCxAbbZMOjWY/kj2bSzgw==", null, false, "a20d6647-bd28-41ed-a3c0-52791df89c6e", false, "Kyle" },
-                    { "3a64b2c1-7780-40f1-a393-8edb30c4b2ab", 0, "2c0e9b72-0c2b-41c3-ae1c-bcaa6d1dfb15", "haley@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEJNJe9DoKE893oJ1tm4/gHwsit3K8Pptyis9SL9Ru79w+SEL1QFiqIlgrmODmDoFfA==", null, false, "e8b6db6e-ce09-4fbc-9e88-4f7a17f65261", false, "Haley" },
-                    { "83aab5f4-67ba-4da9-940e-fef0ce8597bd", 0, "e7dcbf3b-d1fe-4893-8257-524d19a33bd9", "chris@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEBcO4XdbYKFzo3q8XKThEwDq2wod4lHcgoSkSMbX7m4+1VfO0N6z//ItNMT/1LDFlQ==", null, false, "ffcdd47e-ce46-4e5a-87af-09b42fe4a52b", false, "Chris" },
-                    { "8c3605d2-c0da-4592-8879-0c71dc3c02c4", 0, "da54327d-bf84-4577-8451-3e42fa770bb1", "josh@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAENLHy1KrjKcWtIt4+B6gH6YBR5AF6XxFwEwngVqE7YJVimeoblECKUsnGGp45QsXDA==", null, false, "19ddc7a5-c342-4c80-84eb-da379d8f1495", false, "Josh" },
-                    { "bc3a3871-4800-4061-8182-b965c9c109bc", 0, "c82fb5dd-6c75-4f7d-b990-8d82526cce07", "aaron@yahoo.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEK+XHgca2jOapPUzmDky21wVCf7ys+3tPanLqQjtsrN+8cLHqEYJA9fi3cU8bqPQ1A==", null, false, "1bc94f82-c6a4-447d-b78a-45fbd4f3f511", false, "Aaron" },
-                    { "c8c02266-41e6-414d-a1fc-14bbefef86a0", 0, "05e7c0da-cb02-4ca1-a581-caccfad110cd", "debbie@gmail.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEHfBMIPqQNtlVYddXOrhTkDOAXYe7CNRNofV72wMS8W4xBeJGOpUEyShEex+JeKGqQ==", null, false, "a3f1f837-3445-4e5a-b420-caae346bc065", false, "Debbie" },
-                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "44b4f84b-0e55-4ffa-9a70-9e7203cc7366", "admin@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAECGDIcd//XK0Z5D/ed1JnyfeGSUIgM/B77UeMevW4KFO3NHSl5yfwdAKZKz6GoTmSA==", null, false, "5fcf96c6-8770-45f0-ac46-f13d7196fc9f", false, "Administrator" }
+                    { "03d8deac-3687-4274-82c1-e1d32392d2de", 0, "ebbd3f7f-8d12-458f-a5e7-f7869bb6f0f5", "kyle@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAELGYCxw2Trx/l4YORD3NFzY1VPuYOtdyzc+pKWl+AXQuWlnUkQirRwLi72L2Y3UoAA==", null, false, "d183572d-6ef5-412c-a629-3a2fcacef63a", false, "Kyle" },
+                    { "3a64b2c1-7780-40f1-a393-8edb30c4b2ab", 0, "57ce27c3-550c-4389-aec1-c952821959d3", "haley@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEKVCmIRsdkj6N024kI8V9bl3lxSgtYyGaE5FJKVhCvbr4iNm6xDbrmhI6kV82tjv1A==", null, false, "1dc0311e-9a3e-40cd-9207-10f5eb3b98d1", false, "Haley" },
+                    { "83aab5f4-67ba-4da9-940e-fef0ce8597bd", 0, "c2a9bff9-9389-4050-b24a-430d31e1b40b", "chris@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAENw+wrUOxSyvm9xRU1W628F53GCizprekgXCOwRLoFLRPpFYCwNslmAejqZEc9AIdw==", null, false, "9984ed26-7ffb-479c-854b-258f33baa525", false, "Chris" },
+                    { "8c3605d2-c0da-4592-8879-0c71dc3c02c4", 0, "bafe6387-9507-420b-a511-42f1ff5af0f9", "josh@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEMnFSDstJ8ZtHCDAj6HL0D8bh8VBpYl0hSVl4AYqH6+OXWbpvZstokZ4Y9u71eOzcA==", null, false, "600dfbda-e3cc-4b41-87e4-f1f81d9e74b4", false, "Josh" },
+                    { "bc3a3871-4800-4061-8182-b965c9c109bc", 0, "1126213f-95c1-49ba-8988-a44ace36778b", "aaron@yahoo.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEG8mJQEL+4Wen+4p/SU91PDL8NZ7l8zam+CQGsjglgW98U/Yu0A25jdE7LBlDnt+Jg==", null, false, "0481164f-c181-443e-9731-18672d0cfb8a", false, "Aaron" },
+                    { "c8c02266-41e6-414d-a1fc-14bbefef86a0", 0, "c548845c-d82c-4a48-a385-d6c4e2759187", "debbie@gmail.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEN3YGsTnRpnbeOwOalDd7gEZ1fqhSrmW6tPnZ1tWmmVoKEvXK9sTOYwNylEHZeC87g==", null, false, "38340f24-27f7-4cbd-b858-e55d4d28d321", false, "Debbie" },
+                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "f0070af5-0fdc-44e0-a4b6-2858cca39ec6", "admin@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEFoH6E5KioWMeOTx+fncUUxNYp7jzO6oXKKvdYYatvX3armyGitr42OXgzhgr51gxg==", null, false, "e8d26606-8aad-4a8e-88bb-5530b8e1a8c1", false, "Administrator" }
                 });
 
             migrationBuilder.InsertData(
@@ -355,26 +356,26 @@ namespace GJApples.Migrations
                 columns: new[] { "Id", "AppleVarietyId", "DatePlanted", "DateRemoved" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateOnly(2015, 5, 10), null },
-                    { 2, 1, new DateOnly(2016, 6, 15), null },
-                    { 3, 2, new DateOnly(2017, 7, 20), null },
-                    { 4, 2, new DateOnly(2018, 8, 25), new DateOnly(2023, 1, 30) },
-                    { 5, 3, new DateOnly(2019, 9, 30), null },
-                    { 6, 3, new DateOnly(2020, 10, 5), null },
-                    { 7, 4, new DateOnly(2021, 11, 10), null },
-                    { 8, 4, new DateOnly(2022, 12, 15), null },
-                    { 9, 5, new DateOnly(2016, 3, 20), null },
-                    { 10, 5, new DateOnly(2017, 4, 25), null },
-                    { 11, 6, new DateOnly(2018, 5, 30), null },
-                    { 12, 6, new DateOnly(2019, 6, 5), null },
-                    { 13, 7, new DateOnly(2020, 7, 10), null },
-                    { 14, 7, new DateOnly(2021, 8, 15), null },
-                    { 15, 8, new DateOnly(2022, 9, 20), null },
-                    { 16, 8, new DateOnly(2023, 10, 25), null },
-                    { 17, 1, new DateOnly(2017, 11, 30), null },
-                    { 18, 2, new DateOnly(2018, 12, 5), new DateOnly(2023, 2, 10) },
-                    { 19, 3, new DateOnly(2019, 1, 10), null },
-                    { 20, 4, new DateOnly(2020, 2, 15), null }
+                    { 1, 1, new DateTime(2015, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 2, 1, new DateTime(2016, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 3, 2, new DateTime(2017, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 4, 2, new DateTime(2018, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 1, 30, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, 3, new DateTime(2019, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 6, 3, new DateTime(2020, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 7, 4, new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 8, 4, new DateTime(2022, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 9, 5, new DateTime(2016, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 10, 5, new DateTime(2017, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 11, 6, new DateTime(2018, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 12, 6, new DateTime(2019, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 13, 7, new DateTime(2020, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 14, 7, new DateTime(2021, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 15, 8, new DateTime(2022, 9, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 16, 8, new DateTime(2023, 10, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 17, 1, new DateTime(2017, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 18, 2, new DateTime(2018, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 19, 3, new DateTime(2019, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 20, 4, new DateTime(2020, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), null }
                 });
 
             migrationBuilder.InsertData(
