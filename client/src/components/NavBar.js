@@ -57,7 +57,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                             <DropdownMenu right>
                                 <DropdownItem>
                                     <NavItem>
-                                        <NavLink tag={RRNavLink} to="/">
+                                        <NavLink tag={RRNavLink} to="/history">
                                             History
                                         </NavLink>
                                     </NavItem>

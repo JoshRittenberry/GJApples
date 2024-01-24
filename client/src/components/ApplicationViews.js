@@ -3,6 +3,7 @@ import { AuthorizedRoute } from "./auth/AuthorizedRoute"
 import Login from "./auth/Login"
 import Register from "./auth/Register"
 import { Home } from "./homepages/Home"
+import { History } from "./History"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -15,7 +16,12 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           }
         />
 
-        {/* CREATE ROUTES HERE */}
+        <Route
+          path="history"
+          element={
+            <History />
+          }
+        />
 
         <Route
           path="login"
