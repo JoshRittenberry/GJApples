@@ -32,6 +32,9 @@ public class CustomersController : ControllerBase
             .Include(u => u.Orders)
                 .ThenInclude(o => o.OrderItems)
                     .ThenInclude(oi => oi.AppleVariety)
+            .Where(u => _dbContext.UserRoles
+                .Any(ur => ur.UserId == u.IdentityUserId &&
+                       _dbContext.Roles.Any(r => r.Id == ur.RoleId && r.Name == "Customer")))
             .Select(customer => new CustomerDTO
             {
                 Id = customer.Id,
