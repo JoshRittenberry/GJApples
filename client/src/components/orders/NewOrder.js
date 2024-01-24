@@ -14,6 +14,12 @@ export const NewOrder = ({ loggedInUser }) => {
         <>
             <header className="neworder_header">
                 <h1>Create New Order</h1>
+                <input 
+                    // display the total cost of the order
+                />
+                <Button>
+                    Submit Order
+                </Button>
             </header>
             <section className="neworder_body">
                 {apples.map(apple => {
