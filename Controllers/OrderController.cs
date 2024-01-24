@@ -309,7 +309,7 @@ public class OrdersController : ControllerBase
     }
 
     [HttpDelete("orderitem/{id}")]
-    // [Authorize(Roles = "Customer")]
+    [Authorize(Roles = "Customer")]
     public IActionResult DeleteOrderItem(int id)
     {
         var orderItem = _dbContext
