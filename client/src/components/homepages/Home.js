@@ -1,10 +1,12 @@
 import "../stylesheets/home.css"
 
-export const Home = () => {
+export const Home = ({ loggedInUser }) => {
     return (
         <>
             <header className="homepage_header">
-                <h1>Welcome to Garry Jones' Apples</h1>
+                {!loggedInUser ? (
+                    <h1>Welcome to Garry Jones' Apples</h1>
+                ) : <h1>Welcome Back to Garry Jones' Apples</h1>}
                 <img src="https://i.ibb.co/x6w0yJ7/Hand-Holding-Apple.webp" className="homepage_header_pic" alt="Hand Holding Apple" />
             </header>
             <section className="homepage_intro">

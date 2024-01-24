@@ -5,6 +5,8 @@ import Register from "./auth/Register"
 import { Home } from "./homepages/Home"
 import { History } from "./History"
 import { ContactUs } from "./ContactUs"
+import { NewOrder } from "./orders/NewOrder"
+import { OrderHistory } from "./orders/OrderHistory"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -14,7 +16,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
         <Route
           index
           element={
-            <Home />
+            <Home loggedInUser={loggedInUser} />
           }
         />
 
@@ -31,6 +33,26 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           path="contactus"
           element={
             <ContactUs />
+          }
+        />
+
+        {/* New Order Page */}
+        <Route
+          path="order"
+          element={
+            <AuthorizedRoute roles={["Customer"]} loggedInUser={loggedInUser}>
+              <NewOrder loggedInUser={loggedInUser} />
+            </AuthorizedRoute>
+          }
+        />
+
+        {/* Order History Page */}
+        <Route
+          path="orderhistory"
+          element={
+            <AuthorizedRoute roles={["Customer"]} loggedInUser={loggedInUser}>
+              <OrderHistory loggedInUser={loggedInUser} />
+            </AuthorizedRoute>
           }
         />
 
