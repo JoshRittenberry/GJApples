@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom"
 import { AuthorizedRoute } from "./auth/AuthorizedRoute"
 import Login from "./auth/Login"
 import Register from "./auth/Register"
+import { Home } from "./homepages/Home"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -10,9 +11,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
         <Route
           index
           element={
-            <AuthorizedRoute loggedInUser={loggedInUser}>
-              {/* Create Routes here */}
-            </AuthorizedRoute>
+            <Home />
           }
         />
 
