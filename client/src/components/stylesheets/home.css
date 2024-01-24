@@ -24,3 +24,7 @@ p, h1, h3 {
     width: 50%;
     /* font-size: 1.4em; */
 }
+
+.homepage_footer {
+    text-align: center;
+}

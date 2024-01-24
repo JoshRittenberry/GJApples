@@ -55,13 +55,25 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                                 More
                             </DropdownToggle>
                             <DropdownMenu right>
-                                <DropdownItem>Option 1</DropdownItem>
-                                <DropdownItem>Option 2</DropdownItem>
+                                <DropdownItem>
+                                    <NavItem>
+                                        <NavLink tag={RRNavLink} to="/">
+                                            History
+                                        </NavLink>
+                                    </NavItem>
+                                </DropdownItem>
+                                <DropdownItem>
+                                    <NavItem>
+                                        <NavLink tag={RRNavLink} to="/">
+                                            Contact Us
+                                        </NavLink>
+                                    </NavItem>
+                                </DropdownItem>
                                 <DropdownItem divider />
                                 <DropdownItem>
                                     <NavItem>
                                         <NavLink tag={RRNavLink} to="/login">
-                                            <Button color="primary">Login</Button>
+                                            Login
                                         </NavLink>
                                     </NavItem>
                                 </DropdownItem>
