@@ -29,25 +29,56 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                     <img src="https://i.ibb.co/9NWqd8x/Logo.png" className="nav-logo" alt="GJApples_Logo" /> Garry Jones' Apple Orchard
                 </NavbarBrand>
                 {loggedInUser ? (
-                    <>
-                        <NavbarToggler onClick={toggleNavbar} />
-                        <Collapse isOpen={open} navbar>
-                            <Nav navbar></Nav>
-                        </Collapse>
-                        <Button
-                            color="primary"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setOpen(false);
-                                logout().then(() => {
-                                    setLoggedInUser(null);
-                                    setOpen(false);
-                                });
-                            }}
-                        >
-                            Logout
-                        </Button>
-                    </>
+                    <Nav navbar>
+                        {
+                            loggedInUser.roles.includes("Customer") && (
+                                <>
+                                    <NavItem>
+                                        <NavLink href="/order">Order</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink href="/orderhistory">Order History</NavLink>
+                                    </NavItem>
+                                </>
+                            )
+                        }
+                        <UncontrolledDropdown nav inNavbar>
+                            <DropdownToggle nav caret>
+                                More
+                            </DropdownToggle>
+                            <DropdownMenu right>
+                                <DropdownItem>
+                                    <NavItem>
+                                        <NavLink tag={RRNavLink} to="/history">
+                                            History
+                                        </NavLink>
+                                    </NavItem>
+                                </DropdownItem>
+                                <DropdownItem>
+                                    <NavItem>
+                                        <NavLink tag={RRNavLink} to="/contactus">
+                                            Contact Us
+                                        </NavLink>
+                                    </NavItem>
+                                </DropdownItem>
+                                <DropdownItem divider />
+                                <DropdownItem>
+                                    <NavItem>
+                                        <NavLink tag={RRNavLink} to="/login" onClick={(e) => {
+                                            e.preventDefault();
+                                            setOpen(false);
+                                            logout().then(() => {
+                                                setLoggedInUser(null);
+                                                setOpen(false);
+                                            });
+                                        }}>
+                                            Logout
+                                        </NavLink>
+                                    </NavItem>
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                    </Nav>
                 ) : (
                     <Nav navbar>
                         <UncontrolledDropdown nav inNavbar>
