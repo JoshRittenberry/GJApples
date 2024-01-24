@@ -48,16 +48,15 @@ public class CustomersController : ControllerBase
                     CustomerUserProfileId = o.CustomerUserProfileId,
                     Customer = null,
                     EmployeeUserProfileId = o.EmployeeUserProfileId,
-                    Employee = null,
-                    // Employee = new OrderPickerDTO
-                    // {
-                    //     Id = o.Employee.Id,
-                    //     FirstName = o.Employee.FirstName,
-                    //     LastName = o.Employee.LastName,
-                    //     Address = o.Employee.Address,
-                    //     Email = o.Employee.IdentityUser.Email,
-                    //     CompletedOrders = o.Employee.CompletedOrders
-                    // },
+                    Employee = new OrderPickerDTO
+                    {
+                        Id = o.Employee.Id,
+                        FirstName = o.Employee.FirstName,
+                        LastName = o.Employee.LastName,
+                        Address = o.Employee.Address,
+                        Email = o.Employee.IdentityUser.Email,
+                        CompletedOrders = null
+                    },
                     DateOrdered = o.DateOrdered,
                     DateCompleted = o.DateCompleted,
                     Canceled = o.Canceled,
@@ -119,16 +118,15 @@ public class CustomersController : ControllerBase
                 CustomerUserProfileId = o.CustomerUserProfileId,
                 Customer = null,
                 EmployeeUserProfileId = o.EmployeeUserProfileId,
-                Employee = null,
-                // Employee = new OrderPickerDTO
-                // {
-                //     Id = o.Employee.Id,
-                //     FirstName = o.Employee.FirstName,
-                //     LastName = o.Employee.LastName,
-                //     Address = o.Employee.Address,
-                //     Email = o.Employee.IdentityUser.Email,
-                //     CompletedOrders = null
-                // },
+                Employee = new OrderPickerDTO
+                {
+                    Id = o.Employee.Id,
+                    FirstName = o.Employee.FirstName,
+                    LastName = o.Employee.LastName,
+                    Address = o.Employee.Address,
+                    Email = o.Employee.IdentityUser.Email,
+                    CompletedOrders = null
+                },
                 DateOrdered = o.DateOrdered,
                 DateCompleted = o.DateCompleted,
                 Canceled = o.Canceled,
