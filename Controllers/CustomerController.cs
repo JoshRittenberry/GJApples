@@ -84,7 +84,7 @@ public class CustomersController : ControllerBase
 
     // Get Customer Profile by Id
     [HttpGet("{id}")]
-    [Authorize]
+    [Authorize(Roles = "Admin,OrderPicker")]
     public IActionResult GetCustomerById(int id)
     {
         var customer = _dbContext
