@@ -10,15 +10,16 @@ namespace GJApples.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UserProfileController : ControllerBase
+public class UserProfilesController : ControllerBase
 {
     private GJApplesDbContext _dbContext;
 
-    public UserProfileController(GJApplesDbContext context)
+    public UserProfilesController(GJApplesDbContext context)
     {
         _dbContext = context;
     }
 
+    // Get all UserProfiles
     [HttpGet]
     [Authorize]
     public IActionResult Get()
@@ -39,6 +40,7 @@ public class UserProfileController : ControllerBase
             .ToList());
     }
 
+    // Get UserProfile by Id
     [HttpGet("{id}")]
     [Authorize]
     public IActionResult Get(int id)
@@ -59,6 +61,7 @@ public class UserProfileController : ControllerBase
         });
     }
 
+    // Get UserProfiles with Roles
     [HttpGet("withroles")]
     [Authorize(Roles = "Admin")]
     public IActionResult GetWithRoles()
@@ -81,6 +84,7 @@ public class UserProfileController : ControllerBase
         }));
     }
 
+    // Promote UserProfile
     [HttpPost("promote/{id}")]
     [Authorize(Roles = "Admin")]
     public IActionResult Promote(string id)
@@ -96,6 +100,7 @@ public class UserProfileController : ControllerBase
         return NoContent();
     }
 
+    // Demote UserProfile
     [HttpPost("demote/{id}")]
     [Authorize(Roles = "Admin")]
     public IActionResult Demote(string id)

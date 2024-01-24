@@ -18,6 +18,7 @@ public class ApplesController : ControllerBase
         _dbContext = context;
     }
 
+    // Get all AppleVarieties
     [HttpGet]
     [AllowAnonymous]
     public IActionResult Get()
@@ -68,6 +69,7 @@ public class ApplesController : ControllerBase
         );
     }
 
+    // Get AppleVariety by Id
     [HttpGet("{id}")]
     [Authorize]
     public IActionResult Get(int id)
@@ -122,6 +124,7 @@ public class ApplesController : ControllerBase
         });
     }
 
+    // Create New AppleVariety
     [HttpPost]
     [Authorize(Roles = "Admin")]
     public IActionResult CreateNewAppleVariety(AppleVariety appleVariety)
@@ -147,6 +150,7 @@ public class ApplesController : ControllerBase
         return Created($"/api/apple/{appleVariety.Id}", appleVariety);
     }
 
+    // Edit AppleVariety
     [HttpPut("{id}")]
     [Authorize(Roles = "Admin")]
     public IActionResult EditAppleVariety(AppleVariety appleVariety, int id)
@@ -199,6 +203,7 @@ public class ApplesController : ControllerBase
         }
     }
 
+    // Deactivate AppleVariety
     [HttpPut("{id}/changestatus")]
     [Authorize(Roles = "Admin")]
     public IActionResult EditAppleVarietyActiveStatus(int id)
@@ -217,6 +222,7 @@ public class ApplesController : ControllerBase
         return NoContent();
     }
 
+    // Delete AppleVariety
     [HttpDelete("{id}")]
     [Authorize(Roles = "Admin")]
     public IActionResult DeleteAppleVariety(int id)

@@ -5,16 +5,12 @@ namespace GJApples.Models.DTOs;
 public class TreeHarvestReportDTO
 {
     public int Id { get; set; }
-    [Required]
     public int TreeId { get; set; }
-    public TreeDTO Tree { get; set; }
-    [Required]
+    public TreeDTO? Tree { get; set; }
     [ForeignKey("Employee")]
     public int EmployeeUserProfileId { get; set; }
-    public UserProfileDTO Employee { get; set; }
-    [Required]
+    public HarvesterDTO? Employee { get; set; }
     public DateTime HarvestDate { get; set; }
-    [Required]
     [Range(0, 999)]
     public decimal PoundsHarvested { get; set; }
 }

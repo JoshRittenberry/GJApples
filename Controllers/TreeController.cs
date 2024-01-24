@@ -53,14 +53,14 @@ public class TreesController : ControllerBase
                     TreeId = thr.TreeId,
                     Tree = null,
                     EmployeeUserProfileId = thr.EmployeeUserProfileId,
-                    Employee = new UserProfileDTO
+                    Employee = new HarvesterDTO
                     {
                         Id = thr.Employee.Id,
                         FirstName = thr.Employee.FirstName,
                         LastName = thr.Employee.LastName,
                         Address = isAuthorized ? thr.Employee.Address : null,
                         Email = isAuthorized ? thr.Employee.IdentityUser.Email : null,
-                        UserName = isAuthorized ? thr.Employee.IdentityUser.UserName : null,
+                        TreeHarvestReports = null
                     },
                     HarvestDate = thr.HarvestDate,
                     PoundsHarvested = thr.PoundsHarvested
@@ -109,14 +109,14 @@ public class TreesController : ControllerBase
                 TreeId = thr.TreeId,
                 Tree = null,
                 EmployeeUserProfileId = thr.EmployeeUserProfileId,
-                Employee = new UserProfileDTO
+                Employee = new HarvesterDTO
                 {
                     Id = thr.Employee.Id,
                     FirstName = thr.Employee.FirstName,
                     LastName = thr.Employee.LastName,
                     Address = thr.Employee.Address,
                     Email = thr.Employee.IdentityUser.Email,
-                    UserName = thr.Employee.IdentityUser.UserName,
+                    TreeHarvestReports = null
                 },
                 HarvestDate = thr.HarvestDate,
                 PoundsHarvested = thr.PoundsHarvested
@@ -169,14 +169,14 @@ public class TreesController : ControllerBase
                 TreeHarvestReports = null
             },
             EmployeeUserProfileId = thr.EmployeeUserProfileId,
-            Employee = new UserProfileDTO
+            Employee = new HarvesterDTO
             {
                 Id = thr.Employee.Id,
                 FirstName = thr.Employee.FirstName,
                 LastName = thr.Employee.LastName,
                 Address = thr.Employee.Address,
                 Email = thr.Employee.IdentityUser.Email,
-                UserName = thr.Employee.IdentityUser.UserName,
+                TreeHarvestReports = null
             },
             HarvestDate = thr.HarvestDate,
             PoundsHarvested = thr.PoundsHarvested
@@ -226,14 +226,14 @@ public class TreesController : ControllerBase
                 TreeHarvestReports = null
             },
             EmployeeUserProfileId = treeHarvestReport.EmployeeUserProfileId,
-            Employee = new UserProfileDTO
+            Employee = new HarvesterDTO
             {
                 Id = treeHarvestReport.Employee.Id,
                 FirstName = treeHarvestReport.Employee.FirstName,
                 LastName = treeHarvestReport.Employee.LastName,
                 Address = treeHarvestReport.Employee.Address,
                 Email = treeHarvestReport.Employee.IdentityUser.Email,
-                UserName = treeHarvestReport.Employee.IdentityUser.UserName,
+                TreeHarvestReports = null
             },
             HarvestDate = treeHarvestReport.HarvestDate,
             PoundsHarvested = treeHarvestReport.PoundsHarvested
