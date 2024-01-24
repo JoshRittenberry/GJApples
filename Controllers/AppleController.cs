@@ -9,11 +9,11 @@ namespace GJApples.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AppleController : ControllerBase
+public class ApplesController : ControllerBase
 {
     private GJApplesDbContext _dbContext;
 
-    public AppleController(GJApplesDbContext context)
+    public ApplesController(GJApplesDbContext context)
     {
         _dbContext = context;
     }

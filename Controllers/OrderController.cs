@@ -9,11 +9,11 @@ namespace GJApples.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class OrderController : ControllerBase
+public class OrdersController : ControllerBase
 {
     private GJApplesDbContext _dbContext;
 
-    public OrderController(GJApplesDbContext context)
+    public OrdersController(GJApplesDbContext context)
     {
         _dbContext = context;
     }
@@ -134,6 +134,45 @@ public class OrderController : ControllerBase
         };
 
         _dbContext.Orders.Add(order);
+        _dbContext.SaveChanges();
+
+        return Ok();
+    }
+
+    // Create new OrderItem
+    [HttpPost("orderitem")]
+    [Authorize(Roles = "Customer")]
+    public IActionResult CreateNewOrderItem(OrderItem orderItem)
+    {
+        // Find Order
+        var order = _dbContext
+            .Orders
+            .SingleOrDefault(o => o.Id == orderItem.OrderId);
+
+        // Find AppleVariety
+        var appleVariety = _dbContext
+            .AppleVarieties
+            .SingleOrDefault(a => a.Id == orderItem.AppleVarietyId);
+
+        // Find Customer UserName
+        var customerUserName = User.Identity.Name;
+
+        // Find Customer UserProfile
+        UserProfile customer = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == customerUserName);
+
+        if (order == null || appleVariety == null)
+        {
+            return NotFound();
+        }
+
+        if (order.DateCompleted != null || orderItem.Pounds <= 0 || customer.Id != order.CustomerUserProfileId)
+        {
+            return BadRequest();
+        }
+
+        _dbContext.OrderItems.Add(orderItem);
         _dbContext.SaveChanges();
 
         return Ok();
@@ -269,5 +308,4 @@ public class OrderController : ControllerBase
         return Ok(orderToUpdate);
     }
 
-    // Complete OrderItems
 }

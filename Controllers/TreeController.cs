@@ -9,11 +9,11 @@ namespace GJApples.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TreeController : ControllerBase
+public class TreesController : ControllerBase
 {
     private GJApplesDbContext _dbContext;
 
-    public TreeController(GJApplesDbContext context)
+    public TreesController(GJApplesDbContext context)
     {
         _dbContext = context;
     }
@@ -126,7 +126,7 @@ public class TreeController : ControllerBase
 
     // Get TreeHarvestReports
     [HttpGet("harvestreports")]
-    // [Authorize(Roles = "Admin,Harvester")]
+    [Authorize(Roles = "Admin,Harvester")]
     public IActionResult GetTreeHarvestReports([FromQuery] int? treeId)
     {
         var query = _dbContext.TreeHarvestReports
