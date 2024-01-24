@@ -9,6 +9,10 @@ import {
     Navbar,
     NavbarBrand,
     NavbarToggler,
+    UncontrolledDropdown,
+    DropdownMenu,
+    DropdownItem,
+    DropdownToggle
 } from "reactstrap";
 import { logout } from "../managers/authManager";
 import "./stylesheets/navBar.css"
@@ -46,11 +50,23 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                     </>
                 ) : (
                     <Nav navbar>
-                        <NavItem>
-                            <NavLink tag={RRNavLink} to="/login">
-                                <Button color="primary">Login</Button>
-                            </NavLink>
-                        </NavItem>
+                        <UncontrolledDropdown nav inNavbar>
+                            <DropdownToggle nav caret>
+                                More
+                            </DropdownToggle>
+                            <DropdownMenu right>
+                                <DropdownItem>Option 1</DropdownItem>
+                                <DropdownItem>Option 2</DropdownItem>
+                                <DropdownItem divider />
+                                <DropdownItem>
+                                    <NavItem>
+                                        <NavLink tag={RRNavLink} to="/login">
+                                            <Button color="primary">Login</Button>
+                                        </NavLink>
+                                    </NavItem>
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
                     </Nav>
                 )}
             </Navbar>
