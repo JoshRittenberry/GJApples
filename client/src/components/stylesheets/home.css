@@ -2,6 +2,25 @@ body {
     background-color: #22577a;
 }
 
-p {
+p, h1 {
     color: white;
+}
+
+.homepage_header {
+    text-align: center;
+}
+
+.homepage_intro {
+    display: flex;
+    justify-content: space-around;
+}
+
+.homepage_gj_pic {
+    width: 35%;
+    height: 35%;
+}
+
+.homepage_gj_welcome {
+    width: 50%;
+    font-size: 1.4em;
 }
