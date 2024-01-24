@@ -10,15 +10,16 @@ namespace GJApples.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UserProfileController : ControllerBase
+public class UserProfilesController : ControllerBase
 {
     private GJApplesDbContext _dbContext;
 
-    public UserProfileController(GJApplesDbContext context)
+    public UserProfilesController(GJApplesDbContext context)
     {
         _dbContext = context;
     }
 
+    // Get all UserProfiles
     [HttpGet]
     [Authorize]
     public IActionResult Get()
@@ -39,6 +40,7 @@ public class UserProfileController : ControllerBase
             .ToList());
     }
 
+    // Get UserProfile by Id
     [HttpGet("{id}")]
     [Authorize]
     public IActionResult Get(int id)
@@ -59,6 +61,77 @@ public class UserProfileController : ControllerBase
         });
     }
 
+    // Get Customer Profile by Id
+    [HttpGet("customer/{id}")]
+    // [Authorize]
+    public IActionResult GetCustomerById(int id)
+    {
+        var customer = _dbContext
+            .UserProfiles
+                .Include(u => u.IdentityUser)
+            .SingleOrDefault(c => c.Id == id);
+
+        var orders = _dbContext
+            .Orders
+                .Include(o => o.Employee)
+                    .ThenInclude(e => e.IdentityUser)
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.AppleVariety)
+            .Where(o => o.CustomerUserProfileId == id);
+
+        if (customer == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(new CustomerDTO
+        {
+            Id = customer.Id,
+            FirstName = customer.FirstName,
+            LastName = customer.LastName,
+            Address = customer.Address,
+            Email = customer.IdentityUser.Email,
+            Orders = orders.Select(o => new OrderDTO
+            {
+                Id = o.Id,
+                CustomerUserProfileId = o.CustomerUserProfileId,
+                Customer = null,
+                EmployeeUserProfileId = o.EmployeeUserProfileId,
+                Employee = null,
+                // Employee = new OrderPickerDTO
+                // {
+                //     Id = o.Employee.Id,
+                //     FirstName = o.Employee.FirstName,
+                //     LastName = o.Employee.LastName,
+                //     Address = o.Employee.Address,
+                //     Email = o.Employee.IdentityUser.Email,
+                //     CompletedOrders = null
+                // },
+                DateOrdered = o.DateOrdered,
+                DateCompleted = o.DateCompleted,
+                Canceled = o.Canceled,
+                OrderItems = o.OrderItems.Select(oi => new OrderItemDTO
+                {
+                    Id = oi.Id,
+                    OrderId = oi.OrderId,
+                    AppleVarietyId = oi.AppleVarietyId,
+                    AppleVariety = new AppleVarietyDTO
+                    {
+                        Id = oi.AppleVariety.Id,
+                        Type = oi.AppleVariety.Type,
+                        ImageUrl = oi.AppleVariety.ImageUrl,
+                        CostPerPound = oi.AppleVariety.CostPerPound,
+                        IsActive = oi.AppleVariety.IsActive,
+                        Trees = null,
+                        OrderItems = null
+                    },
+                    Pounds = oi.Pounds
+                }).ToList()
+            }).ToList()
+        });
+    }
+
+    // Get UserProfiles with Roles
     [HttpGet("withroles")]
     [Authorize(Roles = "Admin")]
     public IActionResult GetWithRoles()
@@ -81,6 +154,7 @@ public class UserProfileController : ControllerBase
         }));
     }
 
+    // Promote UserProfile
     [HttpPost("promote/{id}")]
     [Authorize(Roles = "Admin")]
     public IActionResult Promote(string id)
@@ -96,6 +170,7 @@ public class UserProfileController : ControllerBase
         return NoContent();
     }
 
+    // Demote UserProfile
     [HttpPost("demote/{id}")]
     [Authorize(Roles = "Admin")]
     public IActionResult Demote(string id)

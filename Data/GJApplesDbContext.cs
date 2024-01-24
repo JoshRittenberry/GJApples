@@ -950,135 +950,25 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
                 CustomerUserProfileId = 6,
                 EmployeeUserProfileId = 3,
                 DateOrdered = new DateTime(2023, 1, 5),
-                DateCompleted = new DateTime(2023, 5, 30),
+                DateCompleted = null,
                 Canceled = false
             },
             new Order
             {
                 Id = 10,
                 CustomerUserProfileId = 7,
-                EmployeeUserProfileId = 3,
+                EmployeeUserProfileId = null,
                 DateOrdered = new DateTime(2023, 4, 8),
-                DateCompleted = new DateTime(2023, 11, 14),
+                DateCompleted = null,
                 Canceled = false
             },
             new Order
             {
                 Id = 11,
                 CustomerUserProfileId = 6,
-                EmployeeUserProfileId = 3,
+                EmployeeUserProfileId = null,
                 DateOrdered = new DateTime(2023, 3, 26),
-                DateCompleted = new DateTime(2023, 9, 24),
-                Canceled = false
-            },
-            new Order
-            {
-                Id = 12,
-                CustomerUserProfileId = 6,
-                EmployeeUserProfileId = 3,
-                DateOrdered = new DateTime(2023, 10, 15),
-                DateCompleted = new DateTime(2023, 10, 15),
-                Canceled = false
-            },
-            new Order
-            {
-                Id = 13,
-                CustomerUserProfileId = 7,
-                EmployeeUserProfileId = 3,
-                DateOrdered = new DateTime(2023, 9, 29),
-                DateCompleted = new DateTime(2023, 11, 5),
-                Canceled = false
-            },
-            new Order
-            {
-                Id = 14,
-                CustomerUserProfileId = 6,
-                EmployeeUserProfileId = 2,
-                DateOrdered = new DateTime(2023, 3, 15),
-                DateCompleted = new DateTime(2023, 9, 19),
-                Canceled = false
-            },
-            new Order
-            {
-                Id = 15,
-                CustomerUserProfileId = 7,
-                EmployeeUserProfileId = 3,
-                DateOrdered = new DateTime(2023, 9, 14),
-                DateCompleted = new DateTime(2023, 9, 26),
-                Canceled = false
-            },
-            new Order
-            {
-                Id = 16,
-                CustomerUserProfileId = 6,
-                EmployeeUserProfileId = 3,
-                DateOrdered = new DateTime(2023, 3, 15),
-                DateCompleted = new DateTime(2023, 11, 29),
-                Canceled = false
-            },
-            new Order
-            {
-                Id = 17,
-                CustomerUserProfileId = 7,
-                EmployeeUserProfileId = 2,
-                DateOrdered = new DateTime(2023, 5, 3),
-                DateCompleted = new DateTime(2023, 12, 27),
-                Canceled = false
-            },
-            new Order
-            {
-                Id = 18,
-                CustomerUserProfileId = 6,
-                DateOrdered = new DateTime(2023, 11, 5),
-                Canceled = false
-            },
-            new Order
-            {
-                Id = 19,
-                CustomerUserProfileId = 7,
-                DateOrdered = new DateTime(2023, 6, 24),
-                Canceled = false
-            },
-            new Order
-            {
-                Id = 20,
-                CustomerUserProfileId = 6,
-                DateOrdered = new DateTime(2023, 4, 20),
-                Canceled = false
-            },
-            new Order
-            {
-                Id = 21,
-                CustomerUserProfileId = 7,
-                DateOrdered = new DateTime(2023, 9, 8),
-                Canceled = false
-            },
-            new Order
-            {
-                Id = 22,
-                CustomerUserProfileId = 7,
-                DateOrdered = new DateTime(2023, 5, 24),
-                Canceled = false
-            },
-            new Order
-            {
-                Id = 23,
-                CustomerUserProfileId = 7,
-                DateOrdered = new DateTime(2023, 5, 7),
-                Canceled = false
-            },
-            new Order
-            {
-                Id = 24,
-                CustomerUserProfileId = 6,
-                DateOrdered = new DateTime(2023, 5, 27),
-                Canceled = false
-            },
-            new Order
-            {
-                Id = 25,
-                CustomerUserProfileId = 6,
-                DateOrdered = new DateTime(2023, 10, 8),
+                DateCompleted = null,
                 Canceled = false
             }
         );
