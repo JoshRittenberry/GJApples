@@ -7,7 +7,7 @@ public class OrderDTO
     public int Id { get; set; }
     [ForeignKey("Customer")]
     public int CustomerUserProfileId { get; set; }
-    public UserProfileDTO? Customer { get; set; }
+    public CustomerDTO? Customer { get; set; }
     [ForeignKey("Employee")]
     public int? EmployeeUserProfileId { get; set; }
     public OrderPickerDTO? Employee { get; set; }
