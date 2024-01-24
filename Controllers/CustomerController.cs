@@ -48,7 +48,7 @@ public class CustomersController : ControllerBase
                     CustomerUserProfileId = o.CustomerUserProfileId,
                     Customer = null,
                     EmployeeUserProfileId = o.EmployeeUserProfileId,
-                    Employee = new OrderPickerDTO
+                    Employee = o.Employee == null ? null : new OrderPickerDTO
                     {
                         Id = o.Employee.Id,
                         FirstName = o.Employee.FirstName,
@@ -118,7 +118,7 @@ public class CustomersController : ControllerBase
                 CustomerUserProfileId = o.CustomerUserProfileId,
                 Customer = null,
                 EmployeeUserProfileId = o.EmployeeUserProfileId,
-                Employee = new OrderPickerDTO
+                Employee = o.Employee == null ? null : new OrderPickerDTO
                 {
                     Id = o.Employee.Id,
                     FirstName = o.Employee.FirstName,
