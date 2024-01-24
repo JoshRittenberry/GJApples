@@ -18,6 +18,7 @@ public class OrderController : ControllerBase
         _dbContext = context;
     }
 
+    // Get all Orders
     [HttpGet]
     [Authorize]
     public IActionResult GetSubmittedOrders()
@@ -61,6 +62,7 @@ public class OrderController : ControllerBase
         );
     }
 
+    // Get Order by Id
     [HttpGet("{id}")]
     [Authorize]
     public IActionResult GetOrderById(int id)
@@ -110,6 +112,7 @@ public class OrderController : ControllerBase
         });
     }
 
+    // Create new Order
     [HttpPost]
     [Authorize(Roles = "Customer")]
     public IActionResult CreateNewOrder()
@@ -265,4 +268,6 @@ public class OrderController : ControllerBase
 
         return Ok(orderToUpdate);
     }
+
+    // Complete OrderItems
 }

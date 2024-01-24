@@ -18,6 +18,7 @@ public class TreeController : ControllerBase
         _dbContext = context;
     }
 
+    // Get all Trees
     [HttpGet]
     [AllowAnonymous]
     public IActionResult Get()
@@ -68,6 +69,7 @@ public class TreeController : ControllerBase
         );
     }
 
+    // Get Tree by Id
     [HttpGet("{id}")]
     [Authorize]
     public IActionResult GetTreeById(int id)
@@ -122,54 +124,68 @@ public class TreeController : ControllerBase
         });
     }
 
+    // Get TreeHarvestReports
     [HttpGet("harvestreports")]
-    [Authorize(Roles = "Admin,Harvester")]
-    public IActionResult GetTreeHarvestReports()
+    // [Authorize(Roles = "Admin,Harvester")]
+    public IActionResult GetTreeHarvestReports([FromQuery] int? treeId)
     {
-        return Ok(_dbContext
-            .TreeHarvestReports
-                .Include(thr => thr.Tree)
-                    .ThenInclude(t => t.AppleVariety)
-                .Include(thr => thr.Employee)
-                    .ThenInclude(e => e.IdentityUser)
-            .Select(thr => new TreeHarvestReportDTO
+        var query = _dbContext.TreeHarvestReports
+        .Include(thr => thr.Tree)
+            .ThenInclude(t => t.AppleVariety)
+        .Include(thr => thr.Employee)
+            .ThenInclude(e => e.IdentityUser)
+        .AsQueryable(); // Create a base query
+
+        if (treeId.HasValue)
+        {
+            query = query.Where(thr => thr.Tree.Id == treeId.Value);
+
+            if (query == null)
             {
-                Id = thr.Id,
-                TreeId = thr.TreeId,
-                Tree = new TreeDTO
+                return BadRequest();
+            }
+        }
+
+        var treeHarvestReports = query.Select(thr => new TreeHarvestReportDTO
+        {
+            Id = thr.Id,
+            TreeId = thr.TreeId,
+            Tree = new TreeDTO
+            {
+                Id = thr.Tree.Id,
+                AppleVarietyId = thr.Tree.AppleVarietyId,
+                AppleVariety = new AppleVarietyDTO
                 {
-                    Id = thr.Tree.Id,
-                    AppleVarietyId = thr.Tree.AppleVarietyId,
-                    AppleVariety = new AppleVarietyDTO
-                    {
-                        Id = thr.Tree.AppleVariety.Id,
-                        Type = thr.Tree.AppleVariety.Type,
-                        ImageUrl = thr.Tree.AppleVariety.ImageUrl,
-                        CostPerPound = thr.Tree.AppleVariety.CostPerPound,
-                        IsActive = thr.Tree.AppleVariety.IsActive,
-                        Trees = null,
-                        OrderItems = null
-                    },
-                    DatePlanted = thr.Tree.DatePlanted,
-                    DateRemoved = thr.Tree.DateRemoved,
-                    TreeHarvestReports = null
+                    Id = thr.Tree.AppleVariety.Id,
+                    Type = thr.Tree.AppleVariety.Type,
+                    ImageUrl = thr.Tree.AppleVariety.ImageUrl,
+                    CostPerPound = thr.Tree.AppleVariety.CostPerPound,
+                    IsActive = thr.Tree.AppleVariety.IsActive,
+                    Trees = null,
+                    OrderItems = null
                 },
-                EmployeeUserProfileId = thr.EmployeeUserProfileId,
-                Employee = new UserProfileDTO
-                {
-                    Id = thr.Employee.Id,
-                    FirstName = thr.Employee.FirstName,
-                    LastName = thr.Employee.LastName,
-                    Address = thr.Employee.Address,
-                    Email = thr.Employee.IdentityUser.Email,
-                    UserName = thr.Employee.IdentityUser.UserName,
-                },
-                HarvestDate = thr.HarvestDate,
-                PoundsHarvested = thr.PoundsHarvested
-            }).ToList()
-        );
+                DatePlanted = thr.Tree.DatePlanted,
+                DateRemoved = thr.Tree.DateRemoved,
+                TreeHarvestReports = null
+            },
+            EmployeeUserProfileId = thr.EmployeeUserProfileId,
+            Employee = new UserProfileDTO
+            {
+                Id = thr.Employee.Id,
+                FirstName = thr.Employee.FirstName,
+                LastName = thr.Employee.LastName,
+                Address = thr.Employee.Address,
+                Email = thr.Employee.IdentityUser.Email,
+                UserName = thr.Employee.IdentityUser.UserName,
+            },
+            HarvestDate = thr.HarvestDate,
+            PoundsHarvested = thr.PoundsHarvested
+        }).ToList();
+
+        return Ok(treeHarvestReports);
     }
 
+    // Get TreeHarvestReport by Id
     [HttpGet("harvestreports/{id}")]
     [Authorize(Roles = "Admin,Harvester")]
     public IActionResult GetTreeHarvestReportById(int id)
@@ -224,6 +240,7 @@ public class TreeController : ControllerBase
         });
     }
 
+    // Create new Tree
     [HttpPost]
     [Authorize(Roles = "Admin")]
     public IActionResult CreateNewTree(Tree tree)
@@ -239,6 +256,7 @@ public class TreeController : ControllerBase
         return Created($"/api/tree/{tree.Id}", tree);
     }
 
+    // Create new TreeHarvestReport
     [HttpPost("harvestreport")]
     [Authorize(Roles = "Admin,Harvester")]
     public IActionResult CreateHarvestReport(TreeHarvestReport treeHarvestReport)
@@ -257,6 +275,7 @@ public class TreeController : ControllerBase
         return Created($"/api/treeHarvestReports/{treeHarvestReport.Id}", treeHarvestReport);
     }
 
+    // Edit Tree
     [HttpPut("{id}")]
     [Authorize(Roles = "Admin")]
     public IActionResult EditTree(Tree tree, int id)
@@ -317,6 +336,7 @@ public class TreeController : ControllerBase
         }
     }
 
+    // Edit Harvest Report
     [HttpPut("harvestreports/{id}")]
     [Authorize(Roles = "Admin,Harveester")]
     public IActionResult EditHarvestReport(TreeHarvestReport treeHarvestReport, int id)
@@ -405,6 +425,7 @@ public class TreeController : ControllerBase
         }
     }
 
+    // Remove Tree / Input DateRemoved
     [HttpPut("{id}/remove")]
     [Authorize(Roles = "Admin")]
     public IActionResult RemoveTree(int id)
@@ -424,6 +445,7 @@ public class TreeController : ControllerBase
         return NoContent();
     }
 
+    // Delete Tree
     [HttpDelete("{id}")]
     [Authorize(Roles = "Admin")]
     public IActionResult DeleteTree(int id)
