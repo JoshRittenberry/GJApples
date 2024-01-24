@@ -11,6 +11,7 @@ import {
     NavbarToggler,
 } from "reactstrap";
 import { logout } from "../managers/authManager";
+import "./stylesheets/navBar.css"
 
 export default function NavBar({ loggedInUser, setLoggedInUser }) {
     const [open, setOpen] = useState(false);
@@ -21,7 +22,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
         <div>
             <Navbar color="light" light fixed="true" expand="lg">
                 <NavbarBrand className="mr-auto" tag={RRNavLink} to="/">
-                    🧹🧼House Rules
+                    <img src="https://i.ibb.co/9NWqd8x/Logo.png" className="nav-logo" alt="GJApples_Logo" /> Garry Jones' Apple Orchard
                 </NavbarBrand>
                 {loggedInUser ? (
                     <>
