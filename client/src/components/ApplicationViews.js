@@ -4,10 +4,12 @@ import Login from "./auth/Login"
 import Register from "./auth/Register"
 import { Home } from "./homepages/Home"
 import { History } from "./History"
+import { ContactUs } from "./ContactUs"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
     <Routes>
+      {/* Home Page */}
       <Route path="/">
         <Route
           index
@@ -16,10 +18,19 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           }
         />
 
+        {/* History Page */}
         <Route
           path="history"
           element={
             <History />
+          }
+        />
+
+        {/* Contact Us Page */}
+        <Route
+          path="contactus"
+          element={
+            <ContactUs />
           }
         />
 

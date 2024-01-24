@@ -64,7 +64,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                                 </DropdownItem>
                                 <DropdownItem>
                                     <NavItem>
-                                        <NavLink tag={RRNavLink} to="/">
+                                        <NavLink tag={RRNavLink} to="/contactus">
                                             Contact Us
                                         </NavLink>
                                     </NavItem>
