@@ -308,4 +308,23 @@ public class OrdersController : ControllerBase
         return Ok(orderToUpdate);
     }
 
+    [HttpDelete("orderitem/{id}")]
+    // [Authorize(Roles = "Customer")]
+    public IActionResult DeleteOrderItem(int id)
+    {
+        var orderItem = _dbContext
+            .OrderItems
+            .SingleOrDefault(oi => oi.Id == id);
+
+        if (orderItem == null)
+        {
+            return NotFound();
+        }
+
+        _dbContext.Remove(orderItem);
+        _dbContext.SaveChanges();
+
+        return NoContent();
+    }
+
 }
