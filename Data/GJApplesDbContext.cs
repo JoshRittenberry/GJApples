@@ -942,7 +942,7 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             {
                 Id = 6,
                 CustomerUserProfileId = 7,
-                EmployeeUserProfileId = 3,
+                EmployeeUserProfileId = 5,
                 DateOrdered = new DateTime(2023, 3, 23),
                 DateCompleted = new DateTime(2023, 4, 15),
                 Canceled = false
@@ -951,7 +951,7 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             {
                 Id = 7,
                 CustomerUserProfileId = 7,
-                EmployeeUserProfileId = 2,
+                EmployeeUserProfileId = 4,
                 DateOrdered = new DateTime(2023, 7, 22),
                 DateCompleted = new DateTime(2023, 11, 23),
                 Canceled = false
@@ -960,7 +960,7 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             {
                 Id = 8,
                 CustomerUserProfileId = 7,
-                EmployeeUserProfileId = 3,
+                EmployeeUserProfileId = 5,
                 DateOrdered = new DateTime(2023, 10, 10),
                 DateCompleted = new DateTime(2023, 10, 28),
                 Canceled = false
@@ -969,7 +969,7 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             {
                 Id = 9,
                 CustomerUserProfileId = 6,
-                EmployeeUserProfileId = 3,
+                EmployeeUserProfileId = 4,
                 DateOrdered = new DateTime(2023, 1, 5),
                 DateCompleted = null,
                 Canceled = false
@@ -978,7 +978,6 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             {
                 Id = 10,
                 CustomerUserProfileId = 7,
-                EmployeeUserProfileId = null,
                 DateOrdered = new DateTime(2023, 4, 8),
                 DateCompleted = null,
                 Canceled = false
@@ -987,7 +986,6 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             {
                 Id = 11,
                 CustomerUserProfileId = 6,
-                EmployeeUserProfileId = null,
                 DateOrdered = new DateTime(2023, 3, 26),
                 DateCompleted = null,
                 Canceled = false
