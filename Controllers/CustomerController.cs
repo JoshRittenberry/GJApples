@@ -19,8 +19,9 @@ public class CustomersController : ControllerBase
         _dbContext = context;
     }
 
+    // Get all Customer Profiles
     [HttpGet]
-    // [Authorize(Roles = "Admin,OrderPicker")]
+    [Authorize(Roles = "Admin,OrderPicker")]
     public IActionResult Get()
     {
         return Ok(_dbContext
@@ -83,7 +84,7 @@ public class CustomersController : ControllerBase
 
     // Get Customer Profile by Id
     [HttpGet("{id}")]
-    // [Authorize]
+    [Authorize]
     public IActionResult GetCustomerById(int id)
     {
         var customer = _dbContext
