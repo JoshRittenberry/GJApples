@@ -23,7 +23,7 @@ public class ApplesController : ControllerBase
     [AllowAnonymous]
     public IActionResult Get()
     {
-        bool isAuthorized = User.Identity.IsAuthenticated;
+        bool isEmployee = User.IsInRole("Admin,OrderPicker,Harvester");
 
         return Ok(_dbContext
             .AppleVarieties
@@ -37,7 +37,7 @@ public class ApplesController : ControllerBase
                 ImageUrl = a.ImageUrl,
                 CostPerPound = a.CostPerPound,
                 IsActive = a.IsActive,
-                Trees = isAuthorized ? a.Trees
+                Trees = isEmployee ? a.Trees
                     .Where(t => t.DateRemoved == null)
                     .Select(t => new TreeDTO
                     {
@@ -57,7 +57,7 @@ public class ApplesController : ControllerBase
                             PoundsHarvested = thr.PoundsHarvested
                         }).ToList()
                     }).ToList() : null,
-                OrderItems = isAuthorized ? a.OrderItems.Select(oi => new OrderItemDTO
+                OrderItems = isEmployee ? a.OrderItems.Select(oi => new OrderItemDTO
                 {
                     Id = oi.Id,
                     OrderId = oi.OrderId,
