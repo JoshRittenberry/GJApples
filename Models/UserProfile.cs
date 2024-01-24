@@ -14,4 +14,7 @@ public class UserProfile
     public string Address { get; set; }
     public string IdentityUserId { get; set; }
     public IdentityUser IdentityUser { get; set; }
+    public List<Order>? CompletedOrders { get; set; }
+    public List<TreeHarvestReport>? TreeHarvestReports { get; set; }
+    public List<Order>? Orders { get; set; }
 }

@@ -52,7 +52,7 @@ public class ApplesController : ControllerBase
                             TreeId = thr.TreeId,
                             Tree = null,
                             EmployeeUserProfileId = thr.EmployeeUserProfileId,
-                            Harvester = null,
+                            Employee = null,
                             HarvestDate = thr.HarvestDate,
                             PoundsHarvested = thr.PoundsHarvested
                         }).ToList()
@@ -108,7 +108,7 @@ public class ApplesController : ControllerBase
                             TreeId = thr.TreeId,
                             Tree = null,
                             EmployeeUserProfileId = thr.EmployeeUserProfileId,
-                            Harvester = null,
+                            Employee = null,
                             HarvestDate = thr.HarvestDate,
                             PoundsHarvested = thr.PoundsHarvested
                         }).ToList()

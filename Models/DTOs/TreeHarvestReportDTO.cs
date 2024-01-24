@@ -11,7 +11,7 @@ public class TreeHarvestReportDTO
     [Required]
     [ForeignKey("Employee")]
     public int EmployeeUserProfileId { get; set; }
-    public HarvesterDTO Harvester { get; set; }
+    public HarvesterDTO Employee { get; set; }
     [Required]
     public DateTime HarvestDate { get; set; }
     [Required]

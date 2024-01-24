@@ -146,6 +146,27 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             }
         );
 
+        // Defines the relationship between UserProfile and the Order's Customer Foreign Key
+        modelBuilder.Entity<UserProfile>()
+            .HasMany(u => u.Orders)
+            .WithOne(o => o.Customer)
+            .HasForeignKey(o => o.CustomerUserProfileId)
+            .IsRequired(false);
+
+        // Defines the relationship between UserProfile and the Order's Employee Foreign Key
+        modelBuilder.Entity<UserProfile>()
+            .HasMany(u => u.CompletedOrders)
+            .WithOne(co => co.Employee)
+            .HasForeignKey(co => co.EmployeeUserProfileId)
+            .IsRequired(false);
+
+        // Defines the relationship between UserProfile and the TreeHarvestReport's Employee Foreign Key
+        modelBuilder.Entity<UserProfile>()
+            .HasMany(u => u.TreeHarvestReports)
+            .WithOne(thr => thr.Employee)
+            .HasForeignKey(thr => thr.EmployeeUserProfileId)
+            .IsRequired(false);
+
         modelBuilder.Entity<UserProfile>().HasData(
             new UserProfile
             {

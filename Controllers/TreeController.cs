@@ -53,7 +53,7 @@ public class TreesController : ControllerBase
                     TreeId = thr.TreeId,
                     Tree = null,
                     EmployeeUserProfileId = thr.EmployeeUserProfileId,
-                    Harvester = new HarvesterDTO
+                    Employee = new HarvesterDTO
                     {
                         Id = thr.Employee.Id,
                         FirstName = thr.Employee.FirstName,
@@ -109,7 +109,7 @@ public class TreesController : ControllerBase
                 TreeId = thr.TreeId,
                 Tree = null,
                 EmployeeUserProfileId = thr.EmployeeUserProfileId,
-                Harvester = new HarvesterDTO
+                Employee = new HarvesterDTO
                 {
                     Id = thr.Employee.Id,
                     FirstName = thr.Employee.FirstName,
@@ -169,7 +169,7 @@ public class TreesController : ControllerBase
                 TreeHarvestReports = null
             },
             EmployeeUserProfileId = thr.EmployeeUserProfileId,
-            Harvester = new HarvesterDTO
+            Employee = new HarvesterDTO
             {
                 Id = thr.Employee.Id,
                 FirstName = thr.Employee.FirstName,
@@ -226,7 +226,7 @@ public class TreesController : ControllerBase
                 TreeHarvestReports = null
             },
             EmployeeUserProfileId = treeHarvestReport.EmployeeUserProfileId,
-            Harvester = new HarvesterDTO
+            Employee = new HarvesterDTO
             {
                 Id = treeHarvestReport.Employee.Id,
                 FirstName = treeHarvestReport.Employee.FirstName,
@@ -262,9 +262,9 @@ public class TreesController : ControllerBase
     public IActionResult CreateHarvestReport(TreeHarvestReport treeHarvestReport)
     {
         var tree = _dbContext.Trees.SingleOrDefault(t => t.Id == treeHarvestReport.TreeId);
-        var harvester = _dbContext.Trees.SingleOrDefault(u => u.Id == treeHarvestReport.EmployeeUserProfileId);
+        var employee = _dbContext.Trees.SingleOrDefault(u => u.Id == treeHarvestReport.EmployeeUserProfileId);
 
-        if (tree == null || harvester == null || treeHarvestReport.HarvestDate == null || treeHarvestReport.HarvestDate == DateTime.MinValue || treeHarvestReport.PoundsHarvested == null || treeHarvestReport.PoundsHarvested < 0)
+        if (tree == null || employee == null || treeHarvestReport.HarvestDate == null || treeHarvestReport.HarvestDate == DateTime.MinValue || treeHarvestReport.PoundsHarvested == null || treeHarvestReport.PoundsHarvested < 0)
         {
             return BadRequest();
         }
