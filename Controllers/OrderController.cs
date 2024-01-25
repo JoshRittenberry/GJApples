@@ -20,11 +20,23 @@ public class OrdersController : ControllerBase
 
     // Get all Orders
     [HttpGet]
-    [Authorize]
+    [Authorize(Roles = "Admin,OrderPicker,Customer")]
     public IActionResult GetSubmittedOrders()
     {
+        // Check if the user is a Customer
+        bool isCustomer = User.IsInRole("Customer");
+
+        // Find Customer UserName
+        var customerUserName = User.Identity.Name;
+
+        // Find Customer UserProfile
+        UserProfile customer = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == customerUserName);
+
         return Ok(_dbContext
             .Orders
+            .Where(o => isCustomer ? o.CustomerUserProfileId == customer.Id : true)
             .Include(o => o.Customer)
                 .ThenInclude(c => c.IdentityUser)
             .Include(o => o.Employee)
@@ -60,6 +72,70 @@ public class OrdersController : ControllerBase
                 }).ToList()
             }).ToList()
         );
+    }
+
+    // Get Customer's Unsubmitted Order
+    [HttpGet("unsubmitted")]
+    [Authorize(Roles = "Customer")]
+    public IActionResult GetUnsubmittedOrder()
+    {
+        // Find Customer UserName
+        var customerUserName = User.Identity.Name;
+
+        // Find Customer UserProfile
+        UserProfile customer = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == customerUserName);
+
+        Order order = null;
+
+        // Use a loop to repeatedly check for the order until it's created
+        while (order == null)
+        {
+            order = _dbContext
+                .Orders
+                .Include(o => o.Customer)
+                .ThenInclude(c => c.IdentityUser)
+                .Include(o => o.Employee)
+                .ThenInclude(e => e.IdentityUser)
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.AppleVariety)
+                .SingleOrDefault(o => o.CustomerUserProfileId == customer.Id && o.Canceled == false && o.DateOrdered == null);
+
+            if (order == null)
+            {
+                CreateNewOrder();
+            }
+        }
+
+        return Ok(new OrderDTO
+        {
+            Id = order.Id,
+            CustomerUserProfileId = order.CustomerUserProfileId,
+            Customer = null,
+            EmployeeUserProfileId = order.EmployeeUserProfileId,
+            Employee = null,
+            DateOrdered = order.DateOrdered,
+            DateCompleted = order.DateCompleted,
+            Canceled = order.Canceled,
+            OrderItems = order.OrderItems.Select(oi => new OrderItemDTO
+            {
+                Id = oi.Id,
+                OrderId = oi.OrderId,
+                AppleVarietyId = oi.AppleVarietyId,
+                AppleVariety = new AppleVarietyDTO
+                {
+                    Id = oi.AppleVariety.Id,
+                    Type = oi.AppleVariety.Type,
+                    ImageUrl = oi.AppleVariety.ImageUrl,
+                    CostPerPound = oi.AppleVariety.CostPerPound,
+                    IsActive = oi.AppleVariety.IsActive,
+                    Trees = null,
+                    OrderItems = null
+                },
+                Pounds = oi.Pounds
+            }).ToList()
+        });
     }
 
     // Get Order by Id
@@ -173,6 +249,70 @@ public class OrdersController : ControllerBase
         }
 
         _dbContext.OrderItems.Add(orderItem);
+        _dbContext.SaveChanges();
+
+        return Ok();
+    }
+
+    // Increase OrderItem Pounds by 0.5
+    [HttpPut("orderitem/{id}/increase")]
+    [Authorize(Roles = "Customer")]
+    public IActionResult IncreaseOrderItemPounds(int id)
+    {
+        // Find Order
+        var orderItemToUpdate = _dbContext
+            .OrderItems
+            .SingleOrDefault(oi => oi.Id == id);
+
+        // Find Customer UserName
+        var customerUserName = User.Identity.Name;
+
+        // Find Customer UserProfile
+        UserProfile customer = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == customerUserName);
+
+        if (orderItemToUpdate == null || customer == null)
+        {
+            return NotFound();
+        }
+
+        orderItemToUpdate.Pounds = orderItemToUpdate.Pounds + 0.5M;
+        _dbContext.SaveChanges();
+
+        return Ok();
+    }
+
+    // Decrease OrderItem Pounds by 0.5
+    [HttpPut("orderitem/{id}/decrease")]
+    [Authorize(Roles = "Customer")]
+    public IActionResult DecreaseOrderItemPounds(int id)
+    {
+        // Find Order
+        var orderItemToUpdate = _dbContext
+            .OrderItems
+            .SingleOrDefault(oi => oi.Id == id);
+
+        // Find Customer UserName
+        var customerUserName = User.Identity.Name;
+
+        // Find Customer UserProfile
+        UserProfile customer = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == customerUserName);
+
+        if (orderItemToUpdate == null || customer == null)
+        {
+            return NotFound();
+        }
+
+        orderItemToUpdate.Pounds = orderItemToUpdate.Pounds - 0.5M;
+
+        if (orderItemToUpdate.Pounds < 1)
+        {
+            _dbContext.Remove(orderItemToUpdate);
+        }
+
         _dbContext.SaveChanges();
 
         return Ok();
