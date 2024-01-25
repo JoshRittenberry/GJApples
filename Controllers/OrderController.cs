@@ -254,6 +254,35 @@ public class OrdersController : ControllerBase
         return Ok();
     }
 
+    // Increase OrderItem Pounds by 0.5
+    [HttpPut("orderitem/{id}/increase")]
+    [Authorize(Roles = "Customer")]
+    public IActionResult IncreaseOrderItemPounds(int id)
+    {
+        // Find Order
+        var orderItemToUpdate = _dbContext
+            .OrderItems
+            .SingleOrDefault(oi => oi.Id == id);
+
+        // Find Customer UserName
+        var customerUserName = User.Identity.Name;
+
+        // Find Customer UserProfile
+        UserProfile customer = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == customerUserName);
+
+        if (orderItemToUpdate == null || customer == null)
+        {
+            return NotFound();
+        }
+
+        orderItemToUpdate.Pounds = orderItemToUpdate.Pounds + 0.5M;
+        _dbContext.SaveChanges();
+
+        return Ok();
+    }
+
     // Submit Order (Add a DateOrdered Value)
     [HttpPut("{id}/submit")]
     [Authorize(Roles = "Customer")]
