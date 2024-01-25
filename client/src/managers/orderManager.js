@@ -31,6 +31,15 @@ export const increaseOrderItem = (orderItemId) => {
     })
 }
 
+export const decreaseOrderItem = (orderItemId) => {
+    return fetch(`${_apiUrl}/orderitem/${orderItemId}/decrease`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+}
+
 export const getOrderById = () => {
 
 }

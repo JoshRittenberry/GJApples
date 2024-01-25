@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import "../stylesheets/newOrder.css"
 import { getAllApples } from "../../managers/appleManager"
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap"
-import { createOrderItem, getCustomerOrders, getUnsubmittedOrder, increaseOrderItem } from "../../managers/orderManager"
+import { createOrderItem, decreaseOrderItem, getCustomerOrders, getUnsubmittedOrder, increaseOrderItem } from "../../managers/orderManager"
 
 export const NewOrder = ({ loggedInUser }) => {
     const [apples, setApples] = useState([])
@@ -13,11 +13,13 @@ export const NewOrder = ({ loggedInUser }) => {
         getUnsubmittedOrder().then(setOrder)
     }, [])
 
-    const handleDisplayedItemCost = (appleId) => {
-        if (order.orderItems.some(oi => oi.appleVarietyId == appleId)) {
+    const handleDisplayedItemPounds = (appleId) => {
+        if (order.orderItems?.some(oi => oi.appleVarietyId == appleId)) {
             let orderItem = order.orderItems.find(oi => oi.appleVarietyId == appleId)
             
-            return orderItem.pounds
+            return `${orderItem.pounds}/lbs`
+        } else {
+            return ""
         }
     }
 
@@ -44,12 +46,25 @@ export const NewOrder = ({ loggedInUser }) => {
         }
     }
 
+    const handleDecreaseItem = (appleId) => {
+        // If the Apple is already in the Order
+        if (order.orderItems.some(oi => oi.appleVarietyId == appleId)) {
+            let orderItem = order.orderItems.find(oi => oi.appleVarietyId == appleId)
+
+            decreaseOrderItem(orderItem.id).then(() => {
+                getUnsubmittedOrder().then(setOrder)
+            })
+        }
+    }
+
     return (
         <>
             <header className="neworder_header">
                 <h1>Create New Order</h1>
                 <input
-                // display the total cost of the order
+                    type="text"
+                    readOnly
+                    value={order?.totalCost}
                 />
                 <Button>
                     Submit Order
@@ -82,14 +97,15 @@ export const NewOrder = ({ loggedInUser }) => {
                                 </CardSubtitle>
                                 <button onClick={() => {
                                     // remove 0.5 pounds of apples
+                                    handleDecreaseItem(apple.id)
                                 }}>
                                     <i className="fa-solid fa-circle-minus"></i>
                                 </button>
                                 <input
                                     // display how many pounds of apples have been added to the order
-                                    type="number"
+                                    type="text"
                                     readOnly
-                                    value={handleDisplayedItemCost(apple.id)}
+                                    value={handleDisplayedItemPounds(apple.id)}
                                 />
                                 <button onClick={() => {
                                     // add the item or increase the item by 0.5 if it already exists
