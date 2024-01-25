@@ -140,9 +140,20 @@ public class OrdersController : ControllerBase
 
     // Get Order by Id
     [HttpGet("{id}")]
-    [Authorize]
+    [Authorize(Roles = "Admin,OrderPicker,Customer")]
     public IActionResult GetOrderById(int id)
     {
+        // Check if the user is a Customer
+        bool isCustomer = User.IsInRole("Customer");
+
+        // Find Customer UserName
+        var customerUserName = User.Identity.Name;
+
+        // Find Customer UserProfile
+        UserProfile customer = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == customerUserName);
+
         var order = _dbContext
             .Orders
             .Include(o => o.Customer)
@@ -156,6 +167,11 @@ public class OrdersController : ControllerBase
         if (order == null)
         {
             return NotFound();
+        }
+
+        if (isCustomer && customer.Id != order.CustomerUserProfileId)
+        {
+            return BadRequest();
         }
 
         return Ok(new OrderDTO

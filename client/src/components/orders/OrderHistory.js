@@ -19,7 +19,7 @@ export const OrderHistory = ({ loggedInUser }) => {
     }, []);
 
     return (
-        <div>
+        <>
             <header className="orderhistory_header">
                 <h1>Order History Page</h1>
             </header>
@@ -78,6 +78,17 @@ export const OrderHistory = ({ loggedInUser }) => {
                     </tbody>
                 </Table>
             </section>
-        </div>
+            <footer className="orderhistory_footer">
+                <h3>Contact Us</h3>
+                <div className="orderhistory_footer_address">
+                    <p>2584 Orchard Lane</p>
+                    <p>Mount Juliet, TN 37122</p>
+                </div>
+                <div className="orderhistory_footer_contactinfo">
+                    <p>Phone Number: (615) 502-7483</p>
+                    <p>Email: contact@garyjonesappleorchard.com</p>
+                </div>
+            </footer>
+        </>
     )
 }
