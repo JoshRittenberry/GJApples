@@ -7,6 +7,7 @@ import { History } from "./History"
 import { ContactUs } from "./ContactUs"
 import { NewOrder } from "./orders/NewOrder"
 import { OrderHistory } from "./orders/OrderHistory"
+import { ViewOrder } from "./orders/ViewOrder"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -48,10 +49,13 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
 
         {/* Order History Page */}
         <Route
-          path="orderhistory"
+          path="orderhistory/*"
           element={
             <AuthorizedRoute roles={["Customer"]} loggedInUser={loggedInUser}>
-              <OrderHistory loggedInUser={loggedInUser} />
+              <Routes>
+                <Route path="" element={<OrderHistory loggedInUser={loggedInUser} />} />
+                <Route path="view/:id" element={<ViewOrder loggedInUser={loggedInUser} />} />
+              </Routes>
             </AuthorizedRoute>
           }
         />

@@ -2,9 +2,12 @@ import { useEffect, useState } from "react"
 import "../stylesheets/orderHistory.css"
 import { getAllOrders } from "../../managers/orderManager"
 import { Button, Table } from "reactstrap"
+import { useNavigate } from "react-router-dom"
 
 export const OrderHistory = ({ loggedInUser }) => {
     const [submittedOrders, setSubmittedOrders] = useState([])
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         getAllOrders().then((res) => {
@@ -30,7 +33,7 @@ export const OrderHistory = ({ loggedInUser }) => {
                             <th>Order Picker</th>
                             <th>Cost</th>
                             <th>Pounds of Apples</th>
-                            <th>Options</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,8 +67,10 @@ export const OrderHistory = ({ loggedInUser }) => {
                                     {!o.canceled && (`${o.orderItems.reduce((sum, item) => sum + item.pounds, 0)} lbs`)}
                                 </th>
                                 <th>
-                                    <Button>
-                                        Something
+                                    <Button onClick={() => {
+                                        navigate(`/orderhistory/view/${o.id}`)
+                                    }}>
+                                        View Order
                                     </Button>
                                 </th>
                             </tr>
