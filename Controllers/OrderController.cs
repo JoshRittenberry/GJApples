@@ -326,6 +326,7 @@ public class OrdersController : ControllerBase
         // Find Order
         var orderToUpdate = _dbContext
             .Orders
+            .Include(o => o.OrderItems)
             .SingleOrDefault(o => o.Id == id);
 
         // Find Customer UserName
@@ -342,6 +343,11 @@ public class OrdersController : ControllerBase
         }
 
         if (customer.Id != orderToUpdate.CustomerUserProfileId)
+        {
+            return BadRequest();
+        }
+
+        if (orderToUpdate.OrderItems.Count < 1)
         {
             return BadRequest();
         }

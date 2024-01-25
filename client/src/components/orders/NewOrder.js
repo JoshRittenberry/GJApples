@@ -61,9 +61,13 @@ export const NewOrder = ({ loggedInUser }) => {
     }
 
     const handleSubmitOrder = () => {
-        submitOrder(order.id).then(() => {
-            navigate("/orderhistory")
-        })
+        if (order.orderItems.length < 1) {
+            console.log("You can't do that")
+        } else {
+            submitOrder(order.id).then(() => {
+                navigate("/orderhistory")
+            })
+        }
     }
 
     return (
