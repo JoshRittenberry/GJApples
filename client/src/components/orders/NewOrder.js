@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import "../stylesheets/newOrder.css"
 import { getAllApples } from "../../managers/appleManager"
-import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap"
-import { createOrderItem, decreaseOrderItem, getCustomerOrders, getUnsubmittedOrder, increaseOrderItem, submitOrder } from "../../managers/orderManager"
+import { Button, Card, CardBody, CardSubtitle, CardTitle } from "reactstrap"
+import { createOrderItem, decreaseOrderItem, getUnsubmittedOrder, increaseOrderItem, submitOrder } from "../../managers/orderManager"
 import { useNavigate } from "react-router-dom"
 
 export const NewOrder = ({ loggedInUser }) => {

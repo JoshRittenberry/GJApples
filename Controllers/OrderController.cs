@@ -21,7 +21,7 @@ public class OrdersController : ControllerBase
     // Get all Orders
     [HttpGet]
     [Authorize(Roles = "Admin,OrderPicker,Customer")]
-    public IActionResult GetSubmittedOrders()
+    public IActionResult Get()
     {
         // Check if the user is a Customer
         bool isCustomer = User.IsInRole("Customer");
