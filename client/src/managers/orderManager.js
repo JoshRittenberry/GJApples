@@ -8,6 +8,10 @@ export const getUnsubmittedOrder = () => {
     return fetch(`${_apiUrl}/unsubmitted`).then((res) => res.json())
 }
 
+export const getOrderById = (orderId) => {
+    return fetch(`${_apiUrl}/${orderId}`).then((res) => res.json())
+}
+
 export const createOrderItem = (orderItem) => {
     return fetch(`${_apiUrl}/orderitem`, {
         method: "POST",
@@ -45,6 +49,11 @@ export const submitOrder = (orderId) => {
     }).then((res) => res.json())
 }
 
-export const getOrderById = () => {
-
+export const cancelOrder = (orderId) => {
+    return fetch(`${_apiUrl}/${orderId}/cancel`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).then((res) => res.json())
 }

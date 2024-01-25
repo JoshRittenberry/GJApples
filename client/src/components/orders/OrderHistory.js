@@ -2,9 +2,12 @@ import { useEffect, useState } from "react"
 import "../stylesheets/orderHistory.css"
 import { getAllOrders } from "../../managers/orderManager"
 import { Button, Table } from "reactstrap"
+import { useNavigate } from "react-router-dom"
 
 export const OrderHistory = ({ loggedInUser }) => {
     const [submittedOrders, setSubmittedOrders] = useState([])
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         getAllOrders().then((res) => {
@@ -16,7 +19,7 @@ export const OrderHistory = ({ loggedInUser }) => {
     }, []);
 
     return (
-        <div>
+        <>
             <header className="orderhistory_header">
                 <h1>Order History Page</h1>
             </header>
@@ -30,7 +33,7 @@ export const OrderHistory = ({ loggedInUser }) => {
                             <th>Order Picker</th>
                             <th>Cost</th>
                             <th>Pounds of Apples</th>
-                            <th>Options</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,8 +67,10 @@ export const OrderHistory = ({ loggedInUser }) => {
                                     {!o.canceled && (`${o.orderItems.reduce((sum, item) => sum + item.pounds, 0)} lbs`)}
                                 </th>
                                 <th>
-                                    <Button>
-                                        Something
+                                    <Button onClick={() => {
+                                        navigate(`/orderhistory/view/${o.id}`)
+                                    }}>
+                                        View Order
                                     </Button>
                                 </th>
                             </tr>
@@ -73,6 +78,17 @@ export const OrderHistory = ({ loggedInUser }) => {
                     </tbody>
                 </Table>
             </section>
-        </div>
+            <footer className="orderhistory_footer">
+                <h3>Contact Us</h3>
+                <div className="orderhistory_footer_address">
+                    <p>2584 Orchard Lane</p>
+                    <p>Mount Juliet, TN 37122</p>
+                </div>
+                <div className="orderhistory_footer_contactinfo">
+                    <p>Phone Number: (615) 502-7483</p>
+                    <p>Email: contact@garyjonesappleorchard.com</p>
+                </div>
+            </footer>
+        </>
     )
 }
