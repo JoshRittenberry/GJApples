@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import "../stylesheets/newOrder.css"
 import { getAllApples } from "../../managers/appleManager"
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap"
-import { createOrderItem, decreaseOrderItem, getCustomerOrders, getUnsubmittedOrder, increaseOrderItem } from "../../managers/orderManager"
+import { createOrderItem, decreaseOrderItem, getCustomerOrders, getUnsubmittedOrder, increaseOrderItem, submitOrder } from "../../managers/orderManager"
 
 export const NewOrder = ({ loggedInUser }) => {
     const [apples, setApples] = useState([])
@@ -16,7 +16,7 @@ export const NewOrder = ({ loggedInUser }) => {
     const handleDisplayedItemPounds = (appleId) => {
         if (order.orderItems?.some(oi => oi.appleVarietyId == appleId)) {
             let orderItem = order.orderItems.find(oi => oi.appleVarietyId == appleId)
-            
+
             return `${orderItem.pounds}/lbs`
         } else {
             return ""
@@ -57,6 +57,13 @@ export const NewOrder = ({ loggedInUser }) => {
         }
     }
 
+    const handleSubmitOrder = () => {
+        submitOrder(order.id).then(() => {
+            // navigate to OrderHistory Page
+            getUnsubmittedOrder().then(setOrder)
+        })
+    }
+
     return (
         <>
             <header className="neworder_header">
@@ -66,7 +73,9 @@ export const NewOrder = ({ loggedInUser }) => {
                     readOnly
                     value={order?.totalCost}
                 />
-                <Button>
+                <Button onClick={() => {
+                    handleSubmitOrder()
+                }}>
                     Submit Order
                 </Button>
             </header>

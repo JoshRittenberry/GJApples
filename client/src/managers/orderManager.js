@@ -40,6 +40,15 @@ export const decreaseOrderItem = (orderItemId) => {
     })
 }
 
+export const submitOrder = (orderId) => {
+    return fetch(`${_apiUrl}/${orderId}/submit`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).then((res) => res.json())
+}
+
 export const getOrderById = () => {
 
 }
