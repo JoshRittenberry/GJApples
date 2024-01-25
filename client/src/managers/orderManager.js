@@ -57,3 +57,9 @@ export const cancelOrder = (orderId) => {
         }
     }).then((res) => res.json())
 }
+
+export const deleteOrderItem = (orderItemId) => {
+    return fetch(`${_apiUrl}/orderitem/${orderItemId}`, {
+        method: "DELETE"
+    })
+}

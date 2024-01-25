@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { cancelOrder, getOrderById } from "../../managers/orderManager"
+import { cancelOrder, getOrderById, createOrderItem, decreaseOrderItem, getUnsubmittedOrder, increaseOrderItem, submitOrder, deleteOrderItem } from "../../managers/orderManager"
 import { Button, Table } from "reactstrap"
 
 export const EditOrder = ({ loggedInUser }) => {
@@ -12,6 +12,66 @@ export const EditOrder = ({ loggedInUser }) => {
     useEffect(() => {
         getOrderById(orderId).then(setOrder)
     }, [])
+
+    const handleDisplayedItemPounds = (orderItemId) => {
+        if (order.orderItems?.some(oi => oi.appleVarietyId == orderItemId)) {
+            let orderItem = order.orderItems.find(oi => oi.appleVarietyId == orderItemId)
+
+            return `${orderItem.pounds}/lbs`
+        } else {
+            return ""
+        }
+    }
+
+    const handleIncreaseItem = (orderItemId) => {
+        // If the Apple is already in the Order
+        if (order.orderItems.some(oi => oi.appleVarietyId == orderItemId)) {
+            let orderItem = order.orderItems.find(oi => oi.appleVarietyId == orderItemId)
+
+            increaseOrderItem(orderItem.id).then(() => {
+                getOrderById(orderId).then(setOrder)
+            })
+        }
+        // If the Apple is not already in the Order
+        else if (!order.orderItems.some(oi => oi.appleVarietyId == orderItemId)) {
+            let orderItem = {
+                orderId: order.id,
+                appleVarietyId: orderItemId,
+                pounds: 1,
+            }
+
+            createOrderItem(orderItem).then(() => {
+                getOrderById(orderId).then(setOrder)
+            })
+        }
+    }
+
+    const handleDecreaseItem = (orderItemId) => {
+        // If the Apple is already in the Order
+        if (order.orderItems.some(oi => oi.appleVarietyId == orderItemId)) {
+            let orderItem = order.orderItems.find(oi => oi.appleVarietyId == orderItemId)
+
+            decreaseOrderItem(orderItem.id).then(() => {
+                getOrderById(orderId).then(setOrder)
+            })
+        }
+    }
+
+    const handleDeleteItem = (orderItemId) => {
+        deleteOrderItem(orderItemId).then(() => {
+            getOrderById(orderId).then(setOrder)
+        })
+    }
+
+    const handleSubmitOrder = () => {
+        if (order.orderItems.length < 1) {
+            console.log("You can't do that")
+        } else {
+            submitOrder(order.id).then(() => {
+                navigate("/orderhistory")
+            })
+        }
+    }
 
     return (
         <>
@@ -44,6 +104,7 @@ export const EditOrder = ({ loggedInUser }) => {
                             <th>Pounds</th>
                             <th>Item Cost (Per Pound)</th>
                             <th>Item Cost (Total)</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,9 +115,35 @@ export const EditOrder = ({ loggedInUser }) => {
                                 >
                                     {oi.appleVariety?.type}
                                 </th>
-                                <th>{oi.pounds} lbs</th>
+                                <th>
+                                    <button onClick={() => {
+                                        // remove 0.5 pounds of apples
+                                        handleDecreaseItem(oi.appleVarietyId)
+                                    }}>
+                                        <i className="fa-solid fa-circle-minus"></i>
+                                    </button>
+                                    <input
+                                        // display how many pounds of apples have been added to the order
+                                        type="text"
+                                        readOnly
+                                        value={handleDisplayedItemPounds(oi.appleVarietyId)}
+                                    />
+                                    <button onClick={() => {
+                                        // add the item or increase the item by 0.5 if it already exists
+                                        handleIncreaseItem(oi.appleVarietyId)
+                                    }}>
+                                        <i className="fa-solid fa-circle-plus"></i>
+                                    </button>
+                                </th>
                                 <th>${oi.appleVariety.costPerPound}</th>
                                 <th>${oi.totalItemCost}</th>
+                                <th>
+                                    <Button onClick={() => {
+                                        handleDeleteItem(oi.id)
+                                    }}>
+                                        Delete Item
+                                    </Button>
+                                </th>
                             </tr>
                         ))}
                     </tbody>
@@ -66,6 +153,7 @@ export const EditOrder = ({ loggedInUser }) => {
                             <th></th>
                             <th></th>
                             <th>Total: ${order.totalCost}</th>
+                            <th></th>
                         </tr>
                     </tbody>
                 </Table>

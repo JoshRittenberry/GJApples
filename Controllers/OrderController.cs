@@ -470,6 +470,7 @@ public class OrdersController : ControllerBase
         return Ok(orderToUpdate);
     }
 
+    // Delete an OrderItem
     [HttpDelete("orderitem/{id}")]
     [Authorize(Roles = "Customer")]
     public IActionResult DeleteOrderItem(int id)
