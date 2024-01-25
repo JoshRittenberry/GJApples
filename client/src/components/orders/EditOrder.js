@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { cancelOrder, getOrderById } from "../../managers/orderManager"
 import { Button, Table } from "reactstrap"
 
-export const ViewOrder = ({ loggedInUser }) => {
+export const EditOrder = ({ loggedInUser }) => {
     const [order, setOrder] = useState({})
 
     const navigate = useNavigate()
@@ -16,7 +16,7 @@ export const ViewOrder = ({ loggedInUser }) => {
     return (
         <>
             <header className="vieworder_header">
-                <h1>View Order</h1>
+                <h1>Edit Order</h1>
                 <h3>Order #{order.id}</h3>
                 <h3>Customer Id #{order.customerUserProfileId}</h3>
                 <h5>Phone: (XXX)-XXX-XXXX</h5>
@@ -24,17 +24,14 @@ export const ViewOrder = ({ loggedInUser }) => {
                 {!order.canceled && order.employeeUserProfileId === null && order.dateCompleted === null && (
                     <>
                         <Button onClick={() => {
-                            cancelOrder(order.id).then(() => {
-                                getOrderById(orderId).then(setOrder)
-                                navigate("/orderhistory")
-                            })
+
                         }}>
-                            Cancel Order
+                            Discard Changes
                         </Button>
                         <Button onClick={() => {
-                            navigate(`/orderhistory/edit/${order.id}`)
+
                         }}>
-                            Edit Order
+                            Save Changes
                         </Button>
                     </>
                 )}
