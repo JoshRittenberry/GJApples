@@ -20,11 +20,23 @@ public class OrdersController : ControllerBase
 
     // Get all Orders
     [HttpGet]
-    [Authorize]
+    // [Authorize(Roles = "Admin,OrderPicker,Customer")]
     public IActionResult GetSubmittedOrders()
     {
+        // Check if the user is a Customer
+        bool isCustomer = User.IsInRole("Customer");
+
+        // Find Customer UserName
+        var customerUserName = User.Identity.Name;
+
+        // Find Customer UserProfile
+        UserProfile customer = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == customerUserName);
+
         return Ok(_dbContext
             .Orders
+            .Where(o => isCustomer ? o.CustomerUserProfileId == customer.Id : true)
             .Include(o => o.Customer)
                 .ThenInclude(c => c.IdentityUser)
             .Include(o => o.Employee)
