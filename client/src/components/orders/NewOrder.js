@@ -3,10 +3,13 @@ import "../stylesheets/newOrder.css"
 import { getAllApples } from "../../managers/appleManager"
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap"
 import { createOrderItem, decreaseOrderItem, getCustomerOrders, getUnsubmittedOrder, increaseOrderItem, submitOrder } from "../../managers/orderManager"
+import { useNavigate } from "react-router-dom"
 
 export const NewOrder = ({ loggedInUser }) => {
     const [apples, setApples] = useState([])
     const [order, setOrder] = useState({})
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         getAllApples().then(setApples)
@@ -59,8 +62,7 @@ export const NewOrder = ({ loggedInUser }) => {
 
     const handleSubmitOrder = () => {
         submitOrder(order.id).then(() => {
-            // navigate to OrderHistory Page
-            getUnsubmittedOrder().then(setOrder)
+            navigate("/orderhistory")
         })
     }
 
