@@ -13,6 +13,12 @@ export const EditOrder = ({ loggedInUser }) => {
         getOrderById(orderId).then(setOrder)
     }, [])
 
+    useEffect(() => {
+        if (order.dateCompleted != null || order.employeeUserProfileId != null || order.customerUserProfileId != loggedInUser.id) {
+            navigate("/orderhistory")
+        }
+    }, [order])
+
     const handleDisplayedItemPounds = (orderItemId) => {
         if (order.orderItems?.some(oi => oi.appleVarietyId == orderItemId)) {
             let orderItem = order.orderItems.find(oi => oi.appleVarietyId == orderItemId)
