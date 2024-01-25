@@ -2,15 +2,15 @@ import { useEffect, useState } from "react"
 import "../stylesheets/newOrder.css"
 import { getAllApples } from "../../managers/appleManager"
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap"
-import { getCustomerOrders } from "../../managers/orderManager"
+import { getCustomerOrders, getUnsubmittedOrder } from "../../managers/orderManager"
 
 export const NewOrder = ({ loggedInUser }) => {
     const [apples, setApples] = useState([])
-    const [orders, setOrders] = useState([])
+    const [order, setOrder] = useState({})
 
     useEffect(() => {
         getAllApples().then(setApples)
-        getCustomerOrders().then(setOrders)
+        getUnsubmittedOrder().then(setOrder)
     }, [])
 
     return (

@@ -20,7 +20,7 @@ public class OrdersController : ControllerBase
 
     // Get all Orders
     [HttpGet]
-    // [Authorize(Roles = "Admin,OrderPicker,Customer")]
+    [Authorize(Roles = "Admin,OrderPicker,Customer")]
     public IActionResult GetSubmittedOrders()
     {
         // Check if the user is a Customer
@@ -72,6 +72,70 @@ public class OrdersController : ControllerBase
                 }).ToList()
             }).ToList()
         );
+    }
+
+    // Get Customer's Unsubmitted Order
+    [HttpGet("unsubmitted")]
+    [Authorize(Roles = "Customer")]
+    public IActionResult GetUnsubmittedOrder()
+    {
+        // Find Customer UserName
+        var customerUserName = User.Identity.Name;
+
+        // Find Customer UserProfile
+        UserProfile customer = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == customerUserName);
+
+        Order order = null;
+
+        // Use a loop to repeatedly check for the order until it's created
+        while (order == null)
+        {
+            order = _dbContext
+                .Orders
+                .Include(o => o.Customer)
+                .ThenInclude(c => c.IdentityUser)
+                .Include(o => o.Employee)
+                .ThenInclude(e => e.IdentityUser)
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.AppleVariety)
+                .SingleOrDefault(o => o.CustomerUserProfileId == customer.Id && o.Canceled == false && o.DateOrdered == null);
+
+            if (order == null)
+            {
+                CreateNewOrder();
+            }
+        }
+
+        return Ok(new OrderDTO
+        {
+            Id = order.Id,
+            CustomerUserProfileId = order.CustomerUserProfileId,
+            Customer = null,
+            EmployeeUserProfileId = order.EmployeeUserProfileId,
+            Employee = null,
+            DateOrdered = order.DateOrdered,
+            DateCompleted = order.DateCompleted,
+            Canceled = order.Canceled,
+            OrderItems = order.OrderItems.Select(oi => new OrderItemDTO
+            {
+                Id = oi.Id,
+                OrderId = oi.OrderId,
+                AppleVarietyId = oi.AppleVarietyId,
+                AppleVariety = new AppleVarietyDTO
+                {
+                    Id = oi.AppleVariety.Id,
+                    Type = oi.AppleVariety.Type,
+                    ImageUrl = oi.AppleVariety.ImageUrl,
+                    CostPerPound = oi.AppleVariety.CostPerPound,
+                    IsActive = oi.AppleVariety.IsActive,
+                    Trees = null,
+                    OrderItems = null
+                },
+                Pounds = oi.Pounds
+            }).ToList()
+        });
     }
 
     // Get Order by Id

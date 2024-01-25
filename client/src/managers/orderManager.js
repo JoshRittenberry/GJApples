@@ -8,10 +8,10 @@ export const getCustomerOrders = () => {
     return fetch(_apiUrl).then((res) => res.json())
 }
 
-export const getOrderById = () => {
-
+export const getUnsubmittedOrder = () => {
+    return fetch(`${_apiUrl}/unsubmitted`).then((res) => res.json())
 }
 
-export const createOrder = () => {
+export const getOrderById = () => {
 
 }
