@@ -14,7 +14,7 @@ export const EditOrder = ({ loggedInUser }) => {
     }, [])
 
     useEffect(() => {
-        if (order.dateCompleted != null || order.employeeUserProfileId != null || order.customerUserProfileId != loggedInUser.id) {
+        if (order.dateCompleted != null || order.employeeUserProfileId != null) {
             navigate("/orderhistory")
         }
     }, [order])
