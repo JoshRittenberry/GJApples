@@ -8,6 +8,10 @@ export const getAllUnassignedOrders = () => {
     return fetch(`${_apiUrl}?unassigned=true`).then((res) => res.json())
 }
 
+export const getOrderPickerAssignment = () => {
+    return fetch(`${_apiUrl}/orderpicker`).then((res) => res.json())
+}
+
 export const getUnsubmittedOrder = () => {
     return fetch(`${_apiUrl}/unsubmitted`).then((res) => res.json())
 }
@@ -37,6 +41,15 @@ export const increaseOrderItem = (orderItemId) => {
 
 export const decreaseOrderItem = (orderItemId) => {
     return fetch(`${_apiUrl}/orderitem/${orderItemId}/decrease`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+}
+
+export const assignOrderPicker = (orderId, orderPickerId) => {
+    return fetch(`${_apiUrl}/${orderId}/assignorderpicker?employeeId=${orderPickerId}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

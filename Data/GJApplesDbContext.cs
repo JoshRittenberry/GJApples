@@ -928,15 +928,19 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             {
                 Id = 4,
                 CustomerUserProfileId = 6,
+                EmployeeUserProfileId = 4,
                 DateOrdered = new DateTime(2023, 10, 3),
-                Canceled = true
+                DateCompleted = new DateTime(2023, 10, 4),
+                Canceled = false
             },
             new Order
             {
                 Id = 5,
                 CustomerUserProfileId = 7,
+                EmployeeUserProfileId = 5,
                 DateOrdered = new DateTime(2023, 5, 30),
-                Canceled = true
+                DateCompleted = new DateTime(2023, 6, 1),
+                Canceled = false
             },
             new Order
             {
@@ -969,7 +973,6 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             {
                 Id = 9,
                 CustomerUserProfileId = 6,
-                EmployeeUserProfileId = 4,
                 DateOrdered = new DateTime(2023, 1, 5),
                 DateCompleted = null,
                 Canceled = false
