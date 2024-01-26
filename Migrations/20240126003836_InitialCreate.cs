@@ -315,10 +315,10 @@ namespace GJApples.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "8b2b3a2d-62f6-4f2b-8b3d-45b6a1f3b5b4", "24035809-bff0-47e9-ad12-e0036d6b9eb8", "Harvester", "harvester" },
-                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "684ee1a5-bc69-4915-9d35-66dee93a11ba", "Admin", "admin" },
-                    { "d4f146bf-70c8-4d02-98ec-0b5f4b9d213f", "79eb7eed-a592-49a0-afe9-dd96de8407a9", "Customer", "customer" },
-                    { "f65f1f30-d0b1-4f59-a3c8-eb1f2e6757d3", "78e51d16-d959-4cf4-842d-0974fd436985", "OrderPicker", "orderpicker" }
+                    { "8b2b3a2d-62f6-4f2b-8b3d-45b6a1f3b5b4", "3345e7bd-be80-4a53-8eec-5fbc98c5a707", "Harvester", "harvester" },
+                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "263a65bf-6d3e-486c-8b39-48cec0ac8bb4", "Admin", "admin" },
+                    { "d4f146bf-70c8-4d02-98ec-0b5f4b9d213f", "2e71ae9d-8b45-4c26-b81e-496c0a2b4834", "Customer", "customer" },
+                    { "f65f1f30-d0b1-4f59-a3c8-eb1f2e6757d3", "9ee7ee4a-4347-481f-bb74-2394164d19b4", "OrderPicker", "orderpicker" }
                 });
 
             migrationBuilder.InsertData(
@@ -326,13 +326,13 @@ namespace GJApples.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "03d8deac-3687-4274-82c1-e1d32392d2de", 0, "bb70c9ad-3ead-4428-8fb4-2783195579b1", "kyle@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEE9WLGwMRBty8GgOeF1SE14zOKPKHU4+BTglbQ/Ybf6a40+Mu2OHgd9qCN+Hs09iHw==", null, false, "ce0d6e25-8d7b-4a66-a1cf-4221a9a09ed2", false, "Kyle" },
-                    { "3a64b2c1-7780-40f1-a393-8edb30c4b2ab", 0, "69a68dd7-4d5a-4e82-8545-cbf976cfa483", "haley@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEM6Gevh8M969wvVYZrMIqZRnoHtC8OVd5PFeHxFYXbnFjoBoTCLE8ARaPnTgBi4ulQ==", null, false, "b392612b-7470-41e3-a901-fd49a69faf5b", false, "Haley" },
-                    { "83aab5f4-67ba-4da9-940e-fef0ce8597bd", 0, "22c1d6d1-c9b9-41c4-8e75-4974d4b9fbc6", "chris@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEHgL/8aLq33uqlMp6q7IIVc29UE4oLoaKy/E7ypKJ5UmIgxHfz2zrLqqjAKcEKfuLg==", null, false, "ba209f61-56cc-4eb3-b34d-77a441c5630e", false, "Chris" },
-                    { "8c3605d2-c0da-4592-8879-0c71dc3c02c4", 0, "6b79ee78-cd87-45bd-a326-f81da2f383d1", "josh@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEN22gKjBLc6JcnpF0Z4gMNNo12ck4AsAipeDHTzr62K3+BiGblqzaz0y9hIlufNMrg==", null, false, "0df6e092-e5e6-49ab-b30e-1353ce38e69c", false, "Josh" },
-                    { "bc3a3871-4800-4061-8182-b965c9c109bc", 0, "1f1f22f4-59a7-41f5-b628-c981017ed902", "aaron@yahoo.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEBqzjPj0nnDpbwnbI8UkRoB6Zw4MCp9JgFZcAILHUUvIwz1HkvtCVcDYQPC+nArhRA==", null, false, "21083376-4c5c-4306-8003-a0656e9b0729", false, "Aaron" },
-                    { "c8c02266-41e6-414d-a1fc-14bbefef86a0", 0, "508738a0-388b-4fe1-9d71-dbede5240940", "debbie@gmail.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEEd7j6PvEbFkM7U1HloL8XaNK+ffwazkeYjfppwzHJoY7gU22TpYlrhDJlTzPXNK0Q==", null, false, "5b5f11f5-950b-4323-9830-191f7c08e78f", false, "Debbie" },
-                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "0dbf8093-fca0-4dbf-a614-315523a05842", "admin@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAELwWa2FLixM3NwTT9zLGAE1iLol5H4QpRs8tiDAua/QhqFnKpszCu587uEN51hrQ7g==", null, false, "5047e4d9-c28c-4b8d-84af-726ed372a488", false, "Administrator" }
+                    { "03d8deac-3687-4274-82c1-e1d32392d2de", 0, "304742ea-3584-43cb-a31f-38b85eaf71e7", "kyle@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEKcBd7C6s+llVXlZiEj/+tyNT7ZIn16zMqHdeJ71FX7k7MlWRprRdZuqzIf3yfsLgw==", null, false, "1e79c53f-b382-4cb4-a757-28940fbb7bcb", false, "Kyle" },
+                    { "3a64b2c1-7780-40f1-a393-8edb30c4b2ab", 0, "9f530e29-8b03-4156-bad7-7b7d16c0d741", "haley@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEH2WMpeDTStXlX3YJYrnfDaB1xGOyGMaEmZmcRyBliThc6PLHDIqPOrl3QQ8JQMvlw==", null, false, "6ea2be31-77b8-4ecc-9e12-6db7cac2f16e", false, "Haley" },
+                    { "83aab5f4-67ba-4da9-940e-fef0ce8597bd", 0, "8299229b-5df2-4042-a60b-75f589ab1002", "chris@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEHy2DEgkMIIOelaQ70D5ZEnBn/WpKXU7JXx3RLhhBhFxImNgyEyqj7mck9ttMzBSEg==", null, false, "2bef79ad-2803-4fa8-ac74-5a577a397a56", false, "Chris" },
+                    { "8c3605d2-c0da-4592-8879-0c71dc3c02c4", 0, "b5bfa1c0-ceeb-44f0-b710-2802a802af09", "josh@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEJ/xYLy23jt3B+SOF9lK/BWf7TmykhQQXH/7OXEm4S3K4qhjXS+mXrZl+AhTWze70A==", null, false, "cb0d9e7c-f4c9-4868-9281-9b6a7609fadc", false, "Josh" },
+                    { "bc3a3871-4800-4061-8182-b965c9c109bc", 0, "bdaec6aa-2ec4-47be-b83c-7a0d2f2e3a91", "aaron@yahoo.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEBfA0peTmUJZlJ656bb8oBCrZ8i+BOyTHbWxutGnSduK5dkogAJIW4zebbXPLsvVVg==", null, false, "6999c372-92b3-4612-b24c-0bbc2d6b6a14", false, "Aaron" },
+                    { "c8c02266-41e6-414d-a1fc-14bbefef86a0", 0, "d439d6db-4126-4cdc-ba2f-bef193e6505d", "debbie@gmail.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEE8UvHXlXw8p5QUMHRXob+zstHm81L87TXB0dVAVTjss49s/6yaayoXLGJ9wyf+UPw==", null, false, "030ed734-45f1-4cc5-a949-5d2c28b4efb1", false, "Debbie" },
+                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "9b7ca95a-1eef-4503-8883-8616dbae7713", "admin@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEHXCkynGCuc/Z0RV3d7usNYwXO8amfPICr+L4zqbCCgZVPl2KpMn5EXurWpUFec9cA==", null, false, "62155a10-2ffd-4e91-913d-cd6a4aa020e0", false, "Administrator" }
                 });
 
             migrationBuilder.InsertData(
@@ -482,15 +482,15 @@ namespace GJApples.Migrations
                 {
                     { 1, 1, 1, 1.5m },
                     { 2, 3, 1, 1.0m },
-                    { 3, 4, 1, 0.5m },
+                    { 3, 4, 1, 1.0m },
                     { 4, 6, 1, 2.5m },
                     { 5, 2, 2, 2.0m },
                     { 6, 8, 2, 3.0m },
-                    { 7, 4, 2, 0.5m },
+                    { 7, 4, 2, 1.0m },
                     { 8, 6, 2, 1.0m },
                     { 9, 7, 3, 4.0m },
                     { 10, 4, 3, 1.5m },
-                    { 11, 2, 3, 0.5m },
+                    { 11, 2, 3, 1.0m },
                     { 12, 1, 3, 1.5m },
                     { 13, 3, 4, 4.5m },
                     { 14, 8, 4, 3.0m },
@@ -505,20 +505,20 @@ namespace GJApples.Migrations
                     { 23, 1, 6, 1.0m },
                     { 24, 8, 6, 4.0m },
                     { 25, 2, 6, 4.5m },
-                    { 26, 3, 7, 0.5m },
+                    { 26, 3, 7, 1.0m },
                     { 27, 4, 7, 1.0m },
-                    { 28, 8, 8, 0.5m },
+                    { 28, 8, 8, 1.0m },
                     { 29, 3, 8, 3.0m },
                     { 30, 2, 8, 2.5m },
                     { 31, 4, 8, 4.0m },
                     { 32, 1, 8, 4.5m },
                     { 33, 6, 8, 1.0m },
                     { 34, 5, 8, 2.0m },
-                    { 35, 7, 8, 0.5m },
-                    { 36, 3, 9, 0.5m },
-                    { 37, 8, 9, 0.5m },
+                    { 35, 7, 8, 1.0m },
+                    { 36, 3, 9, 1.0m },
+                    { 37, 8, 9, 1.0m },
                     { 38, 5, 9, 2.5m },
-                    { 39, 7, 9, 0.5m },
+                    { 39, 7, 9, 1.0m },
                     { 40, 6, 9, 3.5m },
                     { 41, 5, 10, 3.0m },
                     { 42, 3, 10, 4.0m },
@@ -529,7 +529,7 @@ namespace GJApples.Migrations
                     { 47, 8, 10, 2.0m },
                     { 48, 1, 11, 2.0m },
                     { 49, 8, 11, 2.5m },
-                    { 50, 6, 11, 0.5m }
+                    { 50, 6, 11, 1.0m }
                 });
 
             migrationBuilder.CreateIndex(
