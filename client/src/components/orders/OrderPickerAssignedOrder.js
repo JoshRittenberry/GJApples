@@ -7,10 +7,14 @@ export const OrderPickerAssignedOrder = ({ loggedInUser, assignedOrder, setOrder
             {assignedOrder.id > 0 && (
                 <>
                     <header className="orderpickerhome_body_assignment_header">
-                        <h3>Order #{assignedOrder.id}</h3>
-                        <h3>Customer Id #{assignedOrder.customerUserProfileId}</h3>
-                        <h5>Phone: (XXX)-XXX-XXXX</h5>
-                        <h5>Email: xxx@xxxx.com</h5>
+                        <div className="orderpickerhome_body_assignment_header_top">
+                            <h3>Order #{assignedOrder.id}</h3>
+                        </div>
+                        <h5>Customer #{assignedOrder.customerUserProfileId}</h5>
+                        <div className="orderpickerhome_body_assignment_header_bottom">
+                            <h5>Phone: (XXX)-XXX-XXXX</h5>
+                            <h5>Email: xxx@xxxx.com</h5>
+                        </div>
                     </header>
                     <section className="orderpickerhome_body_assignment_body">
                         <Table>
@@ -67,7 +71,7 @@ export const OrderPickerAssignedOrder = ({ loggedInUser, assignedOrder, setOrder
             )}
             {assignedOrder.id == null && (
                 <>
-                    <h1>Assign an order to see this</h1>
+                    <h3>Assign an order to see this</h3>
                 </>
             )}
         </div>
