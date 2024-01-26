@@ -18,9 +18,16 @@ export const ViewOrder = ({ loggedInUser }) => {
     return (
         <>
             <header className="vieworder_header">
-                <h3>Order #{order.id}</h3>
+                <div className="vieworder_header_top">
+                    <h3>Order #{order.id}</h3>
+                    <button className="vieworder_header_top_backbutton" onClick={() => {
+                        navigate("/orderhistory")
+                    }}>
+                        <i class="fa-solid fa-circle-arrow-left"></i>
+                    </button>
+                </div>
                 <h5>Customer #{order.customerUserProfileId}</h5>
-                <div className="vieworder_header_more">
+                <div className="vieworder_header_bottom">
                     <h5>Phone: (XXX)-XXX-XXXX</h5>
                     <h5>Email: xxx@xxxx.com</h5>
                 </div>
@@ -40,7 +47,7 @@ export const ViewOrder = ({ loggedInUser }) => {
                             <tr key={`orderitem-${oi.id}`}>
                                 <th
                                     scope="row"
-                                    >
+                                >
                                     {oi.appleVariety?.type}
                                 </th>
                                 <th>{oi.pounds} lbs</th>

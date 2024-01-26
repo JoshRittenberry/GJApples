@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
+import "../stylesheets/editOrder.css"
 import { useNavigate, useParams } from "react-router-dom"
 import { cancelOrder, getOrderById, createOrderItem, decreaseOrderItem, getUnsubmittedOrder, increaseOrderItem, submitOrder, deleteOrderItem } from "../../managers/orderManager"
-import { Button, Table, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import { Button, Table, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Input } from "reactstrap";
 import { getAllApples } from "../../managers/appleManager"
 import { ContactUsFooter } from "../ContactUsFooter";
 
@@ -50,7 +51,7 @@ export const EditOrder = ({ loggedInUser }) => {
         if (order.orderItems?.some(oi => oi.appleVarietyId == orderItemId)) {
             let orderItem = order.orderItems.find(oi => oi.appleVarietyId == orderItemId)
 
-            return `${orderItem.pounds}/lbs`
+            return `${orderItem.pounds} lbs`
         }
     }
 
@@ -103,11 +104,19 @@ export const EditOrder = ({ loggedInUser }) => {
     return (
         <>
             <header className="editorder_header">
-                <h1>Edit Order</h1>
-                <h3>Order #{order.id}</h3>
-                <h3>Customer Id #{order.customerUserProfileId}</h3>
-                <h5>Phone: (XXX)-XXX-XXXX</h5>
-                <h5>Email: xxx@xxxx.com</h5>
+                <div className="editorder_header_top">
+                    <h3>Order #{order.id}</h3>
+                    <button className="editorder_header_top_backbutton" onClick={() => {
+                        navigate("/orderhistory")
+                    }}>
+                        <i class="fa-solid fa-circle-arrow-left"></i>
+                    </button>
+                </div>
+                <h5>Customer #{order.customerUserProfileId}</h5>
+                <div className="editorder_header_bottom">
+                    <h5>Phone: (XXX)-XXX-XXXX</h5>
+                    <h5>Email: xxx@xxxx.com</h5>
+                </div>
             </header>
             <section className="editorder_body">
                 <Table>
@@ -128,22 +137,23 @@ export const EditOrder = ({ loggedInUser }) => {
                                 >
                                     {oi.appleVariety?.type}
                                 </th>
-                                <th>
-                                    <button onClick={() => {
+                                <th className="editorder_body_buttons">
+                                    <button className="editorder_body_buttons_subtract" onClick={() => {
                                         // remove 0.5 pounds of apples
-                                        handleDecreaseItem(oi.appleVarietyId)
+                                        handleDecreaseItem(oi.id)
                                     }}>
                                         <i className="fa-solid fa-circle-minus"></i>
                                     </button>
-                                    <input
+                                    <Input
                                         // display how many pounds of apples have been added to the order
                                         type="text"
                                         readOnly
                                         value={handleDisplayedItemPounds(oi.appleVarietyId)}
+                                        className="editorder_body_buttons_input"
                                     />
-                                    <button onClick={() => {
+                                    <button className="editorder_body_buttons_add" onClick={() => {
                                         // add the item or increase the item by 0.5 if it already exists
-                                        handleIncreaseItem(oi.appleVarietyId)
+                                        handleIncreaseItem(oi.id)
                                     }}>
                                         <i className="fa-solid fa-circle-plus"></i>
                                     </button>
@@ -168,7 +178,7 @@ export const EditOrder = ({ loggedInUser }) => {
                                     <DropdownMenu>
                                         {apples.map(apple => (
                                             <DropdownItem key={apple.id} onClick={() => {
-                                                let update = {...newOrderItem}
+                                                let update = { ...newOrderItem }
                                                 update.appleVarietyId = apple.id
                                                 setNewOrderItem(update)
                                             }}>

@@ -5,7 +5,19 @@
     color: white;
 }
 
-.vieworder_header_more {
+.vieworder_header_top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.vieworder_header_top_backbutton {
+    color: #FAC710;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 1.5em;
+}
+
+.vieworder_header_bottom{
     display: flex;
     justify-content: space-between;
 }
