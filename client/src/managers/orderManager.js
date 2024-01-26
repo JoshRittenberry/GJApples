@@ -57,6 +57,15 @@ export const assignOrderPicker = (orderId, orderPickerId) => {
     })
 }
 
+export const unassignOrderPicker = (orderId, orderPickerId) => {
+    return fetch(`${_apiUrl}/${orderId}/unassignorderpicker?employeeId=${orderPickerId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+}
+
 export const submitOrder = (orderId) => {
     return fetch(`${_apiUrl}/${orderId}/submit`, {
         method: "PUT",
