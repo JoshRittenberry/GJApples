@@ -22,39 +22,44 @@ export const HarvesterAvailableTrees = ({ loggedInUser, trees, setTrees, assigne
     }
 
     return (
-        <div className="orderpickerhome_body_list">
-            <Table>
-                <thead>
-                    <tr>
-                        <th>Tree Id</th>
-                        <th>Apple Variety</th>
-                        <th>Last Harvest Date</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {trees?.map((t) => (
-                        <tr key={`order-${t.id}`}>
-                            <th
-                                scope="row"
-                            >
-                                {t.id}
-                            </th>
-                            <th>{t.appleVariety.type}</th>
-                            <th>{lastHarvestDate(t.treeHarvestReports)}</th>
-                            <th>
-                                {assignedTreeHarvestReport?.id == null && (
-                                    <Button onClick={() => {
-                                        handleAssignTree(t.id)
-                                    }}>
-                                        Assign Me
-                                    </Button>
-                                )}
-                            </th>
+        <div className="harvesterhome_body_list">
+            <header className="harvesterhome_body_list_header">
+                <h3>Available Harvests</h3>
+            </header>
+            <section className="harvesterhome_body_list_body">
+                <Table>
+                    <thead>
+                        <tr>
+                            <th>Tree Id</th>
+                            <th>Apple Variety</th>
+                            <th>Last Harvest Date</th>
+                            <th></th>
                         </tr>
-                    ))}
-                </tbody>
-            </Table>
+                    </thead>
+                    <tbody>
+                        {trees?.map((t) => (
+                            <tr key={`order-${t.id}`}>
+                                <th
+                                    scope="row"
+                                >
+                                    {t.id}
+                                </th>
+                                <th>{t.appleVariety.type}</th>
+                                <th>{lastHarvestDate(t.treeHarvestReports)}</th>
+                                <th>
+                                    {assignedTreeHarvestReport?.id == null && (
+                                        <Button onClick={() => {
+                                            handleAssignTree(t.id)
+                                        }}>
+                                            Assign Me
+                                        </Button>
+                                    )}
+                                </th>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+            </section>
         </div>
     )
 }
