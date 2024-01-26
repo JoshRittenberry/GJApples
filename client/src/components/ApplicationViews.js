@@ -9,16 +9,24 @@ import { NewOrder } from "./orders/NewOrder"
 import { OrderHistory } from "./orders/OrderHistory"
 import { ViewOrder } from "./orders/ViewOrder"
 import { EditOrder } from "./orders/EditOrder"
+import { OrderPickerHome } from "./homepages/OrderPickerHome"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
     <Routes>
       {/* Home Page */}
-      <Route path="/">
+      <Route path="/*">
         <Route
           index
           element={
-            <Home loggedInUser={loggedInUser} />
+            <Routes>
+              <Route path="" element={<Home loggedInUser={loggedInUser} />} />
+              <Route path="/orderpicker" element={
+                <AuthorizedRoute roles={["OrderPicker"]} loggedInUser={loggedInUser}>
+                  <OrderPickerHome loggedInUser={loggedInUser}/>
+                </AuthorizedRoute>
+              } />
+            </Routes>
           }
         />
 
