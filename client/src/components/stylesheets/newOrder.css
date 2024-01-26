@@ -35,3 +35,18 @@
     width: 75%;
     margin: auto;
 }
+
+.neworder_body_card {
+    width: 18rem;
+    margin: 1%;
+}
+
+.neworder_body_card_cardfooter {
+    display: flex;
+    justify-content: space-between;
+}
+
+.neworder_body_card_cardfooter_input {
+    width: 45%;
+    text-align: center;
+}
