@@ -42,11 +42,20 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                                 </>
                             )
                         }
+                        {
+                            loggedInUser.roles.includes("OrderPicker") && (
+                                <>
+                                    <NavItem>
+                                        <NavLink href="/orderpicker">Employee Homepage</NavLink>
+                                    </NavItem>
+                                </>
+                            )
+                        }
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret>
                                 More
                             </DropdownToggle>
-                            <DropdownMenu right>
+                            <DropdownMenu end>
                                 <DropdownItem>
                                     <NavItem>
                                         <NavLink tag={RRNavLink} to="/history">
@@ -85,7 +94,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                             <DropdownToggle nav caret>
                                 More
                             </DropdownToggle>
-                            <DropdownMenu right>
+                            <DropdownMenu end>
                                 <DropdownItem>
                                     <NavItem>
                                         <NavLink tag={RRNavLink} to="/history">

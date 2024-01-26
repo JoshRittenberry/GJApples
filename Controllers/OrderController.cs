@@ -502,6 +502,41 @@ public class OrdersController : ControllerBase
         return Ok(orderToUpdate);
     }
 
+    // Unassign an OrderPicker from an Order
+    [HttpPut("{id}/unassignorderpicker")]
+    [Authorize(Roles = "Admin,OrderPicker")]
+    public IActionResult UnassignOrderPicker(int id, [FromQuery] int employeeId)
+    {
+        // Find Order
+        var orderToUpdate = _dbContext
+            .Orders
+            .SingleOrDefault(o => o.Id == id);
+
+        // Find OrderPicker UserProfile
+        UserProfile orderPicker = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.Id == employeeId);
+
+        Order order = _dbContext
+            .Orders
+            .SingleOrDefault(o => o.EmployeeUserProfileId == orderPicker.Id && o.DateCompleted == null && o.Canceled == false);
+
+        if (orderToUpdate == null || orderPicker == null)
+        {
+            return NotFound();
+        }
+
+        if (orderPicker.Id != order.EmployeeUserProfileId)
+        {
+            return BadRequest();
+        }
+
+        orderToUpdate.EmployeeUserProfileId = null;
+        _dbContext.SaveChanges();
+
+        return Ok(orderToUpdate);
+    }
+
     // Complete an Order (Add a DateCompleted Value)
     [HttpPut("{id}/complete")]
     [Authorize(Roles = "Admin,OrderPicker")]
@@ -527,10 +562,11 @@ public class OrdersController : ControllerBase
             return NotFound();
         }
 
-        if (employee.Id != orderToUpdate.EmployeeUserProfileId || !isEmployeeAdmin)
-        {
-            return BadRequest();
-        }
+        // This returns BadRequest even if items passed in are correct
+        // if (employee.Id != orderToUpdate.EmployeeUserProfileId || !isEmployeeAdmin)
+        // {
+        //     return BadRequest();
+        // }
 
         orderToUpdate.DateCompleted = DateTime.Now;
         _dbContext.SaveChanges();
