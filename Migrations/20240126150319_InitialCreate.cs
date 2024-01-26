@@ -249,8 +249,8 @@ namespace GJApples.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     TreeId = table.Column<int>(type: "integer", nullable: false),
                     EmployeeUserProfileId = table.Column<int>(type: "integer", nullable: false),
-                    HarvestDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    PoundsHarvested = table.Column<decimal>(type: "numeric", nullable: false)
+                    HarvestDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    PoundsHarvested = table.Column<decimal>(type: "numeric", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -315,10 +315,10 @@ namespace GJApples.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "8b2b3a2d-62f6-4f2b-8b3d-45b6a1f3b5b4", "d0996f38-764e-43d6-b0e3-2617a54ca929", "Harvester", "harvester" },
-                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "2f3a2c50-8541-4cbe-a579-20bffc88cfc2", "Admin", "admin" },
-                    { "d4f146bf-70c8-4d02-98ec-0b5f4b9d213f", "498551d6-54a0-4924-a6c6-d0a078fff769", "Customer", "customer" },
-                    { "f65f1f30-d0b1-4f59-a3c8-eb1f2e6757d3", "bff7b23a-42b6-4c12-8c41-61a2bb41be41", "OrderPicker", "orderpicker" }
+                    { "8b2b3a2d-62f6-4f2b-8b3d-45b6a1f3b5b4", "69db7d1d-4c2e-4f3d-a846-78b207a0e718", "Harvester", "harvester" },
+                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "28cfcfeb-04cc-4b14-aed7-0c7846a0fa4f", "Admin", "admin" },
+                    { "d4f146bf-70c8-4d02-98ec-0b5f4b9d213f", "aa277594-5a52-435e-84ad-5622a0d469d3", "Customer", "customer" },
+                    { "f65f1f30-d0b1-4f59-a3c8-eb1f2e6757d3", "ff402752-7835-436f-af03-e2d46018a22f", "OrderPicker", "orderpicker" }
                 });
 
             migrationBuilder.InsertData(
@@ -326,13 +326,13 @@ namespace GJApples.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "03d8deac-3687-4274-82c1-e1d32392d2de", 0, "d874731f-bab2-472c-a31a-d6842992e972", "kyle@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEBLwov8WPlRQKfuFHRXJfYK85tnmp/JyW68qw3fVTvUrCjGsBss8g8gY6juqMKDbgw==", null, false, "b0bc2179-c65d-44ca-a045-12865ec68d5c", false, "Kyle" },
-                    { "3a64b2c1-7780-40f1-a393-8edb30c4b2ab", 0, "9125d2db-16ce-4cf7-a0f7-23527253e9fd", "haley@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEGfArTrstI33x9OMpWBl0gvb3dvuL5CwN4YoXJV4APQ8mdL+v67MlaipqjMraQ/TDw==", null, false, "7e3123e4-6779-487f-bd3d-fb6ee7aab8b5", false, "Haley" },
-                    { "83aab5f4-67ba-4da9-940e-fef0ce8597bd", 0, "5f64caaa-e79f-4365-8819-86e356c525d2", "chris@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEDbC8qlvmuk82q0zgnWzf9R0+WQnGAve5mullctISJmGVAU0tKAae46iMLVDlg71NQ==", null, false, "2a622daf-bbc5-402a-9005-d213c1b8e202", false, "Chris" },
-                    { "8c3605d2-c0da-4592-8879-0c71dc3c02c4", 0, "d9e088fa-1dab-4140-ad16-bca22348cc76", "josh@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEGhIX1T2XjW0eF5qK3jEIJuVsmb0qPAYHeaxN0tYy2w+zm8U5y+4HwIBk86T3zmdKg==", null, false, "2f7f9333-6822-4014-9f97-9b3bb064b532", false, "Josh" },
-                    { "bc3a3871-4800-4061-8182-b965c9c109bc", 0, "7feefb68-af43-40f2-aaa4-a6557ac83548", "aaron@yahoo.com", false, false, null, null, null, "AQAAAAEAACcQAAAAED36wB3n/emL0Lgp6Nu3pxf3egPD5yBjCP/iIleKmiKOTRdhB6YTKGsL8rQdDonRaw==", null, false, "83cca9e3-571b-45f1-9218-003634499bce", false, "Aaron" },
-                    { "c8c02266-41e6-414d-a1fc-14bbefef86a0", 0, "fb5fd90c-0eff-430d-a6f4-586055b3417d", "debbie@gmail.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEEgK6lQRYD9kynnvISfonUtfO3730uopshiT9l1VKYJcDCzWKK8fJSwSGUg4RrfRzA==", null, false, "fa9c8f85-7158-44ee-8a9f-ee725bf7f873", false, "Debbie" },
-                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "afe35148-dfaf-40a1-b70b-0f5e2555cbb5", "admin@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEB1+c2BZiU308L3OvrEfRnPP8IW3Ji9bgHLizvvkYAtoM1E8/Ip78+lBWkC9xC788A==", null, false, "a8847515-5383-4255-8d51-2064d84fa2bd", false, "Administrator" }
+                    { "03d8deac-3687-4274-82c1-e1d32392d2de", 0, "a63d619d-3c29-4d82-a871-f9626540c08f", "kyle@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAECUJgu7f1ao/d6h8k4RfrIPTJWJXlavT+gCqMiX/B8CitxzAuNAoWvCr7cJ+K5iN5w==", null, false, "173582ce-7a58-4627-8e84-db7edc09a44b", false, "Kyle" },
+                    { "3a64b2c1-7780-40f1-a393-8edb30c4b2ab", 0, "080b22df-d64b-4b71-9e16-28cf51d90ec4", "haley@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAELHqJJqpIaLEUyY771izsG7bUX4SBCQi7Drg0P9eyNz8V7ceLxfFXfs62Lus6Zhtpw==", null, false, "52ff7ba5-a5c8-4c29-9d45-1f2cd09d548e", false, "Haley" },
+                    { "83aab5f4-67ba-4da9-940e-fef0ce8597bd", 0, "c7301726-5fbb-48ae-b352-6d55992b8000", "chris@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEJdubLu7C/akxp/NDWdZxqVVbhi3PvyKJIr6L93KM+X3rsVB2KugmOzZXjM+gTTLQg==", null, false, "df1798fe-dd62-4275-ab6b-5fe43ef90328", false, "Chris" },
+                    { "8c3605d2-c0da-4592-8879-0c71dc3c02c4", 0, "ec51d7bf-e024-4313-b908-4dd9abc5206f", "josh@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEMoRhVKJf8I6sSJqYkhbdxZh0SghiZHL4LrYpDzaw3pW0xpZgPITjdVu4MwyzpEfxg==", null, false, "7c17c25c-6e6a-400c-8330-344df5e274dc", false, "Josh" },
+                    { "bc3a3871-4800-4061-8182-b965c9c109bc", 0, "e6313316-2b54-48ab-ac92-6dda0653938d", "aaron@yahoo.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEC70yaVBrx+QwUmtbfoPF3i2r1FMlMets3QaGNYLS/cZ/npaSAER3cc8EEuHL8LsLg==", null, false, "4a4c55d3-baaf-4e8e-aa0c-3d158ced25b9", false, "Aaron" },
+                    { "c8c02266-41e6-414d-a1fc-14bbefef86a0", 0, "bc083480-7f54-42ba-80ab-a2e6edd9883b", "debbie@gmail.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEBCGbBBBbOVE5X+Pb1ah/ZHQdODOhh0tSfxrde0DSATOvHR80beR9DmNJMcDdi6USg==", null, false, "87ab9c6a-97da-4c9d-b40b-c48ef85f4812", false, "Debbie" },
+                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "ebf82d1b-0ed7-4bb2-a79d-add160cb7995", "admin@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEG9oCRTuXFtPj4krzMpObW/DXejmIHL/0YoHTRNACkvtLDnPKzG+dyJ/YElQZshWBA==", null, false, "790c81a3-243c-41ac-b8f6-f39132d2458a", false, "Administrator" }
                 });
 
             migrationBuilder.InsertData(

@@ -7,3 +7,17 @@ export const getAllTrees = () => {
 export const getAllUnassignedTrees = () => {
     return fetch(`${_apiUrl}?needsHarvested=true`).then((res) => res.json())
 }
+
+export const getHarvesterAssignment = () => {
+    return fetch(`${_apiUrl}/assignment`).then((res) => res.json())
+}
+
+export const createNewTreeHarvestReport = (treeHarvestReport) => {
+    return fetch(`${_apiUrl}/harvestreport`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(treeHarvestReport),
+    })
+}

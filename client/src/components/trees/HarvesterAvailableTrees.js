@@ -1,10 +1,24 @@
-import { Button, Input, Table } from "reactstrap"
+import { Button, Table } from "reactstrap"
+import { createNewTreeHarvestReport, getAllUnassignedTrees } from "../../managers/treeManager"
 
-export const HarvesterAvailableTrees = ({ loggedInUser, trees, assignedTree, setAssignedTree }) => {
+export const HarvesterAvailableTrees = ({ loggedInUser, trees, setTrees, assignedTreeHarvestReport, setAssignedTreeHarvestReport }) => {
 
     const lastHarvestDate = (treeHarvestReports) => {
         let harvest = treeHarvestReports.reduce((prev, current) => prev.id > current.id ? prev : current)
         return new Date(harvest.harvestDate).toISOString().split('T')[0]
+    }
+
+    const handleAssignTree = (treeId) => {
+        let newTreeHarvestReport = {
+            treeId: treeId,
+            employeeUserProfileId: loggedInUser.id,
+        }
+
+        createNewTreeHarvestReport(newTreeHarvestReport).then(() => {
+            // Running the code below causes errors... I put a band-aid on it with the reload page
+            // getAllUnassignedTrees().then(setTrees())
+            window.location.reload()
+        })
     }
 
     return (
@@ -29,9 +43,9 @@ export const HarvesterAvailableTrees = ({ loggedInUser, trees, assignedTree, set
                             <th>{t.appleVariety.type}</th>
                             <th>{lastHarvestDate(t.treeHarvestReports)}</th>
                             <th>
-                                {assignedTree?.id == null && (
+                                {assignedTreeHarvestReport?.id == null && (
                                     <Button onClick={() => {
-
+                                        handleAssignTree(t.id)
                                     }}>
                                         Assign Me
                                     </Button>

@@ -12,8 +12,6 @@ public class TreeHarvestReport
     [ForeignKey("Employee")]
     public int EmployeeUserProfileId { get; set; }
     public UserProfile? Employee { get; set; }
-    [Required]
-    public DateTime HarvestDate { get; set; }
-    [Required]
-    public decimal PoundsHarvested { get; set; }
+    public DateTime? HarvestDate { get; set; }
+    public decimal? PoundsHarvested { get; set; }
 }
