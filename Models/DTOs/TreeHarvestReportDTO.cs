@@ -10,7 +10,7 @@ public class TreeHarvestReportDTO
     [ForeignKey("Employee")]
     public int EmployeeUserProfileId { get; set; }
     public HarvesterDTO? Employee { get; set; }
-    public DateTime HarvestDate { get; set; }
+    public DateTime? HarvestDate { get; set; }
     [Range(0, 999)]
-    public decimal PoundsHarvested { get; set; }
+    public decimal? PoundsHarvested { get; set; }
 }

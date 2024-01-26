@@ -80,10 +80,10 @@ public class OrdersController : ControllerBase
     [Authorize(Roles = "OrderPicker")]
     public IActionResult GetOrderPickerAssignment()
     {
-        // Find Customer UserName
+        // Find OrderPicker's UserName
         var employeeUserName = User.Identity.Name;
 
-        // Find Customer UserProfile
+        // Find OrderPicker's UserProfile
         UserProfile orderPicker = _dbContext
             .UserProfiles
             .SingleOrDefault(u => u.IdentityUser.UserName == employeeUserName);

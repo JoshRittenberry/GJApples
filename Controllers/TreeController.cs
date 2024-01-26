@@ -33,7 +33,12 @@ public class TreesController : ControllerBase
             .Include(t => t.TreeHarvestReports)
                 .ThenInclude(thr => thr.Employee)
                     .ThenInclude(e => e.IdentityUser)
-            .Where(t => needsHarvested == true ? t.TreeHarvestReports.Count <= 0 || t.TreeHarvestReports.Max(thr => thr.HarvestDate) <= sevenDaysAgo && t.DateRemoved == null : true)
+            .Where(t =>
+                (needsHarvested == true &&
+                t.DateRemoved == null &&
+                (t.TreeHarvestReports.Any(thr => thr.HarvestDate <= sevenDaysAgo && thr.Id == t.TreeHarvestReports.Max(th => th.Id)) ||
+                t.TreeHarvestReports.Max(th => th.Id) == 0)) ||
+                (needsHarvested != true && t.DateRemoved == null))
             .Select(t => new TreeDTO
             {
                 Id = t.Id,
@@ -243,6 +248,62 @@ public class TreesController : ControllerBase
         });
     }
 
+    // Get Harvester's Assigned TreeHarvestReport
+    [HttpGet("assignment")]
+    [Authorize(Roles = "Harvester")]
+    public IActionResult GetHarvesterAssignment()
+    {
+        // Find Harvester's UserName
+        var employeeUserName = User.Identity.Name;
+
+        // Find Harvester's UserProfile
+        UserProfile harvester = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == employeeUserName);
+
+        var treeHarvestReport = _dbContext
+            .TreeHarvestReports
+            .Include(thr => thr.Tree)
+                .ThenInclude(t => t.AppleVariety)
+            .Where(thr => thr.EmployeeUserProfileId == harvester.Id)
+            .OrderByDescending(thr => thr.Id)
+            .FirstOrDefault();
+
+        if (harvester == null || treeHarvestReport == null || treeHarvestReport.HarvestDate != null)
+        {
+            return NotFound();
+        }
+
+
+        return Ok(new TreeHarvestReportDTO
+        {
+            Id = treeHarvestReport.Id,
+            TreeId = treeHarvestReport.TreeId,
+            Tree = new TreeDTO
+            {
+                Id = treeHarvestReport.Tree.Id,
+                AppleVarietyId = treeHarvestReport.Tree.AppleVarietyId,
+                AppleVariety = new AppleVarietyDTO
+                {
+                    Id = treeHarvestReport.Tree.AppleVariety.Id,
+                    Type = treeHarvestReport.Tree.AppleVariety.Type,
+                    ImageUrl = treeHarvestReport.Tree.AppleVariety.ImageUrl,
+                    CostPerPound = treeHarvestReport.Tree.AppleVariety.CostPerPound,
+                    IsActive = treeHarvestReport.Tree.AppleVariety.IsActive,
+                    Trees = null,
+                    OrderItems = null
+                },
+                DatePlanted = treeHarvestReport.Tree.DatePlanted,
+                DateRemoved = treeHarvestReport.Tree.DateRemoved,
+                TreeHarvestReports = null
+            },
+            EmployeeUserProfileId = treeHarvestReport.EmployeeUserProfileId,
+            Employee = null,
+            HarvestDate = treeHarvestReport.HarvestDate,
+            PoundsHarvested = treeHarvestReport.PoundsHarvested
+        });
+    }
+
     // Create new Tree
     [HttpPost]
     [Authorize(Roles = "Admin")]
@@ -267,7 +328,8 @@ public class TreesController : ControllerBase
         var tree = _dbContext.Trees.SingleOrDefault(t => t.Id == treeHarvestReport.TreeId);
         var employee = _dbContext.Trees.SingleOrDefault(u => u.Id == treeHarvestReport.EmployeeUserProfileId);
 
-        if (tree == null || employee == null || treeHarvestReport.HarvestDate == null || treeHarvestReport.HarvestDate == DateTime.MinValue || treeHarvestReport.PoundsHarvested == null || treeHarvestReport.PoundsHarvested < 0)
+        // if (tree == null || employee == null || treeHarvestReport.HarvestDate == null || treeHarvestReport.HarvestDate == DateTime.MinValue || treeHarvestReport.PoundsHarvested == null || treeHarvestReport.PoundsHarvested < 0)
+        if (tree == null || employee == null)
         {
             return BadRequest();
         }

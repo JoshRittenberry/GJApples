@@ -16,7 +16,7 @@ public class AppleVariety
             {
                 return null;
             }
-            decimal HarvestedTotal = Trees.Sum(t => t.TreeHarvestReports.Sum(th => th.PoundsHarvested));
+            decimal? HarvestedTotal = Trees.Sum(t => t.TreeHarvestReports.Sum(th => th.PoundsHarvested));
             decimal PoundsOrdered = OrderItems.Sum(oi => oi.Pounds);
             return HarvestedTotal - PoundsOrdered;
         }
