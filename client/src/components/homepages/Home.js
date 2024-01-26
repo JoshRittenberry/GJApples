@@ -1,3 +1,4 @@
+import { ContactUsFooter } from "../ContactUsFooter"
 import "../stylesheets/home.css"
 
 export const Home = ({ loggedInUser }) => {
@@ -22,17 +23,7 @@ export const Home = ({ loggedInUser }) => {
                     <p>Gary Jones</p>
                 </div>
             </section>
-            <footer className="homepage_footer">
-                <h3>Contact Us</h3>
-                <div className="homepage_footer_address">
-                    <p>2584 Orchard Lane</p>
-                    <p>Mount Juliet, TN 37122</p>
-                </div>
-                <div className="homepage_footer_contactinfo">
-                    <p>Phone Number: (615) 502-7483</p>
-                    <p>Email: contact@garyjonesappleorchard.com</p>
-                </div>
-            </footer>
+            <ContactUsFooter />
         </>
     )
 }

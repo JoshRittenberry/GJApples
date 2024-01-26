@@ -20,17 +20,20 @@ public class TreesController : ControllerBase
 
     // Get all Trees
     [HttpGet]
-    [AllowAnonymous]
-    public IActionResult Get()
+    [Authorize(Roles = "Admin,Harvester")]
+    public IActionResult Get([FromQuery] bool? needsHarvested)
     {
         bool isAuthorized = User.Identity.IsAuthenticated && User.IsInRole("Admin");
+
+        DateTime sevenDaysAgo = DateTime.Now.AddDays(-7);
 
         return Ok(_dbContext
             .Trees
             .Include(t => t.AppleVariety)
             .Include(t => t.TreeHarvestReports)
                 .ThenInclude(thr => thr.Employee)
-                .ThenInclude(e => e.IdentityUser)
+                    .ThenInclude(e => e.IdentityUser)
+            .Where(t => needsHarvested == true ? t.TreeHarvestReports.Count <= 0 || t.TreeHarvestReports.Max(thr => thr.HarvestDate) <= sevenDaysAgo && t.DateRemoved == null : true)
             .Select(t => new TreeDTO
             {
                 Id = t.Id,

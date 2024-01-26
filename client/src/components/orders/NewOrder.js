@@ -4,6 +4,7 @@ import { getAllApples } from "../../managers/appleManager"
 import { Button, Card, CardBody, CardSubtitle, CardTitle } from "reactstrap"
 import { createOrderItem, decreaseOrderItem, getUnsubmittedOrder, increaseOrderItem, submitOrder } from "../../managers/orderManager"
 import { useNavigate } from "react-router-dom"
+import { ContactUsFooter } from "../ContactUsFooter"
 
 export const NewOrder = ({ loggedInUser }) => {
     const [apples, setApples] = useState([])
@@ -133,17 +134,7 @@ export const NewOrder = ({ loggedInUser }) => {
                     )
                 })}
             </section>
-            <footer className="neworder_footer">
-                <h3>Contact Us</h3>
-                <div className="neworder_footer_address">
-                    <p>2584 Orchard Lane</p>
-                    <p>Mount Juliet, TN 37122</p>
-                </div>
-                <div className="neworder_footer_contactinfo">
-                    <p>Phone Number: (615) 502-7483</p>
-                    <p>Email: contact@garyjonesappleorchard.com</p>
-                </div>
-            </footer>
+            <ContactUsFooter />
         </>
     )
 }

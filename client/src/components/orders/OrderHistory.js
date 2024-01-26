@@ -3,6 +3,7 @@ import "../stylesheets/orderHistory.css"
 import { getAllOrders } from "../../managers/orderManager"
 import { Button, Table } from "reactstrap"
 import { useNavigate } from "react-router-dom"
+import { ContactUsFooter } from "../ContactUsFooter"
 
 export const OrderHistory = ({ loggedInUser }) => {
     const [submittedOrders, setSubmittedOrders] = useState([])
@@ -78,17 +79,7 @@ export const OrderHistory = ({ loggedInUser }) => {
                     </tbody>
                 </Table>
             </section>
-            <footer className="orderhistory_footer">
-                <h3>Contact Us</h3>
-                <div className="orderhistory_footer_address">
-                    <p>2584 Orchard Lane</p>
-                    <p>Mount Juliet, TN 37122</p>
-                </div>
-                <div className="orderhistory_footer_contactinfo">
-                    <p>Phone Number: (615) 502-7483</p>
-                    <p>Email: contact@garyjonesappleorchard.com</p>
-                </div>
-            </footer>
+            <ContactUsFooter />
         </>
     )
 }

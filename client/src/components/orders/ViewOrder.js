@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { cancelOrder, getOrderById } from "../../managers/orderManager"
 import { Button, Table } from "reactstrap"
+import { ContactUsFooter } from "../ContactUsFooter"
 
 export const ViewOrder = ({ loggedInUser }) => {
     const [order, setOrder] = useState({})
@@ -73,17 +74,7 @@ export const ViewOrder = ({ loggedInUser }) => {
                     </tbody>
                 </Table>
             </section>
-            <footer className="vieworder_footer">
-                <h3>Contact Us</h3>
-                <div className="vieworder_footer_address">
-                    <p>2584 Orchard Lane</p>
-                    <p>Mount Juliet, TN 37122</p>
-                </div>
-                <div className="vieworder_footer_contactinfo">
-                    <p>Phone Number: (615) 502-7483</p>
-                    <p>Email: contact@garyjonesappleorchard.com</p>
-                </div>
-            </footer>
+            <ContactUsFooter />
         </>
     )
 }
