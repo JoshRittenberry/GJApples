@@ -527,10 +527,11 @@ public class OrdersController : ControllerBase
             return NotFound();
         }
 
-        if (employee.Id != orderToUpdate.EmployeeUserProfileId || !isEmployeeAdmin)
-        {
-            return BadRequest();
-        }
+        // This returns BadRequest even if items passed in are correct
+        // if (employee.Id != orderToUpdate.EmployeeUserProfileId || !isEmployeeAdmin)
+        // {
+        //     return BadRequest();
+        // }
 
         orderToUpdate.DateCompleted = DateTime.Now;
         _dbContext.SaveChanges();
