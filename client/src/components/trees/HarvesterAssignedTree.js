@@ -1,4 +1,5 @@
 import { Button, Input, Table } from "reactstrap"
+import { deleteTreeHarvestReport, getAllUnassignedTrees, getHarvesterAssignment } from "../../managers/treeManager"
 
 export const HarvesterAssignedTree = ({ loggedInUser, trees, setTrees, assignedTreeHarvestReport, setAssignedTreeHarvestReport }) => {
     return (
@@ -39,10 +40,10 @@ export const HarvesterAssignedTree = ({ loggedInUser, trees, setTrees, assignedT
                                 <tr>
                                     <th>
                                         <Button onClick={() => {
-                                            // unassignOrderPicker(assignedTreeHarvestReport.id, loggedInUser.id).then(() => {
-                                            //     getAllUnassignedOrders().then(setOrders)
-                                            //     getOrderPickerAssignment().then(setAssignedOrder)
-                                            // })
+                                            deleteTreeHarvestReport(assignedTreeHarvestReport.id).then(() => {
+                                                getAllUnassignedTrees().then(setTrees)
+                                                getHarvesterAssignment().then(setAssignedTreeHarvestReport)
+                                            })
                                         }}>
                                             Unassign Me
                                         </Button>

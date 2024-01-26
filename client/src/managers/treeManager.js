@@ -13,11 +13,17 @@ export const getHarvesterAssignment = () => {
 }
 
 export const createNewTreeHarvestReport = (treeHarvestReport) => {
-    return fetch(`${_apiUrl}/harvestreport`, {
+    return fetch(`${_apiUrl}/harvestreports`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(treeHarvestReport),
+    })
+}
+
+export const deleteTreeHarvestReport = (treeHarvestReportId) => {
+    return fetch(`${_apiUrl}/harvestreports/${treeHarvestReportId}`, {
+        method: "DELETE"
     })
 }
