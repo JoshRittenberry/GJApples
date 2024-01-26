@@ -8,6 +8,7 @@ import { ContactUs } from "./ContactUs"
 import { NewOrder } from "./orders/NewOrder"
 import { OrderHistory } from "./orders/OrderHistory"
 import { ViewOrder } from "./orders/ViewOrder"
+import { EditOrder } from "./orders/EditOrder"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -55,6 +56,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
               <Routes>
                 <Route path="" element={<OrderHistory loggedInUser={loggedInUser} />} />
                 <Route path="view/:id" element={<ViewOrder loggedInUser={loggedInUser} />} />
+                <Route path="edit/:id" element={<EditOrder loggedInUser={loggedInUser} />} />
               </Routes>
             </AuthorizedRoute>
           }

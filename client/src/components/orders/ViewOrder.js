@@ -31,7 +31,9 @@ export const ViewOrder = ({ loggedInUser }) => {
                         }}>
                             Cancel Order
                         </Button>
-                        <Button>
+                        <Button onClick={() => {
+                            navigate(`/orderhistory/edit/${order.id}`)
+                        }}>
                             Edit Order
                         </Button>
                     </>
