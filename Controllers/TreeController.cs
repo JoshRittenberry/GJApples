@@ -428,23 +428,18 @@ public class TreesController : ControllerBase
             return NotFound();
         }
 
+        // Causing an error
         // If the User/Employee isn't the creator of the report, or an Admin, forbid them from making changes
-        if (employee.Id != treeHarvestReportToUpdate.EmployeeUserProfileId || !isUserAdmin)
-        {
-            return BadRequest();
-        }
+        // if (employee.Id != treeHarvestReportToUpdate.EmployeeUserProfileId || !isUserAdmin)
+        // {
+        //     return BadRequest();
+        // }
 
         // If the User/Employee is the creator of the report, or is an Admin, allow changes to be made
         if (employee.Id == treeHarvestReportToUpdate.EmployeeUserProfileId || isUserAdmin)
         {
             bool isUpdated = false;
 
-            // Update TreeId
-            if (treeHarvestReport.TreeId != null && treeHarvestReport.TreeId != treeHarvestReportToUpdate.TreeId)
-            {
-                treeHarvestReportToUpdate.TreeId = treeHarvestReport.TreeId;
-                isUpdated = true;
-            }
             // Update EmployeeId only if the user is an Admin
             if (isUserAdmin && treeHarvestReport.EmployeeUserProfileId != null && treeHarvestReport.EmployeeUserProfileId != treeHarvestReportToUpdate.EmployeeUserProfileId)
             {

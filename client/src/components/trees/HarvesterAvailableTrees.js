@@ -1,5 +1,5 @@
 import { Button, Table } from "reactstrap"
-import { createNewTreeHarvestReport, getAllUnassignedTrees } from "../../managers/treeManager"
+import { createNewTreeHarvestReport, getAllUnassignedTrees, getHarvesterAssignment } from "../../managers/treeManager"
 
 export const HarvesterAvailableTrees = ({ loggedInUser, trees, setTrees, assignedTreeHarvestReport, setAssignedTreeHarvestReport }) => {
 
@@ -15,9 +15,8 @@ export const HarvesterAvailableTrees = ({ loggedInUser, trees, setTrees, assigne
         }
 
         createNewTreeHarvestReport(newTreeHarvestReport).then(() => {
-            // Running the code below causes errors... I put a band-aid on it with the reload page
-            // getAllUnassignedTrees().then(setTrees())
-            window.location.reload()
+            getAllUnassignedTrees().then(setTrees)
+            getHarvesterAssignment().then(setAssignedTreeHarvestReport)
         })
     }
 
