@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import "../stylesheets/newOrder.css"
 import { getAllApples } from "../../managers/appleManager"
-import { Button, Card, CardBody, CardSubtitle, CardTitle } from "reactstrap"
+import { Button, Card, CardBody, CardSubtitle, CardTitle, Input } from "reactstrap"
 import { createOrderItem, decreaseOrderItem, getUnsubmittedOrder, increaseOrderItem, submitOrder } from "../../managers/orderManager"
 import { useNavigate } from "react-router-dom"
 import { ContactUsFooter } from "../ContactUsFooter"
@@ -75,16 +75,18 @@ export const NewOrder = ({ loggedInUser }) => {
         <>
             <header className="neworder_header">
                 <h1>Create New Order</h1>
-                <input
-                    type="text"
-                    readOnly
-                    value={order?.totalCost}
-                />
-                <Button onClick={() => {
-                    handleSubmitOrder()
-                }}>
-                    Submit Order
-                </Button>
+                <aside className="neworder_header_inputs">
+                    <Input
+                        type="text"
+                        readOnly
+                        value={`Total: $${order?.totalCost}`}
+                    />
+                    <Button onClick={() => {
+                        handleSubmitOrder()
+                    }}>
+                        Submit Order
+                    </Button>
+                </aside>
             </header>
             <section className="neworder_body">
                 {apples.map(apple => {

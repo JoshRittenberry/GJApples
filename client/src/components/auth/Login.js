@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../managers/authManager";
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
+import "../stylesheets/login.css"
 
 export default function Login({ setLoggedInUser }) {
   const navigate = useNavigate();
