@@ -321,7 +321,7 @@ public class TreesController : ControllerBase
     }
 
     // Create new TreeHarvestReport
-    [HttpPost("harvestreport")]
+    [HttpPost("harvestreports")]
     [Authorize(Roles = "Admin,Harvester")]
     public IActionResult CreateHarvestReport(TreeHarvestReport treeHarvestReport)
     {
@@ -403,7 +403,7 @@ public class TreesController : ControllerBase
 
     // Edit Harvest Report
     [HttpPut("harvestreports/{id}")]
-    [Authorize(Roles = "Admin,Harveester")]
+    [Authorize(Roles = "Admin,Harvester")]
     public IActionResult EditHarvestReport(TreeHarvestReport treeHarvestReport, int id)
     {
         // Find TreeHarvestReport
@@ -428,23 +428,18 @@ public class TreesController : ControllerBase
             return NotFound();
         }
 
+        // Causing an error
         // If the User/Employee isn't the creator of the report, or an Admin, forbid them from making changes
-        if (employee.Id != treeHarvestReportToUpdate.EmployeeUserProfileId || !isUserAdmin)
-        {
-            return BadRequest();
-        }
+        // if (employee.Id != treeHarvestReportToUpdate.EmployeeUserProfileId || !isUserAdmin)
+        // {
+        //     return BadRequest();
+        // }
 
         // If the User/Employee is the creator of the report, or is an Admin, allow changes to be made
         if (employee.Id == treeHarvestReportToUpdate.EmployeeUserProfileId || isUserAdmin)
         {
             bool isUpdated = false;
 
-            // Update TreeId
-            if (treeHarvestReport.TreeId != null && treeHarvestReport.TreeId != treeHarvestReportToUpdate.TreeId)
-            {
-                treeHarvestReportToUpdate.TreeId = treeHarvestReport.TreeId;
-                isUpdated = true;
-            }
             // Update EmployeeId only if the user is an Admin
             if (isUserAdmin && treeHarvestReport.EmployeeUserProfileId != null && treeHarvestReport.EmployeeUserProfileId != treeHarvestReportToUpdate.EmployeeUserProfileId)
             {
@@ -508,6 +503,40 @@ public class TreesController : ControllerBase
         _dbContext.SaveChanges();
 
         return NoContent();
+    }
+
+    // Delete TreeHarvestReport
+    [HttpDelete("harvestreports/{id}")]
+    [Authorize(Roles = "Harvester")]
+    public IActionResult DeleteTreeHarvestReport(int id)
+    {
+        // Find Harvester's UserName
+        var employeeUserName = User.Identity.Name;
+
+        // Find Harvester's UserProfile
+        UserProfile harvester = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == employeeUserName);
+
+        var treeHarvestReport = _dbContext
+            .TreeHarvestReports
+            .SingleOrDefault(thr => thr.Id == id);
+
+        if (harvester == null || treeHarvestReport == null)
+        {
+            return NotFound();
+        }
+
+        if (treeHarvestReport.EmployeeUserProfileId != harvester.Id)
+        {
+            return BadRequest();
+        }
+
+        _dbContext.Remove(treeHarvestReport);
+        _dbContext.SaveChanges();
+
+        return NoContent();
+
     }
 
     // Delete Tree
