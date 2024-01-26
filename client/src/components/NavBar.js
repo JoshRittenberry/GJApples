@@ -51,6 +51,15 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                                 </>
                             )
                         }
+                        {
+                            loggedInUser.roles.includes("Harvester") && (
+                                <>
+                                    <NavItem>
+                                        <NavLink href="/harvester">Employee Homepage</NavLink>
+                                    </NavItem>
+                                </>
+                            )
+                        }
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret>
                                 More
