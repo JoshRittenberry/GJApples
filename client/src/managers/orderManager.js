@@ -4,6 +4,14 @@ export const getAllOrders = () => {
     return fetch(_apiUrl).then((res) => res.json())
 }
 
+export const getAllUnassignedOrders = () => {
+    return fetch(`${_apiUrl}?unassigned=true`).then((res) => res.json())
+}
+
+export const getOrderPickerAssignment = () => {
+    return fetch(`${_apiUrl}/orderpicker`).then((res) => res.json())
+}
+
 export const getUnsubmittedOrder = () => {
     return fetch(`${_apiUrl}/unsubmitted`).then((res) => res.json())
 }
@@ -40,8 +48,26 @@ export const decreaseOrderItem = (orderItemId) => {
     })
 }
 
+export const assignOrderPicker = (orderId, orderPickerId) => {
+    return fetch(`${_apiUrl}/${orderId}/assignorderpicker?employeeId=${orderPickerId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+}
+
 export const submitOrder = (orderId) => {
     return fetch(`${_apiUrl}/${orderId}/submit`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).then((res) => res.json())
+}
+
+export const completeOrder = (orderId) => {
+    return fetch(`${_apiUrl}/${orderId}/complete`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

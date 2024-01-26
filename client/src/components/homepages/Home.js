@@ -9,7 +9,7 @@ export const Home = ({ loggedInUser }) => {
                 ) : <h1>Welcome Back to Garry Jones' Apples</h1>}
                 <img src="https://i.ibb.co/x6w0yJ7/Hand-Holding-Apple.webp" className="homepage_header_pic" alt="Hand Holding Apple" />
             </header>
-            <section className="homepage_intro">
+            <section className="homepage_body">
                 <img src="https://i.ibb.co/8zmvNLT/GJ-Picking-Apples.jpg" className="homepage_gj_pic" alt="Gary Jones Picking Apples" />
                 <div className="homepage_gj_welcome">
                     <p>Hello, and thank you for visiting our little slice of paradise! I'm Gary Jones, the proud founder and caretaker of this orchard that has been my labor of love for many years. Nestled in the heart of nature, our orchard is more than just a place to pick apples – it's a sanctuary where memories are made, traditions are born, and the simple joys of nature can be appreciated in every bite of our crisp, juicy apples.</p>

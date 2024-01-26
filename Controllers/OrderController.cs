@@ -21,7 +21,7 @@ public class OrdersController : ControllerBase
     // Get all Orders
     [HttpGet]
     [Authorize(Roles = "Admin,OrderPicker,Customer")]
-    public IActionResult Get()
+    public IActionResult Get([FromQuery] bool? unassigned)
     {
         // Check if the user is a Customer
         bool isCustomer = User.IsInRole("Customer");
@@ -37,6 +37,7 @@ public class OrdersController : ControllerBase
         return Ok(_dbContext
             .Orders
             .Where(o => isCustomer ? o.CustomerUserProfileId == customer.Id : true)
+            .Where(o => unassigned == true ? o.EmployeeUserProfileId == null && o.Canceled == false && o.DateOrdered != null : true)
             .Include(o => o.Customer)
                 .ThenInclude(c => c.IdentityUser)
             .Include(o => o.Employee)
@@ -72,6 +73,64 @@ public class OrdersController : ControllerBase
                 }).ToList()
             }).ToList()
         );
+    }
+
+    // Get OrderPicker's Assigned Order
+    [HttpGet("orderpicker")]
+    [Authorize(Roles = "OrderPicker")]
+    public IActionResult GetOrderPickerAssignment()
+    {
+        // Find Customer UserName
+        var employeeUserName = User.Identity.Name;
+
+        // Find Customer UserProfile
+        UserProfile orderPicker = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == employeeUserName);
+
+        var order = _dbContext
+            .Orders
+            .Include(o => o.Customer)
+                .ThenInclude(c => c.IdentityUser)
+            .Include(o => o.Employee)
+                .ThenInclude(e => e.IdentityUser)
+            .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.AppleVariety)
+            .SingleOrDefault(o => o.EmployeeUserProfileId == orderPicker.Id && o.DateCompleted == null && o.Canceled == false);
+
+        if (orderPicker == null || order == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(new OrderDTO
+        {
+            Id = order.Id,
+            CustomerUserProfileId = order.CustomerUserProfileId,
+            Customer = null,
+            EmployeeUserProfileId = order.EmployeeUserProfileId,
+            Employee = null,
+            DateOrdered = order.DateOrdered,
+            DateCompleted = order.DateCompleted,
+            Canceled = order.Canceled,
+            OrderItems = order.OrderItems.Select(oi => new OrderItemDTO
+            {
+                Id = oi.Id,
+                OrderId = oi.OrderId,
+                AppleVarietyId = oi.AppleVarietyId,
+                AppleVariety = new AppleVarietyDTO
+                {
+                    Id = oi.AppleVariety.Id,
+                    Type = oi.AppleVariety.Type,
+                    ImageUrl = oi.AppleVariety.ImageUrl,
+                    CostPerPound = oi.AppleVariety.CostPerPound,
+                    IsActive = oi.AppleVariety.IsActive,
+                    Trees = null,
+                    OrderItems = null
+                },
+                Pounds = oi.Pounds
+            }).ToList()
+        });
     }
 
     // Get Customer's Unsubmitted Order
@@ -410,8 +469,8 @@ public class OrdersController : ControllerBase
 
     // Assign an Order to an Order Picker
     [HttpPut("{id}/assignorderpicker")]
-    [Authorize(Roles = "Admin,AssignOrderPicker")]
-    public IActionResult AssignOrderPicker(int id, [FromQuery] int? employeeId)
+    [Authorize(Roles = "Admin,OrderPicker")]
+    public IActionResult AssignOrderPicker(int id, [FromQuery] int employeeId)
     {
         // Find Order
         var orderToUpdate = _dbContext
@@ -423,9 +482,18 @@ public class OrdersController : ControllerBase
             .UserProfiles
             .SingleOrDefault(u => u.Id == employeeId);
 
+        Order order = _dbContext
+            .Orders
+            .SingleOrDefault(o => o.EmployeeUserProfileId == orderPicker.Id && o.DateCompleted == null && o.Canceled == false);
+
         if (orderToUpdate == null || orderPicker == null)
         {
             return NotFound();
+        }
+
+        if (order != null)
+        {
+            return BadRequest();
         }
 
         orderToUpdate.EmployeeUserProfileId = employeeId;
@@ -444,10 +512,10 @@ public class OrdersController : ControllerBase
             .Orders
             .SingleOrDefault(o => o.Id == id);
 
-        // Find Customer UserName
+        // Find Employee UserName
         var employeeUserName = User.Identity.Name;
 
-        // Find Customer UserProfile
+        // Find Employee UserProfile
         UserProfile employee = _dbContext
             .UserProfiles
             .SingleOrDefault(u => u.IdentityUser.UserName == employeeUserName);
