@@ -1,7 +1,4 @@
-div {
-    text-align: center;
-}
-
-.funny_gif {
-    width: 25%;
+.orderhistory_body {
+    width: 70%;
+    margin: auto;
 }

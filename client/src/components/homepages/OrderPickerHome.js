@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import "../stylesheets/orderPickerHomePage.css"
 import { getAllUnassignedOrders, getOrderPickerAssignment } from "../../managers/orderManager"
 import { OrderPickerAvailableOrders } from "../orders/OrderPickerAvailableOrders"
 import { OrderPickerAssignedOrder } from "../orders/OrderPickerAssignedOrder"

@@ -1,0 +1,33 @@
+/* Main Page */
+.orderpickerhome_body {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: auto;
+}
+
+/* Assignment Section */
+.orderpickerhome_body_assignment {
+    width: 50%;
+}
+
+.orderpickerhome_body_assignment_header {
+    margin: auto;
+    text-align: left;
+    color: white;
+}
+
+.orderpickerhome_body_assignment_header_top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.orderpickerhome_body_assignment_header_bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Open Orders Section */
+.orderpickerhome_body_list {
+    width: 45%;
+}

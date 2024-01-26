@@ -4,6 +4,9 @@ import { assignOrderPicker, getOrderPickerAssignment } from "../../managers/orde
 export const OrderPickerAvailableOrders = ({ loggedInUser, orders, assignedOrder, setAssignedOrder }) => {
     return (
         <div className="orderpickerhome_body_list">
+            <header className="orderpickerhome_body_list_header">
+                <h3>Orders Needing Completed</h3>
+            </header>
             <Table>
                 <thead>
                     <tr>

@@ -1,0 +1,37 @@
+.vieworder_header {
+    width: 70%;
+    margin: auto;
+    text-align: left;
+    color: white;
+}
+
+.vieworder_header_top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.vieworder_header_top_backbutton {
+    color: #FAC710;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 1.5em;
+}
+
+.vieworder_header_bottom{
+    display: flex;
+    justify-content: space-between;
+}
+
+.vieworder_body {
+    width: 70%;
+    margin: auto;
+}
+
+.vieworder_body_buttons {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.vieworder_body_buttons Button {
+    margin-left: 1%;
+}

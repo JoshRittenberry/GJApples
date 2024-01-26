@@ -1,0 +1,54 @@
+/* Main Page */
+.harvesterhome_body {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: auto;
+    color: white;
+}
+
+/* Assignment Section */
+.harvesterhome_body_assignment {
+    width: 50%;
+}
+
+.harvesterhome_body_assignment_header {
+    margin: auto;
+    text-align: left;
+    color: white;
+}
+
+.harvesterhome_body_assignment_header_top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.harvesterhome_body_assignment_header_bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.harvesterhome_body_assignment_body_input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.harvesterhome_body_assignment_body_input Input {
+    width: 20%;
+}
+
+.harvesterhome_body_assignment_body_buttons {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.harvesterhome_body_assignment_body_buttons Button {
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+/* Open Orders Section */
+.harvesterhome_body_list {
+    width: 45%;
+}
