@@ -21,7 +21,7 @@ export const NewOrder = ({ loggedInUser }) => {
         if (order.orderItems?.some(oi => oi.appleVarietyId == appleId)) {
             let orderItem = order.orderItems.find(oi => oi.appleVarietyId == appleId)
 
-            return `${orderItem.pounds}/lbs`
+            return `${orderItem.pounds} lbs`
         } else {
             return ""
         }
