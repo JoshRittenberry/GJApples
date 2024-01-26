@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { cancelOrder, getOrderById, createOrderItem, decreaseOrderItem, getUnsubmittedOrder, increaseOrderItem, submitOrder, deleteOrderItem } from "../../managers/orderManager"
 import { Button, Table, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import { getAllApples } from "../../managers/appleManager"
+import { ContactUsFooter } from "../ContactUsFooter";
 
 export const EditOrder = ({ loggedInUser }) => {
     const [order, setOrder] = useState({})
@@ -215,17 +216,7 @@ export const EditOrder = ({ loggedInUser }) => {
                     </tbody>
                 </Table>
             </section>
-            <footer className="editorder_footer">
-                <h3>Contact Us</h3>
-                <div className="editorder_footer_address">
-                    <p>2584 Orchard Lane</p>
-                    <p>Mount Juliet, TN 37122</p>
-                </div>
-                <div className="editorder_footer_contactinfo">
-                    <p>Phone Number: (615) 502-7483</p>
-                    <p>Email: contact@garyjonesappleorchard.com</p>
-                </div>
-            </footer>
+            <ContactUsFooter />
         </>
     )
 }
