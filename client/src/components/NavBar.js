@@ -42,6 +42,15 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                                 </>
                             )
                         }
+                        {
+                            loggedInUser.roles.includes("OrderPicker") && (
+                                <>
+                                    <NavItem>
+                                        <NavLink href="/orderpicker">Employee Homepage</NavLink>
+                                    </NavItem>
+                                </>
+                            )
+                        }
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret>
                                 More
