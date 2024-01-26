@@ -94,7 +94,8 @@ export const NewOrder = ({ loggedInUser }) => {
                         <Card key={`apple-${apple.id}`} className="neworder_body_card">
                             <img
                                 alt="Sample"
-                                src="https://picsum.photos/300/200"
+                                src={apple.imageUrl}
+                                className="neworder_body_card_img"
                             />
                             <CardBody>
                                 <CardTitle tag="h5">

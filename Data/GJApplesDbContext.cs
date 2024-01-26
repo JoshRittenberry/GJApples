@@ -231,7 +231,7 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             {
                 Id = 1,
                 Type = "Honeycrisp",
-                ImageUrl = "url_to_honeycrisp_image",
+                ImageUrl = "https://i.ibb.co/ZMDrZFH/Honey-Crisp-Apple.jpg",
                 CostPerPound = 1.20m,
                 IsActive = true,
             },
@@ -239,7 +239,7 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             {
                 Id = 2,
                 Type = "Granny Smith",
-                ImageUrl = "url_to_granny_smith_image",
+                ImageUrl = "https://i.ibb.co/8bq7xWW/Granny-Smith-Apple.jpg",
                 CostPerPound = 0.95m,
                 IsActive = true,
             },
@@ -247,7 +247,7 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             {
                 Id = 3,
                 Type = "Fuji",
-                ImageUrl = "url_to_fuji_image",
+                ImageUrl = "https://i.ibb.co/WBtxpKf/Fuji-Apple.webp",
                 CostPerPound = 1.10m,
                 IsActive = true,
             },
@@ -255,7 +255,7 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             {
                 Id = 4,
                 Type = "Gala",
-                ImageUrl = "url_to_gala_image",
+                ImageUrl = "https://i.ibb.co/SNp02bf/Gala-Apple.jpg",
                 CostPerPound = 0.85m,
                 IsActive = true,
             },
@@ -263,7 +263,7 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             {
                 Id = 5,
                 Type = "Pink Lady",
-                ImageUrl = "url_to_pink_lady_image",
+                ImageUrl = "https://i.ibb.co/8XjJ88T/Pink-Lady-Apple.jpg",
                 CostPerPound = 1.15m,
                 IsActive = true,
             },
@@ -271,7 +271,7 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             {
                 Id = 6,
                 Type = "Braeburn",
-                ImageUrl = "url_to_braeburn_image",
+                ImageUrl = "https://i.ibb.co/5rW7k1s/Braeburn-Apple.jpg",
                 CostPerPound = 0.90m,
                 IsActive = true,
             },
@@ -279,7 +279,7 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             {
                 Id = 7,
                 Type = "Red Delicious",
-                ImageUrl = "url_to_red_delicious_image",
+                ImageUrl = "https://i.ibb.co/C9GyMDj/Red-Delicious-Apple.jpg",
                 CostPerPound = 0.80m,
                 IsActive = true,
             },
@@ -287,7 +287,7 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
             {
                 Id = 8,
                 Type = "Golden Delicious",
-                ImageUrl = "url_to_golden_delicious_image",
+                ImageUrl = "https://i.ibb.co/Bz1tZ16/Golden-Delicious-Apple.jpg",
                 CostPerPound = 0.85m,
                 IsActive = true,
             }

@@ -41,6 +41,13 @@
     margin: 1%;
 }
 
+.neworder_body_card_img {
+    width: 17.75rem;
+    height: 16rem;
+    border-radius: 2%;
+    margin: auto;
+}
+
 .neworder_body_card_cardfooter {
     display: flex;
     justify-content: space-between;
