@@ -4,6 +4,10 @@ export const getAllOrders = () => {
     return fetch(_apiUrl).then((res) => res.json())
 }
 
+export const getAllUnassignedOrders = () => {
+    return fetch(`${_apiUrl}?unassigned=true`).then((res) => res.json())
+}
+
 export const getUnsubmittedOrder = () => {
     return fetch(`${_apiUrl}/unsubmitted`).then((res) => res.json())
 }

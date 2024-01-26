@@ -21,7 +21,7 @@ public class OrdersController : ControllerBase
     // Get all Orders
     [HttpGet]
     [Authorize(Roles = "Admin,OrderPicker,Customer")]
-    public IActionResult Get()
+    public IActionResult Get([FromQuery] bool? unassigned)
     {
         // Check if the user is a Customer
         bool isCustomer = User.IsInRole("Customer");
@@ -37,6 +37,7 @@ public class OrdersController : ControllerBase
         return Ok(_dbContext
             .Orders
             .Where(o => isCustomer ? o.CustomerUserProfileId == customer.Id : true)
+            .Where(o => unassigned == true ? o.EmployeeUserProfileId == null && o.Canceled == false : true)
             .Include(o => o.Customer)
                 .ThenInclude(c => c.IdentityUser)
             .Include(o => o.Employee)

@@ -17,16 +17,19 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
       {/* Home Page */}
       <Route path="/">
         <Route
-          path="*"
+          index
           element={
-            <Routes>
-              <Route path="" element={<Home loggedInUser={loggedInUser} />} />
-              <Route path="/orderpicker" element={
-                <AuthorizedRoute roles={["OrderPicker"]} loggedInUser={loggedInUser}>
-                  <OrderPickerHome loggedInUser={loggedInUser} />
-                </AuthorizedRoute>
-              } />
-            </Routes>
+            <Home loggedInUser={loggedInUser} />
+          }
+        />
+
+        {/* OrderPicker Home */}
+        <Route 
+          path="orderpicker"
+          element={
+            <AuthorizedRoute roles={["OrderPicker"]} loggedInUser={loggedInUser}>
+              <OrderPickerHome loggedInUser={loggedInUser} />
+            </AuthorizedRoute>
           }
         />
 

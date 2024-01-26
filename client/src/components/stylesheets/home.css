@@ -10,7 +10,7 @@ p, h1, h3 {
     text-align: center;
 }
 
-.homepage_intro {
+.homepage_body {
     display: flex;
     justify-content: space-around;
 }
