@@ -10,6 +10,7 @@ import { OrderHistory } from "./orders/OrderHistory"
 import { ViewOrder } from "./orders/ViewOrder"
 import { EditOrder } from "./orders/EditOrder"
 import { OrderPickerHome } from "./homepages/OrderPickerHome"
+import { HarvesterHome } from "./homepages/HarvesterHome"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -24,11 +25,21 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
         />
 
         {/* OrderPicker Home */}
-        <Route 
+        <Route
           path="orderpicker"
           element={
             <AuthorizedRoute roles={["OrderPicker"]} loggedInUser={loggedInUser}>
               <OrderPickerHome loggedInUser={loggedInUser} />
+            </AuthorizedRoute>
+          }
+        />
+
+        {/* Harvester Home */}
+        <Route
+          path="harvester"
+          element={
+            <AuthorizedRoute roles={["Harvester"]} loggedInUser={loggedInUser}>
+              <HarvesterHome loggedInUser={loggedInUser} />
             </AuthorizedRoute>
           }
         />
