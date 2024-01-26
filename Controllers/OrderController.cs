@@ -512,10 +512,10 @@ public class OrdersController : ControllerBase
             .Orders
             .SingleOrDefault(o => o.Id == id);
 
-        // Find Customer UserName
+        // Find Employee UserName
         var employeeUserName = User.Identity.Name;
 
-        // Find Customer UserProfile
+        // Find Employee UserProfile
         UserProfile employee = _dbContext
             .UserProfiles
             .SingleOrDefault(u => u.IdentityUser.UserName == employeeUserName);

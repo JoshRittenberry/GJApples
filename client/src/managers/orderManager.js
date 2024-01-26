@@ -66,6 +66,15 @@ export const submitOrder = (orderId) => {
     }).then((res) => res.json())
 }
 
+export const completeOrder = (orderId) => {
+    return fetch(`${_apiUrl}/${orderId}/complete`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).then((res) => res.json())
+}
+
 export const cancelOrder = (orderId) => {
     return fetch(`${_apiUrl}/${orderId}/cancel`, {
         method: "PUT",
