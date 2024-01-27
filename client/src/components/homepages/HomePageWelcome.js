@@ -10,7 +10,7 @@ export const HomePageWelcome = ({ loggedInUser }) => {
         <div className='hero-container'>
             <video src='/videos/hp_apples_h.mp4' autoPlay loop muted />
             <h1>Garry Jones' Apples</h1>
-            <p>What are you waiting for{loggedInUser?.id != null && (` ${loggedInUser.firstName}`)}? Buy some damn apples!!</p>
+            <p>What are you waiting for{loggedInUser?.id != null && (` ${loggedInUser.firstName}`)}? Buy some of our delicious apples!!</p>
             <div className='hero-btns'>
                 {loggedInUser?.id == null && (
                     <Button
