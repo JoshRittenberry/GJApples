@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../stylesheets/newOrderSelections.css';
 import { NewOrderSelectionItem } from './NewOrderSelectionItem';
 
-export const NewOrderSelections = ({ apples }) => {
+export const NewOrderSelections = ({ apples, order, setOrder, handleDisplayedItemPounds, handleAddOrIncreaseItem, handleDecreaseItem, handleSubmitOrder }) => {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [index, setIndex] = useState(0)
 
@@ -26,21 +26,22 @@ export const NewOrderSelections = ({ apples }) => {
 
     const renderAppleList = () => {
         const appleGroups = [];
-        
-        if (screenWidth >= 1600)
-        {
+
+        if (screenWidth >= 1600) {
             for (let i = 0; i < apples.length; i += 4) {
                 const group = apples.slice(i, i + 4);
-    
+
                 appleGroups.push(
                     <ul className='cards__neworderselection__items' key={i}>
                         {group.map((apple, index) => (
                             <NewOrderSelectionItem
-                                key={index}
-                                src={apple.imageUrl}
-                                alt={`${apple.type} Image`}
-                                text={apple.type}
-                                label={`$${apple.costPerPound}/lb`}
+                                apple={apple}
+                                order={order}
+                                setOrder={setOrder}
+                                handleDisplayedItemPounds={handleDisplayedItemPounds}
+                                handleAddOrIncreaseItem={handleAddOrIncreaseItem}
+                                handleDecreaseItem={handleDecreaseItem}
+                                handleSubmitOrder={handleSubmitOrder}
                             />
                         ))}
                     </ul>
@@ -56,11 +57,13 @@ export const NewOrderSelections = ({ apples }) => {
                     <ul className='cards__neworderselection__items' key={i}>
                         {group.map((apple, index) => (
                             <NewOrderSelectionItem
-                                key={index}
-                                src={apple.imageUrl}
-                                alt={`${apple.type} Image`}
-                                text={apple.type}
-                                label={`$${apple.costPerPound}`}
+                                apple={apple}
+                                order={order}
+                                setOrder={setOrder}
+                                handleDisplayedItemPounds={handleDisplayedItemPounds}
+                                handleAddOrIncreaseItem={handleAddOrIncreaseItem}
+                                handleDecreaseItem={handleDecreaseItem}
+                                handleSubmitOrder={handleSubmitOrder}
                             />
                         ))}
                     </ul>

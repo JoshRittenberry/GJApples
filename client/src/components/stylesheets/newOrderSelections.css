@@ -33,7 +33,7 @@ h1 {
     margin: 0 1rem;
     border-radius: 10px;
     /* new */
-    min-width: 20em;
+    width: 22em;
 }
 
 .cards__neworderselection__item__link {
@@ -94,13 +94,45 @@ h1 {
 }
 
 .cards__neworderselection__item__info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 20px 30px 30px;
 }
 
 .cards__neworderselection__item__text {
-    color: #252e48;
+    color: black;
     font-size: 18px;
     line-height: 24px;
+    margin-bottom: 0;
+}
+
+.cards__neworderselection__item__footer {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cards__neworderselection__item__footer__subtract {
+    color: black;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.cards__neworderselection__item__footer__input {
+    width: 65%;
+    text-align: center;
+}
+
+.cards__neworderselection__item__footer__add {
+    color: black;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.cards__neworderselection__item__footer__subtract:hover,
+.cards__neworderselection__item__footer__add:hover {
+    color: #1f98f4;
 }
 
 @media only screen and (min-width: 1200px) {
