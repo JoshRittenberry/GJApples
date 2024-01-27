@@ -27,14 +27,6 @@ export const ContactUsFooter = () => {
                     </form>
                 </div>
             </section>
-            {/* <div className="footer-links">
-                <div className="footer-link-wrapper">
-                    <div className="footer-link-items">
-                        <h2 className="Connect With Us"></h2>
-                        <Link to="/contactus">Contact Us</Link>
-                    </div>
-                </div>
-            </div> */}
             <section className="social-media">
                 <div className="social-media-wrap">
                     <div className="footer-logo">
@@ -44,17 +36,17 @@ export const ContactUsFooter = () => {
                     </div>
                     <small className="website-rights">GJ's Apples © 2024</small>
                     <div className="social-icons">
-                        <Link 
+                        <Link
                             className="social-icon-link facebook"
-                            to="/"
+                            to="https://www.facebook.com/"
                             target="_blank"
                             aria-label="Facebook"
                         >
                             <i className="fab fa-facebook-f"></i>
                         </Link>
-                        <Link 
+                        <Link
                             className="social-icon-link instagram"
-                            to="/"
+                            to="https://www.instagram.com/"
                             target="_blank"
                             aria-label="Instagram"
                         >
