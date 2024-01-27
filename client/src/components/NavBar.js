@@ -1,22 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink as RRNavLink } from "react-router-dom";
-import {
-    Button,
-    Collapse,
-    Nav,
-    NavLink,
-    NavItem,
-    Navbar,
-    NavbarBrand,
-    NavbarToggler,
-    UncontrolledDropdown,
-    DropdownMenu,
-    DropdownItem,
-    DropdownToggle
-} from "reactstrap";
+import { Link } from "react-router-dom";
 import { logout } from "../managers/authManager";
 import "./stylesheets/navBar.css"
-import { NavBarButton } from "./NavBarButton";
+import { NavBarButton } from "./Button";
 
 export default function NavBar({ loggedInUser, setLoggedInUser }) {
     const [click, setClick] = useState(false)
@@ -110,7 +96,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
 
                                 {/* Logout */}
                                 <li className="nav-item">
-                                    <Link to="/login" onClick={(e) => {
+                                    <Link to="/login" className="nav-links" onClick={(e) => {
                                         e.preventDefault();
                                         // setOpen(false);
                                         logout().then(() => {
@@ -150,126 +136,9 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                             </>
                         )}
                     </ul>
-                    {button && <NavBarButton buttonStyle="btn--outline">Login</NavBarButton>}
+                    {/* {button && <Button buttonStyle="btn--outline">Login</Button>} */}
                 </div>
             </nav>
         </>
     )
 }
-
-// My Old Code:
-// 
-// const [open, setOpen] = useState(false);
-// const toggleNavbar = () => setOpen(!open);
-// 
-// return (
-//     <div>
-//         <Navbar color="light" light fixed="true" expand="lg">
-//             <NavbarBrand className="mr-auto" tag={RRNavLink} to="/">
-//                 <img src="https://i.ibb.co/9NWqd8x/Logo.png" className="nav-logo" alt="GJApples_Logo" /> Garry Jones' Apple Orchard
-//             </NavbarBrand>
-//             {loggedInUser ? (
-//                 <Nav navbar>
-//                     {
-//                         loggedInUser.roles.includes("Customer") && (
-//                             <>
-//                                 <NavItem>
-//                                     <NavLink href="/order">Order</NavLink>
-//                                 </NavItem>
-//                                 <NavItem>
-//                                     <NavLink href="/orderhistory">Order History</NavLink>
-//                                 </NavItem>
-//                             </>
-//                         )
-//                     }
-//                     {
-//                         loggedInUser.roles.includes("OrderPicker") && (
-//                             <>
-//                                 <NavItem>
-//                                     <NavLink href="/orderpicker">Employee Homepage</NavLink>
-//                                 </NavItem>
-//                             </>
-//                         )
-//                     }
-//                     {
-//                         loggedInUser.roles.includes("Harvester") && (
-//                             <>
-//                                 <NavItem>
-//                                     <NavLink href="/harvester">Employee Homepage</NavLink>
-//                                 </NavItem>
-//                             </>
-//                         )
-//                     }
-//                     <UncontrolledDropdown nav inNavbar>
-//                         <DropdownToggle nav caret>
-//                             More
-//                         </DropdownToggle>
-//                         <DropdownMenu end>
-//                             <DropdownItem>
-//                                 <NavItem>
-//                                     <NavLink tag={RRNavLink} to="/history">
-//                                         History
-//                                     </NavLink>
-//                                 </NavItem>
-//                             </DropdownItem>
-//                             <DropdownItem>
-//                                 <NavItem>
-//                                     <NavLink tag={RRNavLink} to="/contactus">
-//                                         Contact Us
-//                                     </NavLink>
-//                                 </NavItem>
-//                             </DropdownItem>
-//                             <DropdownItem divider />
-//                             <DropdownItem>
-//                                 <NavItem>
-//                                     <NavLink tag={RRNavLink} to="/login" onClick={(e) => {
-//                                         e.preventDefault();
-//                                         setOpen(false);
-//                                         logout().then(() => {
-//                                             setLoggedInUser(null);
-//                                             setOpen(false);
-//                                         });
-//                                     }}>
-//                                         Logout
-//                                     </NavLink>
-//                                 </NavItem>
-//                             </DropdownItem>
-//                         </DropdownMenu>
-//                     </UncontrolledDropdown>
-//                 </Nav>
-//             ) : (
-//                 <Nav navbar>
-//                     <UncontrolledDropdown nav inNavbar>
-//                         <DropdownToggle nav caret>
-//                             More
-//                         </DropdownToggle>
-//                         <DropdownMenu end>
-//                             <DropdownItem>
-//                                 <NavItem>
-//                                     <NavLink tag={RRNavLink} to="/history">
-//                                         History
-//                                     </NavLink>
-//                                 </NavItem>
-//                             </DropdownItem>
-//                             <DropdownItem>
-//                                 <NavItem>
-//                                     <NavLink tag={RRNavLink} to="/contactus">
-//                                         Contact Us
-//                                     </NavLink>
-//                                 </NavItem>
-//                             </DropdownItem>
-//                             <DropdownItem divider />
-//                             <DropdownItem>
-//                                 <NavItem>
-//                                     <NavLink tag={RRNavLink} to="/login">
-//                                         Login
-//                                     </NavLink>
-//                                 </NavItem>
-//                             </DropdownItem>
-//                         </DropdownMenu>
-//                     </UncontrolledDropdown>
-//                 </Nav>
-//             )}
-//         </Navbar>
-//     </div>
-// );

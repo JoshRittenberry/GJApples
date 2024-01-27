@@ -21,12 +21,13 @@
 .navbar-logo {
     color: #fff;
     justify-self: start;
-    margin-left: 20px;
+    margin-left: 10px;
     cursor: pointer;
     text-decoration: none;
     font-size: 2rem;
     display: flex;
     align-items: center;
+    margin-bottom: 16px;
 }
 
 .fa-typo3 {
@@ -35,14 +36,14 @@
 }
 
 .nav-menu {
-    display: grid;
+    display: flex;
     grid-template-columns: repeat(4, auto);
     grid-gap: 10px;
     list-style: none;
     text-align: center;
     width: 60vw;
     justify-content: end;
-    margin-right: 2rem;
+    /* margin-right: 2rem; */
 }
 
 .nav-item {
@@ -76,6 +77,9 @@
 }
 
 @media screen and (max-width: 960px) {
+    ul {
+        padding-left: 0;
+    }
     .NavbarItems {
         position: relative;
     }
@@ -117,7 +121,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        transform: translate(25%, 50%);
+        transform: translate(25%, 35%);
     }
 
     .menu-icon {
@@ -125,7 +129,7 @@
         position: absolute;
         top: 0;
         right: 0;
-        transform: translate(-100%, 60%);
+        transform: translate(-100%, 45%);
         font-size: 1.8rem;
         cursor: pointer;
     }
