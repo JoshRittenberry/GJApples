@@ -1,4 +1,5 @@
 .orderhistory_body {
-    width: 70%;
-    margin: auto;
+    max-width: 1120px;
+    width: 90%;
+    margin: 0 auto;
 }
