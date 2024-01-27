@@ -2,4 +2,6 @@
     max-width: 1120px;
     width: 90%;
     margin: 0 auto;
+    min-height: 85vh;
+    overflow: auto;
 }
