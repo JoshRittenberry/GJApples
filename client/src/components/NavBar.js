@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../managers/authManager";
 import "./stylesheets/navBar.css"
-import { NavBarButton } from "./Button";
+import { Button } from "./Button";
 
 export default function NavBar({ loggedInUser, setLoggedInUser }) {
     const [click, setClick] = useState(false)
