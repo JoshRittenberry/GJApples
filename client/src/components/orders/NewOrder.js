@@ -89,7 +89,15 @@ export const NewOrder = ({ loggedInUser }) => {
                     </Button>
                 </aside>
             </header>
-            <NewOrderSelections apples={apples} />
+            <NewOrderSelections
+                apples={apples}
+                order={order}
+                setOrder={setOrder}
+                handleDisplayedItemPounds={handleDisplayedItemPounds}
+                handleAddOrIncreaseItem={handleAddOrIncreaseItem}
+                handleDecreaseItem={handleDecreaseItem}
+                handleSubmitOrder={handleSubmitOrder}
+            />
             <ContactUsFooter />
         </>
     )

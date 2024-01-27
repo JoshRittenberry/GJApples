@@ -40,7 +40,7 @@ export const NewOrderSelections = ({ apples }) => {
                                 src={apple.imageUrl}
                                 alt={`${apple.type} Image`}
                                 text={apple.type}
-                                label={`$${apple.costPerPound}`}
+                                label={`$${apple.costPerPound}/lb`}
                             />
                         ))}
                     </ul>
