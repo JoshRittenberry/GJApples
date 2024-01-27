@@ -1,29 +1,43 @@
 import "../stylesheets/homePageWelcome.css"
 import "../../App.css"
 import { Button } from "../Button"
+import { useNavigate } from "react-router-dom"
 
-export const HomePageWelcome = () => {
+export const HomePageWelcome = ({ loggedInUser }) => {
+    const navigate = useNavigate()
+
     return (
         <div className='hero-container'>
             <video src='/videos/hp_apples_h.mp4' autoPlay loop muted />
             <h1>Garry Jones' Apples</h1>
-            <p>What are you waiting for?</p>
+            <p>What are you waiting for{loggedInUser?.id != null && (` ${loggedInUser.firstName}`)}? Buy some damn apples!!</p>
             <div className='hero-btns'>
-                <Button
-                    className='btns'
-                    buttonStyle='btn--outline'
-                    buttonSize='btn--large'
-                >
-                    GET STARTED
-                </Button>
-                <Button
-                    className='btns'
-                    buttonStyle='btn--primary'
-                    buttonSize='btn--large'
-                    onClick={console.log('hey')}
-                >
-                    WATCH TRAILER <i className='far fa-play-circle' />
-                </Button>
+                {loggedInUser?.id == null && (
+                    <Button
+                        className='btns'
+                        buttonStyle='btn--primary'
+                        buttonSize='btn--large'
+                        onClick={event => {
+                            event.preventDefault()
+                            navigate("/login")
+                        }}
+                    >
+                        Login to Purchase
+                    </Button>
+                )}
+                {loggedInUser?.id != null && (
+                    <Button
+                        className='btns'
+                        buttonStyle='btn--primary'
+                        buttonSize='btn--large'
+                        onClick={event => {
+                            event.preventDefault()
+                            navigate("/order")
+                        }}
+                    >
+                        Start an Order
+                    </Button>
+                )}
             </div>
         </div>
     )
