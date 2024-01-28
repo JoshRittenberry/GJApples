@@ -80,7 +80,7 @@ export const History = () => {
     ]
 
     let position = ""
-
+    
     return (
         <>
             <div className='history-container'>

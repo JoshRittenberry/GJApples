@@ -5,6 +5,23 @@ import { useEffect, useState } from "react"
 
 export const HarvesterAssignedTree = ({ loggedInUser, trees, setTrees, assignedTreeHarvestReport, setAssignedTreeHarvestReport }) => {
     const [thr, setTHR] = useState({})
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
+    useEffect(() => {
+        // Function to update screenWidth state when the window is resized
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+
+        // Attach the event listener for window resize
+        window.addEventListener('resize', handleResize);
+
+        // Clean up the event listener when the component unmounts
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []); // Empty dependency array means this effect runs once after initial render
+
 
     useEffect(() => {
         setTHR({
@@ -14,7 +31,7 @@ export const HarvesterAssignedTree = ({ loggedInUser, trees, setTrees, assignedT
     }, [])
 
     return (
-        <div className="harvesterhome_body_assignment">
+        <div className="harvesterhome_body_assignment" style={{ display: assignedTreeHarvestReport.id == null && screenWidth <= 1200 && 'none' }}>
             {assignedTreeHarvestReport.id > 0 && (
                 <>
                     <header className="harvesterhome_body_assignment_header">
@@ -47,7 +64,7 @@ export const HarvesterAssignedTree = ({ loggedInUser, trees, setTrees, assignedT
                                 }}
                             />
                         </div>
-                        <div className="harvesterhome_body_assignment_body_buttons">
+                        <div className="harvesterhome_body_assignment_body_button_container">
                             <Button onClick={() => {
                                 deleteTreeHarvestReport(assignedTreeHarvestReport.id).then(() => {
                                     getAllUnassignedTrees().then(setTrees)
@@ -71,9 +88,12 @@ export const HarvesterAssignedTree = ({ loggedInUser, trees, setTrees, assignedT
                 </>
             )}
             {assignedTreeHarvestReport.id == null && (
-                <>
-                    <h3>Assign a Tree to see this</h3>
-                </>
+                <div className="harvesterhome_body_assignment_empty">
+                    <div>
+                        <img src="/pictures/tree_growing.gif"></img>
+                        <h5>Assign an order to see the "Assigned Order" view</h5>
+                    </div>
+                </div>
             )}
         </div>
     )

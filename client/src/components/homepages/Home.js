@@ -7,7 +7,6 @@ import { HomePageGJGreeting } from "./HomePageGJGreeting"
 import { ContactUsFooter } from "../ContactUsFooter"
 
 export const Home = ({ loggedInUser }) => {
-    console.log(loggedInUser)
     return (
         <>
             <HomePageWelcome loggedInUser={loggedInUser} />

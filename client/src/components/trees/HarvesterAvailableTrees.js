@@ -1,7 +1,24 @@
 import { Button, Table } from "reactstrap"
 import { createNewTreeHarvestReport, getAllUnassignedTrees, getHarvesterAssignment } from "../../managers/treeManager"
+import { useEffect, useState } from "react";
 
 export const HarvesterAvailableTrees = ({ loggedInUser, trees, setTrees, assignedTreeHarvestReport, setAssignedTreeHarvestReport }) => {
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
+    useEffect(() => {
+        // Function to update screenWidth state when the window is resized
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+
+        // Attach the event listener for window resize
+        window.addEventListener('resize', handleResize);
+
+        // Clean up the event listener when the component unmounts
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []); // Empty dependency array means this effect runs once after initial render
 
     const lastHarvestDate = (treeHarvestReports) => {
         let harvest = treeHarvestReports.reduce((prev, current) => prev.id > current.id ? prev : current)
@@ -21,7 +38,7 @@ export const HarvesterAvailableTrees = ({ loggedInUser, trees, setTrees, assigne
     }
 
     return (
-        <div className="harvesterhome_body_list">
+        <div className="harvesterhome_body_list" style={{ display: assignedTreeHarvestReport.id != null && screenWidth <= 1200 && 'none' }}>
             <header className="harvesterhome_body_list_header">
                 <h3>Available Harvests</h3>
             </header>
@@ -31,8 +48,8 @@ export const HarvesterAvailableTrees = ({ loggedInUser, trees, setTrees, assigne
                         <tr>
                             <th>Tree Id</th>
                             <th>Apple Variety</th>
-                            <th>Last Harvest Date</th>
-                            <th></th>
+                            {screenWidth > 800 && <th>Last Harvest Date</th>}
+                            {assignedTreeHarvestReport.id == null && <th></th>}
                         </tr>
                     </thead>
                     <tbody>
@@ -44,16 +61,16 @@ export const HarvesterAvailableTrees = ({ loggedInUser, trees, setTrees, assigne
                                     {t.id}
                                 </th>
                                 <th>{t.appleVariety.type}</th>
-                                <th>{lastHarvestDate(t.treeHarvestReports)}</th>
-                                <th>
-                                    {assignedTreeHarvestReport?.id == null && (
+                                {screenWidth > 800 && <th>{lastHarvestDate(t.treeHarvestReports)}</th>}
+                                {assignedTreeHarvestReport?.id == null && (
+                                    <th>
                                         <Button onClick={() => {
                                             handleAssignTree(t.id)
                                         }}>
                                             Assign Me
                                         </Button>
-                                    )}
-                                </th>
+                                    </th>
+                                )}
                             </tr>
                         ))}
                     </tbody>
