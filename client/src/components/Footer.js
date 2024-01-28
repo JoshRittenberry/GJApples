@@ -6,7 +6,7 @@ export const Footer = () => {
     return (
         <div className="footer-container">
             <section className="footer-subscription">
-                <Link to="/contactus" className="social-logo">
+                <Link to="/" className="social-logo">
                     Contact Us
                 </Link>
                 <p className="footer-subscription-heading">

@@ -3,14 +3,19 @@ import { Link } from "react-router-dom";
 import { logout } from "../managers/authManager";
 import "./stylesheets/navBar.css"
 import { Button } from "./Button";
+import { getUnsubmittedOrder } from "../managers/orderManager";
 
 export default function NavBar({ loggedInUser, setLoggedInUser }) {
     const [click, setClick] = useState(false)
     const [button, setButton] = useState(true)
+    const [order, setOrder] = useState({})
 
     useEffect(() => {
         showButton()
-    }, [])
+        getUnsubmittedOrder().then(order => {
+            setOrder(order)
+        })
+    }, [order])
 
     const handleClick = () => {
         setClick(!click)
@@ -66,6 +71,11 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                                         <li className="nav-item">
                                             <Link to="/orderhistory" className="nav-links" onClick={closeMobileMenu}>
                                                 Order History
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link to="/cart" className="nav-links" onClick={closeMobileMenu}>
+                                                <i class="fa-solid fa-bag-shopping">{order.orderItems?.length > 0 && ` ${order.orderItems?.length}`}</i>
                                             </Link>
                                         </li>
                                     </>

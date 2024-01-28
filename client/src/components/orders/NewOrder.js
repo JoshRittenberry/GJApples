@@ -66,10 +66,14 @@ export const NewOrder = ({ loggedInUser }) => {
         if (order.orderItems.length < 1) {
             console.log("You can't do that")
         } else {
-            submitOrder(order.id).then(() => {
-                navigate("/orderhistory")
-            })
+            navigate("/cart")
         }
+        
+        // else {
+        //     submitOrder(order.id).then(() => {
+        //         navigate("/orderhistory")
+        //     })
+        // }
     }
 
     return (
@@ -77,15 +81,15 @@ export const NewOrder = ({ loggedInUser }) => {
             <header className="neworder_header">
                 <h1>Create New Order</h1>
                 <aside className="neworder_header_inputs">
-                    <Input
+                    {/* <Input
                         type="text"
                         readOnly
                         value={`Total: $${order?.totalCost}`}
-                    />
+                    /> */}
                     <Button onClick={() => {
                         handleSubmitOrder()
                     }}>
-                        Submit Order
+                        My Cart
                     </Button>
                 </aside>
             </header>
