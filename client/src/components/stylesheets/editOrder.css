@@ -1,8 +1,16 @@
+.editorder {
+    max-width: 1120px;
+    width: 90%;
+    margin: 0 auto;
+    height: 90vh;
+    overflow: auto;
+}
+
 .editorder_header {
     width: 70%;
     margin: auto;
     text-align: left;
-    color: white;
+    color: black;
 }
 
 .editorder_header_top {
@@ -11,10 +19,14 @@
 }
 
 .editorder_header_top_backbutton {
-    color: #FAC710;
+    color: black;
     border: none;
     background-color: rgba(0, 0, 0, 0);
     font-size: 1.5em;
+}
+
+.editorder_header_top_backbutton:hover {
+    color: #1f98f4;
 }
 
 .editorder_header_bottom {
@@ -33,7 +45,7 @@
 }
 
 .editorder_body_buttons_subtract {
-    color: #FAC710;
+    color: black;
     border: none;
     background-color: rgba(0, 0, 0, 0);
 }
@@ -41,15 +53,16 @@
 .editorder_body_buttons_input {
     width: 45%;
     text-align: center;
+    margin: 1px 10px 1px 10px;
 }
 
 .editorder_body_buttons_add {
-    color: #FAC710;
+    color: black;
     border: none;
     background-color: rgba(0, 0, 0, 0);
 }
 
 .editorder_body_buttons_subtract:hover,
 .editorder_body_buttons_add:hover {
-    color: #22577a;
+    color: #1f98f4;
 }
