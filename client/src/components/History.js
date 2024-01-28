@@ -84,7 +84,8 @@ export const History = () => {
     return (
         <>
             <div className='history-container'>
-                {screenWidth > 960 && <video className="history-container-video" src='/videos/hp_apples_v.mp4' autoPlay loop muted />}
+                <video className="history-container-video" src='/videos/hp_apples_v.mp4' playsInline autoPlay loop muted />
+                {/* {screenWidth > 960 && <video className="history-container-video" src='/videos/hp_apples_v.mp4' autoPlay loop muted />} */}
                 <div className="timeline">
                     {timelineElements.map(te => {
                         if (position == "right" || position == "") {
