@@ -7,11 +7,11 @@ export const HomePageWelcome = ({ loggedInUser }) => {
     const navigate = useNavigate()
 
     return (
-        <div className='hero-container'>
-            <video src='/videos/hp_apples_h.mp4' autoPlay loop muted />
+        <div className='homepagewelcome-container'>
+            <video className='homepagewelcome-container-video' src='/videos/hp_apples_h.mp4' autoPlay loop muted />
             <h1>Garry Jones' Apples</h1>
             <p>What are you waiting for{loggedInUser?.id != null && (` ${loggedInUser.firstName}`)}? Buy some of our delicious apples!!</p>
-            <div className='hero-btns'>
+            <div className='homepagewelcome-btns'>
                 {loggedInUser?.id == null && (
                     <Button
                         className='btns'
