@@ -9,7 +9,7 @@ import { NewOrder } from "./orders/NewOrder"
 import { OrderHistory } from "./orders/OrderHistory"
 import { ViewOrder } from "./orders/ViewOrder"
 import { EditOrder } from "./orders/EditOrder"
-import { OrderPickerHome } from "./homepages/OrderPickerHome"
+import { OrderPickerHomePage } from "./homepages/OrderPickerHomePage"
 import { HarvesterHome } from "./homepages/HarvesterHome"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
@@ -29,7 +29,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           path="orderpicker"
           element={
             <AuthorizedRoute roles={["OrderPicker"]} loggedInUser={loggedInUser}>
-              <OrderPickerHome loggedInUser={loggedInUser} />
+              <OrderPickerHomePage loggedInUser={loggedInUser} />
             </AuthorizedRoute>
           }
         />

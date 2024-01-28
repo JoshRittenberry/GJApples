@@ -1,4 +1,15 @@
 .orderhistory_body {
-    width: 70%;
-    margin: auto;
+    max-width: 1120px;
+    width: 90%;
+    margin: 0 auto;
+    min-height: 85vh;
+    overflow: auto;
+}
+
+.orderhistory_body Button {
+    background-color: black;
+}
+
+.orderhistory_body Button:hover {
+    background-color: #1f98f4;
 }

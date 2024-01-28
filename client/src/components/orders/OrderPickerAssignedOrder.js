@@ -1,9 +1,27 @@
 import { Button, Input, Table } from "reactstrap"
 import { completeOrder, getAllUnassignedOrders, unassignOrderPicker, getOrderPickerAssignment } from "../../managers/orderManager"
+import { useEffect, useState } from "react";
 
 export const OrderPickerAssignedOrder = ({ loggedInUser, assignedOrder, setOrders, setAssignedOrder }) => {
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
+    useEffect(() => {
+        // Function to update screenWidth state when the window is resized
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+
+        // Attach the event listener for window resize
+        window.addEventListener('resize', handleResize);
+
+        // Clean up the event listener when the component unmounts
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []); // Empty dependency array means this effect runs once after initial render
+
     return (
-        <div className="orderpickerhome_body_assignment">
+        <div className="orderpickerhome_body_assignment" style={{ display: assignedOrder.id == null && screenWidth <= 1200 && 'none' }}>
             {assignedOrder.id > 0 && (
                 <>
                     <header className="orderpickerhome_body_assignment_header">
@@ -20,9 +38,9 @@ export const OrderPickerAssignedOrder = ({ loggedInUser, assignedOrder, setOrder
                         <Table>
                             <thead>
                                 <tr>
-                                    <th>Apple Variety</th>
-                                    <th>Pounds</th>
-                                    <th>Filled</th>
+                                    <th style={{ textAlign: `left` }}>Apple Variety</th>
+                                    <th style={{ textAlign: `center` }}>Pounds</th>
+                                    <th style={{ textAlign: `right` }}>Filled</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -30,49 +48,46 @@ export const OrderPickerAssignedOrder = ({ loggedInUser, assignedOrder, setOrder
                                     <tr key={`orderitem-${oi.id}`}>
                                         <th
                                             scope="row"
+                                            style={{ textAlign: `left` }}
                                         >
                                             {oi.appleVariety?.type}
                                         </th>
-                                        <th>{oi.pounds} lbs</th>
-                                        <th>
+                                        <th style={{ textAlign: `center` }}>{oi.pounds} lbs</th>
+                                        <th style={{textAlign: `right`}}>
                                             <Input type="checkbox" />
                                         </th>
                                     </tr>
                                 ))}
                             </tbody>
-                            <tbody>
-                                <tr>
-                                    <th>
-                                        <Button onClick={() => {
-                                            unassignOrderPicker(assignedOrder.id, loggedInUser.id).then(() => {
-                                                getAllUnassignedOrders().then(setOrders)
-                                                getOrderPickerAssignment().then(setAssignedOrder)
-                                            })
-                                        }}>
-                                            Unassign Me
-                                        </Button>
-                                    </th>
-                                    <th></th>
-                                    <th>
-                                        <Button onClick={() => {
-                                            completeOrder(assignedOrder.id).then(() => {
-                                                getAllUnassignedOrders().then(setOrders)
-                                                getOrderPickerAssignment().then(setAssignedOrder)
-                                            })
-                                        }}>
-                                            Complete Order
-                                        </Button>
-                                    </th>
-                                </tr>
-                            </tbody>
                         </Table>
+                        <div className="orderpickerhome_body_assignment_body_button_container">
+                            <Button onClick={() => {
+                                unassignOrderPicker(assignedOrder.id, loggedInUser.id).then(() => {
+                                    getAllUnassignedOrders().then(setOrders)
+                                    getOrderPickerAssignment().then(setAssignedOrder)
+                                })
+                            }}>
+                                Unassign Me
+                            </Button>
+                            <Button onClick={() => {
+                                completeOrder(assignedOrder.id).then(() => {
+                                    getAllUnassignedOrders().then(setOrders)
+                                    getOrderPickerAssignment().then(setAssignedOrder)
+                                })
+                            }}>
+                                Complete Order
+                            </Button>
+                        </div>
                     </section>
                 </>
             )}
             {assignedOrder.id == null && (
-                <>
-                    <h3>Assign an order to see this</h3>
-                </>
+                <div className="orderpickerhome_body_assignment_empty">
+                    <div>
+                        <img src="/pictures/tree_growing.gif"></img>
+                        <h5>Assign an order to see the "Assigned Order" view</h5>
+                    </div>
+                </div>
             )}
         </div>
     )
