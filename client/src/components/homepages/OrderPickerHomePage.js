@@ -5,7 +5,7 @@ import { OrderPickerAvailableOrders } from "../orders/OrderPickerAvailableOrders
 import { OrderPickerAssignedOrder } from "../orders/OrderPickerAssignedOrder"
 import { ContactUsFooter } from "../ContactUsFooter"
 
-export const OrderPickerHome = ({ loggedInUser }) => {
+export const OrderPickerHomePage = ({ loggedInUser }) => {
     const [orders, setOrders] = useState([])
     const [assignedOrder, setAssignedOrder] = useState({})
 
