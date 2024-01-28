@@ -27,9 +27,8 @@ export const HomePageWelcome = ({ loggedInUser }) => {
     return (
         <div className='homepagewelcome-container'>
             <video className='homepagewelcome-container-video' src='/videos/hp_apples_h.mp4' playsInline autoPlay loop muted />
-            {/* {screenWidth > 960 && <video className='homepagewelcome-container-video' src='/videos/hp_apples_h.mp4' autoPlay loop muted />} */}
             <h1>Garry Jones' Apples</h1>
-            <p>What are you waiting for{loggedInUser?.id != null && (` ${loggedInUser.firstName}`)}? Buy some of our delicious apples!!</p>
+            <p>What are you waiting for{loggedInUser?.id != null && loggedInUser.roles.includes("Customer") && (` ${loggedInUser.firstName}`)}? Buy some of our delicious apples!!</p>
             <div className='homepagewelcome-btns'>
                 {loggedInUser?.id == null && (
                     <Button
