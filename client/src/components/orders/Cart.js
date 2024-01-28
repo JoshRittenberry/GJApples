@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 
 export const Cart = ({ loggedInUser }) => {
     const [order, setOrder] = useState({})
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
     const navigate = useNavigate()
 
@@ -14,6 +15,18 @@ export const Cart = ({ loggedInUser }) => {
         getUnsubmittedOrder().then(order => {
             setOrder(order)
         })
+        // Function to update screenWidth state when the window is resized
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth)
+        }
+
+        // Attach the event listener for window resize
+        window.addEventListener('resize', handleResize)
+
+        // Clean up the event listener when the component unmounts
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
     })
 
     const handleDisplayedItemPounds = (orderItemId) => {
@@ -71,17 +84,18 @@ export const Cart = ({ loggedInUser }) => {
                     <Table>
                         <thead>
                             <tr>
-                                <th>Apple Variety</th>
+                                <th className="cart_body_table_applevariety">Apple Variety</th>
                                 <th>Pounds</th>
-                                <th>Item Cost (Per Pound)</th>
-                                <th>Item Cost (Total)</th>
-                                <th></th>
+                                {screenWidth > 1100 && <th>Item Cost (Per Pound)</th>}
+                                {screenWidth > 780 && <th>Item Cost (Total)</th>}
+                                <th className="cart_body_table_options"></th>
                             </tr>
                         </thead>
                         <tbody>
                             {order.orderItems?.map((oi) => (
                                 <tr key={`orderitem-${oi.id}`}>
                                     <th
+                                        className="cart_body_table_applevariety"
                                         scope="row"
                                     >
                                         {oi.appleVariety?.type}
@@ -107,34 +121,27 @@ export const Cart = ({ loggedInUser }) => {
                                             <i className="fa-solid fa-circle-plus"></i>
                                         </button>
                                     </th>
-                                    <th>${oi.appleVariety.costPerPound}</th>
-                                    <th>${oi.totalItemCost}</th>
-                                    <th className="cart_body_options">
-                                        <Button onClick={() => {
+                                    {screenWidth > 1100 && <th>${oi.appleVariety.costPerPound}</th>}
+                                    {screenWidth > 780 && <th>${oi.totalItemCost}</th>}
+                                    <th className="cart_body_table_options">
+                                        <button onClick={() => {
                                             handleDeleteItem(oi.id)
                                         }}>
-                                            Delete Item
-                                        </Button>
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
                                     </th>
                                 </tr>
                             ))}
                         </tbody>
-                        <tbody>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th>Total: ${order.totalCost}</th>
-                                <th className="cart_footer_options">
-                                    <Button onClick={() => {
-                                        handleSubmitOrder()
-                                    }}>
-                                        Submit
-                                    </Button>
-                                </th>
-                            </tr>
-                        </tbody>
                     </Table>
+                    <div className="cart_footer">
+                        <div>Total: ${order.totalCost}</div>
+                        <Button onClick={() => {
+                            handleSubmitOrder()
+                        }}>
+                            Submit
+                        </Button>
+                    </div>
                 </section>
             </div>
             <Footer />

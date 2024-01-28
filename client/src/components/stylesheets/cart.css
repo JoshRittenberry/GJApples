@@ -19,12 +19,22 @@
     margin: auto;
 }
 
+.cart_body_table_applevariety {
+    width: 150px;
+}
+
+.cart_body_table_options {
+    width: 20px
+}
+
 .cart_body_buttons {
     display: flex;
     justify-content: center;
 }
 
-.cart_body_buttons_subtract {
+.cart_body_buttons_subtract,
+.cart_body_buttons_add,
+.cart_body_table_options button {
     color: black;
     border: none;
     background-color: rgba(0, 0, 0, 0);
@@ -36,24 +46,29 @@
     margin: 1px 10px 1px 10px;
 }
 
-.cart_body_buttons_add {
-    color: black;
-    border: none;
-    background-color: rgba(0, 0, 0, 0);
-}
-
 .cart_body_buttons_subtract:hover,
-.cart_body_buttons_add:hover {
+.cart_body_buttons_add:hover,
+.cart_body_table_options button:hover {
     color: #1f98f4;
 }
 
-.cart_body_options Button,
-.cart_footer_options Button {
+.cart_footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.cart_footer div,
+.cart_footer Button {
+    margin: 5px;
+}
+
+.cart_footer Button {
     background-color: black;
     width: 150px;
 }
 
-.cart_body_options Button:hover,
-.cart_footer_options Button:hover {
+.cart_footer Button:hover {
     background-color: #1f98f4;
 }
