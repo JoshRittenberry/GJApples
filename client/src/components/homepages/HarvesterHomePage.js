@@ -3,6 +3,7 @@ import { ContactUsFooter } from "../ContactUsFooter"
 import { HarvesterAvailableTrees } from "../trees/HarvesterAvailableTrees"
 import { getAllUnassignedTrees, getHarvesterAssignment } from "../../managers/treeManager"
 import { HarvesterAssignedTree } from "../trees/HarvesterAssignedTree"
+import "../stylesheets/harvesterHomePage.css"
 
 export const HarvesterHomePage = ({ loggedInUser }) => {
     const [trees, setTrees] = useState([])

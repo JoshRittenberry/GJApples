@@ -1,5 +1,4 @@
 import { Button, Input, Label, Table } from "reactstrap"
-import "../stylesheets/harvesterHomePage.css"
 import { completeHarvesterAssignment, deleteTreeHarvestReport, getAllUnassignedTrees, getHarvesterAssignment } from "../../managers/treeManager"
 import { useEffect, useState } from "react"
 
