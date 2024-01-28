@@ -74,6 +74,7 @@
     width: 150px;
 }
 
-.editorder_body_options Button:hover {
+.editorder_body_options Button:hover,
+.editorder_body_dropdown:hover {
     background-color: #1f98f4;
 }
