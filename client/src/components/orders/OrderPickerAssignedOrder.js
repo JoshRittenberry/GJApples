@@ -82,9 +82,12 @@ export const OrderPickerAssignedOrder = ({ loggedInUser, assignedOrder, setOrder
                 </>
             )}
             {assignedOrder.id == null && (
-                <>
-                    <h3>Assign an order to see the complete order view</h3>
-                </>
+                <div className="orderpickerhome_body_assignment_empty">
+                    <div>
+                        <img src="/pictures/tree_growing.gif"></img>
+                        <h5>Assign an order to see the "Assigned Order" view</h5>
+                    </div>
+                </div>
             )}
         </div>
     )

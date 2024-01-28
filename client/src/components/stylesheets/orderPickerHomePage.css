@@ -21,6 +21,12 @@
     text-align: center;
 }
 
+.orderpickerhome_body_assignment_empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .orderpickerhome_body_assignment_header {
     margin: auto;
     text-align: left;
