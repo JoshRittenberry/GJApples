@@ -12,19 +12,19 @@ export const CartSelectionItem = ({ apple, order, setOrder, handleDisplayedItemP
     
     return (
         <>
-            <li className='cards__neworderselection__item'>
-                <Link className='cards__neworderselection__item__link'>
-                    <figure className='cards__neworderselection__item__pic-wrap' data-category={`$${apple?.costPerPound}/lb`}>
+            <li className='cards__cartSelection__item'>
+                <Link className='cards__cartSelection__item__link'>
+                    <figure className='cards__cartSelection__item__pic-wrap' data-category={`$${apple?.costPerPound}/lb`}>
                         <img
-                            className='cards__neworderselection__item__img'
+                            className='cards__cartSelection__item__img'
                             alt={`${apple?.type} Image`}
                             src={apple?.imageUrl}
                         />
                     </figure>
-                    <div className='cards__neworderselection__item__info'>
-                        <h5 className='cards__neworderselection__item__text'>{apple?.type}</h5>
-                        <div className="cards__neworderselection__item__footer">
-                            <button className="cards__neworderselection__item__footer__subtract" onClick={() => {
+                    <div className='cards__cartSelection__item__info'>
+                        <h5 className='cards__cartSelection__item__text'>{apple?.type}</h5>
+                        <div className="cards__cartSelection__item__footer">
+                            <button className="cards__cartSelection__item__footer__subtract" onClick={() => {
                                 // remove 0.5 pounds of apples
                                 handleDecreaseItem(orderItem.id)
                             }}>
@@ -35,9 +35,9 @@ export const CartSelectionItem = ({ apple, order, setOrder, handleDisplayedItemP
                                 type="text"
                                 readOnly
                                 value={handleDisplayedItemPounds(apple?.id)}
-                                className="cards__neworderselection__item__footer__input"
+                                className="cards__cartSelection__item__footer__input"
                             />
-                            <button className="cards__neworderselection__item__footer__add" onClick={() => {
+                            <button className="cards__cartSelection__item__footer__add" onClick={() => {
                                 // add the item or increase the item by 0.5 if it already exists
                                 handleIncreaseItem(orderItem.id)
                             }}>

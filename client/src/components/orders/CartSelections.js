@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../stylesheets/newOrderSelections.css';
+import '../stylesheets/cartSelections.css';
 import { CartSelectionItem } from './CartSelectionItem';
 
 export const CartSelections = ({ apples, order, setOrder, handleDisplayedItemPounds, handleIncreaseItem, handleDecreaseItem, handleSubmitOrder }) => {
@@ -28,7 +28,7 @@ export const CartSelections = ({ apples, order, setOrder, handleDisplayedItemPou
                 const group = apples.slice(i, i + 4)
 
                 appleGroups.push(
-                    <ul className='cards__neworderselection__items' key={i}>
+                    <ul className='cards__cartSelection__items' key={i}>
                         {group.map((apple, index) => (
                             <CartSelectionItem
                                 apple={apple}
@@ -50,7 +50,7 @@ export const CartSelections = ({ apples, order, setOrder, handleDisplayedItemPou
                 const group = apples.slice(i, i + 2);
 
                 appleGroups.push(
-                    <ul className='cards__neworderselection__items' key={i}>
+                    <ul className='cards__cartSelection__items' key={i}>
                         {group.map((apple, index) => (
                             <CartSelectionItem
                                 apple={apple}
@@ -71,9 +71,9 @@ export const CartSelections = ({ apples, order, setOrder, handleDisplayedItemPou
     };
 
     return (
-        <div className='cards__neworderselection'>
-            <div className='cards__neworderselection__container'>
-                <div className='cards__neworderselection__wrapper'>
+        <div className='cards__cartSelection'>
+            <div className='cards__cartSelection__container'>
+                <div className='cards__cartSelection__wrapper'>
                     {renderAppleList()}
                 </div>
             </div>
