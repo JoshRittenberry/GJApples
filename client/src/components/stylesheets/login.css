@@ -1,3 +1,9 @@
+.login-container {
+    min-height: 90vh;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .login-container > h3{
     text-align: center;
 }
@@ -14,4 +20,20 @@
 
 .login-container-options > p {
     margin: 0px;
+}
+
+.login-container-options > Button {
+    background-color: black;
+}
+
+.login-container-options > Button:hover {
+    background-color: #1f98f4;
+}
+
+@media screen and (max-width: 820px) {
+
+    .login-container-options {
+        display: block;
+        text-align: center;
+    }
 }
