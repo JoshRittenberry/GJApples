@@ -2,7 +2,7 @@
     max-width: 1120px;
     width: 90%;
     margin: 0 auto;
-    height: 90vh;
+    min-height: 90vh;
     overflow: auto;
     text-align: center;
 }
