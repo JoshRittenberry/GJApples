@@ -18,13 +18,15 @@ export const OrderPickerHomePage = ({ loggedInUser }) => {
 
     return (
         <>
-            <header className="orderpickerhome_header">
-                <h1>Order Picker Home Page</h1>
-            </header>
-            <section className="orderpickerhome_body">
-                <OrderPickerAvailableOrders loggedInUser={loggedInUser} orders={orders} assignedOrder={assignedOrder} setAssignedOrder={setAssignedOrder} />
-                <OrderPickerAssignedOrder loggedInUser={loggedInUser} assignedOrder={assignedOrder} setOrders={setOrders} setAssignedOrder={setAssignedOrder} />
-            </section>
+            <div className="orderpickerhome">
+                <header className="orderpickerhome_header">
+                    <h1>Order Picker Home Page</h1>
+                </header>
+                <section className="orderpickerhome_body">
+                    <OrderPickerAvailableOrders loggedInUser={loggedInUser} orders={orders} assignedOrder={assignedOrder} setAssignedOrder={setAssignedOrder} />
+                    <OrderPickerAssignedOrder loggedInUser={loggedInUser} assignedOrder={assignedOrder} setOrders={setOrders} setAssignedOrder={setAssignedOrder} />
+                </section>
+            </div>
             <ContactUsFooter />
         </>
     )

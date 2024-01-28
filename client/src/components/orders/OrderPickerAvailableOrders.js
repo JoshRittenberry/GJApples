@@ -12,7 +12,7 @@ export const OrderPickerAvailableOrders = ({ loggedInUser, orders, assignedOrder
                     <tr>
                         <th>Order ID</th>
                         <th>Order Date</th>
-                        <th></th>
+                        {assignedOrder.id == null && <th></th>}
                     </tr>
                 </thead>
                 <tbody>
@@ -24,8 +24,8 @@ export const OrderPickerAvailableOrders = ({ loggedInUser, orders, assignedOrder
                                 {o.id}
                             </th>
                             <th>{new Date(o.dateOrdered).toISOString().split('T')[0]}</th>
-                            <th>
-                                {assignedOrder?.id == null && (
+                            {assignedOrder?.id == null && (
+                                <th>
                                     <Button onClick={() => {
                                         assignOrderPicker(o.id, loggedInUser.id).then(() => {
                                             // Running the code below causes errors... I put a band-aid on it with the reload page
@@ -35,8 +35,8 @@ export const OrderPickerAvailableOrders = ({ loggedInUser, orders, assignedOrder
                                     }}>
                                         Assign Me
                                     </Button>
-                                )}
-                            </th>
+                                </th>
+                            )}
                         </tr>
                     ))}
                 </tbody>

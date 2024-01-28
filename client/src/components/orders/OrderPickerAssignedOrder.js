@@ -20,9 +20,9 @@ export const OrderPickerAssignedOrder = ({ loggedInUser, assignedOrder, setOrder
                         <Table>
                             <thead>
                                 <tr>
-                                    <th>Apple Variety</th>
-                                    <th>Pounds</th>
-                                    <th>Filled</th>
+                                    <th style={{ textAlign: `left` }}>Apple Variety</th>
+                                    <th style={{ textAlign: `center` }}>Pounds</th>
+                                    <th style={{ textAlign: `right` }}>Filled</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -30,42 +30,36 @@ export const OrderPickerAssignedOrder = ({ loggedInUser, assignedOrder, setOrder
                                     <tr key={`orderitem-${oi.id}`}>
                                         <th
                                             scope="row"
+                                            style={{ textAlign: `left` }}
                                         >
                                             {oi.appleVariety?.type}
                                         </th>
-                                        <th>{oi.pounds} lbs</th>
-                                        <th>
+                                        <th style={{ textAlign: `center` }}>{oi.pounds} lbs</th>
+                                        <th style={{textAlign: `right`}}>
                                             <Input type="checkbox" />
                                         </th>
                                     </tr>
                                 ))}
                             </tbody>
-                            <tbody>
-                                <tr>
-                                    <th>
-                                        <Button onClick={() => {
-                                            unassignOrderPicker(assignedOrder.id, loggedInUser.id).then(() => {
-                                                getAllUnassignedOrders().then(setOrders)
-                                                getOrderPickerAssignment().then(setAssignedOrder)
-                                            })
-                                        }}>
-                                            Unassign Me
-                                        </Button>
-                                    </th>
-                                    <th></th>
-                                    <th>
-                                        <Button onClick={() => {
-                                            completeOrder(assignedOrder.id).then(() => {
-                                                getAllUnassignedOrders().then(setOrders)
-                                                getOrderPickerAssignment().then(setAssignedOrder)
-                                            })
-                                        }}>
-                                            Complete Order
-                                        </Button>
-                                    </th>
-                                </tr>
-                            </tbody>
                         </Table>
+                        <div className="orderpickerhome_body_assignment_body_button_container">
+                            <Button onClick={() => {
+                                unassignOrderPicker(assignedOrder.id, loggedInUser.id).then(() => {
+                                    getAllUnassignedOrders().then(setOrders)
+                                    getOrderPickerAssignment().then(setAssignedOrder)
+                                })
+                            }}>
+                                Unassign Me
+                            </Button>
+                            <Button onClick={() => {
+                                completeOrder(assignedOrder.id).then(() => {
+                                    getAllUnassignedOrders().then(setOrders)
+                                    getOrderPickerAssignment().then(setAssignedOrder)
+                                })
+                            }}>
+                                Complete Order
+                            </Button>
+                        </div>
                     </section>
                 </>
             )}

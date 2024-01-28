@@ -1,4 +1,13 @@
 /* Main Page */
+.orderpickerhome {
+    min-height: 90vh;
+    margin-bottom: 20px;
+}
+
+.orderpickerhome_header {
+    margin: 20px;
+}
+
 .orderpickerhome_body {
     display: flex;
     justify-content: space-between;
@@ -8,13 +17,14 @@
 
 /* Assignment Section */
 .orderpickerhome_body_assignment {
-    width: 50%;
+    width: 55%;
+    text-align: center;
 }
 
 .orderpickerhome_body_assignment_header {
     margin: auto;
     text-align: left;
-    color: white;
+    color: black;
 }
 
 .orderpickerhome_body_assignment_header_top {
@@ -27,7 +37,22 @@
     justify-content: space-between;
 }
 
+.orderpickerhome_body_assignment_body_button_container {
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+}
+
+.orderpickerhome_body_assignment_body_button_container Button {
+    background-color: black;
+}
+
+.orderpickerhome_body_assignment_body_button_container Button:hover {
+    background-color: #1f98f4;
+}
+
 /* Open Orders Section */
 .orderpickerhome_body_list {
-    width: 45%;
+    width: 40%;
+    text-align: center;
 }
