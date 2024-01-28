@@ -44,7 +44,7 @@ export default function Register({ setLoggedInUser }) {
   };
 
   return (
-    <div className="container" style={{ maxWidth: "500px" }}>
+    <div className="container register-container" style={{ maxWidth: "500px" }}>
       <h3>Sign Up</h3>
       <FormGroup>
         <Label>First Name</Label>
@@ -124,16 +124,18 @@ export default function Register({ setLoggedInUser }) {
       <p style={{ color: "red" }} hidden={!registrationFailure}>
         Registration Failure
       </p>
-      <Button
-        color="primary"
-        onClick={handleSubmit}
-        disabled={passwordMismatch}
-      >
-        Register
-      </Button>
-      <p>
-        Already signed up? Log in <Link to="/login">here</Link>
-      </p>
+      <div className="register-container-options">
+        <Button
+          color="primary"
+          onClick={handleSubmit}
+          disabled={passwordMismatch}
+        >
+          Register
+        </Button>
+        <p>
+          Already signed up? Log in <Link to="/login">here</Link>
+        </p>
+      </div>
     </div>
   );
 }

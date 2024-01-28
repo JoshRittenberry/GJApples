@@ -1,0 +1,17 @@
+.register-container>h3 {
+    text-align: center;
+}
+
+.register-container>Label {
+    color: black;
+}
+
+.register-container-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.register-container-options>p {
+    margin: 0px;
+}

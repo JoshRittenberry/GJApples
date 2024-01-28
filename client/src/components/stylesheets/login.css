@@ -1,3 +1,17 @@
-Label {
-    color: white;
+.login-container > h3{
+    text-align: center;
+}
+
+.login-container > Label {
+    color: black;
+}
+
+.login-container-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.login-container-options > p {
+    margin: 0px;
 }

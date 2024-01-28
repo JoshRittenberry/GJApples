@@ -23,7 +23,7 @@ export default function Login({ setLoggedInUser }) {
   };
 
   return (
-    <div className="container" style={{ maxWidth: "500px" }}>
+    <div className="container login-container" style={{ maxWidth: "500px" }}>
       <h3>Login</h3>
       <FormGroup>
         <Label>Email</Label>
@@ -50,13 +50,14 @@ export default function Login({ setLoggedInUser }) {
         />
         <FormFeedback>Login failed.</FormFeedback>
       </FormGroup>
-
-      <Button color="primary" onClick={handleSubmit}>
-        Login
-      </Button>
-      <p>
-        Not signed up? Register <Link to="/register">here</Link>
-      </p>
+      <div className="login-container-options">
+        <Button color="primary" onClick={handleSubmit}>
+          Login
+        </Button>
+        <p>
+          Not signed up? Register <Link to="/register">here</Link>
+        </p>
+      </div>
     </div>
   );
 }
