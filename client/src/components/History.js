@@ -61,8 +61,6 @@ export const History = () => {
         <>
             <div className='history-container'>
                 <video src='/videos/hp_apples_v.mp4' autoPlay loop muted />
-                <h1>Hear From Garry Jones Himself</h1>
-                <p>Learn about the humble beginnings of Garry's Orchard and what helped make it one of Tennessee's top orchards.</p>
                 <div className="timeline">
                     {timelineElements.map(te => {
                         if (position == "right" || position == "") {
@@ -72,6 +70,7 @@ export const History = () => {
                         }
                         return (
                             <div className={`timeline-container ${position}-container`} key={te.id}>
+                                <img src="/pictures/blank.png"></img>
                                 <div className="timeline-container-textbox">
                                     <h2>{te.title}</h2>
                                     <small>{te.date}</small>
