@@ -3,7 +3,7 @@ import "../stylesheets/orderHistory.css"
 import { getAllOrders } from "../../managers/orderManager"
 import { Button, Table } from "reactstrap"
 import { useNavigate } from "react-router-dom"
-import { ContactUsFooter } from "../ContactUsFooter"
+import { Footer } from "../Footer"
 
 export const OrderHistory = ({ loggedInUser }) => {
     const [submittedOrders, setSubmittedOrders] = useState([])
@@ -22,10 +22,10 @@ export const OrderHistory = ({ loggedInUser }) => {
         const handleResize = () => {
             setScreenWidth(window.innerWidth)
         }
-    
+
         // Attach the event listener for window resize
         window.addEventListener('resize', handleResize)
-    
+
         // Clean up the event listener when the component unmounts
         return () => {
             window.removeEventListener('resize', handleResize)
@@ -43,7 +43,7 @@ export const OrderHistory = ({ loggedInUser }) => {
                         <tr>
                             <th>Order ID</th>
                             {screenWidth >= 425 && <th>Order Date</th>}
-                            {screenWidth >= 620 &&<th>Date Completed</th>}
+                            {screenWidth >= 620 && <th>Date Completed</th>}
                             {screenWidth >= 1260 && <th>Order Picker</th>}
                             <th>Cost</th>
                             {screenWidth >= 1260 && <th>Pounds of Apples</th>}
@@ -100,7 +100,7 @@ export const OrderHistory = ({ loggedInUser }) => {
                     </tbody>
                 </Table>
             </section>
-            <ContactUsFooter />
+            <Footer />
         </>
     )
 }

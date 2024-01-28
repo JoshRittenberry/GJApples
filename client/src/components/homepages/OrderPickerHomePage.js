@@ -3,7 +3,7 @@ import "../stylesheets/orderPickerHomePage.css"
 import { getAllUnassignedOrders, getOrderPickerAssignment } from "../../managers/orderManager"
 import { OrderPickerAvailableOrders } from "../orders/OrderPickerAvailableOrders"
 import { OrderPickerAssignedOrder } from "../orders/OrderPickerAssignedOrder"
-import { ContactUsFooter } from "../ContactUsFooter"
+import { Footer } from "../Footer"
 
 export const OrderPickerHomePage = ({ loggedInUser }) => {
     const [orders, setOrders] = useState([])
@@ -27,7 +27,7 @@ export const OrderPickerHomePage = ({ loggedInUser }) => {
                     <OrderPickerAssignedOrder loggedInUser={loggedInUser} assignedOrder={assignedOrder} setOrders={setOrders} setAssignedOrder={setAssignedOrder} />
                 </section>
             </div>
-            <ContactUsFooter />
+            <Footer />
         </>
     )
 }

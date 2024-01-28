@@ -54,11 +54,6 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                                         History
                                     </Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link to="/contactus" className="nav-links" onClick={closeMobileMenu}>
-                                        Contact Us
-                                    </Link>
-                                </li>
 
                                 {/* Customer Links */}
                                 {loggedInUser.roles.includes("Customer") && (
@@ -119,11 +114,6 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                                 <li className="nav-item">
                                     <Link to="/history" className="nav-links" onClick={closeMobileMenu}>
                                         History
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="/contactus" className="nav-links" onClick={closeMobileMenu}>
-                                        Contact Us
                                     </Link>
                                 </li>
 

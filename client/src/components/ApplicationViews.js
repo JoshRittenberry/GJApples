@@ -4,7 +4,6 @@ import Login from "./auth/Login"
 import Register from "./auth/Register"
 import { Home } from "./homepages/Home"
 import { History } from "./History"
-import { ContactUs } from "./ContactUs"
 import { NewOrder } from "./orders/NewOrder"
 import { OrderHistory } from "./orders/OrderHistory"
 import { ViewOrder } from "./orders/ViewOrder"
@@ -49,14 +48,6 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           path="history"
           element={
             <History />
-          }
-        />
-
-        {/* Contact Us Page */}
-        <Route
-          path="contactus"
-          element={
-            <ContactUs />
           }
         />
 

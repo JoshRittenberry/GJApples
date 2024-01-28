@@ -4,7 +4,7 @@ import { getAllApples } from "../../managers/appleManager"
 import { Button, Input } from "reactstrap"
 import { createOrderItem, decreaseOrderItem, getUnsubmittedOrder, increaseOrderItem, submitOrder } from "../../managers/orderManager"
 import { useNavigate } from "react-router-dom"
-import { ContactUsFooter } from "../ContactUsFooter"
+import { Footer } from "../Footer"
 import { NewOrderSelections } from "./NewOrderSelections"
 
 export const NewOrder = ({ loggedInUser }) => {
@@ -98,7 +98,7 @@ export const NewOrder = ({ loggedInUser }) => {
                 handleDecreaseItem={handleDecreaseItem}
                 handleSubmitOrder={handleSubmitOrder}
             />
-            <ContactUsFooter />
+            <Footer />
         </>
     )
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { ContactUsFooter } from "./ContactUsFooter"
+import { Footer } from "./Footer"
 import "./stylesheets/history.css"
 
 export const History = () => {
@@ -80,7 +80,7 @@ export const History = () => {
     ]
 
     let position = ""
-    
+
     return (
         <>
             <div className='history-container'>
@@ -110,7 +110,7 @@ export const History = () => {
                     })}
                 </div>
             </div>
-            <ContactUsFooter />
+            <Footer />
         </>
     )
 }
