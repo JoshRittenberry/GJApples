@@ -4,6 +4,7 @@
     margin: 0 auto;
     height: 90vh;
     overflow: auto;
+    text-align: center;
 }
 
 .editorder_header {
@@ -65,4 +66,14 @@
 .editorder_body_buttons_subtract:hover,
 .editorder_body_buttons_add:hover {
     color: #1f98f4;
+}
+
+.editorder_body_options Button,
+.editorder_body_dropdown {
+    background-color: black;
+    width: 150px;
+}
+
+.editorder_body_options Button:hover {
+    background-color: #1f98f4;
 }

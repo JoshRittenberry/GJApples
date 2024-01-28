@@ -159,7 +159,7 @@ export const EditOrder = ({ loggedInUser }) => {
                                     </th>
                                     <th>${oi.appleVariety.costPerPound}</th>
                                     <th>${oi.totalItemCost}</th>
-                                    <th>
+                                    <th className="editorder_body_options">
                                         <Button className="editorder__button" onClick={() => {
                                             handleDeleteItem(oi.id)
                                         }}>
@@ -171,7 +171,7 @@ export const EditOrder = ({ loggedInUser }) => {
                             <tr>
                                 <th>
                                     <Dropdown isOpen={isOpen} toggle={toggleDropdown}>
-                                        <DropdownToggle caret>
+                                        <DropdownToggle className="editorder_body_dropdown" caret>
                                             {newOrderItem.appleVarietyId == null ? "Select an Apple" : apples.find(apple => apple.id === newOrderItem.appleVarietyId).type}
                                         </DropdownToggle>
                                         <DropdownMenu>
@@ -205,7 +205,7 @@ export const EditOrder = ({ loggedInUser }) => {
                                         apples.find(apple => apple.id === newOrderItem.appleVarietyId).costPerPound
                                     )}
                                 </th>
-                                <th>
+                                <th className="editorder_body_options">
                                     <Button className="test" onClick={() => {
                                         handleAddNewItem()
                                     }}>

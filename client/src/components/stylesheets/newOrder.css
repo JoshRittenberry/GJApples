@@ -25,3 +25,11 @@
     width: 45%;
     text-align: center;
 }
+
+.neworder_header_inputs Button {
+    background-color: black;
+}
+
+.neworder_header_inputs Button:hover {
+    background-color: #1f98f4;
+}
