@@ -18,7 +18,9 @@ h1 {
 
 .cards__cartSelection__wrapper {
     position: relative;
-    margin: 50px 0 45px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 20px;
 }
 
 .cards__cartSelection__items {

@@ -83,7 +83,7 @@ export const Cart = ({ loggedInUser }) => {
         <>
             <div className="cart">
                 <header className="cart_header">
-                    <h3>My Cart</h3>
+                    <h1>My Cart</h1>
                 </header>
                 <section className="cart_body">
                     {screenWidth > 650 && (
