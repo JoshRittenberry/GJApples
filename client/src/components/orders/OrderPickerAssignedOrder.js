@@ -1,9 +1,27 @@
 import { Button, Input, Table } from "reactstrap"
 import { completeOrder, getAllUnassignedOrders, unassignOrderPicker, getOrderPickerAssignment } from "../../managers/orderManager"
+import { useEffect, useState } from "react";
 
 export const OrderPickerAssignedOrder = ({ loggedInUser, assignedOrder, setOrders, setAssignedOrder }) => {
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
+    useEffect(() => {
+        // Function to update screenWidth state when the window is resized
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+
+        // Attach the event listener for window resize
+        window.addEventListener('resize', handleResize);
+
+        // Clean up the event listener when the component unmounts
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []); // Empty dependency array means this effect runs once after initial render
+
     return (
-        <div className="orderpickerhome_body_assignment">
+        <div className="orderpickerhome_body_assignment" style={{ display: assignedOrder.id == null && screenWidth <= 1200 && 'none' }}>
             {assignedOrder.id > 0 && (
                 <>
                     <header className="orderpickerhome_body_assignment_header">
@@ -65,7 +83,7 @@ export const OrderPickerAssignedOrder = ({ loggedInUser, assignedOrder, setOrder
             )}
             {assignedOrder.id == null && (
                 <>
-                    <h3>Assign an order to see this</h3>
+                    <h3>Assign an order to see the complete order view</h3>
                 </>
             )}
         </div>

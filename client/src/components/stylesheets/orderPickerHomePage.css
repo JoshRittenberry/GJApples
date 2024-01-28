@@ -56,3 +56,30 @@
     width: 40%;
     text-align: center;
 }
+
+.orderpickerhome_body_list Button {
+    background-color: black;
+}
+
+.orderpickerhome_body_list Button:hover {
+    background-color: #1f98f4;
+}
+
+/* Conditional Screen Stuff */
+
+@media screen and (max-width: 1200px) {
+    .orderpickerhome_body {
+        display: block;
+        width: 90%;
+    }
+
+    .orderpickerhome_body_assignment {
+        margin: auto;
+        width: 100%;
+    }
+
+    .orderpickerhome_body_list {
+        margin: auto;
+        width: 100%;
+    }
+}
