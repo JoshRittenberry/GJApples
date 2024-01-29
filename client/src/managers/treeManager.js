@@ -4,6 +4,10 @@ export const getAllTrees = () => {
     return fetch(_apiUrl).then((res) => res.json())
 }
 
+export const getTreeById = (treeId) => {
+    return fetch(`${_apiUrl}/${treeId}`).then((res) => res.json())
+}
+
 export const getAllUnassignedTrees = () => {
     return fetch(`${_apiUrl}?needsHarvested=true`).then((res) => res.json())
 }
