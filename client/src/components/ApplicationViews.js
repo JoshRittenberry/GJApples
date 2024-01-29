@@ -12,6 +12,7 @@ import { OrderPickerHomePage } from "./homepages/OrderPickerHomePage"
 import { HarvesterHomePage } from "./homepages/HarvesterHomePage"
 import { Cart } from "./orders/Cart"
 import { AdminHomePage } from "./homepages/AdminHomePage"
+import { ViewTrees } from "./trees/ViewTrees"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -55,7 +56,6 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           }
         />
 
-
         {/* History Page */}
         <Route
           path="history"
@@ -84,6 +84,16 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
                 <Route path="view/:id" element={<ViewOrder loggedInUser={loggedInUser} />} />
                 <Route path="edit/:id" element={<EditOrder loggedInUser={loggedInUser} />} />
               </Routes>
+            </AuthorizedRoute>
+          }
+        />
+
+        {/* Trees Page */}
+        <Route
+          path="trees"
+          element={
+            <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
+              <ViewTrees loggedInUser={loggedInUser} />
             </AuthorizedRoute>
           }
         />
