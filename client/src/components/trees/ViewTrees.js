@@ -64,11 +64,11 @@ export const ViewTrees = ({ loggedInUser }) => {
                             <tr>
                                 <th>Tree Id</th>
                                 <th>Apple Variety</th>
-                                {screenWidth > 800 && <th>Date Planted</th>}
-                                {screenWidth > 800 && <th>Date Removed</th>}
-                                {screenWidth > 800 && <th>Last Harvest Date</th>}
-                                {screenWidth > 800 && <th>Last Harvester</th>}
-                                {screenWidth > 800 && <th>Pounds Produced</th>}
+                                {screenWidth > 715 && <th>Date Planted</th>}
+                                {screenWidth > 840 && <th>Date Removed</th>}
+                                {screenWidth > 460 && <th>Last Harvest Date</th>}
+                                {screenWidth > 600 && <th>Last Harvester</th>}
+                                {screenWidth > 990 && <th>Pounds Produced</th>}
                                 {loggedInUser.roles.includes("Admin") && <th></th>}
                             </tr>
                         </thead>
@@ -82,11 +82,11 @@ export const ViewTrees = ({ loggedInUser }) => {
                                         {t.id}
                                     </th>
                                     <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{t.appleVariety.type}</th>
-                                    {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{datePlanted(t)}</th>}
-                                    {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{dateRemoved(t)}</th>}
-                                    {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{lastHarvestDate(t.treeHarvestReports)}</th>}
-                                    {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{lastHarvester(t.treeHarvestReports)}</th>}
-                                    {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{poundsProduced(t.treeHarvestReports)}</th>}
+                                    {screenWidth > 715 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{datePlanted(t)}</th>}
+                                    {screenWidth > 840 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{dateRemoved(t)}</th>}
+                                    {screenWidth > 460 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{lastHarvestDate(t.treeHarvestReports)}</th>}
+                                    {screenWidth > 600 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{lastHarvester(t.treeHarvestReports)}</th>}
+                                    {screenWidth > 990 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{poundsProduced(t.treeHarvestReports)}</th>}
                                     {loggedInUser.roles.includes("Admin") && (
                                         <th>
                                             <Button className="viewtrees_body_button">
