@@ -3,7 +3,7 @@ import "../stylesheets/viewOrder.css"
 import { useNavigate, useParams } from "react-router-dom"
 import { cancelOrder, getOrderById } from "../../managers/orderManager"
 import { Button, Table } from "reactstrap"
-import { ContactUsFooter } from "../ContactUsFooter"
+import { Footer } from "../Footer"
 
 export const ViewOrder = ({ loggedInUser }) => {
     const [order, setOrder] = useState({})
@@ -24,7 +24,7 @@ export const ViewOrder = ({ loggedInUser }) => {
                         <button className="vieworder_header_top_backbutton" onClick={() => {
                             navigate("/orderhistory")
                         }}>
-                            <i class="fa-solid fa-circle-arrow-left"></i>
+                            <i className="fa-solid fa-circle-arrow-left"></i>
                         </button>
                     </div>
                     <h5>Customer #{order.customerUserProfileId}</h5>
@@ -85,7 +85,7 @@ export const ViewOrder = ({ loggedInUser }) => {
                     )}
                 </section>
             </div>
-            <ContactUsFooter />
+            <Footer />
         </>
     )
 }

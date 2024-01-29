@@ -1,13 +1,12 @@
 .history-container-video {
     object-fit: cover;
-    width: 200%;
-    height: 575%;
+    /* width: 200%;
+    height: 575%; */
     position: fixed;
     z-index: -1;
 }
 
 .history-container {
-    /* background: url('../../../public/pictures/GJ-Picking-Apples.jpg') center center/cover no-repeat; */
     min-height: 100vh;
     width: 100%;
     display: flex;

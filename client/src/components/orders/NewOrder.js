@@ -4,7 +4,7 @@ import { getAllApples } from "../../managers/appleManager"
 import { Button, Input } from "reactstrap"
 import { createOrderItem, decreaseOrderItem, getUnsubmittedOrder, increaseOrderItem, submitOrder } from "../../managers/orderManager"
 import { useNavigate } from "react-router-dom"
-import { ContactUsFooter } from "../ContactUsFooter"
+import { Footer } from "../Footer"
 import { NewOrderSelections } from "./NewOrderSelections"
 
 export const NewOrder = ({ loggedInUser }) => {
@@ -66,9 +66,7 @@ export const NewOrder = ({ loggedInUser }) => {
         if (order.orderItems.length < 1) {
             console.log("You can't do that")
         } else {
-            submitOrder(order.id).then(() => {
-                navigate("/orderhistory")
-            })
+            navigate("/cart")
         }
     }
 
@@ -77,15 +75,10 @@ export const NewOrder = ({ loggedInUser }) => {
             <header className="neworder_header">
                 <h1>Create New Order</h1>
                 <aside className="neworder_header_inputs">
-                    <Input
-                        type="text"
-                        readOnly
-                        value={`Total: $${order?.totalCost}`}
-                    />
                     <Button onClick={() => {
                         handleSubmitOrder()
                     }}>
-                        Submit Order
+                        My Cart
                     </Button>
                 </aside>
             </header>
@@ -98,7 +91,7 @@ export const NewOrder = ({ loggedInUser }) => {
                 handleDecreaseItem={handleDecreaseItem}
                 handleSubmitOrder={handleSubmitOrder}
             />
-            <ContactUsFooter />
+            <Footer />
         </>
     )
 }

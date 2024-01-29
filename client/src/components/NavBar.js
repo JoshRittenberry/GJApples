@@ -3,14 +3,21 @@ import { Link } from "react-router-dom";
 import { logout } from "../managers/authManager";
 import "./stylesheets/navBar.css"
 import { Button } from "./Button";
+import { getUnsubmittedOrder } from "../managers/orderManager";
 
 export default function NavBar({ loggedInUser, setLoggedInUser }) {
     const [click, setClick] = useState(false)
     const [button, setButton] = useState(true)
+    const [order, setOrder] = useState({})
 
     useEffect(() => {
         showButton()
-    }, [])
+        if (loggedInUser?.roles.includes("Customer")) {
+            getUnsubmittedOrder().then(order => {
+                setOrder(order)
+            })
+        }
+    }, [order, loggedInUser])
 
     const handleClick = () => {
         setClick(!click)
@@ -54,11 +61,6 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                                         History
                                     </Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link to="/contactus" className="nav-links" onClick={closeMobileMenu}>
-                                        Contact Us
-                                    </Link>
-                                </li>
 
                                 {/* Customer Links */}
                                 {loggedInUser.roles.includes("Customer") && (
@@ -71,6 +73,11 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                                         <li className="nav-item">
                                             <Link to="/orderhistory" className="nav-links" onClick={closeMobileMenu}>
                                                 Order History
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link to="/cart" className="nav-links" onClick={closeMobileMenu}>
+                                                <i className="fa-solid fa-bag-shopping">{order.orderItems?.length > 0 && ` ${order.orderItems?.length}`}</i>
                                             </Link>
                                         </li>
                                     </>
@@ -90,6 +97,15 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                                     <li className="nav-item">
                                         <Link to="/harvester" className="nav-links" onClick={closeMobileMenu}>
                                             Employee Homepage
+                                        </Link>
+                                    </li>
+                                )}
+
+                                {/* Admin Links */}
+                                {loggedInUser.roles.includes("Admin") && (
+                                    <li className="nav-item">
+                                        <Link to="/admin" className="nav-links" onClick={closeMobileMenu}>
+                                            Admin Homepage
                                         </Link>
                                     </li>
                                 )}
@@ -119,11 +135,6 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                                 <li className="nav-item">
                                     <Link to="/history" className="nav-links" onClick={closeMobileMenu}>
                                         History
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="/contactus" className="nav-links" onClick={closeMobileMenu}>
-                                        Contact Us
                                     </Link>
                                 </li>
 

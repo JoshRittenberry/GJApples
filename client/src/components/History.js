@@ -1,25 +1,8 @@
 import { useEffect, useState } from "react"
-import { ContactUsFooter } from "./ContactUsFooter"
+import { Footer } from "./Footer"
 import "./stylesheets/history.css"
 
 export const History = () => {
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
-
-    useEffect(() => {
-        // Function to update screenWidth state when the window is resized
-        const handleResize = () => {
-            setScreenWidth(window.innerWidth);
-        };
-
-        // Attach the event listener for window resize
-        window.addEventListener('resize', handleResize);
-
-        // Clean up the event listener when the component unmounts
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []); // Empty dependency array means this effect runs once after initial render
-
     let timelineElements = [
         {
             id: 1,
@@ -80,12 +63,11 @@ export const History = () => {
     ]
 
     let position = ""
-    
+
     return (
         <>
             <div className='history-container'>
                 <video className="history-container-video" src='/videos/hp_apples_v.mp4' playsInline autoPlay loop muted />
-                {/* {screenWidth > 960 && <video className="history-container-video" src='/videos/hp_apples_v.mp4' autoPlay loop muted />} */}
                 <div className="timeline">
                     {timelineElements.map(te => {
                         if (position == "right" || position == "") {
@@ -110,7 +92,7 @@ export const History = () => {
                     })}
                 </div>
             </div>
-            <ContactUsFooter />
+            <Footer />
         </>
     )
 }

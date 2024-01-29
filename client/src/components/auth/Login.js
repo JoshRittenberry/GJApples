@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../managers/authManager";
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
-import { ContactUsFooter } from "../ContactUsFooter"
+import { Footer } from "../Footer"
 import "../stylesheets/login.css"
 
 export default function Login({ setLoggedInUser }) {
@@ -61,7 +61,7 @@ export default function Login({ setLoggedInUser }) {
           </p>
         </div>
       </div>
-      <ContactUsFooter />
+      <Footer />
     </>
   );
 }

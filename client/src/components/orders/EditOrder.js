@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { cancelOrder, getOrderById, createOrderItem, decreaseOrderItem, increaseOrderItem, deleteOrderItem } from "../../managers/orderManager"
 import { Button, Table, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Input } from "reactstrap";
 import { getAllApples } from "../../managers/appleManager"
-import { ContactUsFooter } from "../ContactUsFooter";
+import { Footer } from "../Footer";
 
 export const EditOrder = ({ loggedInUser }) => {
     const [order, setOrder] = useState({})
@@ -108,7 +108,7 @@ export const EditOrder = ({ loggedInUser }) => {
                         <button className="editorder_header_top_backbutton" onClick={() => {
                             navigate("/orderhistory")
                         }}>
-                            <i class="fa-solid fa-circle-arrow-left"></i>
+                            <i className="fa-solid fa-circle-arrow-left"></i>
                         </button>
                     </div>
                     <h5>Customer #{order.customerUserProfileId}</h5>
@@ -226,7 +226,7 @@ export const EditOrder = ({ loggedInUser }) => {
                     </Table>
                 </section>
             </div>
-            <ContactUsFooter />
+            <Footer />
         </>
     )
 }

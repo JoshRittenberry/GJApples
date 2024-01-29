@@ -4,13 +4,14 @@ import Login from "./auth/Login"
 import Register from "./auth/Register"
 import { Home } from "./homepages/Home"
 import { History } from "./History"
-import { ContactUs } from "./ContactUs"
 import { NewOrder } from "./orders/NewOrder"
 import { OrderHistory } from "./orders/OrderHistory"
 import { ViewOrder } from "./orders/ViewOrder"
 import { EditOrder } from "./orders/EditOrder"
 import { OrderPickerHomePage } from "./homepages/OrderPickerHomePage"
 import { HarvesterHomePage } from "./homepages/HarvesterHomePage"
+import { Cart } from "./orders/Cart"
+import { AdminHomePage } from "./homepages/AdminHomePage"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -44,19 +45,22 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           }
         />
 
+        {/* Admin Home */}
+        <Route
+          path="admin"
+          element={
+            <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
+              <AdminHomePage loggedInUser={loggedInUser} />
+            </AuthorizedRoute>
+          }
+        />
+
+
         {/* History Page */}
         <Route
           path="history"
           element={
             <History />
-          }
-        />
-
-        {/* Contact Us Page */}
-        <Route
-          path="contactus"
-          element={
-            <ContactUs />
           }
         />
 
@@ -80,6 +84,15 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
                 <Route path="view/:id" element={<ViewOrder loggedInUser={loggedInUser} />} />
                 <Route path="edit/:id" element={<EditOrder loggedInUser={loggedInUser} />} />
               </Routes>
+            </AuthorizedRoute>
+          }
+        />
+
+        <Route
+          path="cart"
+          element={
+            <AuthorizedRoute roles={["Customer"]} loggedInUser={loggedInUser}>
+              <Cart loggedInUser={loggedInUser} />
             </AuthorizedRoute>
           }
         />

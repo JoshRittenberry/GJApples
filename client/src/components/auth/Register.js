@@ -2,7 +2,7 @@ import { useState } from "react";
 import { register } from "../../managers/authManager";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
-import { ContactUsFooter } from "../ContactUsFooter"
+import { Footer } from "../Footer"
 import "../stylesheets/register.css"
 
 export default function Register({ setLoggedInUser }) {
@@ -139,7 +139,7 @@ export default function Register({ setLoggedInUser }) {
           </p>
         </div>
       </div>
-      <ContactUsFooter />
+      <Footer />
     </>
   );
 }

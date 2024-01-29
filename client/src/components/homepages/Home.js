@@ -4,15 +4,17 @@ import "../../App.css"
 import { HomePageWelcome } from "./HomePageWelcome"
 import { Cards } from "../cards/Cards"
 import { HomePageGJGreeting } from "./HomePageGJGreeting"
-import { ContactUsFooter } from "../ContactUsFooter"
+import { Footer } from "../Footer"
 
 export const Home = ({ loggedInUser }) => {
     return (
         <>
-            <HomePageWelcome loggedInUser={loggedInUser} />
-            <HomePageGJGreeting />
-            {/* <Cards /> */}
-            <ContactUsFooter />
+            <div className="homepage">
+                <HomePageWelcome loggedInUser={loggedInUser} />
+                <HomePageGJGreeting />
+                {/* <Cards /> */}
+            </div>
+            <Footer />
         </>
     )
 }
