@@ -39,7 +39,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
         <Route
           path="harvester"
           element={
-            <AuthorizedRoute roles={["Harvester"]} loggedInUser={loggedInUser}>
+            <AuthorizedRoute roles={["Harvester", "Admin"]} loggedInUser={loggedInUser}>
               <HarvesterHomePage loggedInUser={loggedInUser} />
             </AuthorizedRoute>
           }

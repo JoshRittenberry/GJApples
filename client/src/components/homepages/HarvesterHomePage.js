@@ -18,7 +18,7 @@ export const HarvesterHomePage = ({ loggedInUser }) => {
         <>
             <div className="harvesterhome">
                 <header className="harvesterhome_header">
-                    <h1>Harvester Home Page</h1>
+                    <h1>Open Harvests</h1>
                 </header>
                 <section className="harvesterhome_body">
                     <HarvesterAvailableTrees loggedInUser={loggedInUser} trees={trees} setTrees={setTrees} assignedTreeHarvestReport={assignedTreeHarvestReport} setAssignedTreeHarvestReport={setAssignedTreeHarvestReport} />

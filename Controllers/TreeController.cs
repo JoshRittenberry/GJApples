@@ -250,7 +250,7 @@ public class TreesController : ControllerBase
 
     // Get Harvester's Assigned TreeHarvestReport
     [HttpGet("assignment")]
-    [Authorize(Roles = "Harvester")]
+    [Authorize(Roles = "Admin,Harvester")]
     public IActionResult GetHarvesterAssignment()
     {
         // Find Harvester's UserName
@@ -507,7 +507,7 @@ public class TreesController : ControllerBase
 
     // Delete TreeHarvestReport
     [HttpDelete("harvestreports/{id}")]
-    [Authorize(Roles = "Harvester")]
+    [Authorize(Roles = "Admin,Harvester")]
     public IActionResult DeleteTreeHarvestReport(int id)
     {
         // Find Harvester's UserName
