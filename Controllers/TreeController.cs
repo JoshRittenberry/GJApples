@@ -38,7 +38,7 @@ public class TreesController : ControllerBase
                 t.DateRemoved == null &&
                 (t.TreeHarvestReports.Any(thr => thr.HarvestDate <= sevenDaysAgo && thr.Id == t.TreeHarvestReports.Max(th => th.Id)) ||
                 t.TreeHarvestReports.Max(th => th.Id) == 0)) ||
-                (needsHarvested != true && t.DateRemoved == null))
+                (needsHarvested != true))
             .Select(t => new TreeDTO
             {
                 Id = t.Id,

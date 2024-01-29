@@ -1,0 +1,39 @@
+.viewtrees {
+    min-height: 90vh;
+    margin-bottom: 20px;
+    width: 90%;
+    margin: auto auto 20px auto;
+    text-align: center;
+}
+
+.viewtrees_header {
+    margin-top: 20px;
+}
+
+.viewtrees_body_button {
+    background-color: black;
+    width: 100px;
+}
+
+.viewtrees_body_button:hover {
+    background-color: #1f98f4;
+}
+
+.viewtrees_body_pagination {
+    width: 25%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+}
+
+@media screen and (max-width: 1000px) {
+    .viewtrees_body_pagination {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .viewtrees_body_pagination {
+        width: 100%;
+    }
+}
