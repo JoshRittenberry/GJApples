@@ -5,7 +5,7 @@ import { Button, Input } from "reactstrap"
 import { createOrderItem, decreaseOrderItem, getUnsubmittedOrder, increaseOrderItem, submitOrder } from "../../managers/orderManager"
 import { useNavigate } from "react-router-dom"
 import { Footer } from "../Footer"
-import { NewOrderSelections } from "./NewOrderSelections"
+import { NewOrderSelections } from "../cards/NewOrderSelections"
 
 export const NewOrder = ({ loggedInUser }) => {
     const [apples, setApples] = useState([])
