@@ -12,6 +12,7 @@
 
 .viewtrees_body_button {
     background-color: black;
+    width: 100px;
 }
 
 .viewtrees_body_button:hover {

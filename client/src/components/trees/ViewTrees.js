@@ -120,14 +120,14 @@ export const ViewTrees = ({ loggedInUser }) => {
                         </tbody>
                     </Table>
                 </section>
-            </div>
-            <div className="pagination">
-                <Button onClick={prevPage} disabled={currentPage === 1}>
-                    Previous
-                </Button>
-                <Button onClick={nextPage} disabled={indexOfLastTree >= trees.length}>
-                    Next
-                </Button>
+                <div className="viewtrees_body_pagination">
+                    <Button className="viewtrees_body_button" onClick={prevPage} disabled={currentPage === 1}>
+                        Previous
+                    </Button>
+                    <Button className="viewtrees_body_button" onClick={nextPage} disabled={indexOfLastTree >= trees.length}>
+                        Next
+                    </Button>
+                </div>
             </div>
             <Footer />
         </>
