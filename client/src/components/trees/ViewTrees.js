@@ -64,16 +64,17 @@ export const ViewTrees = () => {
                             {trees?.map((t) => (
                                 <tr key={`order-${t.id}`}>
                                     <th
+                                        style={{ color: t.dateRemoved != null ? 'red' : 'black' }}
                                         scope="row"
                                     >
                                         {t.id}
                                     </th>
-                                    <th>{t.appleVariety.type}</th>
-                                    {screenWidth > 800 && <th>{t.datePlanted}</th>}
-                                    {screenWidth > 800 && <th>{t.dateRemoved}</th>}
-                                    {screenWidth > 800 && <th>{lastHarvestDate(t.treeHarvestReports)}</th>}
-                                    {screenWidth > 800 && <th>{lastHarvester(t.treeHarvestReports)}</th>}
-                                    {screenWidth > 800 && <th>{poundsProduced(t.treeHarvestReports)}</th>}
+                                    <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{t.appleVariety.type}</th>
+                                    {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{t.datePlanted}</th>}
+                                    {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{t.dateRemoved}</th>}
+                                    {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{lastHarvestDate(t.treeHarvestReports)}</th>}
+                                    {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{lastHarvester(t.treeHarvestReports)}</th>}
+                                    {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{poundsProduced(t.treeHarvestReports)}</th>}
                                 </tr>
                             ))}
                         </tbody>
