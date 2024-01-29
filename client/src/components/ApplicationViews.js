@@ -13,9 +13,12 @@ import { HarvesterHomePage } from "./homepages/HarvesterHomePage"
 import { Cart } from "./orders/Cart"
 import { AdminHomePage } from "./homepages/AdminHomePage"
 import { ViewTrees } from "./trees/ViewTrees"
+import ScrollToTop from "./ScrollToTop"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
+    <>
+    <ScrollToTop />
     <Routes>
       {/* Home Page */}
       <Route path="/">
@@ -118,5 +121,6 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
       </Route>
       <Route path="*" element={<p>Whoops, nothing here...</p>} />
     </Routes>
+    </>
   )
 }
