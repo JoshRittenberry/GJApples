@@ -4,7 +4,7 @@ import { decreaseOrderItem, deleteOrderItem, getOrderById, getUnsubmittedOrder, 
 import { Button, Dropdown, DropdownToggle, Input, Table } from "reactstrap"
 import { Footer } from "../Footer"
 import { useNavigate } from "react-router-dom"
-import { CartSelections } from "./CartSelections"
+import { CartSelections } from "../cards/CartSelections"
 
 export const Cart = ({ loggedInUser }) => {
     const [order, setOrder] = useState({})
