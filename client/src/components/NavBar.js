@@ -12,10 +12,12 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
 
     useEffect(() => {
         showButton()
-        getUnsubmittedOrder().then(order => {
-            setOrder(order)
-        })
-    }, [order])
+        if (loggedInUser) {
+            getUnsubmittedOrder().then(order => {
+                setOrder(order)
+            })
+        }
+    }, [order, loggedInUser])
 
     const handleClick = () => {
         setClick(!click)
@@ -75,7 +77,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                                         </li>
                                         <li className="nav-item">
                                             <Link to="/cart" className="nav-links" onClick={closeMobileMenu}>
-                                                <i class="fa-solid fa-bag-shopping">{order.orderItems?.length > 0 && ` ${order.orderItems?.length}`}</i>
+                                                <i className="fa-solid fa-bag-shopping">{order.orderItems?.length > 0 && ` ${order.orderItems?.length}`}</i>
                                             </Link>
                                         </li>
                                     </>

@@ -133,7 +133,7 @@ export const Cart = ({ loggedInUser }) => {
                                             <button onClick={() => {
                                                 handleDeleteItem(oi.id)
                                             }}>
-                                                <i class="fa-solid fa-trash"></i>
+                                                <i className="fa-solid fa-trash"></i>
                                             </button>
                                         </th>
                                     </tr>

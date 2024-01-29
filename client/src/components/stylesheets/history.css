@@ -1,7 +1,7 @@
 .history-container-video {
     object-fit: cover;
-    /* width: 200%; */
-    /* height: 575%; */
+    /* width: 200%;
+    height: 575%; */
     position: fixed;
     z-index: -1;
 }

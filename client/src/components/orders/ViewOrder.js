@@ -24,7 +24,7 @@ export const ViewOrder = ({ loggedInUser }) => {
                         <button className="vieworder_header_top_backbutton" onClick={() => {
                             navigate("/orderhistory")
                         }}>
-                            <i class="fa-solid fa-circle-arrow-left"></i>
+                            <i className="fa-solid fa-circle-arrow-left"></i>
                         </button>
                     </div>
                     <h5>Customer #{order.customerUserProfileId}</h5>
