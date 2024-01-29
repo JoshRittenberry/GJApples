@@ -1,8 +1,19 @@
 .viewtrees {
     min-height: 90vh;
     margin-bottom: 20px;
+    width: 90%;
+    margin: auto auto 20px auto;
+    text-align: center;
 }
 
 .viewtrees_header {
     margin-top: 20px;
+}
+
+.viewtrees_body_button {
+    background-color: black;
+}
+
+.viewtrees_body_button:hover {
+    background-color: #1f98f4;
 }

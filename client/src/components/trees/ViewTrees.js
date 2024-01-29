@@ -4,7 +4,7 @@ import { Button, Table } from "reactstrap"
 import { Footer } from "../Footer"
 import { getAllTrees } from "../../managers/treeManager"
 
-export const ViewTrees = () => {
+export const ViewTrees = ({ loggedInUser }) => {
     const [trees, setTrees] = useState([])
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
@@ -69,6 +69,7 @@ export const ViewTrees = () => {
                                 {screenWidth > 800 && <th>Last Harvest Date</th>}
                                 {screenWidth > 800 && <th>Last Harvester</th>}
                                 {screenWidth > 800 && <th>Pounds Produced</th>}
+                                {loggedInUser.roles.includes("Admin") && <th></th>}
                             </tr>
                         </thead>
                         <tbody>
@@ -86,6 +87,13 @@ export const ViewTrees = () => {
                                     {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{lastHarvestDate(t.treeHarvestReports)}</th>}
                                     {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{lastHarvester(t.treeHarvestReports)}</th>}
                                     {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{poundsProduced(t.treeHarvestReports)}</th>}
+                                    {loggedInUser.roles.includes("Admin") && (
+                                        <th>
+                                            <Button className="viewtrees_body_button">
+                                                Edit
+                                            </Button>
+                                        </th>
+                                    )}
                                 </tr>
                             ))}
                         </tbody>
