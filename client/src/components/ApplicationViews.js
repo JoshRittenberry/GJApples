@@ -29,7 +29,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
         <Route
           path="orderpicker"
           element={
-            <AuthorizedRoute roles={["OrderPicker"]} loggedInUser={loggedInUser}>
+            <AuthorizedRoute roles={["OrderPicker", "Admin"]} loggedInUser={loggedInUser}>
               <OrderPickerHomePage loggedInUser={loggedInUser} />
             </AuthorizedRoute>
           }

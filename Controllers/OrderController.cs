@@ -77,7 +77,7 @@ public class OrdersController : ControllerBase
 
     // Get OrderPicker's Assigned Order
     [HttpGet("orderpicker")]
-    [Authorize(Roles = "OrderPicker")]
+    [Authorize(Roles = "Admin,OrderPicker")]
     public IActionResult GetOrderPickerAssignment()
     {
         // Find OrderPicker's UserName
