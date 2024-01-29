@@ -11,6 +11,7 @@ import { EditOrder } from "./orders/EditOrder"
 import { OrderPickerHomePage } from "./homepages/OrderPickerHomePage"
 import { HarvesterHomePage } from "./homepages/HarvesterHomePage"
 import { Cart } from "./orders/Cart"
+import { AdminHomePage } from "./homepages/AdminHomePage"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -43,6 +44,17 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             </AuthorizedRoute>
           }
         />
+
+        {/* Admin Home */}
+        <Route
+          path="admin"
+          element={
+            <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
+              <AdminHomePage loggedInUser={loggedInUser} />
+            </AuthorizedRoute>
+          }
+        />
+
 
         {/* History Page */}
         <Route

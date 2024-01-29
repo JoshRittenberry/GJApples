@@ -101,6 +101,15 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                                     </li>
                                 )}
 
+                                {/* Admin Links */}
+                                {loggedInUser.roles.includes("Admin") && (
+                                    <li className="nav-item">
+                                        <Link to="/admin" className="nav-links" onClick={closeMobileMenu}>
+                                            Admin Homepage
+                                        </Link>
+                                    </li>
+                                )}
+
                                 {/* Logout */}
                                 <li className="nav-item">
                                     <Link to="/login" className="nav-links" onClick={(e) => {
