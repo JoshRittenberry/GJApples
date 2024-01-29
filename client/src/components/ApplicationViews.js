@@ -14,6 +14,7 @@ import { Cart } from "./orders/Cart"
 import { AdminHomePage } from "./homepages/AdminHomePage"
 import { ViewTrees } from "./trees/ViewTrees"
 import ScrollToTop from "./ScrollToTop"
+import { EditTree } from "./trees/EditTree"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -91,13 +92,31 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           }
         />
 
-        {/* Trees Page */}
+        {/* Trees Page
         <Route
-          path="trees"
+          path="trees/*"
           element={
             <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
               <ViewTrees loggedInUser={loggedInUser} />
             </AuthorizedRoute>
+          }
+        /> */}
+
+        <Route
+          path="trees/*"
+          element={
+            <Routes>
+              <Route path="" element={
+                <AuthorizedRoute roles={["Admin","Harvester"]} loggedInUser={loggedInUser}>
+                  <ViewTrees loggedInUser={loggedInUser} />
+                </AuthorizedRoute>
+              } />
+              <Route path="edit/:id" element={
+                <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
+                  <EditTree loggedInUser={loggedInUser} />
+                </AuthorizedRoute>
+              } />
+            </Routes>
           }
         />
 
