@@ -9,9 +9,11 @@ import { Footer } from "../Footer"
 export const Home = ({ loggedInUser }) => {
     return (
         <>
-            <HomePageWelcome loggedInUser={loggedInUser} />
-            <HomePageGJGreeting />
-            {/* <Cards /> */}
+            <div className="homepage">
+                <HomePageWelcome loggedInUser={loggedInUser} />
+                <HomePageGJGreeting />
+                {/* <Cards /> */}
+            </div>
             <Footer />
         </>
     )
