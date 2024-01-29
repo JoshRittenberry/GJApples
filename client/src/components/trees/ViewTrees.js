@@ -7,6 +7,8 @@ import { getAllTrees } from "../../managers/treeManager"
 export const ViewTrees = ({ loggedInUser }) => {
     const [trees, setTrees] = useState([])
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+    const [currentPage, setCurrentPage] = useState(1)
+    const treesPerPage = 10
 
     useEffect(() => {
         getAllTrees().then(setTrees)
@@ -24,6 +26,25 @@ export const ViewTrees = ({ loggedInUser }) => {
             window.removeEventListener('resize', handleResize);
         };
     }, [])
+
+    // Calculate the index of the first and last tree to display on the current page
+    const indexOfLastTree = currentPage * treesPerPage;
+    const indexOfFirstTree = indexOfLastTree - treesPerPage;
+    const currentTrees = trees.slice(indexOfFirstTree, indexOfLastTree);
+
+    // Function to handle next page
+    const nextPage = () => {
+        if (indexOfLastTree < trees.length) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    // Function to handle previous page
+    const prevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
 
     const datePlanted = (tree) => {
         return new Date(tree.datePlanted).toISOString().split('T')[0]
@@ -73,7 +94,7 @@ export const ViewTrees = ({ loggedInUser }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {trees?.map((t) => (
+                            {currentTrees?.map((t) => (
                                 <tr key={`order-${t.id}`}>
                                     <th
                                         style={{ color: t.dateRemoved != null ? 'red' : 'black' }}
@@ -99,6 +120,14 @@ export const ViewTrees = ({ loggedInUser }) => {
                         </tbody>
                     </Table>
                 </section>
+            </div>
+            <div className="pagination">
+                <Button onClick={prevPage} disabled={currentPage === 1}>
+                    Previous
+                </Button>
+                <Button onClick={nextPage} disabled={indexOfLastTree >= trees.length}>
+                    Next
+                </Button>
             </div>
             <Footer />
         </>
