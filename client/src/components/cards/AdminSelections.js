@@ -112,7 +112,6 @@ export const AdminSelections = () => {
 
     return (
         <div className='cards__adminselection'>
-            {/* <h1>Check out these EPIC Destinations!</h1> */}
             <div className='cards__adminselection__container'>
                 <div className='cards__adminselection__wrapper'>
                     {renderSelectionList()}
