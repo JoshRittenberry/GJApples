@@ -26,7 +26,7 @@ export const AdminSelections = () => {
             id: 1,
             src: '/pictures/employees.jpg',
             alt: 'Garry Jones Picking Apples',
-            text: 'Create a new user.',
+            text: 'Create a new  employee account',
             label: 'New User',
             path: '/'
         },
@@ -34,7 +34,7 @@ export const AdminSelections = () => {
             id: 2,
             src: '/pictures/orders.jpg',
             alt: 'Garry Jones Picking Apples',
-            text: 'View all orders needing to be completed.',
+            text: 'View all open orders',
             label: 'Orders',
             path: '/orderpicker'
         },
@@ -42,7 +42,7 @@ export const AdminSelections = () => {
             id: 3,
             src: '/pictures/harvest.jpg',
             alt: 'Garry Jones Picking Apples',
-            text: 'View all trees needing to be harvested.',
+            text: 'View all open harvests',
             label: 'Harvests',
             path: '/harvester'
         },
@@ -50,7 +50,7 @@ export const AdminSelections = () => {
             id: 4,
             src: '/pictures/trees.jpg',
             alt: 'Garry Jones Picking Apples',
-            text: 'View, and edit, trees currently on the orchard.',
+            text: 'View, and edit, trees currently on the orchard',
             label: 'Trees',
             path: '/trees'
         },
@@ -58,7 +58,7 @@ export const AdminSelections = () => {
             id: 5,
             src: '/pictures/apples.jpg',
             alt: 'Garry Jones Picking Apples',
-            text: 'View, and edit, apples currently grown on the orchard.',
+            text: 'View, and edit, apples currently grown on the orchard',
             label: 'Apples',
             path: '/apples'
         }
