@@ -25,6 +25,17 @@ export const ViewTrees = () => {
         };
     }, [])
 
+    const datePlanted = (tree) => {
+        return new Date(tree.datePlanted).toISOString().split('T')[0]
+    }
+
+    const dateRemoved = (tree) => {
+        if (tree.dateRemoved == null) {
+            return `-`
+        }
+        return new Date(tree.dateRemoved).toISOString().split('T')[0]
+    }
+
     const lastHarvestDate = (treeHarvestReports) => {
         let harvest = treeHarvestReports.reduce((prev, current) => prev.id > current.id ? prev : current)
         return new Date(harvest.harvestDate).toISOString().split('T')[0]
@@ -45,7 +56,7 @@ export const ViewTrees = () => {
         <>
             <div className="viewtrees">
                 <header className="viewtrees_header">
-                    <h1>View Trees</h1>
+                    <h1>Tree Manager</h1>
                 </header>
                 <section className="viewtrees_body">
                     <Table>
@@ -70,8 +81,8 @@ export const ViewTrees = () => {
                                         {t.id}
                                     </th>
                                     <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{t.appleVariety.type}</th>
-                                    {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{t.datePlanted}</th>}
-                                    {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{t.dateRemoved}</th>}
+                                    {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{datePlanted(t)}</th>}
+                                    {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{dateRemoved(t)}</th>}
                                     {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{lastHarvestDate(t.treeHarvestReports)}</th>}
                                     {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{lastHarvester(t.treeHarvestReports)}</th>}
                                     {screenWidth > 800 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{poundsProduced(t.treeHarvestReports)}</th>}
