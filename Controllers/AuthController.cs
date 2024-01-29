@@ -19,6 +19,8 @@ public class AuthController : ControllerBase
     private GJApplesDbContext _dbContext;
     private UserManager<IdentityUser> _userManager;
 
+    // private RoleManager<IdentityRole> _roleManager;  // maybe this will work???
+
     public AuthController(GJApplesDbContext context, UserManager<IdentityUser> userManager)
     {
         _dbContext = context;
@@ -120,7 +122,8 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register(RegistrationDTO registration)
+    // added FromQuery
+    public async Task<IActionResult> Register(RegistrationDTO registration, [FromQuery] string? roleName)
     {
         var user = new IdentityUser
         {
@@ -133,15 +136,42 @@ public class AuthController : ControllerBase
             .GetString(Convert.FromBase64String(registration.Password));
 
         var result = await _userManager.CreateAsync(user, password);
+
+        // var role = _dbContext.Roles.SingleOrDefault(r => r.Name == roleName);   // Finds the role from the query
+
+        // if (role == null) // checks to see if the role was found, if not it uses the Customer role
+        // {
+        //     role = _dbContext.Roles.SingleOrDefault(r => r.Name == "Customer");
+        // }
+
         if (result.Succeeded)
         {
-            _dbContext.UserProfiles.Add(new UserProfile
-            {
+            // var newUserProfile = new UserProfile     // is this how this should work?
+            // {
+            //     FirstName = registration.FirstName,
+            //     LastName = registration.LastName,
+            //     Address = registration.Address,
+            //     IdentityUserId = user.Id,
+            // };
+
+            // await _roleManager.CreateAsync(newUserProfile.IdentityUserId, role.Id);     // IDK if this is correct but its obviously not since it has red lines
+
+            // var newIdentityUserRole = new IdentityUserRole  // IDK why it doesn't like this
+            // {
+            //     UserId = newUserProfile.IdentityUserId,
+            //     RoleId = role.Id
+            // }
+
+            _dbContext.UserProfiles.Add(new UserProfile {
                 FirstName = registration.FirstName,
                 LastName = registration.LastName,
                 Address = registration.Address,
                 IdentityUserId = user.Id,
             });
+
+            // _dbContext.UserProfiles.Add(newUserProfile);     // how I think this should change
+            // _dbContext.UserRoles.Add(newIdentityUserRole);      // Add new IdentityUserRole
+
             _dbContext.SaveChanges();
 
             var claims = new List<Claim>
@@ -149,7 +179,6 @@ public class AuthController : ControllerBase
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Name, user.UserName.ToString()),
                     new Claim(ClaimTypes.Email, user.Email)
-
                 };
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 

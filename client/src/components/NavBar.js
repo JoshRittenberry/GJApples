@@ -12,7 +12,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
 
     useEffect(() => {
         showButton()
-        if (loggedInUser) {
+        if (loggedInUser?.roles.includes("Customer")) {
             getUnsubmittedOrder().then(order => {
                 setOrder(order)
             })
