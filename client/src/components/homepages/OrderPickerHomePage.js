@@ -20,7 +20,7 @@ export const OrderPickerHomePage = ({ loggedInUser }) => {
         <>
             <div className="orderpickerhome">
                 <header className="orderpickerhome_header">
-                    <h1>Order Picker Home Page</h1>
+                    <h1>Open Orders</h1>
                 </header>
                 <section className="orderpickerhome_body">
                     <OrderPickerAvailableOrders loggedInUser={loggedInUser} orders={orders} assignedOrder={assignedOrder} setAssignedOrder={setAssignedOrder} />
