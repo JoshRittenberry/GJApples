@@ -21,7 +21,7 @@ public class UserProfilesController : ControllerBase
 
     // Get all UserProfiles
     [HttpGet]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public IActionResult Get()
     {
         return Ok(_dbContext
@@ -42,7 +42,7 @@ public class UserProfilesController : ControllerBase
 
     // Get UserProfile by Id
     [HttpGet("{id}")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public IActionResult Get(int id)
     {
         var foundUP = _dbContext
@@ -50,12 +50,19 @@ public class UserProfilesController : ControllerBase
             .Include(up => up.IdentityUser)
             .SingleOrDefault(up => up.Id == id);
 
+        if (foundUP == null)
+        {
+            return NotFound();
+        }
+
         return Ok(new UserProfileDTO
         {
             Id = foundUP.Id,
             FirstName = foundUP.FirstName,
             LastName = foundUP.LastName,
             Address = foundUP.Address,
+            Email = foundUP.IdentityUser.Email,
+            UserName = foundUP.IdentityUser.UserName,
             IdentityUserId = foundUP.IdentityUserId,
             IdentityUser = foundUP.IdentityUser
         });
@@ -115,6 +122,63 @@ public class UserProfilesController : ControllerBase
 
         _dbContext.UserRoles.Remove(userRole);
         _dbContext.SaveChanges();
+        return NoContent();
+    }
+
+    // Edit UserProfile
+    [HttpPut("{id}")]
+    [Authorize]
+    public IActionResult UpdateUserProfile(UserProfileDTO update, int id)
+    {
+        var foundUP = _dbContext
+            .UserProfiles
+            .Include(up => up.IdentityUser)
+            .SingleOrDefault(up => up.Id == id);
+
+        if (foundUP == null)
+        {
+            return NotFound();
+        }
+
+        bool isUpdated = false;
+
+        // Update FirstName
+        if (!string.IsNullOrWhiteSpace(update.FirstName) && update.FirstName != foundUP.FirstName)
+        {
+            foundUP.FirstName = update.FirstName.Trim();
+            isUpdated = true;
+        }
+        // Update LastName
+        if (!string.IsNullOrWhiteSpace(update.LastName) && update.LastName != foundUP.LastName)
+        {
+            foundUP.LastName = update.LastName.Trim();
+            isUpdated = true;
+        }
+        // Update Email
+        if (!string.IsNullOrWhiteSpace(update.Email) && update.Email != foundUP.IdentityUser.Email)
+        {
+            foundUP.IdentityUser.Email = update.Email.Trim();
+            isUpdated = true;
+        }
+        // Update UserName
+        if (!string.IsNullOrWhiteSpace(update.UserName) && update.UserName != foundUP.IdentityUser.UserName)
+        {
+            foundUP.IdentityUser.UserName = update.UserName.Trim();
+            isUpdated = true;
+        }
+        // Update Address
+        if (!string.IsNullOrWhiteSpace(update.Address) && update.Address != foundUP.Address)
+        {
+            foundUP.Address = update.Address.Trim();
+            isUpdated = true;
+        }
+
+        if (isUpdated)
+        {
+            _dbContext.SaveChanges();
+            return Ok();
+        }
+
         return NoContent();
     }
 }

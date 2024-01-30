@@ -5,3 +5,17 @@ export const getAllOrderPickers = () => {
 export const getAllHarvesters = () => {
     return fetch(`/api/harvesters`).then((res) => res.json())
 }
+
+export const getEmployeeById = (employeeId) => {
+    return fetch(`/api/userprofiles/${employeeId}`).then((res) => res.json())
+}
+
+export const updateEmployee = (employeeId, update) => {
+    return fetch(`/api/userprofiles/${employeeId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(update),
+    })
+}
