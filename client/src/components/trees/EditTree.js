@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { Footer } from "../Footer"
 import "../stylesheets/editTree.css"
-import { useParams } from "react-router-dom"
-import { getTreeById } from "../../managers/treeManager"
+import { useNavigate, useParams } from "react-router-dom"
+import { editTree, getTreeById } from "../../managers/treeManager"
 import { Button, Form, FormGroup, FormText, Input, Label } from "reactstrap"
 import { getAppleVarieties } from "../../managers/appleManager"
 
@@ -11,12 +11,14 @@ export const EditTree = ({ loggedInUser }) => {
     const [appleVarieties, setAppleVarieties] = useState([])
     const [update, setUpdate] = useState({})
 
+    const navigate = useNavigate()
     const treeId = useParams().id
 
     useEffect(() => {
         getTreeById(treeId).then(res => {
             setTree(res)
             setUpdate({
+                id: res.id,
                 appleVarietyId: res.appleVarietyId,
                 datePlanted: res.datePlanted,
                 dateRemoved: res.dateRemoved,
@@ -55,10 +57,15 @@ export const EditTree = ({ loggedInUser }) => {
                                 id="appleVariety"
                                 name="select"
                                 type="select"
+                                onChange={event => {
+                                    let newUpdate = { ...update }
+                                    newUpdate.appleVarietyId = event.target.value
+                                    setUpdate(newUpdate)
+                                }}
                             >
                                 {appleVarieties.map(av => {
                                     return (
-                                        <option key={av.id} selected={av.id == update.appleVarietyId}>
+                                        <option key={av.id} selected={av.id == update.appleVarietyId} value={av.id}>
                                             {av.type}
                                         </option>
                                     )
@@ -74,7 +81,13 @@ export const EditTree = ({ loggedInUser }) => {
                                 name="datePlanted"
                                 placeholder="date placeholder"
                                 type="date"
-                                defaultValue={update.datePlanted ? update.datePlanted.substring(0, 10) : ''}
+                                value={update.datePlanted ? update.datePlanted.substring(0, 10) : ''}
+                                onChange={event => {
+                                    let newUpdate = { ...update };
+                                    const selectedDate = event.target.value;
+                                    newUpdate.datePlanted = selectedDate ? new Date(selectedDate).toISOString() : tree.datePlanted;
+                                    setUpdate(newUpdate);
+                                }}
                             />
                         </FormGroup>
                         <FormGroup>
@@ -86,22 +99,28 @@ export const EditTree = ({ loggedInUser }) => {
                                 name="dateRemoved"
                                 placeholder="date placeholder"
                                 type="date"
-                                defaultValue={update.dateRemoved ? update.dateRemoved.substring(0, 10) : ''}
+                                value={update.dateRemoved ? update.dateRemoved.substring(0, 10) : ''}
                                 onChange={event => {
-                                    event.preventDefault()
-                                    let newUpdate = { ...update }
-                                    newUpdate.dateRemoved = new Date().toISOString()
-                                    setUpdate(newUpdate)
+                                    let newUpdate = { ...update };
+                                    const selectedDate = event.target.value;
+                                    newUpdate.dateRemoved = selectedDate ? new Date(selectedDate).toISOString() : null;
+                                    setUpdate(newUpdate);
                                 }}
                             />
                         </FormGroup>
                     </Form>
                 </section>
                 <div className="edittree_footer">
-                    <Button className="edittree_footer_button">
+                    <Button className="edittree_footer_button" onClick={() => {
+                        editTree(update).then(() => {
+                            navigate("/trees")
+                        })
+                    }}>
                         Submit
                     </Button>
-                    <Button className="edittree_footer_button">
+                    <Button className="edittree_footer_button" onClick={() => {
+                        navigate("/trees")
+                    }}>
                         Cancel
                     </Button>
                 </div>

@@ -36,6 +36,16 @@ export const completeHarvesterAssignment = (treeHarvestReportId, treeHarvestRepo
     })
 }
 
+export const editTree = (tree) => {
+    return fetch(`${_apiUrl}/${tree.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(tree),
+    })
+}
+
 export const deleteTreeHarvestReport = (treeHarvestReportId) => {
     return fetch(`${_apiUrl}/harvestreports/${treeHarvestReportId}`, {
         method: "DELETE"
