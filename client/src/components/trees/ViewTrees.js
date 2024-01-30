@@ -61,16 +61,25 @@ export const ViewTrees = ({ loggedInUser }) => {
     }
 
     const lastHarvestDate = (treeHarvestReports) => {
+        if (treeHarvestReports.length < 1) {
+            return "-"
+        }
         let harvest = treeHarvestReports.reduce((prev, current) => prev.id > current.id ? prev : current)
         return new Date(harvest.harvestDate).toISOString().split('T')[0]
     }
 
     const lastHarvester = (treeHarvestReports) => {
+        if (treeHarvestReports.length < 1) {
+            return "-"
+        }
         let harvest = treeHarvestReports.reduce((prev, current) => prev.id > current.id ? prev : current)
         return `${harvest.employee.firstName} ${harvest.employee.lastName}`
     }
 
     const poundsProduced = (treeHarvestReports) => {
+        if (treeHarvestReports.length < 1) {
+            return "-"
+        }
         let pounds = 0
         let harvest = treeHarvestReports.map(thr => pounds += thr.poundsHarvested)
         return pounds
@@ -81,6 +90,13 @@ export const ViewTrees = ({ loggedInUser }) => {
             <div className="viewtrees">
                 <header className="viewtrees_header">
                     <h1>Tree Manager</h1>
+                    <aside className="viewtrees_header_inputs">
+                        <Button className="viewtrees_header_inputs_button" onClick={() => {
+                            navigate("/trees/newtree")
+                        }}>
+                            New Tree
+                        </Button>
+                    </aside>
                 </header>
                 <section className="viewtrees_body">
                     <Table>

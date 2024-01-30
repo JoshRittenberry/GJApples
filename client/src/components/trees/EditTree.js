@@ -3,7 +3,7 @@ import { Footer } from "../Footer"
 import "../stylesheets/editTree.css"
 import { useNavigate, useParams } from "react-router-dom"
 import { editTree, getTreeById } from "../../managers/treeManager"
-import { Button, Form, FormGroup, FormText, Input, Label } from "reactstrap"
+import { Button, Form, FormGroup, Input, Label } from "reactstrap"
 import { getAppleVarieties } from "../../managers/appleManager"
 
 export const EditTree = ({ loggedInUser }) => {

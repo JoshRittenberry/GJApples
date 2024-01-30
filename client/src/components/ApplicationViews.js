@@ -15,6 +15,7 @@ import { AdminHomePage } from "./homepages/AdminHomePage"
 import { ViewTrees } from "./trees/ViewTrees"
 import ScrollToTop from "./ScrollToTop"
 import { EditTree } from "./trees/EditTree"
+import { NewTree } from "./trees/NewTree"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -92,16 +93,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           }
         />
 
-        {/* Trees Page
-        <Route
-          path="trees/*"
-          element={
-            <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
-              <ViewTrees loggedInUser={loggedInUser} />
-            </AuthorizedRoute>
-          }
-        /> */}
-
+        {/* Tree Pages */}
         <Route
           path="trees/*"
           element={
@@ -114,6 +106,11 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
               <Route path="edit/:id" element={
                 <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
                   <EditTree loggedInUser={loggedInUser} />
+                </AuthorizedRoute>
+              } />
+              <Route path="newtree" element={
+                <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
+                  <NewTree loggedInUser={loggedInUser} />
                 </AuthorizedRoute>
               } />
             </Routes>
