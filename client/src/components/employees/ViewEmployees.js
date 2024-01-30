@@ -76,11 +76,9 @@ export const ViewEmployees = ({ loggedInUser }) => {
         <>
             <div className="viewemployees">
                 <header className="viewemployees_header">
-                    <h1>View Employees</h1>
+                    <h1>Employees</h1>
                     <aside className="viewemployees_header_inputs">
-                        <Button className="viewemployees_header_inputs_button">
-                            Click Me
-                        </Button>
+                        {/* Place for buttons if needed */}
                     </aside>
                 </header>
                 <section className="viewemployees_body">
@@ -109,8 +107,10 @@ export const ViewEmployees = ({ loggedInUser }) => {
                                         {screenWidth > 900 && <th>{e.address}</th>}
                                         {screenWidth > 600 && <th>{e.email}</th>}
                                         <th>
-                                            <Button className="viewemployees_body_button">
-                                                Something
+                                            <Button className="viewemployees_body_button" onClick={() => {
+                                                navigate(`/employees/edit/${e.id}`)
+                                            }}>
+                                                Edit Employee
                                             </Button>
                                         </th>
                                     </tr>

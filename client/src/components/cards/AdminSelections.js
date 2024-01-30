@@ -28,7 +28,7 @@ export const AdminSelections = () => {
             alt: 'Garry Jones Picking Apples',
             text: 'View and Edit Employees',
             label: 'Employees',
-            path: '/employees/view'
+            path: '/employees'
         },
         {
             id: 2,
