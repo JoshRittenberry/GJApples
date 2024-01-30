@@ -21,7 +21,7 @@ public class OrderPickersController : ControllerBase
 
     // Get all OrderPicker Profiles
     [HttpGet]
-    [Authorize(Roles = "Admin,OrderPicker")]
+    [Authorize(Roles = "Admin")]
     public IActionResult Get()
     {
         return Ok(_dbContext
@@ -82,7 +82,7 @@ public class OrderPickersController : ControllerBase
             }).ToList());
     }
 
-    // Get Customer Profile by Id
+    // Get OrderPicker Profile by Id
     [HttpGet("{id}")]
     [Authorize(Roles = "Admin,OrderPicker")]
     public IActionResult GetCustomerById(int id)
