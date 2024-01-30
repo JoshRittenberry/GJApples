@@ -16,6 +16,7 @@ export const EditEmployee = () => {
         getEmployeeById(employeeId).then(res => {
             setEmployee(res)
             setUpdate({
+                id: res.id,
                 firstName: res.firstName,
                 lastName: res.lastName,
                 address: res.address,

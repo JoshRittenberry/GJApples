@@ -127,7 +127,7 @@ public class UserProfilesController : ControllerBase
 
     // Edit UserProfile
     [HttpPut("{id}")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public IActionResult UpdateUserProfile(UserProfileDTO update, int id)
     {
         var foundUP = _dbContext

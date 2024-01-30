@@ -15,7 +15,7 @@ public class UserProfileDTO
     public string Email { get; set; }
     [MaxLength(50)]
     public string UserName { get; set; }
-    public string IdentityUserId { get; set; }
-    public IdentityUser IdentityUser { get; set; }
-    public List<string> Roles { get; set; }
+    public string? IdentityUserId { get; set; }
+    public IdentityUser? IdentityUser { get; set; }
+    public List<string>? Roles { get; set; }
 }
