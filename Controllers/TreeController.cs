@@ -309,7 +309,7 @@ public class TreesController : ControllerBase
     [Authorize(Roles = "Admin")]
     public IActionResult CreateNewTree(Tree tree)
     {
-        if (tree.DatePlanted == null || tree.DatePlanted == DateTime.MinValue)
+        if (tree.DatePlanted == null || tree.DatePlanted == DateTime.MinValue || tree.AppleVarietyId == null)
         {
             tree.DatePlanted = DateTime.Now;
         }
@@ -317,7 +317,7 @@ public class TreesController : ControllerBase
         _dbContext.Trees.Add(tree);
         _dbContext.SaveChanges();
 
-        return Created($"/api/tree/{tree.Id}", tree);
+        return Created($"/api/trees/{tree.Id}", tree);
     }
 
     // Create new TreeHarvestReport

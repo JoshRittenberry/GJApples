@@ -16,6 +16,16 @@ export const getHarvesterAssignment = () => {
     return fetch(`${_apiUrl}/assignment`).then((res) => res.json())
 }
 
+export const createNewTree = (newTree) => {
+    return fetch(_apiUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTree),
+    })
+}
+
 export const createNewTreeHarvestReport = (treeHarvestReport) => {
     return fetch(`${_apiUrl}/harvestreports`, {
         method: "POST",

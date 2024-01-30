@@ -122,6 +122,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
+    // added FromQuery
     public async Task<IActionResult> Register(RegistrationDTO registration, [FromQuery] string? roleName)
     {
         var user = new IdentityUser
