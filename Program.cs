@@ -17,12 +17,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
     {
         options.Cookie.Name = "GJApplesLoginCookie";
-        options.Cookie.SameSite = SameSiteMode.None; // Set SameSite to None
-        options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Ensure the cookie is Secure
-        options.Cookie.HttpOnly = true;
-        options.Cookie.MaxAge = new TimeSpan(7, 0, 0, 0);
-        options.SlidingExpiration = true;
-        options.ExpireTimeSpan = new TimeSpan(24, 0, 0);
+        options.Cookie.SameSite = SameSiteMode.Strict;
+        options.Cookie.HttpOnly = true; //The cookie cannot be accessed through JS (protects against XSS)
+        options.Cookie.MaxAge = new TimeSpan(7, 0, 0, 0); // cookie expires in a week regardless of activity
+        options.SlidingExpiration = true; // extend the cookie lifetime with activity up to 7 days.
+        options.ExpireTimeSpan = new TimeSpan(24, 0, 0); // Cookie will expire in 24 hours without activity
         options.Events.OnRedirectToLogin = (context) =>
         {
             context.Response.StatusCode = StatusCodes.Status401Unauthorized;
