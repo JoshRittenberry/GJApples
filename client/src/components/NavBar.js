@@ -86,7 +86,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                                 {/* Order Picker Links */}
                                 {loggedInUser.roles.includes("OrderPicker") && (
                                     <li className="nav-item">
-                                        <Link to="/orderpicker" className="nav-links" onClick={closeMobileMenu}>
+                                        <Link to="/orders/open" className="nav-links" onClick={closeMobileMenu}>
                                             Employee Portal
                                         </Link>
                                     </li>
@@ -95,7 +95,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                                 {/* Harvester Links */}
                                 {loggedInUser.roles.includes("Harvester") && (
                                     <li className="nav-item">
-                                        <Link to="/harvester" className="nav-links" onClick={closeMobileMenu}>
+                                        <Link to="/harvests/open" className="nav-links" onClick={closeMobileMenu}>
                                             Employee Portal
                                         </Link>
                                     </li>

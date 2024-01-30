@@ -28,7 +28,7 @@ export const AdminSelections = () => {
             alt: 'Garry Jones Picking Apples',
             text: 'View and Edit Employees',
             label: 'Employees',
-            path: '/'
+            path: '/employees'
         },
         {
             id: 2,
@@ -36,7 +36,7 @@ export const AdminSelections = () => {
             alt: 'Garry Jones Picking Apples',
             text: 'View all open orders',
             label: 'Orders',
-            path: '/orderpicker'
+            path: '/orders/open'
         },
         {
             id: 3,
@@ -44,7 +44,7 @@ export const AdminSelections = () => {
             alt: 'Garry Jones Picking Apples',
             text: 'View all open harvests',
             label: 'Harvests',
-            path: '/harvester'
+            path: '/harvests/open'
         },
         {
             id: 4,

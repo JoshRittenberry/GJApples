@@ -16,127 +16,146 @@ import { ViewTrees } from "./trees/ViewTrees"
 import ScrollToTop from "./ScrollToTop"
 import { EditTree } from "./trees/EditTree"
 import { NewTree } from "./trees/NewTree"
+import { ViewEmployees } from "./employees/ViewEmployees"
+import { EditEmployee } from "./employees/EditEmployee"
+import { NewEmployee } from "./employees/NewEmployee"
+import { AdminEmployeeMenu } from "./employees/AdminEmployeeMenu"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
     <>
-    <ScrollToTop />
-    <Routes>
-      {/* Home Page */}
-      <Route path="/">
-        <Route
-          index
-          element={
-            <Home loggedInUser={loggedInUser} />
-          }
-        />
+      <ScrollToTop />
+      <Routes>
+        {/* Home Page */}
+        <Route path="/">
+          <Route
+            index
+            element={
+              <Home loggedInUser={loggedInUser} />
+            }
+          />
 
-        {/* OrderPicker Home */}
-        <Route
-          path="orderpicker"
-          element={
-            <AuthorizedRoute roles={["OrderPicker", "Admin"]} loggedInUser={loggedInUser}>
-              <OrderPickerHomePage loggedInUser={loggedInUser} />
-            </AuthorizedRoute>
-          }
-        />
+          {/* OrderPicker Home */}
+          <Route
+            path="orders/open"
+            element={
+              <AuthorizedRoute roles={["OrderPicker", "Admin"]} loggedInUser={loggedInUser}>
+                <OrderPickerHomePage loggedInUser={loggedInUser} />
+              </AuthorizedRoute>
+            }
+          />
 
-        {/* Harvester Home */}
-        <Route
-          path="harvester"
-          element={
-            <AuthorizedRoute roles={["Harvester", "Admin"]} loggedInUser={loggedInUser}>
-              <HarvesterHomePage loggedInUser={loggedInUser} />
-            </AuthorizedRoute>
-          }
-        />
+          {/* Harvester Home */}
+          <Route
+            path="harvests/open"
+            element={
+              <AuthorizedRoute roles={["Harvester", "Admin"]} loggedInUser={loggedInUser}>
+                <HarvesterHomePage loggedInUser={loggedInUser} />
+              </AuthorizedRoute>
+            }
+          />
 
-        {/* Admin Home */}
-        <Route
-          path="admin"
-          element={
-            <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
-              <AdminHomePage loggedInUser={loggedInUser} />
-            </AuthorizedRoute>
-          }
-        />
+          {/* Admin Home */}
+          <Route
+            path="admin"
+            element={
+              <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
+                <AdminHomePage loggedInUser={loggedInUser} />
+              </AuthorizedRoute>
+            }
+          />
 
-        {/* History Page */}
-        <Route
-          path="history"
-          element={
-            <History />
-          }
-        />
+          {/* History Page */}
+          <Route
+            path="history"
+            element={
+              <History />
+            }
+          />
 
-        {/* New Order Page */}
-        <Route
-          path="order"
-          element={
-            <AuthorizedRoute roles={["Customer"]} loggedInUser={loggedInUser}>
-              <NewOrder loggedInUser={loggedInUser} />
-            </AuthorizedRoute>
-          }
-        />
+          {/* New Order Page */}
+          <Route
+            path="order"
+            element={
+              <AuthorizedRoute roles={["Customer"]} loggedInUser={loggedInUser}>
+                <NewOrder loggedInUser={loggedInUser} />
+              </AuthorizedRoute>
+            }
+          />
 
-        {/* Order History Page */}
-        <Route
-          path="orderhistory/*"
-          element={
-            <AuthorizedRoute roles={["Customer"]} loggedInUser={loggedInUser}>
+          {/* Order History Page */}
+          <Route
+            path="orderhistory/*"
+            element={
+              <AuthorizedRoute roles={["Customer"]} loggedInUser={loggedInUser}>
+                <Routes>
+                  <Route path="" element={<OrderHistory loggedInUser={loggedInUser} />} />
+                  <Route path="view/:id" element={<ViewOrder loggedInUser={loggedInUser} />} />
+                  <Route path="edit/:id" element={<EditOrder loggedInUser={loggedInUser} />} />
+                </Routes>
+              </AuthorizedRoute>
+            }
+          />
+
+          {/* Tree Pages */}
+          <Route
+            path="trees/*"
+            element={
               <Routes>
-                <Route path="" element={<OrderHistory loggedInUser={loggedInUser} />} />
-                <Route path="view/:id" element={<ViewOrder loggedInUser={loggedInUser} />} />
-                <Route path="edit/:id" element={<EditOrder loggedInUser={loggedInUser} />} />
+                <Route path="" element={
+                  <AuthorizedRoute roles={["Admin", "Harvester"]} loggedInUser={loggedInUser}>
+                    <ViewTrees loggedInUser={loggedInUser} />
+                  </AuthorizedRoute>
+                } />
+                <Route path="edit/:id" element={
+                  <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
+                    <EditTree loggedInUser={loggedInUser} />
+                  </AuthorizedRoute>
+                } />
+                <Route path="newtree" element={
+                  <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
+                    <NewTree loggedInUser={loggedInUser} />
+                  </AuthorizedRoute>
+                } />
               </Routes>
-            </AuthorizedRoute>
-          }
-        />
+            }
+          />
 
-        {/* Tree Pages */}
-        <Route
-          path="trees/*"
-          element={
-            <Routes>
-              <Route path="" element={
-                <AuthorizedRoute roles={["Admin","Harvester"]} loggedInUser={loggedInUser}>
-                  <ViewTrees loggedInUser={loggedInUser} />
-                </AuthorizedRoute>
-              } />
-              <Route path="edit/:id" element={
-                <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
-                  <EditTree loggedInUser={loggedInUser} />
-                </AuthorizedRoute>
-              } />
-              <Route path="newtree" element={
-                <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
-                  <NewTree loggedInUser={loggedInUser} />
-                </AuthorizedRoute>
-              } />
-            </Routes>
-          }
-        />
+          {/* Employee Pages */}
+          <Route
+            path="employees/*"
+            element={
+              <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
+                <Routes>
+                  <Route path="" element={<AdminEmployeeMenu loggedInUser={loggedInUser} />} />
+                  <Route path="view" element={<ViewEmployees loggedInUser={loggedInUser} />} />
+                  <Route path="edit/:id" element={<EditEmployee loggedInUser={loggedInUser} />} />
+                  <Route path="new" element={<NewEmployee loggedInUser={loggedInUser} />} />
+                </Routes>
+              </AuthorizedRoute>
+            }
+          />
 
-        <Route
-          path="cart"
-          element={
-            <AuthorizedRoute roles={["Customer"]} loggedInUser={loggedInUser}>
-              <Cart loggedInUser={loggedInUser} />
-            </AuthorizedRoute>
-          }
-        />
+          <Route
+            path="cart"
+            element={
+              <AuthorizedRoute roles={["Customer"]} loggedInUser={loggedInUser}>
+                <Cart loggedInUser={loggedInUser} />
+              </AuthorizedRoute>
+            }
+          />
 
-        <Route
-          path="login"
-          element={<Login setLoggedInUser={setLoggedInUser} />}
-        />
-        <Route
-          path="register"
-          element={<Register setLoggedInUser={setLoggedInUser} />}
-        />
-      </Route>
-      <Route path="*" element={<p>Whoops, nothing here...</p>} />
-    </Routes>
+          <Route
+            path="login"
+            element={<Login setLoggedInUser={setLoggedInUser} />}
+          />
+          <Route
+            path="register"
+            element={<Register setLoggedInUser={setLoggedInUser} />}
+          />
+        </Route>
+        <Route path="*" element={<p>Whoops, nothing here...</p>} />
+      </Routes>
     </>
   )
 }
