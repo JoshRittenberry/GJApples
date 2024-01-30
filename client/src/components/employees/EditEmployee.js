@@ -93,31 +93,6 @@ export const EditEmployee = () => {
                             }}
                         />
                     </FormGroup>
-                    {/* <FormGroup>
-                        <Label>Password</Label>
-                        <Input
-                            invalid={passwordMismatch}
-                            type="password"
-                            value={password}
-                            onChange={(e) => {
-                                setPasswordMismatch(false);
-                                setPassword(e.target.value);
-                            }}
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label> Confirm Password</Label>
-                        <Input
-                            invalid={passwordMismatch}
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) => {
-                                setPasswordMismatch(false);
-                                setConfirmPassword(e.target.value);
-                            }}
-                        />
-                        <FormFeedback>Passwords do not match!</FormFeedback>
-                    </FormGroup> */}
                 </section>
                 <div className="editemployee_footer">
                     <Button className="editemployee_footer_button" onClick={() => {

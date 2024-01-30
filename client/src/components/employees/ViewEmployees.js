@@ -107,11 +107,21 @@ export const ViewEmployees = ({ loggedInUser }) => {
                                         {screenWidth > 900 && <th>{e.address}</th>}
                                         {screenWidth > 600 && <th>{e.email}</th>}
                                         <th>
-                                            <Button className="viewemployees_body_button" onClick={() => {
+                                            <button className="viewemployees_body_button_edit" onClick={() => {
                                                 navigate(`/employees/edit/${e.id}`)
                                             }}>
-                                                Edit Employee
-                                            </Button>
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </button>
+                                            <button className="viewemployees_body_button_position" onClick={() => {
+                                                navigate(`/employees/edit/${e.id}`)
+                                            }}>
+                                                <i class="fa-solid fa-briefcase"></i>
+                                            </button>
+                                            <button className="viewemployees_body_button_reset" onClick={() => {
+                                                navigate(`/employees/edit/${e.id}`)
+                                            }}>
+                                                <i class="fa-solid fa-key"></i>
+                                            </button>
                                         </th>
                                     </tr>
                                 )

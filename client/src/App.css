@@ -5,6 +5,10 @@
   font-family: 'PT Sans', sans-serif;
 }
 
+th {
+  vertical-align: middle;
+}
+
 .home,
 .services,
 .products,
