@@ -26,7 +26,7 @@ export const AdminSelections = () => {
             id: 1,
             src: '/pictures/employees.jpg',
             alt: 'Garry Jones Picking Apples',
-            text: 'Create a new  employee account',
+            text: 'View and Edit Employees',
             label: 'New User',
             path: '/'
         },
@@ -50,7 +50,7 @@ export const AdminSelections = () => {
             id: 4,
             src: '/pictures/trees.jpg',
             alt: 'Garry Jones Picking Apples',
-            text: 'View, and edit, trees currently on the orchard',
+            text: 'View and Edit Trees',
             label: 'Trees',
             path: '/trees'
         },
@@ -58,7 +58,7 @@ export const AdminSelections = () => {
             id: 5,
             src: '/pictures/apples.jpg',
             alt: 'Garry Jones Picking Apples',
-            text: 'View, and edit, apples currently grown on the orchard',
+            text: 'View and Edit Apples',
             label: 'Apples',
             path: '/apples'
         }
@@ -67,7 +67,7 @@ export const AdminSelections = () => {
     const renderSelectionList = () => {
         const selectionGroups = [];
 
-        if (screenWidth >= 1600) {
+        if (screenWidth >= 1200) {
             for (let i = 0; i < selections.length; i += 3) {
                 const group = selections.slice(i, i + 3)
 
@@ -87,7 +87,7 @@ export const AdminSelections = () => {
             }
         }
 
-        if (screenWidth < 1600) {
+        if (screenWidth < 1200) {
             for (let i = 0; i < selections.length; i += 1) {
                 const group = selections.slice(i, i + 1);
 
