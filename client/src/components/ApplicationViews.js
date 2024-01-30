@@ -16,6 +16,7 @@ import { ViewTrees } from "./trees/ViewTrees"
 import ScrollToTop from "./ScrollToTop"
 import { EditTree } from "./trees/EditTree"
 import { NewTree } from "./trees/NewTree"
+import { ViewEmployees } from "./employees/ViewEmployees"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -33,7 +34,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
 
         {/* OrderPicker Home */}
         <Route
-          path="orderpicker"
+          path="orders/open"
           element={
             <AuthorizedRoute roles={["OrderPicker", "Admin"]} loggedInUser={loggedInUser}>
               <OrderPickerHomePage loggedInUser={loggedInUser} />
@@ -43,7 +44,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
 
         {/* Harvester Home */}
         <Route
-          path="harvester"
+          path="harvests/open"
           element={
             <AuthorizedRoute roles={["Harvester", "Admin"]} loggedInUser={loggedInUser}>
               <HarvesterHomePage loggedInUser={loggedInUser} />
@@ -114,6 +115,20 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
                 </AuthorizedRoute>
               } />
             </Routes>
+          }
+        />
+
+        {/* Employee Pages */}
+        <Route
+          path="employees/*"
+          element={
+            <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
+              <Routes>
+                {/* <Route path="" element={<OrderHistory loggedInUser={loggedInUser} />} /> */}
+                <Route path="view" element={<ViewEmployees loggedInUser={loggedInUser} />} />
+                {/* <Route path="edit/:id" element={<EditOrder loggedInUser={loggedInUser} />} /> */}
+              </Routes>
+            </AuthorizedRoute>
           }
         />
 
