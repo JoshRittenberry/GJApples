@@ -3,12 +3,15 @@ import { useEffect, useState } from "react"
 import { Button, Table } from "reactstrap"
 import { Footer } from "../Footer"
 import { getAllTrees } from "../../managers/treeManager"
+import { useNavigate } from "react-router-dom"
 
 export const ViewTrees = ({ loggedInUser }) => {
     const [trees, setTrees] = useState([])
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [currentPage, setCurrentPage] = useState(1)
+
     const treesPerPage = 10
+    const navigate = useNavigate()
 
     useEffect(() => {
         getAllTrees().then(setTrees)
@@ -110,7 +113,9 @@ export const ViewTrees = ({ loggedInUser }) => {
                                     {screenWidth > 990 && <th style={{ color: t.dateRemoved != null ? 'red' : 'black' }}>{poundsProduced(t.treeHarvestReports)}</th>}
                                     {loggedInUser.roles.includes("Admin") && (
                                         <th>
-                                            <Button className="viewtrees_body_button">
+                                            <Button className="viewtrees_body_button" onClick={() => {
+                                                navigate(`/trees/edit/${t.id}`)
+                                            }}>
                                                 Edit
                                             </Button>
                                         </th>

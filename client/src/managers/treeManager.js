@@ -4,6 +4,10 @@ export const getAllTrees = () => {
     return fetch(_apiUrl).then((res) => res.json())
 }
 
+export const getTreeById = (treeId) => {
+    return fetch(`${_apiUrl}/${treeId}`).then((res) => res.json())
+}
+
 export const getAllUnassignedTrees = () => {
     return fetch(`${_apiUrl}?needsHarvested=true`).then((res) => res.json())
 }
@@ -29,6 +33,16 @@ export const completeHarvesterAssignment = (treeHarvestReportId, treeHarvestRepo
             "Content-Type": "application/json",
         },
         body: JSON.stringify(treeHarvestReport),
+    })
+}
+
+export const editTree = (tree) => {
+    return fetch(`${_apiUrl}/${tree.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(tree),
     })
 }
 

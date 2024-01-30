@@ -376,11 +376,11 @@ public class TreesController : ControllerBase
             }
         }
         // Update DateRemoved
-        if (tree.DateRemoved != null && tree.DateRemoved != treeToUpdate.DateRemoved)
+        if (tree.DateRemoved != treeToUpdate.DateRemoved)
         {
-            if (tree.DatePlanted == DateTime.MinValue)
+            if (tree.DatePlanted == DateTime.MinValue || tree.DatePlanted == null)
             {
-                treeToUpdate.DateRemoved = treeToUpdate.DateRemoved;
+                treeToUpdate.DateRemoved = null;
             }
             else
             {
