@@ -4,16 +4,20 @@ import React, { useEffect, useState } from 'react'
 import { Footer } from "../Footer"
 import "../stylesheets/viewEmployees.css"
 import { useNavigate } from "react-router-dom"
+import { ChangeEmployeeRoleModal } from "./ChangeEmployeeRoleModal"
 
 export const ViewEmployees = ({ loggedInUser }) => {
     const [orderPickers, setOrderPickers] = useState([])
     const [harvesters, setHarvesters] = useState([])
     const [employees, setEmployees] = useState([])
+    const [modal, setModal] = useState(false)
+    const [selectedEmployee, setSelectedEmployee] = useState({})
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [currentPage, setCurrentPage] = useState(1)
 
     const employeesPerPage = 10
     const navigate = useNavigate()
+    const toggle = () => setModal(!modal);
 
     useEffect(() => {
         getAllOrderPickers().then((op) => {
@@ -113,7 +117,8 @@ export const ViewEmployees = ({ loggedInUser }) => {
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </button>
                                             <button className="viewemployees_body_button_position" onClick={() => {
-                                                navigate(`/employees/edit/${e.id}`)
+                                                setSelectedEmployee(e)
+                                                toggle()
                                             }}>
                                                 <i class="fa-solid fa-briefcase"></i>
                                             </button>
@@ -140,6 +145,7 @@ export const ViewEmployees = ({ loggedInUser }) => {
                     </div>
                 )}
             </div>
+            <ChangeEmployeeRoleModal modal={modal} toggle={toggle} selectedEmployee={selectedEmployee} />
             <Footer />
         </>
     )

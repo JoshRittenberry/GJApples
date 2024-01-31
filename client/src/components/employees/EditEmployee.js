@@ -102,7 +102,7 @@ export const EditEmployee = () => {
                         Submit
                     </Button>
                     <Button className="editemployee_footer_button" onClick={() => {
-
+                        navigate("/employees/view")
                     }}>
                         Cancel
                     </Button>
