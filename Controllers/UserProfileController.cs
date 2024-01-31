@@ -40,6 +40,21 @@ public class UserProfilesController : ControllerBase
             .ToList());
     }
 
+    [HttpGet("roles")]
+    [Authorize(Roles = "Admin")]
+    public IActionResult GetRoles()
+    {
+        return Ok(_dbContext
+            .Roles
+            .Select(r => new IdentityRoleDTO
+            {
+                Id = r.Id,
+                Name = r.Name
+            })
+            .ToList()
+        );
+    }
+
     // Get UserProfile by Id
     [HttpGet("{id}")]
     [Authorize(Roles = "Admin")]

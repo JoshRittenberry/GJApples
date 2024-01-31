@@ -145,7 +145,7 @@ export const ViewEmployees = ({ loggedInUser }) => {
                     </div>
                 )}
             </div>
-            <ChangeEmployeeRoleModal modal={modal} toggle={toggle} selectedEmployee={selectedEmployee} />
+            <ChangeEmployeeRoleModal modal={modal} toggle={toggle} selectedEmployee={selectedEmployee} setSelectedEmployee={setSelectedEmployee} />
             <Footer />
         </>
     )

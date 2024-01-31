@@ -12,5 +12,6 @@ public class OrderPickerDTO
     public string Address { get; set; }
     [EmailAddress]
     public string Email { get; set; }
+    public string? IdentityUserId { get; set; }
     public List<OrderDTO>? CompletedOrders { get; set; }
 }

@@ -40,6 +40,7 @@ public class HarvestersController : ControllerBase
                 LastName = harvester.LastName,
                 Address = harvester.Address,
                 Email = harvester.IdentityUser.Email,
+                IdentityUserId = harvester.IdentityUserId,
                 TreeHarvestReports = harvester.TreeHarvestReports.Select(thr => new TreeHarvestReportDTO
                 {
                     Id = thr.Id,

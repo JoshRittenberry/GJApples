@@ -1,23 +1,51 @@
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
+import { useEffect, useState } from "react"
+import { Button, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
+import { getAllRoles } from "../../managers/employeeManager"
 
-export const ChangeEmployeeRoleModal = ({ modal, toggle, selectedEmployee, args }) => {
+export const ChangeEmployeeRoleModal = ({ modal, toggle, selectedEmployee, setSelectedEmployee, args }) => {
+    const [roles, setRoles] = useState([])
+
+    useEffect(() => {
+        getAllRoles().then(setRoles)
+    }, [])
+
     return (
         <Modal isOpen={modal} toggle={toggle} {...args}>
-            <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+            <ModalHeader toggle={toggle}>Edit {selectedEmployee.firstName} {selectedEmployee.lastName}'s Position</ModalHeader>
             <ModalBody>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum.
+                <Form>
+                    <FormGroup>
+                        <Label for="position">
+                            Position
+                        </Label>
+                        <Input
+                            id="position"
+                            name="select"
+                            type="select"
+                            onChange=""
+                        >
+                            {roles.map(r => {
+                                return (
+                                    <option key={r.id} value={r.id}>
+                                        {r.name}
+                                    </option>
+                                )
+                            })}
+                        </Input>
+                    </FormGroup>
+                </Form>
             </ModalBody>
             <ModalFooter>
-                <Button color="primary" onClick={toggle}>
-                    Do Something
+                <Button color="primary" onClick={() => {
+                    setSelectedEmployee({})
+                    toggle()
+                }}>
+                    Submit
                 </Button>{' '}
-                <Button color="secondary" onClick={toggle}>
+                <Button color="secondary" onClick={() => {
+                    setSelectedEmployee({})
+                    toggle()
+                }}>
                     Cancel
                 </Button>
             </ModalFooter>

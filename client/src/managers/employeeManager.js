@@ -6,6 +6,10 @@ export const getAllHarvesters = () => {
     return fetch(`/api/harvesters`).then((res) => res.json())
 }
 
+export const getAllRoles = () => {
+    return fetch(`/api/userprofiles/roles`).then((res) => res.json())
+}
+
 export const getEmployeeById = (employeeId) => {
     return fetch(`/api/userprofiles/${employeeId}`).then((res) => res.json())
 }
