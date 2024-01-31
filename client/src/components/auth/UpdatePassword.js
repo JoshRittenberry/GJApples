@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { Footer } from "../Footer"
 import { getUserWithRoles, updateEmployeePassword } from "../../managers/employeeManager"
 import { useNavigate } from "react-router-dom"
+import "../stylesheets/updatePassword.css"
 
 export const UpdatePassword = ({ loggedInUser }) => {
     const [user, setUser] = useState({})
