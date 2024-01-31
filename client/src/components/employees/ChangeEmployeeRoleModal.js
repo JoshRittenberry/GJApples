@@ -51,8 +51,9 @@ export const ChangeEmployeeRoleModal = ({ modal, toggle, selectedEmployee, setSe
                 <Button color="primary" onClick={() => {
                     if (currentRole != null && user.roles?.[0] !== currentRole.name) {
                         updateEmployeeRole(user?.identityUserId, currentRole?.id).then(() => {
-                            setSelectedEmployee({});
-                            toggle();
+                            setSelectedEmployee({})
+                            toggle()
+                            window.location.reload()
                         });
                     }
                 }}>
