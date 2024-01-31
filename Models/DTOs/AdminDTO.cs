@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GJApples.Models.DTOs;
 
-public class OrderPickerDTO
+public class AdminDTO
 {
     public int Id { get; set; }
     public string FirstName { get; set; }
@@ -13,5 +13,4 @@ public class OrderPickerDTO
     [EmailAddress]
     public string Email { get; set; }
     public string? IdentityUserId { get; set; }
-    public List<OrderDTO>? CompletedOrders { get; set; }
 }

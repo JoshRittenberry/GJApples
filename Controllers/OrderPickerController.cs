@@ -43,6 +43,7 @@ public class OrderPickersController : ControllerBase
                 LastName = orderPicker.LastName,
                 Address = orderPicker.Address,
                 Email = orderPicker.IdentityUser.Email,
+                IdentityUserId = orderPicker.IdentityUserId,
                 CompletedOrders = orderPicker.CompletedOrders.Select(co => new OrderDTO
                 {
                     Id = co.Id,

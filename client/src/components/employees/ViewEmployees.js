@@ -1,28 +1,40 @@
 import { Button, Table } from "reactstrap"
-import { getAllHarvesters, getAllOrderPickers } from "../../managers/employeeManager"
+import { getAllAdmin, getAllHarvesters, getAllOrderPickers } from "../../managers/employeeManager"
 import React, { useEffect, useState } from 'react'
 import { Footer } from "../Footer"
 import "../stylesheets/viewEmployees.css"
 import { useNavigate } from "react-router-dom"
+import { ChangeEmployeeRoleModal } from "./ChangeEmployeeRoleModal"
+import { ChangeEmployeePasswordModal } from "./ChangeEmployeePasswordModal"
 
 export const ViewEmployees = ({ loggedInUser }) => {
     const [orderPickers, setOrderPickers] = useState([])
     const [harvesters, setHarvesters] = useState([])
+    const [admins, setAdmins] = useState([])
     const [employees, setEmployees] = useState([])
+    const [selectedEmployee, setSelectedEmployee] = useState({})
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [currentPage, setCurrentPage] = useState(1)
+    const [positionModal, setPositionModal] = useState(false)
+    const [passwordModal, setPasswordModal] = useState(false)
+
 
     const employeesPerPage = 10
     const navigate = useNavigate()
+    const togglePositionModal = () => setPositionModal(!positionModal)
+    const togglePasswordModal = () => setPasswordModal(!passwordModal)
 
     useEffect(() => {
         getAllOrderPickers().then((op) => {
             setOrderPickers(op)
-            getAllHarvesters().then((h) => {
-                setHarvesters(h)
-                const combinedEmployees = [...op, ...h]
-                combinedEmployees.sort((a, b) => a.id - b.id)
-                setEmployees(combinedEmployees)
+            getAllAdmin().then((a) => {
+                setAdmins(a)
+                getAllHarvesters().then((h) => {
+                    setHarvesters(h)
+                    const combinedEmployees = [...op, ...a, ...h]
+                    combinedEmployees.sort((a, b) => a.id - b.id)
+                    setEmployees(combinedEmployees)
+                })
             })
         })
 
@@ -60,15 +72,18 @@ export const ViewEmployees = ({ loggedInUser }) => {
     }
 
     const employeePosition = (employeeId) => {
-        const orderPicker = orderPickers.find((picker) => picker.id === employeeId);
-        const harvester = harvesters.find((harvester) => harvester.id === employeeId);
+        const orderPicker = orderPickers.find((picker) => picker.id === employeeId)
+        const harvester = harvesters.find((harvester) => harvester.id === employeeId)
+        const admin = admins.find((admin) => admin.id === employeeId)
 
         if (orderPicker) {
-            return "Order Picker";
+            return "Order Picker"
         } else if (harvester) {
-            return "Harvester";
+            return "Harvester"
+        } else if (admin) {
+            return "Admin"
         } else {
-            return "N/A";
+            return "N/A"
         }
     }
 
@@ -107,11 +122,23 @@ export const ViewEmployees = ({ loggedInUser }) => {
                                         {screenWidth > 900 && <th>{e.address}</th>}
                                         {screenWidth > 600 && <th>{e.email}</th>}
                                         <th>
-                                            <Button className="viewemployees_body_button" onClick={() => {
+                                            <button className="viewemployees_body_button_edit" onClick={() => {
                                                 navigate(`/employees/edit/${e.id}`)
                                             }}>
-                                                Edit Employee
-                                            </Button>
+                                                <i className="fa-solid fa-pen-to-square"></i>
+                                            </button>
+                                            <button className="viewemployees_body_button_position" onClick={() => {
+                                                setSelectedEmployee(e)
+                                                togglePositionModal()
+                                            }}>
+                                                <i className="fa-solid fa-briefcase"></i>
+                                            </button>
+                                            <button className="viewemployees_body_button_reset" onClick={() => {
+                                                setSelectedEmployee(e)
+                                                togglePasswordModal()
+                                            }}>
+                                                <i className="fa-solid fa-key"></i>
+                                            </button>
                                         </th>
                                     </tr>
                                 )
@@ -130,6 +157,8 @@ export const ViewEmployees = ({ loggedInUser }) => {
                     </div>
                 )}
             </div>
+            <ChangeEmployeeRoleModal positionModal={positionModal} togglePositionModal={togglePositionModal} selectedEmployee={selectedEmployee} setSelectedEmployee={setSelectedEmployee} />
+            <ChangeEmployeePasswordModal passwordModal={passwordModal} togglePasswordModal={togglePasswordModal} selectedEmployee={selectedEmployee} setSelectedEmployee={setSelectedEmployee} />
             <Footer />
         </>
     )

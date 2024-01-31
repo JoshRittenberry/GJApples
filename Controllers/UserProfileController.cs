@@ -1,3 +1,4 @@
+using System.Text;
 using GJApples.Data;
 using GJApples.Models;
 using GJApples.Models.DTOs;
@@ -21,7 +22,7 @@ public class UserProfilesController : ControllerBase
 
     // Get all UserProfiles
     [HttpGet]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public IActionResult Get()
     {
         return Ok(_dbContext
@@ -40,9 +41,25 @@ public class UserProfilesController : ControllerBase
             .ToList());
     }
 
+    // Get all Roles
+    [HttpGet("roles")]
+    [Authorize(Roles = "Admin")]
+    public IActionResult GetRoles()
+    {
+        return Ok(_dbContext
+            .Roles
+            .Select(r => new IdentityRoleDTO
+            {
+                Id = r.Id,
+                Name = r.Name
+            })
+            .ToList()
+        );
+    }
+
     // Get UserProfile by Id
     [HttpGet("{id}")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public IActionResult Get(int id)
     {
         var foundUP = _dbContext
@@ -50,12 +67,19 @@ public class UserProfilesController : ControllerBase
             .Include(up => up.IdentityUser)
             .SingleOrDefault(up => up.Id == id);
 
+        if (foundUP == null)
+        {
+            return NotFound();
+        }
+
         return Ok(new UserProfileDTO
         {
             Id = foundUP.Id,
             FirstName = foundUP.FirstName,
             LastName = foundUP.LastName,
             Address = foundUP.Address,
+            Email = foundUP.IdentityUser.Email,
+            UserName = foundUP.IdentityUser.UserName,
             IdentityUserId = foundUP.IdentityUserId,
             IdentityUser = foundUP.IdentityUser
         });
@@ -82,6 +106,31 @@ public class UserProfilesController : ControllerBase
             .Select(ur => _dbContext.Roles.SingleOrDefault(r => r.Id == ur.RoleId).Name)
             .ToList()
         }));
+    }
+
+    // Get UserProfile with Roles
+    [HttpGet("withroles/{id}")]
+    [Authorize(Roles = "Admin")]
+    public IActionResult GetWithRoles(int id)
+    {
+        var user = _dbContext.UserProfiles
+        .Include(up => up.IdentityUser)
+        .SingleOrDefault(up => up.Id == id);
+
+        return Ok(new UserProfileDTO
+        {
+            Id = user.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Address = user.Address,
+            Email = user.IdentityUser.Email,
+            UserName = user.IdentityUser.UserName,
+            IdentityUserId = user.IdentityUserId,
+            Roles = _dbContext.UserRoles
+                .Where(ur => ur.UserId == user.IdentityUserId)
+                .Select(ur => _dbContext.Roles.SingleOrDefault(r => r.Id == ur.RoleId).Name)
+                .ToList()
+        });
     }
 
     // Promote UserProfile
@@ -116,5 +165,117 @@ public class UserProfilesController : ControllerBase
         _dbContext.UserRoles.Remove(userRole);
         _dbContext.SaveChanges();
         return NoContent();
+    }
+
+    // Edit UserProfile
+    [HttpPut("{id}")]
+    [Authorize(Roles = "Admin")]
+    public IActionResult UpdateUserProfile(UserProfileDTO update, int id)
+    {
+        var foundUP = _dbContext
+            .UserProfiles
+            .Include(up => up.IdentityUser)
+            .SingleOrDefault(up => up.Id == id);
+
+        if (foundUP == null)
+        {
+            return NotFound();
+        }
+
+        bool isUpdated = false;
+
+        // Update FirstName
+        if (!string.IsNullOrWhiteSpace(update.FirstName) && update.FirstName != foundUP.FirstName)
+        {
+            foundUP.FirstName = update.FirstName.Trim();
+            isUpdated = true;
+        }
+        // Update LastName
+        if (!string.IsNullOrWhiteSpace(update.LastName) && update.LastName != foundUP.LastName)
+        {
+            foundUP.LastName = update.LastName.Trim();
+            isUpdated = true;
+        }
+        // Update Email
+        if (!string.IsNullOrWhiteSpace(update.Email) && update.Email != foundUP.IdentityUser.Email)
+        {
+            foundUP.IdentityUser.Email = update.Email.Trim();
+            isUpdated = true;
+        }
+        // Update UserName
+        if (!string.IsNullOrWhiteSpace(update.UserName) && update.UserName != foundUP.IdentityUser.UserName)
+        {
+            foundUP.IdentityUser.UserName = update.UserName.Trim();
+            isUpdated = true;
+        }
+        // Update Address
+        if (!string.IsNullOrWhiteSpace(update.Address) && update.Address != foundUP.Address)
+        {
+            foundUP.Address = update.Address.Trim();
+            isUpdated = true;
+        }
+
+        if (isUpdated)
+        {
+            _dbContext.SaveChanges();
+            return Ok();
+        }
+
+        return NoContent();
+    }
+
+    // Change UserProfile's Role
+    [HttpPut("changerole/{id}")]
+    [Authorize(Roles = "Admin")]
+    public IActionResult UpdateUserProfileRole(string id, [FromQuery] string roleId)
+    {
+        IdentityRole role = _dbContext.Roles.SingleOrDefault(r => r.Id == roleId);
+        IdentityUser user = _dbContext.Users.SingleOrDefault(u => u.Id == id);
+
+        var userRole = _dbContext.UserRoles.SingleOrDefault(ur => ur.UserId == user.Id);
+
+        if (userRole == null)
+        {
+            return NotFound();
+        }
+
+        // Delete the old entry
+        _dbContext.UserRoles.Remove(userRole);
+        _dbContext.SaveChanges();
+
+        // Create a new entry
+        _dbContext.UserRoles.Add(new IdentityUserRole<string>
+        {
+            RoleId = role.Id,
+            UserId = user.Id
+        });
+
+        _dbContext.SaveChanges();
+
+        return NoContent();
+    }
+
+    // Change UserProfile's Password
+    [HttpPut("changepassword")]
+    [Authorize(Roles = "Admin")]
+    public IActionResult UpdateUserProfilePassword(NewPasswordDTO newPassword)
+    {
+        var password = Encoding
+            .GetEncoding("iso-8859-1")
+            .GetString(Convert.FromBase64String(newPassword.Password));
+
+        var user = _dbContext.Users.SingleOrDefault(u => u.Id == newPassword.IdentityUserId);
+
+        if (string.IsNullOrWhiteSpace(password) || user == null)
+        {
+            return BadRequest();
+        }
+
+        var passwordHasher = new PasswordHasher<IdentityUser>();
+        user.PasswordHash = passwordHasher.HashPassword(user, password);
+
+        _dbContext.SaveChanges();
+
+        return Ok();
     }
 }
