@@ -255,10 +255,10 @@ public class UserProfilesController : ControllerBase
     }
 
     // Change UserProfile's Password
-    [HttpPut("changepassword/{id}")]
+    [HttpPut("changepassword")]
     [Authorize(Roles = "Admin")]
-    public IActionResult UpdateUserProfilePassword(string id, [FromQuery] string newPassword)
+    public IActionResult UpdateUserProfilePassword(NewPasswordDTO newPassword)
     {
-        
+
     }
 }
