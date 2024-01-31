@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Footer } from "../Footer"
 import "../stylesheets/viewEmployees.css"
 import { useNavigate } from "react-router-dom"
-import { ChangeEmployeeRoleModal } from "./ChangeEmployeeRoleModal"
+import { ChangeEmployeePositionModal } from "./ChangeEmployeePositionModal"
 import { ChangeEmployeePasswordModal } from "./ChangeEmployeePasswordModal"
 
 export const ViewEmployees = ({ loggedInUser }) => {
@@ -157,7 +157,7 @@ export const ViewEmployees = ({ loggedInUser }) => {
                     </div>
                 )}
             </div>
-            <ChangeEmployeeRoleModal positionModal={positionModal} togglePositionModal={togglePositionModal} selectedEmployee={selectedEmployee} setSelectedEmployee={setSelectedEmployee} />
+            <ChangeEmployeePositionModal positionModal={positionModal} togglePositionModal={togglePositionModal} selectedEmployee={selectedEmployee} setSelectedEmployee={setSelectedEmployee} />
             <ChangeEmployeePasswordModal passwordModal={passwordModal} togglePasswordModal={togglePasswordModal} selectedEmployee={selectedEmployee} setSelectedEmployee={setSelectedEmployee} />
             <Footer />
         </>
