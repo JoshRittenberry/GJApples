@@ -253,4 +253,12 @@ public class UserProfilesController : ControllerBase
 
         return NoContent();
     }
+
+    // Change UserProfile's Password
+    [HttpPut("changepassword/{id}")]
+    [Authorize(Roles = "Admin")]
+    public IActionResult UpdateUserProfilePassword(string id, [FromQuery] string newPassword)
+    {
+        
+    }
 }
