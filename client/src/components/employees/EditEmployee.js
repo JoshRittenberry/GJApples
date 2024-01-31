@@ -21,6 +21,7 @@ export const EditEmployee = () => {
                 lastName: res.lastName,
                 address: res.address,
                 email: res.email,
+                forcePasswordChange: false,
                 userName: res.userName
             })
         })

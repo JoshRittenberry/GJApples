@@ -16,6 +16,9 @@ export default function Login({ setLoggedInUser }) {
     login(email, password).then((user) => {
       if (!user) {
         setFailedLogin(true);
+      } else if (user.forcePasswordChange == true) {
+        setLoggedInUser(user);
+        navigate("/updatepassword")
       } else {
         setLoggedInUser(user);
         navigate("/");

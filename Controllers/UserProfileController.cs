@@ -36,6 +36,7 @@ public class UserProfilesController : ControllerBase
                 Address = up.Address,
                 IdentityUserId = up.IdentityUserId,
                 Email = up.IdentityUser.Email,
+                ForcePasswordChange = up.ForcePasswordChange,
                 UserName = up.IdentityUser.UserName
             })
             .ToList());
@@ -80,6 +81,7 @@ public class UserProfilesController : ControllerBase
             Address = foundUP.Address,
             Email = foundUP.IdentityUser.Email,
             UserName = foundUP.IdentityUser.UserName,
+            ForcePasswordChange = foundUP.ForcePasswordChange,
             IdentityUserId = foundUP.IdentityUserId,
             IdentityUser = foundUP.IdentityUser
         });
@@ -99,6 +101,7 @@ public class UserProfilesController : ControllerBase
             LastName = up.LastName,
             Address = up.Address,
             Email = up.IdentityUser.Email,
+            ForcePasswordChange = up.ForcePasswordChange,
             UserName = up.IdentityUser.UserName,
             IdentityUserId = up.IdentityUserId,
             Roles = _dbContext.UserRoles
@@ -110,12 +113,28 @@ public class UserProfilesController : ControllerBase
 
     // Get UserProfile with Roles
     [HttpGet("withroles/{id}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public IActionResult GetWithRoles(int id)
     {
+        // Check if User is Admin
+        bool isAdmin = User.Identity.IsAuthenticated && User.IsInRole("Admin");
+
+        // Find User's UserName
+        var userName = User.Identity.Name;
+
+        // Find Customer UserProfile
+        UserProfile userAccount = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUser.UserName == userName);
+
         var user = _dbContext.UserProfiles
-        .Include(up => up.IdentityUser)
-        .SingleOrDefault(up => up.Id == id);
+            .Include(up => up.IdentityUser)
+            .SingleOrDefault(up => up.Id == id);
+
+        if (!isAdmin && userAccount.Id != user.Id)
+        {
+            return BadRequest();
+        }
 
         return Ok(new UserProfileDTO
         {
@@ -124,6 +143,7 @@ public class UserProfilesController : ControllerBase
             LastName = user.LastName,
             Address = user.Address,
             Email = user.IdentityUser.Email,
+            ForcePasswordChange = user.ForcePasswordChange,
             UserName = user.IdentityUser.UserName,
             IdentityUserId = user.IdentityUserId,
             Roles = _dbContext.UserRoles
@@ -257,9 +277,25 @@ public class UserProfilesController : ControllerBase
 
     // Change UserProfile's Password
     [HttpPut("changepassword")]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public IActionResult UpdateUserProfilePassword(NewPasswordDTO newPassword)
     {
+        // Check if User is Admin
+        bool isAdmin = User.Identity.IsAuthenticated && User.IsInRole("Admin");
+
+        // Find User's UserName
+        var userName = User.Identity.Name;
+
+        // Find Customer UserProfile
+        UserProfile userAccount = _dbContext
+            .UserProfiles
+            .SingleOrDefault(u => u.IdentityUserId == newPassword.IdentityUserId);
+
+        if (!isAdmin && userAccount.IdentityUserId != newPassword.IdentityUserId)
+        {
+            return BadRequest();
+        }
+
         var password = Encoding
             .GetEncoding("iso-8859-1")
             .GetString(Convert.FromBase64String(newPassword.Password));
@@ -273,6 +309,19 @@ public class UserProfilesController : ControllerBase
 
         var passwordHasher = new PasswordHasher<IdentityUser>();
         user.PasswordHash = passwordHasher.HashPassword(user, password);
+
+        _dbContext.SaveChanges();
+
+        var userProfile = _dbContext.UserProfiles.SingleOrDefault(up => up.IdentityUserId == user.Id);
+
+        if (isAdmin) 
+        {
+            userProfile.ForcePasswordChange = true;
+        }
+        else 
+        {
+            userProfile.ForcePasswordChange = false;
+        }
 
         _dbContext.SaveChanges();
 

@@ -174,7 +174,8 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
                 IdentityUserId = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                 FirstName = "Garry",
                 LastName = "Jones",
-                Address = "101 Main Street"
+                Address = "101 Main Street",
+                ForcePasswordChange = false
             },
             new UserProfile
             {
@@ -182,7 +183,8 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
                 IdentityUserId = "8c3605d2-c0da-4592-8879-0c71dc3c02c4",
                 FirstName = "Josh",
                 LastName = "Harvester",
-                Address = "102 Harvest Lane"
+                Address = "102 Harvest Lane",
+                ForcePasswordChange = false
             },
             new UserProfile
             {
@@ -190,7 +192,8 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
                 IdentityUserId = "3a64b2c1-7780-40f1-a393-8edb30c4b2ab",
                 FirstName = "Haley",
                 LastName = "Harvester",
-                Address = "103 Harvest Lane"
+                Address = "103 Harvest Lane",
+                ForcePasswordChange = false
             },
             new UserProfile
             {
@@ -198,7 +201,8 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
                 IdentityUserId = "83aab5f4-67ba-4da9-940e-fef0ce8597bd",
                 FirstName = "Chris",
                 LastName = "Picker",
-                Address = "104 Picker Street"
+                Address = "104 Picker Street",
+                ForcePasswordChange = false
             },
             new UserProfile
             {
@@ -206,7 +210,8 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
                 IdentityUserId = "03d8deac-3687-4274-82c1-e1d32392d2de",
                 FirstName = "Kyle",
                 LastName = "Picker",
-                Address = "105 Picker Street"
+                Address = "105 Picker Street",
+                ForcePasswordChange = false
             },
             new UserProfile
             {
@@ -214,7 +219,8 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
                 IdentityUserId = "c8c02266-41e6-414d-a1fc-14bbefef86a0",
                 FirstName = "Debbie",
                 LastName = "Customer",
-                Address = "106 Customer Road"
+                Address = "106 Customer Road",
+                ForcePasswordChange = false
             },
             new UserProfile
             {
@@ -222,7 +228,8 @@ public class GJApplesDbContext : IdentityDbContext<IdentityUser>
                 IdentityUserId = "bc3a3871-4800-4061-8182-b965c9c109bc",
                 FirstName = "Aaron",
                 LastName = "Customer",
-                Address = "107 Customer Road"
+                Address = "107 Customer Road",
+                ForcePasswordChange = false
             }
         );
 

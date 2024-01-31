@@ -113,6 +113,7 @@ public class AuthController : ControllerBase
                 IdentityUserId = identityUserId,
                 UserName = User.FindFirstValue(ClaimTypes.Name),
                 Email = User.FindFirstValue(ClaimTypes.Email),
+                ForcePasswordChange = profile.ForcePasswordChange,
                 Roles = roles
             };
 

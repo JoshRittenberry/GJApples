@@ -13,6 +13,7 @@ public class UserProfileDTO
     public string Address { get; set; }
     [EmailAddress]
     public string Email { get; set; }
+    public bool ForcePasswordChange { get; set; }
     [MaxLength(50)]
     public string UserName { get; set; }
     public string? IdentityUserId { get; set; }

@@ -201,6 +201,7 @@ namespace GJApples.Migrations
                     FirstName = table.Column<string>(type: "text", nullable: false),
                     LastName = table.Column<string>(type: "text", nullable: false),
                     Address = table.Column<string>(type: "text", nullable: false),
+                    ForcePasswordChange = table.Column<bool>(type: "boolean", nullable: false),
                     IdentityUserId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -315,10 +316,10 @@ namespace GJApples.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "8b2b3a2d-62f6-4f2b-8b3d-45b6a1f3b5b4", "bdd6d948-fa15-430c-be23-25d30a49cd58", "Harvester", "harvester" },
-                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "2dcc1772-918c-43de-a0dc-f3501c3a37d2", "Admin", "admin" },
-                    { "d4f146bf-70c8-4d02-98ec-0b5f4b9d213f", "a9380ff9-f02d-4674-adee-44b2e82c0624", "Customer", "customer" },
-                    { "f65f1f30-d0b1-4f59-a3c8-eb1f2e6757d3", "b4fa4527-1276-409b-83e8-b77bf80543a5", "OrderPicker", "orderpicker" }
+                    { "8b2b3a2d-62f6-4f2b-8b3d-45b6a1f3b5b4", "877e141a-213b-4f01-ab81-8b381b6b6eac", "Harvester", "harvester" },
+                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "1ae4f194-a87c-4c90-bf9f-2aa7c08d7052", "Admin", "admin" },
+                    { "d4f146bf-70c8-4d02-98ec-0b5f4b9d213f", "a7b9d98d-46cc-4132-948f-f5a3a2746282", "Customer", "customer" },
+                    { "f65f1f30-d0b1-4f59-a3c8-eb1f2e6757d3", "d3d525d4-b451-43c9-9e07-57169ffdcef4", "OrderPicker", "orderpicker" }
                 });
 
             migrationBuilder.InsertData(
@@ -326,13 +327,13 @@ namespace GJApples.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "03d8deac-3687-4274-82c1-e1d32392d2de", 0, "78cbff3e-65ef-4795-a7ae-4aa863c08f90", "kyle@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEK0J+POeA6Npdkr3OU/NKbFqjJXJyCFg3uOXR0SdbYj2sa34bGaiwiIDrK0Ejuq3ug==", null, false, "64c8d960-5abc-4661-989a-f4d054601aae", false, "Kyle" },
-                    { "3a64b2c1-7780-40f1-a393-8edb30c4b2ab", 0, "7c4a8191-ee01-44d8-8c2b-fb82a3462504", "haley@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEO5p4tMYRcfh8yReGYcNOD9ugK+c1VNjh8txHyiTS1+YJbNB/lnR6qbxk0X/9FaVdw==", null, false, "a1a989ab-d59b-4e9c-bd90-3fa08a84dd97", false, "Haley" },
-                    { "83aab5f4-67ba-4da9-940e-fef0ce8597bd", 0, "1f9898eb-d387-41b3-a895-d9c87ee05581", "chris@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEO7TRAKjAGE4Ac4EimMGg/UiLu3U8yHg4xvM/r0HynTIheVzN8xsegJH6Umi6Dbunw==", null, false, "5613303c-2cbc-4081-b18c-e56ee454486c", false, "Chris" },
-                    { "8c3605d2-c0da-4592-8879-0c71dc3c02c4", 0, "da1b60b8-0cb8-4d14-8c3d-a4b4a1bcde2d", "josh@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAECeUmkkASHr4e92vLBVdnU6Q/E6Pb35eg2QP0cOaA03Fmx6DmdF6cThO/UmijgAnCw==", null, false, "39a2064e-3742-4544-b19a-6c71f3c6c3b2", false, "Josh" },
-                    { "bc3a3871-4800-4061-8182-b965c9c109bc", 0, "b0c84d26-17bb-4b6c-bd0e-a99ee17c644f", "aaron@yahoo.com", false, false, null, null, null, "AQAAAAEAACcQAAAAELFOg9JWUJk+qX1fbdyen5JIwUxk0HPLo8zFN0T4CmOSh79bubksNnVWYgUAi7D+8w==", null, false, "6c8b6a28-0ad7-4eff-9415-1db89ef22488", false, "Aaron" },
-                    { "c8c02266-41e6-414d-a1fc-14bbefef86a0", 0, "dc2c6f4a-9a66-46bf-a834-8270818f3cfe", "debbie@gmail.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEPzH94ebHLGfy5kh8GOq/g5b8VvR1/7P1rrNXse+us6upwINMw9z2UURutXptnGBqA==", null, false, "0ffbd8e9-ee07-460d-a93e-2947288ba962", false, "Debbie" },
-                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "8d823249-2f3c-4efd-b8ca-7bb0333a9218", "admin@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEOy1Iyr9eS+lP4xe/g4KnAlek3oDPXSsMqRPF/hj0xbXyGefLG6drToeRlcGI5C7Sw==", null, false, "db0003b6-4637-4225-b410-711b341afa56", false, "Administrator" }
+                    { "03d8deac-3687-4274-82c1-e1d32392d2de", 0, "08b3ec52-75b1-4e41-a27a-54c103483691", "kyle@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEM6XH40dWNI5d9RcCugDv0wXs+NVZ2lXfKOn/oi+q2P94U2DnZfZ9fylG+NCYCNFhg==", null, false, "f85f8238-1db2-425f-bd62-522c90756aae", false, "Kyle" },
+                    { "3a64b2c1-7780-40f1-a393-8edb30c4b2ab", 0, "fad4259f-efc1-4cc8-a54d-3a33ad7fb62b", "haley@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAELtES5POd9/Owzcwb0ANwr/2ZRJpOm1izSTT+O1SfIty8X0AIQNyCKsX2MWycDq5OA==", null, false, "40f48447-520d-404e-aecc-56b3af0296ad", false, "Haley" },
+                    { "83aab5f4-67ba-4da9-940e-fef0ce8597bd", 0, "4427b962-4f9e-4c21-b5af-fde9c415a2bf", "chris@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEBz2zHNNXtDbhpXrEtPsBzcRwz8cI/vsCFx6k4P/XRksQsGBNEsv5Rublp2juIbAJg==", null, false, "777f0df8-d556-481b-a7e3-a2b3867b939c", false, "Chris" },
+                    { "8c3605d2-c0da-4592-8879-0c71dc3c02c4", 0, "b7c4c8a7-72fa-4a55-b456-9d25ab67b8b6", "josh@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEKvx+/NPZM3tZzgvpB78tZiz/qvKkArl75/EOrIZM1jzh2DAfCaTctdCTCufFUF7zA==", null, false, "c2539340-5365-45c5-b758-183defe00402", false, "Josh" },
+                    { "bc3a3871-4800-4061-8182-b965c9c109bc", 0, "74eb97a3-1235-4815-b582-82c23d40cae3", "aaron@yahoo.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEN3Uprg4LnjQL3GTXN4C/Rf5E0BSIv6/+f2o6EWZbKT/4ulc5707W3hI0Jse2Oogpw==", null, false, "714d73bb-15ce-4d28-a751-5f9c3ed00543", false, "Aaron" },
+                    { "c8c02266-41e6-414d-a1fc-14bbefef86a0", 0, "7b7784f1-75c4-46ab-93ed-11a1de2f1cf0", "debbie@gmail.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEEB0xGdxhpmG0wvXMscFYS22EzVgDt6n872p2mbf95/b/dINxm88LNvn/jplBQoveg==", null, false, "8351f8b8-4c80-41dc-a49f-7b923d1cced6", false, "Debbie" },
+                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "83cd0366-e127-47d2-876c-cbf6e585b9fc", "admin@gjapples.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEKLATLo/C0mspwxUnBVU2mlszsz5eIoLPPxgXWgsixCn6LO0psbygJL0BmgqYFd+bQ==", null, false, "bd239540-4de4-48d5-ae6b-35229335e4c4", false, "Administrator" }
                 });
 
             migrationBuilder.InsertData(
@@ -378,16 +379,16 @@ namespace GJApples.Migrations
 
             migrationBuilder.InsertData(
                 table: "UserProfiles",
-                columns: new[] { "Id", "Address", "FirstName", "IdentityUserId", "LastName" },
+                columns: new[] { "Id", "Address", "FirstName", "ForcePasswordChange", "IdentityUserId", "LastName" },
                 values: new object[,]
                 {
-                    { 1, "101 Main Street", "Garry", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", "Jones" },
-                    { 2, "102 Harvest Lane", "Josh", "8c3605d2-c0da-4592-8879-0c71dc3c02c4", "Harvester" },
-                    { 3, "103 Harvest Lane", "Haley", "3a64b2c1-7780-40f1-a393-8edb30c4b2ab", "Harvester" },
-                    { 4, "104 Picker Street", "Chris", "83aab5f4-67ba-4da9-940e-fef0ce8597bd", "Picker" },
-                    { 5, "105 Picker Street", "Kyle", "03d8deac-3687-4274-82c1-e1d32392d2de", "Picker" },
-                    { 6, "106 Customer Road", "Debbie", "c8c02266-41e6-414d-a1fc-14bbefef86a0", "Customer" },
-                    { 7, "107 Customer Road", "Aaron", "bc3a3871-4800-4061-8182-b965c9c109bc", "Customer" }
+                    { 1, "101 Main Street", "Garry", false, "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", "Jones" },
+                    { 2, "102 Harvest Lane", "Josh", false, "8c3605d2-c0da-4592-8879-0c71dc3c02c4", "Harvester" },
+                    { 3, "103 Harvest Lane", "Haley", false, "3a64b2c1-7780-40f1-a393-8edb30c4b2ab", "Harvester" },
+                    { 4, "104 Picker Street", "Chris", false, "83aab5f4-67ba-4da9-940e-fef0ce8597bd", "Picker" },
+                    { 5, "105 Picker Street", "Kyle", false, "03d8deac-3687-4274-82c1-e1d32392d2de", "Picker" },
+                    { 6, "106 Customer Road", "Debbie", false, "c8c02266-41e6-414d-a1fc-14bbefef86a0", "Customer" },
+                    { 7, "107 Customer Road", "Aaron", false, "bc3a3871-4800-4061-8182-b965c9c109bc", "Customer" }
                 });
 
             migrationBuilder.InsertData(
