@@ -114,18 +114,18 @@ export const ViewEmployees = ({ loggedInUser }) => {
                                             <button className="viewemployees_body_button_edit" onClick={() => {
                                                 navigate(`/employees/edit/${e.id}`)
                                             }}>
-                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                <i className="fa-solid fa-pen-to-square"></i>
                                             </button>
                                             <button className="viewemployees_body_button_position" onClick={() => {
                                                 setSelectedEmployee(e)
                                                 toggle()
                                             }}>
-                                                <i class="fa-solid fa-briefcase"></i>
+                                                <i className="fa-solid fa-briefcase"></i>
                                             </button>
                                             <button className="viewemployees_body_button_reset" onClick={() => {
                                                 navigate(`/employees/edit/${e.id}`)
                                             }}>
-                                                <i class="fa-solid fa-key"></i>
+                                                <i className="fa-solid fa-key"></i>
                                             </button>
                                         </th>
                                     </tr>

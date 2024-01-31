@@ -31,3 +31,12 @@ export const updateEmployee = (employeeId, update) => {
         body: JSON.stringify(update),
     })
 }
+
+export const updateEmployeeRole = (employeeId, roleId) => {
+    return fetch(`/api/userprofiles/changerole/${employeeId}?roleId=${roleId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+}

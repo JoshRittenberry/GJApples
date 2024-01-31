@@ -222,4 +222,35 @@ public class UserProfilesController : ControllerBase
 
         return NoContent();
     }
+
+    // Change UserProfile's Role
+    [HttpPut("changerole/{id}")]
+    [Authorize(Roles = "Admin")]
+    public IActionResult UpdateUserProfileRole(string id, [FromQuery] string roleId)
+    {
+        IdentityRole role = _dbContext.Roles.SingleOrDefault(r => r.Id == roleId);
+        IdentityUser user = _dbContext.Users.SingleOrDefault(u => u.Id == id);
+
+        var userRole = _dbContext.UserRoles.SingleOrDefault(ur => ur.UserId == user.Id);
+
+        if (userRole == null)
+        {
+            return NotFound();
+        }
+
+        // Delete the old entry
+        _dbContext.UserRoles.Remove(userRole);
+        _dbContext.SaveChanges();
+
+        // Create a new entry
+        _dbContext.UserRoles.Add(new IdentityUserRole<string>
+        {
+            RoleId = role.Id,
+            UserId = user.Id
+        });
+
+        _dbContext.SaveChanges();
+
+        return NoContent();
+    }
 }
