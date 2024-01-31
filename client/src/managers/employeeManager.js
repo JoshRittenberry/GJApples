@@ -10,6 +10,14 @@ export const getAllRoles = () => {
     return fetch(`/api/userprofiles/roles`).then((res) => res.json())
 }
 
+export const getAllUsersWithRoles = () => {
+    return fetch(`/api/userprofiles/withroles`).then((res) => res.json())
+}
+
+export const getUserWithRoles = (userId) => {
+    return fetch(`/api/userprofiles/withroles/${userId}`).then((res) => res.json())
+}
+
 export const getEmployeeById = (employeeId) => {
     return fetch(`/api/userprofiles/${employeeId}`).then((res) => res.json())
 }

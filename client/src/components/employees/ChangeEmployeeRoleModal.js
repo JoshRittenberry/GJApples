@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react"
 import { Button, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
-import { getAllRoles } from "../../managers/employeeManager"
+import { getAllRoles, getUserWithRoles } from "../../managers/employeeManager"
 
 export const ChangeEmployeeRoleModal = ({ modal, toggle, selectedEmployee, setSelectedEmployee, args }) => {
     const [roles, setRoles] = useState([])
+    const [user, setUser] = useState([])
+    const [currentRole, setCurrentRole] = useState({})
 
     useEffect(() => {
-        getAllRoles().then(setRoles)
-    }, [])
+        getAllRoles().then(rolesRes => {
+            setRoles(rolesRes)
+            getUserWithRoles(selectedEmployee.id).then(userRes => {
+                setUser(userRes)
+                const userRole = rolesRes.find(role => userRes.roles?.includes(role.name))
+                setCurrentRole(userRole)
+            })
+        })
+    }, [toggle])
 
     return (
         <Modal isOpen={modal} toggle={toggle} {...args}>
@@ -26,7 +35,7 @@ export const ChangeEmployeeRoleModal = ({ modal, toggle, selectedEmployee, setSe
                         >
                             {roles.map(r => {
                                 return (
-                                    <option key={r.id} value={r.id}>
+                                    <option key={r.id} selected={r.id === currentRole?.id} value={r.id}>
                                         {r.name}
                                     </option>
                                 )

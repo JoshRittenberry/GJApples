@@ -40,6 +40,7 @@ public class UserProfilesController : ControllerBase
             .ToList());
     }
 
+    // Get all Roles
     [HttpGet("roles")]
     [Authorize(Roles = "Admin")]
     public IActionResult GetRoles()
@@ -104,6 +105,31 @@ public class UserProfilesController : ControllerBase
             .Select(ur => _dbContext.Roles.SingleOrDefault(r => r.Id == ur.RoleId).Name)
             .ToList()
         }));
+    }
+
+    // Get UserProfile with Roles
+    [HttpGet("withroles/{id}")]
+    [Authorize(Roles = "Admin")]
+    public IActionResult GetWithRoles(int id)
+    {
+        var user = _dbContext.UserProfiles
+        .Include(up => up.IdentityUser)
+        .SingleOrDefault(up => up.Id == id);
+
+        return Ok(new UserProfileDTO
+        {
+            Id = user.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Address = user.Address,
+            Email = user.IdentityUser.Email,
+            UserName = user.IdentityUser.UserName,
+            IdentityUserId = user.IdentityUserId,
+            Roles = _dbContext.UserRoles
+                .Where(ur => ur.UserId == user.IdentityUserId)
+                .Select(ur => _dbContext.Roles.SingleOrDefault(r => r.Id == ur.RoleId).Name)
+                .ToList()
+        });
     }
 
     // Promote UserProfile
