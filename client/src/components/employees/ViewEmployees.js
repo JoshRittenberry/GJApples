@@ -5,20 +5,24 @@ import { Footer } from "../Footer"
 import "../stylesheets/viewEmployees.css"
 import { useNavigate } from "react-router-dom"
 import { ChangeEmployeeRoleModal } from "./ChangeEmployeeRoleModal"
+import { ChangeEmployeePasswordModal } from "./ChangeEmployeePasswordModal"
 
 export const ViewEmployees = ({ loggedInUser }) => {
     const [orderPickers, setOrderPickers] = useState([])
     const [harvesters, setHarvesters] = useState([])
     const [admins, setAdmins] = useState([])
     const [employees, setEmployees] = useState([])
-    const [modal, setModal] = useState(false)
     const [selectedEmployee, setSelectedEmployee] = useState({})
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [currentPage, setCurrentPage] = useState(1)
+    const [positionModal, setPositionModal] = useState(false)
+    const [passwordModal, setPasswordModal] = useState(false)
+
 
     const employeesPerPage = 10
     const navigate = useNavigate()
-    const toggle = () => setModal(!modal)
+    const togglePositionModal = () => setPositionModal(!positionModal)
+    const togglePasswordModal = () => setPasswordModal(!passwordModal)
 
     useEffect(() => {
         getAllOrderPickers().then((op) => {
@@ -77,7 +81,7 @@ export const ViewEmployees = ({ loggedInUser }) => {
         } else if (harvester) {
             return "Harvester"
         } else if (admin) {
-            return "Admin"  
+            return "Admin"
         } else {
             return "N/A"
         }
@@ -125,12 +129,13 @@ export const ViewEmployees = ({ loggedInUser }) => {
                                             </button>
                                             <button className="viewemployees_body_button_position" onClick={() => {
                                                 setSelectedEmployee(e)
-                                                toggle()
+                                                togglePositionModal()
                                             }}>
                                                 <i className="fa-solid fa-briefcase"></i>
                                             </button>
                                             <button className="viewemployees_body_button_reset" onClick={() => {
-                                                navigate(`/employees/edit/${e.id}`)
+                                                setSelectedEmployee(e)
+                                                togglePasswordModal()
                                             }}>
                                                 <i className="fa-solid fa-key"></i>
                                             </button>
@@ -152,7 +157,8 @@ export const ViewEmployees = ({ loggedInUser }) => {
                     </div>
                 )}
             </div>
-            <ChangeEmployeeRoleModal modal={modal} toggle={toggle} selectedEmployee={selectedEmployee} setSelectedEmployee={setSelectedEmployee} />
+            <ChangeEmployeeRoleModal positionModal={positionModal} togglePositionModal={togglePositionModal} selectedEmployee={selectedEmployee} setSelectedEmployee={setSelectedEmployee} />
+            <ChangeEmployeePasswordModal passwordModal={passwordModal} togglePasswordModal={togglePasswordModal} selectedEmployee={selectedEmployee} setSelectedEmployee={setSelectedEmployee} />
             <Footer />
         </>
     )

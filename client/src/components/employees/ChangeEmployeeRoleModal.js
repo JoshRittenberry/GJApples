@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Button, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
 import { getAllRoles, getUserWithRoles, updateEmployeeRole } from "../../managers/employeeManager"
 
-export const ChangeEmployeeRoleModal = ({ modal, toggle, selectedEmployee, setSelectedEmployee, args }) => {
+export const ChangeEmployeeRoleModal = ({ positionModal, togglePositionModal, selectedEmployee, setSelectedEmployee, args }) => {
     const [roles, setRoles] = useState([])
     const [user, setUser] = useState([])
     const [currentRole, setCurrentRole] = useState({})
@@ -16,11 +16,11 @@ export const ChangeEmployeeRoleModal = ({ modal, toggle, selectedEmployee, setSe
                 setCurrentRole(userRole)
             })
         })
-    }, [toggle])
+    }, [togglePositionModal])
 
     return (
-        <Modal isOpen={modal} toggle={toggle} {...args}>
-            <ModalHeader toggle={toggle}>Edit {selectedEmployee.firstName} {selectedEmployee.lastName}'s Position</ModalHeader>
+        <Modal isOpen={positionModal} togglePositionModal={togglePositionModal} {...args}>
+            <ModalHeader togglePositionModal={togglePositionModal}>Edit {selectedEmployee.firstName} {selectedEmployee.lastName}'s Position</ModalHeader>
             <ModalBody>
                 <Form>
                     <FormGroup>
@@ -52,7 +52,7 @@ export const ChangeEmployeeRoleModal = ({ modal, toggle, selectedEmployee, setSe
                     if (currentRole != null && user.roles?.[0] !== currentRole.name) {
                         updateEmployeeRole(user?.identityUserId, currentRole?.id).then(() => {
                             setSelectedEmployee({})
-                            toggle()
+                            togglePositionModal()
                             window.location.reload()
                         });
                     }
@@ -61,7 +61,7 @@ export const ChangeEmployeeRoleModal = ({ modal, toggle, selectedEmployee, setSe
                 </Button>
                 <Button color="secondary" onClick={() => {
                     setSelectedEmployee({})
-                    toggle()
+                    togglePositionModal()
                 }}>
                     Cancel
                 </Button>
