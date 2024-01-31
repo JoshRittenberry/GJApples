@@ -4,7 +4,7 @@ import { getAllRoles, getUserWithRoles, updateEmployeeRole } from "../../manager
 
 export const ChangeEmployeeRoleModal = ({ positionModal, togglePositionModal, selectedEmployee, setSelectedEmployee, args }) => {
     const [roles, setRoles] = useState([])
-    const [user, setUser] = useState([])
+    const [user, setUser] = useState({})
     const [currentRole, setCurrentRole] = useState({})
 
     useEffect(() => {

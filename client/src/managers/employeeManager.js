@@ -44,3 +44,14 @@ export const updateEmployeeRole = (employeeId, roleId) => {
         }
     })
 }
+
+export const updateEmployeePassword = (newPassword) => {
+    newPassword.password = btoa(newPassword.password)
+    return fetch(`/api/userprofiles/changepassword`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPassword)
+    })
+}

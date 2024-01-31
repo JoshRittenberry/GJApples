@@ -1,25 +1,34 @@
 import "../stylesheets/changeEmployeePasswordModal.css"
 import { useEffect, useState } from "react"
 import { Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
-import { getAllRoles, getUserWithRoles, updateEmployeeRole } from "../../managers/employeeManager"
+import { getAllRoles, getUserWithRoles, updateEmployeePassword, updateEmployeeRole } from "../../managers/employeeManager"
 
 export const ChangeEmployeePasswordModal = ({ passwordModal, togglePasswordModal, selectedEmployee, setSelectedEmployee, args }) => {
-    const [password, setPassword] = useState(null)
+    const [user, setUser] = useState({})
+    const [password, setPassword] = useState({})
 
     useEffect(() => {
-
-    }, [])
+        getUserWithRoles(selectedEmployee.id).then(userRes => {
+            setUser(userRes)
+            setPassword({
+                identityUserId: userRes.identityUserId,
+                password: null,
+            })
+        })
+    }, [togglePasswordModal])
 
     const generateRandomPassword = () => {
         const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*"
-        let password = ""
+        let newPassword = ""
 
         for (let i = 0; i < 8; i++) {
             const randomIndex = Math.floor(Math.random() * charset.length)
-            password += charset[randomIndex]
+            newPassword += charset[randomIndex]
         }
 
-        setPassword(password)
+        let update = {...password}
+        update.password = newPassword
+        setPassword(update)
     }
 
     return (
@@ -40,7 +49,7 @@ export const ChangeEmployeePasswordModal = ({ passwordModal, togglePasswordModal
                                 bsSize="md"
                                 id="password"
                                 type="text"
-                                value={password}
+                                value={password?.password}
                                 readOnly
                             />
                         </Col>
@@ -48,17 +57,19 @@ export const ChangeEmployeePasswordModal = ({ passwordModal, togglePasswordModal
                 </Form>
             </ModalBody>
             <ModalFooter>
-                {password === null && (
+                {password?.password === null && (
                     <Button color="primary" onClick={() => {
                         generateRandomPassword()
                     }}>
                         Generate Password
                     </Button>
                 )}
-                {password != null && (
+                {password?.password != null && (
                     <Button color="primary" onClick={() => {
-                        setPassword(null)
-                        togglePasswordModal()
+                        updateEmployeePassword(password).then(() => {
+                            setPassword(null)
+                            togglePasswordModal()
+                        })
                     }}>
                         Submit
                     </Button>

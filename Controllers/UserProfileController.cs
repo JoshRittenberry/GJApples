@@ -1,3 +1,4 @@
+using System.Text;
 using GJApples.Data;
 using GJApples.Models;
 using GJApples.Models.DTOs;
@@ -259,6 +260,22 @@ public class UserProfilesController : ControllerBase
     [Authorize(Roles = "Admin")]
     public IActionResult UpdateUserProfilePassword(NewPasswordDTO newPassword)
     {
+        var password = Encoding
+            .GetEncoding("iso-8859-1")
+            .GetString(Convert.FromBase64String(newPassword.Password));
 
+        var user = _dbContext.Users.SingleOrDefault(u => u.Id == newPassword.IdentityUserId);
+
+        if (string.IsNullOrWhiteSpace(password) || user == null)
+        {
+            return BadRequest();
+        }
+
+        var passwordHasher = new PasswordHasher<IdentityUser>();
+        user.PasswordHash = passwordHasher.HashPassword(user, password);
+
+        _dbContext.SaveChanges();
+
+        return Ok();
     }
 }
