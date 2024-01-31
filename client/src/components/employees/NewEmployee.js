@@ -5,7 +5,7 @@ import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
 import { Footer } from "../Footer"
 import "../stylesheets/register.css"
 
-export const NewEmployee = ({setLoggedInUser}) => {
+export const NewEmployee = ({ setLoggedInUser }) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [userName, setUserName] = useState("");
@@ -14,6 +14,18 @@ export const NewEmployee = ({setLoggedInUser}) => {
     const [password, setPassword] = useState("");
 
     const navigate = useNavigate();
+
+    const generateRandomPassword = () => {
+        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*"
+        let newPassword = ""
+
+        for (let i = 0; i < 8; i++) {
+            const randomIndex = Math.floor(Math.random() * charset.length)
+            newPassword += charset[randomIndex]
+        }
+
+        setPassword(newPassword)
+    }
 
     const handleSubmit = (e) => {
 
@@ -76,19 +88,33 @@ export const NewEmployee = ({setLoggedInUser}) => {
                 <FormGroup>
                     <Label>Password</Label>
                     <Input
-                        type="password"
+                        type="text"
                         value={password}
+                        readOnly
                         onChange={(e) => {
                             setPassword(e.target.value);
                         }}
                     />
                 </FormGroup>
-                <div className="register-container-options">
-                    <Button
-                        color="primary"
-                        onClick={handleSubmit}
-                    >
-                        Create Account
+                <div className="newemployee_footer">
+                    {password === "" && (
+                        <Button onClick={() => {
+                            generateRandomPassword()
+                        }}>
+                            Generate
+                        </Button>
+                    )}
+                    {password != "" && (
+                        <Button onClick={() => {
+                            setPassword(null)
+                        }}>
+                            Submit
+                        </Button>
+                    )}
+                    <Button onClick={() => {
+                        setPassword(null)
+                    }}>
+                        Cancel
                     </Button>
                 </div>
             </div>
