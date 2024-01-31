@@ -12,6 +12,7 @@ public class UserProfile
     public string LastName { get; set; }
     [Required]
     public string Address { get; set; }
+    public bool ForcePasswordChange { get; set; }
     public string IdentityUserId { get; set; }
     public IdentityUser IdentityUser { get; set; }
     public List<Order>? CompletedOrders { get; set; }

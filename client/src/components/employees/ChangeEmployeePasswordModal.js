@@ -33,7 +33,7 @@ export const ChangeEmployeePasswordModal = ({ passwordModal, togglePasswordModal
 
     return (
         <Modal isOpen={passwordModal} togglePasswordModal={togglePasswordModal} {...args}>
-            <ModalHeader togglePasswordModal={togglePasswordModal}>Reset {selectedEmployee.firstName} {selectedEmployee.lastName}'s Password</ModalHeader>
+            <ModalHeader className="changeemployeepasswordmodal_header" togglePasswordModal={togglePasswordModal}>Reset {selectedEmployee.firstName} {selectedEmployee.lastName}'s Password</ModalHeader>
             <ModalBody className="changeemployeepasswordmodal_body">
                 <Form className="changeemployeepasswordmodal_form">
                     <FormGroup row>
@@ -56,12 +56,12 @@ export const ChangeEmployeePasswordModal = ({ passwordModal, togglePasswordModal
                     </FormGroup>
                 </Form>
             </ModalBody>
-            <ModalFooter>
+            <ModalFooter className="changeemployeepasswordmodal_footer">
                 {password?.password === null && (
                     <Button color="primary" onClick={() => {
                         generateRandomPassword()
                     }}>
-                        Generate Password
+                        Generate
                     </Button>
                 )}
                 {password?.password != null && (

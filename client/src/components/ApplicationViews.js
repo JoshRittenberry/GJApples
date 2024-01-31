@@ -20,6 +20,7 @@ import { ViewEmployees } from "./employees/ViewEmployees"
 import { EditEmployee } from "./employees/EditEmployee"
 import { NewEmployee } from "./employees/NewEmployee"
 import { AdminEmployeeMenu } from "./employees/AdminEmployeeMenu"
+import { UpdatePassword } from "./auth/UpdatePassword"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -152,6 +153,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           <Route
             path="register"
             element={<Register setLoggedInUser={setLoggedInUser} />}
+          />
+          <Route
+            path="updatepassword"
+            element={
+              <AuthorizedRoute loggedInUser={loggedInUser}>
+                <UpdatePassword loggedInUser={loggedInUser} />
+              </AuthorizedRoute>
+            }
           />
         </Route>
         <Route path="*" element={<p>Whoops, nothing here...</p>} />

@@ -1,8 +1,9 @@
+import "../stylesheets/changeEmployeePositionModal.css"
 import { useEffect, useState } from "react"
 import { Button, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
 import { getAllRoles, getUserWithRoles, updateEmployeeRole } from "../../managers/employeeManager"
 
-export const ChangeEmployeeRoleModal = ({ positionModal, togglePositionModal, selectedEmployee, setSelectedEmployee, args }) => {
+export const ChangeEmployeePositionModal = ({ positionModal, togglePositionModal, selectedEmployee, setSelectedEmployee, args }) => {
     const [roles, setRoles] = useState([])
     const [user, setUser] = useState({})
     const [currentRole, setCurrentRole] = useState({})
@@ -20,7 +21,7 @@ export const ChangeEmployeeRoleModal = ({ positionModal, togglePositionModal, se
 
     return (
         <Modal isOpen={positionModal} togglePositionModal={togglePositionModal} {...args}>
-            <ModalHeader togglePositionModal={togglePositionModal}>Edit {selectedEmployee.firstName} {selectedEmployee.lastName}'s Position</ModalHeader>
+            <ModalHeader className="changeemployeepositionmodal_header" togglePositionModal={togglePositionModal}>Edit {selectedEmployee.firstName} {selectedEmployee.lastName}'s Position</ModalHeader>
             <ModalBody>
                 <Form>
                     <FormGroup>
@@ -47,8 +48,8 @@ export const ChangeEmployeeRoleModal = ({ positionModal, togglePositionModal, se
                     </FormGroup>
                 </Form>
             </ModalBody>
-            <ModalFooter>
-                <Button color="primary" onClick={() => {
+            <ModalFooter className="changeemployeepositionmodal_footer">
+                <Button onClick={() => {
                     if (currentRole != null && user.roles?.[0] !== currentRole.name) {
                         updateEmployeeRole(user?.identityUserId, currentRole?.id).then(() => {
                             setSelectedEmployee({})
@@ -59,7 +60,7 @@ export const ChangeEmployeeRoleModal = ({ positionModal, togglePositionModal, se
                 }}>
                     Submit
                 </Button>
-                <Button color="secondary" onClick={() => {
+                <Button onClick={() => {
                     setSelectedEmployee({})
                     togglePositionModal()
                 }}>
