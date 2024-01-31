@@ -18,7 +18,7 @@ export const ViewEmployees = ({ loggedInUser }) => {
 
     const employeesPerPage = 10
     const navigate = useNavigate()
-    const toggle = () => setModal(!modal);
+    const toggle = () => setModal(!modal)
 
     useEffect(() => {
         getAllOrderPickers().then((op) => {
@@ -68,15 +68,18 @@ export const ViewEmployees = ({ loggedInUser }) => {
     }
 
     const employeePosition = (employeeId) => {
-        const orderPicker = orderPickers.find((picker) => picker.id === employeeId);
-        const harvester = harvesters.find((harvester) => harvester.id === employeeId);
+        const orderPicker = orderPickers.find((picker) => picker.id === employeeId)
+        const harvester = harvesters.find((harvester) => harvester.id === employeeId)
+        const admin = admins.find((admin) => admin.id === employeeId)
 
         if (orderPicker) {
-            return "Order Picker";
+            return "Order Picker"
         } else if (harvester) {
-            return "Harvester";
+            return "Harvester"
+        } else if (admin) {
+            return "Admin"  
         } else {
-            return "N/A";
+            return "N/A"
         }
     }
 
