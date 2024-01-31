@@ -1,5 +1,5 @@
 import { Button, Table } from "reactstrap"
-import { getAllHarvesters, getAllOrderPickers } from "../../managers/employeeManager"
+import { getAllAdmin, getAllHarvesters, getAllOrderPickers } from "../../managers/employeeManager"
 import React, { useEffect, useState } from 'react'
 import { Footer } from "../Footer"
 import "../stylesheets/viewEmployees.css"
@@ -9,6 +9,7 @@ import { ChangeEmployeeRoleModal } from "./ChangeEmployeeRoleModal"
 export const ViewEmployees = ({ loggedInUser }) => {
     const [orderPickers, setOrderPickers] = useState([])
     const [harvesters, setHarvesters] = useState([])
+    const [admins, setAdmins] = useState([])
     const [employees, setEmployees] = useState([])
     const [modal, setModal] = useState(false)
     const [selectedEmployee, setSelectedEmployee] = useState({})
@@ -22,11 +23,14 @@ export const ViewEmployees = ({ loggedInUser }) => {
     useEffect(() => {
         getAllOrderPickers().then((op) => {
             setOrderPickers(op)
-            getAllHarvesters().then((h) => {
-                setHarvesters(h)
-                const combinedEmployees = [...op, ...h]
-                combinedEmployees.sort((a, b) => a.id - b.id)
-                setEmployees(combinedEmployees)
+            getAllAdmin().then((a) => {
+                setAdmins(a)
+                getAllHarvesters().then((h) => {
+                    setHarvesters(h)
+                    const combinedEmployees = [...op, ...a, ...h]
+                    combinedEmployees.sort((a, b) => a.id - b.id)
+                    setEmployees(combinedEmployees)
+                })
             })
         })
 
