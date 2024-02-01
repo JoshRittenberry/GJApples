@@ -13,8 +13,8 @@ export const Home = ({ loggedInUser }) => {
                 <HomePageWelcome loggedInUser={loggedInUser} />
                 <HomePageGJGreeting />
                 {/* <Cards /> */}
-            </div>
             <Footer />
+            </div>
         </>
     )
 }
