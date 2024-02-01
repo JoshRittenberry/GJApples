@@ -8,6 +8,10 @@
     margin: 20px;
 }
 
+.harvesterhome_header h1 {
+    text-align: center;
+}
+
 .harvesterhome_body {
     display: flex;
     justify-content: space-between;

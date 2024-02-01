@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 export const OrderPickerAssignedOrder = ({ loggedInUser, assignedOrder, setOrders, setAssignedOrder }) => {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+    const [checkboxesChecked, setCheckboxesChecked] = useState(false)
 
     useEffect(() => {
         // Function to update screenWidth state when the window is resized
@@ -19,6 +20,28 @@ export const OrderPickerAssignedOrder = ({ loggedInUser, assignedOrder, setOrder
             window.removeEventListener('resize', handleResize);
         };
     }, []); // Empty dependency array means this effect runs once after initial render
+
+    const handleCheckboxChange = (itemId) => {
+        // Find the index of the item with the given itemId
+        const itemIndex = assignedOrder.orderItems.findIndex((oi) => oi.id === itemId);
+
+        if (itemIndex !== -1) {
+            // Clone the orderItems array to avoid mutating the state directly
+            const updatedOrderItems = [...assignedOrder.orderItems];
+            // Toggle the checkbox state for the specific item
+            updatedOrderItems[itemIndex].checked = !updatedOrderItems[itemIndex].checked;
+
+            // Check if all checkboxes are checked
+            const allChecked = updatedOrderItems.every((oi) => oi.checked);
+
+            // Update the state
+            setAssignedOrder({
+                ...assignedOrder,
+                orderItems: updatedOrderItems,
+            });
+            setCheckboxesChecked(allChecked);
+        }
+    };
 
     return (
         <div className="orderpickerhome_body_assignment" style={{ display: assignedOrder.id == null && screenWidth <= 1200 && 'none' }}>
@@ -46,15 +69,15 @@ export const OrderPickerAssignedOrder = ({ loggedInUser, assignedOrder, setOrder
                             <tbody>
                                 {assignedOrder.orderItems?.map((oi) => (
                                     <tr key={`orderitem-${oi.id}`}>
-                                        <th
-                                            scope="row"
-                                            style={{ textAlign: `left` }}
-                                        >
+                                        <th scope="row" style={{ textAlign: `left` }}>
                                             {oi.appleVariety?.type}
                                         </th>
                                         <th style={{ textAlign: `center` }}>{oi.pounds} lbs</th>
-                                        <th style={{textAlign: `right`}}>
-                                            <Input type="checkbox" />
+                                        <th style={{ textAlign: `right` }}>
+                                            <Input
+                                                type="checkbox"
+                                                onChange={() => handleCheckboxChange(oi.id)}
+                                            />
                                         </th>
                                     </tr>
                                 ))}
@@ -69,14 +92,22 @@ export const OrderPickerAssignedOrder = ({ loggedInUser, assignedOrder, setOrder
                             }}>
                                 Unassign Me
                             </Button>
-                            <Button onClick={() => {
-                                completeOrder(assignedOrder.id).then(() => {
-                                    getAllUnassignedOrders().then(setOrders)
-                                    getOrderPickerAssignment().then(setAssignedOrder)
-                                })
-                            }}>
+                            <Button
+                                onClick={() => {
+                                    if (checkboxesChecked) {
+                                        completeOrder(assignedOrder.id).then(() => {
+                                            getAllUnassignedOrders().then(setOrders);
+                                            getOrderPickerAssignment().then(setAssignedOrder);
+                                        });
+                                    } else {
+                                        // Display a message or take appropriate action if checkboxes are not checked
+                                        window.alert("Please verify all apples were filled.");
+                                    }
+                                }}
+                            >
                                 Complete Order
                             </Button>
+
                         </div>
                     </section>
                 </>
