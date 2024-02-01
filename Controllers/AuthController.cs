@@ -123,8 +123,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    // added FromQuery
-    public async Task<IActionResult> Register(RegistrationDTO registration, [FromQuery] string? roleName)
+    public async Task<IActionResult> Register(RegistrationDTO registration)
     {
         var user = new IdentityUser
         {
@@ -138,12 +137,7 @@ public class AuthController : ControllerBase
 
         var result = await _userManager.CreateAsync(user, password);
 
-        var newUserRole = _dbContext.Roles.SingleOrDefault(r => r.Name == roleName);
-
-        if (newUserRole == null)
-        {
-            newUserRole = _dbContext.Roles.SingleOrDefault(r => r.Name == "Customer");
-        }
+        var newUserRole = _dbContext.Roles.SingleOrDefault(r => r.Name == "Customer");
 
         if (result.Succeeded)
         {
@@ -153,6 +147,7 @@ public class AuthController : ControllerBase
                 LastName = registration.LastName,
                 Address = registration.Address,
                 IdentityUserId = user.Id,
+                ForcePasswordChange = false
             });
 
 
@@ -184,6 +179,54 @@ public class AuthController : ControllerBase
             HttpContext.SignInAsync(
             CookieAuthenticationDefaults.AuthenticationScheme,
             new ClaimsPrincipal(claimsIdentity)).Wait();
+
+            return Ok();
+        }
+        return StatusCode(500);
+    }
+
+    [HttpPost("create")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Create(RegistrationDTO registration, [FromQuery] string? roleName)
+    {
+        var user = new IdentityUser
+        {
+            UserName = registration.UserName,
+            Email = registration.Email
+        };
+
+        var password = Encoding
+            .GetEncoding("iso-8859-1")
+            .GetString(Convert.FromBase64String(registration.Password));
+
+        var result = await _userManager.CreateAsync(user, password);
+
+        var newUserRole = _dbContext.Roles.SingleOrDefault(r => r.Name == roleName);
+
+        if (newUserRole == null)
+        {
+            newUserRole = _dbContext.Roles.SingleOrDefault(r => r.Name == "Harvester");
+        }
+
+        if (result.Succeeded)
+        {
+            await _dbContext.UserProfiles.AddAsync(new UserProfile
+            {
+                FirstName = registration.FirstName,
+                LastName = registration.LastName,
+                Address = registration.Address,
+                IdentityUserId = user.Id,
+                ForcePasswordChange = true
+            });
+
+
+            await _dbContext.UserRoles.AddAsync(new IdentityUserRole<string>
+            {
+                UserId = user.Id,
+                RoleId = newUserRole.Id
+            });
+
+            await _dbContext.SaveChangesAsync();
 
             return Ok();
         }

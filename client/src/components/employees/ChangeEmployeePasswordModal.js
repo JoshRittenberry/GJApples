@@ -58,14 +58,14 @@ export const ChangeEmployeePasswordModal = ({ passwordModal, togglePasswordModal
             </ModalBody>
             <ModalFooter className="changeemployeepasswordmodal_footer">
                 {password?.password === null && (
-                    <Button color="primary" onClick={() => {
+                    <Button onClick={() => {
                         generateRandomPassword()
                     }}>
                         Generate
                     </Button>
                 )}
                 {password?.password != null && (
-                    <Button color="primary" onClick={() => {
+                    <Button onClick={() => {
                         updateEmployeePassword(password).then(() => {
                             setPassword(null)
                             togglePasswordModal()
@@ -74,7 +74,7 @@ export const ChangeEmployeePasswordModal = ({ passwordModal, togglePasswordModal
                         Submit
                     </Button>
                 )}
-                <Button color="secondary" onClick={() => {
+                <Button onClick={() => {
                     setPassword(null)
                     togglePasswordModal()
                 }}>
