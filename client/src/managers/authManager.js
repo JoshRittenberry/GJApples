@@ -37,3 +37,15 @@ export const register = (userProfile) => {
         body: JSON.stringify(userProfile),
     }).then(() => tryGetLoggedInUser());
 };
+
+export const create = (userProfile, roleName) => {
+    userProfile.password = btoa(userProfile.password);
+    return fetch(`${_apiUrl}/create?roleName=${roleName}`, {
+        credentials: "same-origin",
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userProfile),
+    })
+};

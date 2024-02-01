@@ -1,19 +1,29 @@
-import { useState } from "react";
-import { register } from "../../managers/authManager";
-import { Link, useNavigate } from "react-router-dom";
-import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
+import { useEffect, useState } from "react"
+import { create, register } from "../../managers/authManager"
+import { Link, useNavigate } from "react-router-dom"
+import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap"
 import { Footer } from "../Footer"
 import "../stylesheets/register.css"
+import { getAllRoles } from "../../managers/employeeManager"
 
 export const NewEmployee = ({ setLoggedInUser }) => {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [userName, setUserName] = useState("");
-    const [email, setEmail] = useState("");
-    const [address, setAddress] = useState("");
-    const [password, setPassword] = useState("");
+    const [roles, setRoles] = useState([])
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [userName, setUserName] = useState("")
+    const [email, setEmail] = useState("")
+    const [address, setAddress] = useState("")
+    const [password, setPassword] = useState("")
+    const [selectedRole, setSelectedRole] = useState({})
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        getAllRoles().then(res => {
+            setRoles(res.filter(role => role.name !== 'Customer'))
+            setSelectedRole(res[0])
+        })
+    }, [])
 
     const generateRandomPassword = () => {
         const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*"
@@ -28,8 +38,22 @@ export const NewEmployee = ({ setLoggedInUser }) => {
     }
 
     const handleSubmit = (e) => {
+        let newEmployee = {
+            firstName: { firstName },
+            lastName: { lastName },
+            userName: { userName },
+            email: { email },
+            address: { address },
+            password: { password }
+        }
+        if (firstName.trim() == "" || lastName.trim() == "" || userName.trim() == "" || email.trim() == "" || address.trim() == "" || password.trim() == "") {
+            return
+        }
 
-    };
+        create(newEmployee, selectedRole.name).then(() => {
+            // navigate("/employees")
+        })
+    }
 
     return (
         <>
@@ -41,7 +65,7 @@ export const NewEmployee = ({ setLoggedInUser }) => {
                         type="text"
                         value={firstName}
                         onChange={(e) => {
-                            setFirstName(e.target.value);
+                            setFirstName(e.target.value)
                         }}
                     />
                 </FormGroup>
@@ -51,7 +75,7 @@ export const NewEmployee = ({ setLoggedInUser }) => {
                         type="text"
                         value={lastName}
                         onChange={(e) => {
-                            setLastName(e.target.value);
+                            setLastName(e.target.value)
                         }}
                     />
                 </FormGroup>
@@ -61,7 +85,7 @@ export const NewEmployee = ({ setLoggedInUser }) => {
                         type="email"
                         value={email}
                         onChange={(e) => {
-                            setEmail(e.target.value);
+                            setEmail(e.target.value)
                         }}
                     />
                 </FormGroup>
@@ -71,9 +95,29 @@ export const NewEmployee = ({ setLoggedInUser }) => {
                         type="text"
                         value={userName}
                         onChange={(e) => {
-                            setUserName(e.target.value);
+                            setUserName(e.target.value)
                         }}
                     />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="position">
+                        Position
+                    </Label>
+                    <Input
+                        id="position"
+                        name="select"
+                        type="select"
+                        onChange={event => {
+                            let newRole = roles.find(role => role.id == event.target.value)
+                            setSelectedRole(newRole)
+                        }}
+                    >
+                        {roles.map((r, index) => (
+                            <option key={r.id} selected={index === 0} value={r.id}>
+                                {r.name}
+                            </option>
+                        ))}
+                    </Input>
                 </FormGroup>
                 <FormGroup>
                     <Label>Address</Label>
@@ -81,7 +125,7 @@ export const NewEmployee = ({ setLoggedInUser }) => {
                         type="text"
                         value={address}
                         onChange={(e) => {
-                            setAddress(e.target.value);
+                            setAddress(e.target.value)
                         }}
                     />
                 </FormGroup>
@@ -92,7 +136,7 @@ export const NewEmployee = ({ setLoggedInUser }) => {
                         value={password}
                         readOnly
                         onChange={(e) => {
-                            setPassword(e.target.value);
+                            setPassword(e.target.value)
                         }}
                     />
                 </FormGroup>
@@ -106,13 +150,14 @@ export const NewEmployee = ({ setLoggedInUser }) => {
                     )}
                     {password != "" && (
                         <Button onClick={() => {
-                            setPassword(null)
+                            handleSubmit()
                         }}>
                             Submit
                         </Button>
                     )}
                     <Button onClick={() => {
-                        setPassword(null)
+                        setPassword("")
+                        navigate("/employees")
                     }}>
                         Cancel
                     </Button>
@@ -120,5 +165,5 @@ export const NewEmployee = ({ setLoggedInUser }) => {
             </div>
             <Footer />
         </>
-    );
+    )
 }
