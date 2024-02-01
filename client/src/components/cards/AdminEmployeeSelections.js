@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import '../stylesheets/adminEmployeeSelections.css';
-import AdminSelectionItem from './AdminSelectionItem';
 import { AdminEmployeeSelectionItem } from './AdminEmployeeSelectionItem';
 
 export const AdminEmployeeSelections = () => {
@@ -28,7 +27,7 @@ export const AdminEmployeeSelections = () => {
             alt: 'View Customers',
             text: 'View and Edit Customers',
             label: 'Customers',
-            path: '/employees/new'
+            path: '/customers/view'
         },
         {
             id: 4,
@@ -36,7 +35,7 @@ export const AdminEmployeeSelections = () => {
             alt: 'Create Customer',
             text: 'Create a New Customer Account',
             label: 'New Customer',
-            path: '/employees/new'
+            path: '/customers/new'
         }
     ]
 
@@ -49,7 +48,7 @@ export const AdminEmployeeSelections = () => {
             selectionGroups.push(
                 <ul className='cards__adminselection__items' key={i}>
                     {group.map((selection, index) => (
-                        <AdminSelectionItem
+                        <AdminEmployeeSelectionItem
                             src={selection.src}
                             alt={selection.alt}
                             text={selection.text}
