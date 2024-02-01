@@ -26,9 +26,11 @@ export const HomePageWelcome = ({ loggedInUser }) => {
 
     return (
         <div className='homepagewelcome-container'>
-            <video className='homepagewelcome-container-video' src='/videos/hp_apples_h.mp4' playsInline autoPlay loop muted />
+            {loggedInUser?.id == null && <video className='homepagewelcome-container-video' src='/videos/hp_apples_h.mp4' playsInline autoPlay loop muted />}
+            {!loggedInUser?.roles.includes("Admin") && <video className='homepagewelcome-container-video' src='/videos/hp_apples_h.mp4' playsInline autoPlay loop muted />}
+            {loggedInUser?.roles.includes("Admin") && <video className='homepagewelcome-container-video' src='/videos/hp_employee_h.mp4' playsInline autoPlay loop muted />}
             <h1>Garry Jones' Apples</h1>
-            <p>What are you waiting for{loggedInUser?.id != null && loggedInUser.roles.includes("Customer") && (` ${loggedInUser.firstName}`)}? Buy some of our delicious apples!!</p>
+            <p>What are you waiting for{loggedInUser?.id != null && loggedInUser?.roles.includes("Customer") && (` ${loggedInUser?.firstName}`)}? Buy some of our delicious apples!!</p>
             <div className='homepagewelcome-btns'>
                 {loggedInUser?.id == null && (
                     <Button
@@ -43,7 +45,7 @@ export const HomePageWelcome = ({ loggedInUser }) => {
                         Login to Purchase
                     </Button>
                 )}
-                {loggedInUser?.id != null && (
+                {loggedInUser?.id != null && loggedInUser?.roles.includes("Customer") && (
                     <Button
                         className='btns'
                         buttonStyle='btn--primary'
