@@ -39,12 +39,12 @@ export const NewEmployee = ({ setLoggedInUser }) => {
 
     const handleSubmit = (e) => {
         let newEmployee = {
-            firstName: { firstName },
-            lastName: { lastName },
-            userName: { userName },
-            email: { email },
-            address: { address },
-            password: { password }
+            email: email,
+            password: password,
+            userName: userName ,
+            firstName: firstName,
+            lastName: lastName,
+            address: address
         }
         if (firstName.trim() == "" || lastName.trim() == "" || userName.trim() == "" || email.trim() == "" || address.trim() == "" || password.trim() == "") {
             return
