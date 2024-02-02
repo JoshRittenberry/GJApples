@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
-import { Footer } from "../Footer"
-import "../stylesheets/editCustomer.css"
+import { Footer } from "../../Footer"
+import "../../stylesheets/editCustomer.css"
 import { useNavigate, useParams } from "react-router-dom";
-import { getCustomerById, updateCustomer } from "../../managers/customerManager";
+import { getCustomerById, updateCustomer } from "../../../managers/customerManager";
 
 export const EditCustomer = () => {
     const [customer, setCustomer] = useState({})

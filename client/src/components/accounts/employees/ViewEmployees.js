@@ -1,8 +1,8 @@
 import { Button, Table } from "reactstrap"
-import { getAllAdmin, getAllHarvesters, getAllOrderPickers } from "../../managers/employeeManager"
+import { getAllAdmin, getAllHarvesters, getAllOrderPickers } from "../../../managers/employeeManager"
 import React, { useEffect, useState } from 'react'
-import { Footer } from "../Footer"
-import "../stylesheets/viewEmployees.css"
+import { Footer } from "../../Footer"
+import "../../stylesheets/viewEmployees.css"
 import { useNavigate } from "react-router-dom"
 import { ChangeEmployeePositionModal } from "./ChangeEmployeePositionModal"
 import { ChangeEmployeePasswordModal } from "./ChangeEmployeePasswordModal"

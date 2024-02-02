@@ -1,7 +1,7 @@
-import "../stylesheets/changeEmployeePositionModal.css"
+import "../../stylesheets/changeEmployeePositionModal.css"
 import { useEffect, useState } from "react"
 import { Button, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
-import { getAllRoles, getUserWithRoles, updateEmployeeRole } from "../../managers/employeeManager"
+import { getAllRoles, getUserWithRoles, updateEmployeeRole } from "../../../managers/employeeManager"
 
 export const ChangeEmployeePositionModal = ({ positionModal, togglePositionModal, selectedEmployee, setSelectedEmployee, args }) => {
     const [roles, setRoles] = useState([])

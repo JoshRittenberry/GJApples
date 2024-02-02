@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
-import { createEmployee, register } from "../../managers/authManager"
+import { createEmployee, register } from "../../../managers/authManager"
 import { Link, useNavigate } from "react-router-dom"
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap"
-import { Footer } from "../Footer"
-import "../stylesheets/newEmployee.css"
-import { getAllRoles } from "../../managers/employeeManager"
+import { Footer } from "../../Footer"
+import "../../stylesheets/newEmployee.css"
+import { getAllRoles } from "../../../managers/employeeManager"
 
 export const NewEmployee = ({ setLoggedInUser }) => {
     const [roles, setRoles] = useState([])

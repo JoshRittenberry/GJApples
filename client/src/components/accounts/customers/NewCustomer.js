@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
-import { createCustomer, register } from "../../managers/authManager"
+import { createCustomer, register } from "../../../managers/authManager"
 import { Link, useNavigate } from "react-router-dom"
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap"
-import { Footer } from "../Footer"
-import "../stylesheets/register.css"
-import { getAllRoles } from "../../managers/employeeManager"
+import { Footer } from "../../Footer"
+import "../../stylesheets/register.css"
 
 export const NewCustomer = ({ setLoggedInUser }) => {
     const [roles, setRoles] = useState([])
