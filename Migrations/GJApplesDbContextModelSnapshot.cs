@@ -1401,28 +1401,28 @@ namespace GJApples.Migrations
                         new
                         {
                             Id = "c3aaeb97-d2ba-4a53-a521-4eea61e59b35",
-                            ConcurrencyStamp = "ed7bff63-cdbc-4eb9-a67c-aebd25c28367",
+                            ConcurrencyStamp = "2b1a2b07-1de7-46b9-8e03-7c0e1b3e7cbe",
                             Name = "Admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
                             Id = "8b2b3a2d-62f6-4f2b-8b3d-45b6a1f3b5b4",
-                            ConcurrencyStamp = "d32a61a0-84f9-42a0-8333-170da1511459",
+                            ConcurrencyStamp = "ded8f7c8-cfc4-4b9b-bebb-db1d02eb3419",
                             Name = "Harvester",
                             NormalizedName = "harvester"
                         },
                         new
                         {
                             Id = "f65f1f30-d0b1-4f59-a3c8-eb1f2e6757d3",
-                            ConcurrencyStamp = "0d0f92f9-7968-4074-bb15-5d7b18d7e0d6",
+                            ConcurrencyStamp = "11b2eb1e-b7ac-4913-8009-237712a4126f",
                             Name = "OrderPicker",
                             NormalizedName = "orderpicker"
                         },
                         new
                         {
                             Id = "d4f146bf-70c8-4d02-98ec-0b5f4b9d213f",
-                            ConcurrencyStamp = "3fed3eb1-f6b3-4811-bcda-aeb4ce77b284",
+                            ConcurrencyStamp = "5a286ac9-6065-4fac-8141-23c8e52470f0",
                             Name = "Customer",
                             NormalizedName = "customer"
                         });
@@ -1521,13 +1521,13 @@ namespace GJApples.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c6947960-e365-4ef0-8151-51642eda44c3",
+                            ConcurrencyStamp = "5f51d50c-2fb2-42b0-9a17-ce62d55ffeae",
                             Email = "admin@gjapples.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAELVwiOzMUaTZD22hUzqRoWeFLQ0caeLXlgEZWoIU7FBCyi8VNxgGT72HmvwvElFg/w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFgCbagNMwYFUFkyRFqDRDiNo6GvsHfeBGy1U4O7JIaXFdwGUvmMK35lKcPad83jiQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e7c93844-1c65-4820-8db1-de00370106fd",
+                            SecurityStamp = "db722b5f-080a-4056-a765-45e43bf31f82",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         },
@@ -1535,13 +1535,13 @@ namespace GJApples.Migrations
                         {
                             Id = "8c3605d2-c0da-4592-8879-0c71dc3c02c4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6a03a58f-0c79-40d3-8e4c-c2c7a87fecb9",
+                            ConcurrencyStamp = "285068fd-bd6b-4aa9-9d65-205282bda7c6",
                             Email = "josh@gjapples.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEBt577As962pRMXyGEaxlsNIFJLx/mMbXVIMLkgItlRskeImuVbWiF+vI/mcSy7+Qg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENcd3h1hIVWKLgvWRHitxvNmw5XgfspxqwBI5yg5JY1w/xfV2xe52KFfEKSOyA2JnA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e79cde3c-4555-4b1c-9731-368240bb2644",
+                            SecurityStamp = "b1b8841a-bd3b-4476-9466-3023d1ba4386",
                             TwoFactorEnabled = false,
                             UserName = "Josh"
                         },
@@ -1549,13 +1549,13 @@ namespace GJApples.Migrations
                         {
                             Id = "3a64b2c1-7780-40f1-a393-8edb30c4b2ab",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1b702a49-7568-45be-8e55-5baa0882ee2a",
+                            ConcurrencyStamp = "528a6b2f-8308-43a6-a7dc-c730f760f378",
                             Email = "haley@gjapples.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEP6QDyibUGnb+Mtg1ul9zKBKJaDoPVCCTsa2IcV02/DlTQmTVW1JsNtHkjJlmSxv3g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFLjyZeNuHTYB9o9mjcnT/PsIfI/zmOuFDYIqugyat19OSmi/HAjNZ2sx+Fr9oBYEw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c2dda9f8-af46-4810-be09-79ea40cf72d1",
+                            SecurityStamp = "599e3ef4-b44f-4a82-b499-c60b14183032",
                             TwoFactorEnabled = false,
                             UserName = "Haley"
                         },
@@ -1563,13 +1563,13 @@ namespace GJApples.Migrations
                         {
                             Id = "83aab5f4-67ba-4da9-940e-fef0ce8597bd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "35799917-1cde-4f6b-bc04-c9831f7d653c",
+                            ConcurrencyStamp = "6cbf4380-febc-4921-be02-7dab3812f7cf",
                             Email = "chris@gjapples.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEMFItNVvbRekYRZuFRtH6THnwjzDgWopbn5Mr55tIrZAYIij53sNgv1eygqsHQ8w2Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFzaSaL3yMiDQf68cxnJMhQ5VYFD+AHb5bGC/dlSm/IWkScMoRPFIYvEpthfBwmxyA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "667e7f27-2259-47d6-ac4a-9b637ad0b6d3",
+                            SecurityStamp = "46c2ad12-7239-4c70-990f-7870c8052684",
                             TwoFactorEnabled = false,
                             UserName = "Chris"
                         },
@@ -1577,13 +1577,13 @@ namespace GJApples.Migrations
                         {
                             Id = "03d8deac-3687-4274-82c1-e1d32392d2de",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "149a58b9-80c7-407a-91df-3438bd8d271a",
+                            ConcurrencyStamp = "c44e2260-a0e5-4f17-98d3-0e7f95bf6b65",
                             Email = "kyle@gjapples.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEGmZ0GwwyAbANnHc5XKum9DFEbUDu9srBVTZGbBGrjtzcWN/+7HPplpq/j8oCGXxzQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAED/IuNcFACRXEQAv/QPr8x+YKfSi/y6iuJ3fzPLh/V81/mLkg2C2SbNQW3tJLsCmbw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "140b3c02-9b71-43a3-a67d-88c506318b35",
+                            SecurityStamp = "00ff7c46-7593-4a3d-b5dd-8c99bb23075b",
                             TwoFactorEnabled = false,
                             UserName = "Kyle"
                         },
@@ -1591,13 +1591,13 @@ namespace GJApples.Migrations
                         {
                             Id = "c8c02266-41e6-414d-a1fc-14bbefef86a0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bd856d91-25f4-42a1-9b87-e959c1670449",
+                            ConcurrencyStamp = "0f69fcef-ecd6-43e6-88bf-ffd1a1651bc8",
                             Email = "debbie@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEH8tBX0AB2jITEggnvTox1mm1T/jz6XpKLsZalUO4jZoO6BxXrOeaQBnrUYZypjlww==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKqItYvuhYadiUb3uLA4wRCIEGZpQTNgH42U/cQkhpZVsQ3ZCCYxyMM0gNX6chLF+Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5e829a2b-7a6d-40e1-9718-fce0025363a9",
+                            SecurityStamp = "c4750c51-d12c-45ee-bc7c-561b21ac78b3",
                             TwoFactorEnabled = false,
                             UserName = "Debbie"
                         },
@@ -1605,13 +1605,13 @@ namespace GJApples.Migrations
                         {
                             Id = "bc3a3871-4800-4061-8182-b965c9c109bc",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0dc6d86a-e4e9-4bff-a05e-023ee664231a",
+                            ConcurrencyStamp = "66f4a328-2cc1-4b08-b65a-c9768e6c9e4b",
                             Email = "aaron@yahoo.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEDA7DLQI6ZjVBjnMRbpw3Eg4TQkQOYtI6xek0vI8QRuR/MNjxJ/PXvuGCUXl/Snzeg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKUgAV8ggNUaW8m5UHsDfcWVHqmfMXErzSE0VTPHIddqbRAvQ981wp77JYSxD7YKKg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "84e9b8eb-6edc-4da2-8fd1-e8fe2b417da0",
+                            SecurityStamp = "22d1c546-a573-4666-bf3d-10ea39cf6e53",
                             TwoFactorEnabled = false,
                             UserName = "Aaron"
                         });
