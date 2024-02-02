@@ -91,7 +91,6 @@ export const ViewApples = ({ loggedInUser }) => {
                                 <th>Pounds Produced</th>
                                 <th>Pounds Purchased</th>
                                 <th>Pounds Available</th>
-                                <th></th>
                                 {loggedInUser.roles.includes("Admin") && <th></th>}
                             </tr>
                         </thead>
@@ -120,12 +119,16 @@ export const ViewApples = ({ loggedInUser }) => {
                     </Table>
                 </section>
                 <div className="viewapples_body_pagination">
-                    <Button className="viewapples_body_button" onClick={prevPage} disabled={currentPage === 1}>
-                        Previous
-                    </Button>
-                    <Button className="viewapples_body_button" onClick={nextPage} disabled={indexOfLastApple >= apples.length}>
-                        Next
-                    </Button>
+                    {apples.length > 10 && (
+                        <>
+                            <Button className="viewapples_body_button" onClick={prevPage} disabled={currentPage === 1}>
+                                Previous
+                            </Button>
+                            <Button className="viewapples_body_button" onClick={nextPage} disabled={indexOfLastApple >= apples.length}>
+                                Next
+                            </Button>
+                        </>
+                    )}
                 </div>
             </div>
             <Footer />
