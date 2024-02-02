@@ -5,7 +5,7 @@ import "../stylesheets/editEmployee.css"
 import { useNavigate, useParams } from "react-router-dom";
 import { getEmployeeById, updateEmployee } from "../../managers/employeeManager";
 
-export const EditEmployee = () => {
+export const EditCustomer = () => {
     const [employee, setEmployee] = useState({})
     const [update, setUpdate] = useState({})
 

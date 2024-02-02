@@ -1,30 +1,25 @@
 import { Button, Table } from "reactstrap"
-import { getAllAdmin, getAllHarvesters, getAllOrderPickers } from "../../managers/customerManager"
 import React, { useEffect, useState } from 'react'
 import { Footer } from "../Footer"
 import "../stylesheets/viewCustomers.css"
 import { useNavigate } from "react-router-dom"
-import { ChangeCustomerPositionModal } from "./ChangeCustomerPositionModal"
 import { ChangeCustomerPasswordModal } from "./ChangeCustomerPasswordModal"
+import { getAllCustomers } from "../../managers/customerManager"
 
 export const ViewCustomers = ({ loggedInUser }) => {
     const [customers, setCustomers] = useState([])
     const [selectedCustomer, setSelectedCustomer] = useState({})
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [currentPage, setCurrentPage] = useState(1)
-    const [positionModal, setPositionModal] = useState(false)
     const [passwordModal, setPasswordModal] = useState(false)
 
 
     const customersPerPage = 10
     const navigate = useNavigate()
-    const togglePositionModal = () => setPositionModal(!positionModal)
     const togglePasswordModal = () => setPasswordModal(!passwordModal)
 
     useEffect(() => {
-
-        // Need a funciton to get all customers
-
+        getAllCustomers().then(setCustomers)
         // Function to update screenWidth state when the window is resized
         const handleResize = () => {
             setScreenWidth(window.innerWidth)
@@ -58,22 +53,6 @@ export const ViewCustomers = ({ loggedInUser }) => {
         }
     }
 
-    const customerPosition = (customerId) => {
-        const orderPicker = orderPickers.find((picker) => picker.id === customerId)
-        const harvester = harvesters.find((harvester) => harvester.id === customerId)
-        const admin = admins.find((admin) => admin.id === customerId)
-
-        if (orderPicker) {
-            return "Order Picker"
-        } else if (harvester) {
-            return "Harvester"
-        } else if (admin) {
-            return "Admin"
-        } else {
-            return "N/A"
-        }
-    }
-
     return (
         <>
             <div className="viewcustomers">
@@ -90,7 +69,6 @@ export const ViewCustomers = ({ loggedInUser }) => {
                                 <th>Id</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
-                                {screenWidth > 700 && <th>Position</th>}
                                 {screenWidth > 900 && <th>Address</th>}
                                 {screenWidth > 600 && <th>Email</th>}
                                 <th>Actions</th>
@@ -105,7 +83,6 @@ export const ViewCustomers = ({ loggedInUser }) => {
                                         </th>
                                         <th>{e.firstName}</th>
                                         <th>{e.lastName}</th>
-                                        {screenWidth > 700 && <th>{customerPosition(e.id)}</th>}
                                         {screenWidth > 900 && <th>{e.address}</th>}
                                         {screenWidth > 600 && <th>{e.email}</th>}
                                         <th>
@@ -113,12 +90,6 @@ export const ViewCustomers = ({ loggedInUser }) => {
                                                 navigate(`/customers/edit/${e.id}`)
                                             }}>
                                                 <i className="fa-solid fa-pen-to-square"></i>
-                                            </button>
-                                            <button className="viewcustomers_body_button_position" onClick={() => {
-                                                setSelectedCustomer(e)
-                                                togglePositionModal()
-                                            }}>
-                                                <i className="fa-solid fa-briefcase"></i>
                                             </button>
                                             <button className="viewcustomers_body_button_reset" onClick={() => {
                                                 setSelectedCustomer(e)
@@ -144,7 +115,6 @@ export const ViewCustomers = ({ loggedInUser }) => {
                     </div>
                 )}
             </div>
-            <ChangeCustomerPositionModal positionModal={positionModal} togglePositionModal={togglePositionModal} selectedCustomer={selectedCustomer} setSelectedCustomer={setSelectedCustomer} />
             <ChangeCustomerPasswordModal passwordModal={passwordModal} togglePasswordModal={togglePasswordModal} selectedCustomer={selectedCustomer} setSelectedCustomer={setSelectedCustomer} />
             <Footer />
         </>

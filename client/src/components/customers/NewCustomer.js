@@ -6,7 +6,7 @@ import { Footer } from "../Footer"
 import "../stylesheets/register.css"
 import { getAllRoles } from "../../managers/employeeManager"
 
-export const NewEmployee = ({ setLoggedInUser }) => {
+export const NewCustomer = ({ setLoggedInUser }) => {
     const [roles, setRoles] = useState([])
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")

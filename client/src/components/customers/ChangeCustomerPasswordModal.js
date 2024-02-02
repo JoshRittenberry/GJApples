@@ -3,12 +3,12 @@ import { useEffect, useState } from "react"
 import { Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
 import { getAllRoles, getUserWithRoles, updateEmployeePassword, updateEmployeeRole } from "../../managers/employeeManager"
 
-export const ChangeEmployeePasswordModal = ({ passwordModal, togglePasswordModal, selectedEmployee, setSelectedEmployee, args }) => {
+export const ChangeCustomerPasswordModal = ({ passwordModal, togglePasswordModal, selectedCustomer, setSelectedCustomer, args }) => {
     const [user, setUser] = useState({})
     const [password, setPassword] = useState({})
 
     useEffect(() => {
-        getUserWithRoles(selectedEmployee.id).then(userRes => {
+        getUserWithRoles(selectedCustomer.id).then(userRes => {
             setUser(userRes)
             setPassword({
                 identityUserId: userRes.identityUserId,
@@ -33,7 +33,7 @@ export const ChangeEmployeePasswordModal = ({ passwordModal, togglePasswordModal
 
     return (
         <Modal isOpen={passwordModal} togglePasswordModal={togglePasswordModal} {...args}>
-            <ModalHeader className="changeemployeepasswordmodal_header" togglePasswordModal={togglePasswordModal}>Reset {selectedEmployee.firstName} {selectedEmployee.lastName}'s Password</ModalHeader>
+            <ModalHeader className="changeemployeepasswordmodal_header" togglePasswordModal={togglePasswordModal}>Reset {selectedCustomer.firstName} {selectedCustomer.lastName}'s Password</ModalHeader>
             <ModalBody className="changeemployeepasswordmodal_body">
                 <Form className="changeemployeepasswordmodal_form">
                     <FormGroup row>

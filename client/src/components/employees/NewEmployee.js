@@ -3,7 +3,7 @@ import { create, register } from "../../managers/authManager"
 import { Link, useNavigate } from "react-router-dom"
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap"
 import { Footer } from "../Footer"
-import "../stylesheets/register.css"
+import "../stylesheets/newEmployee.css"
 import { getAllRoles } from "../../managers/employeeManager"
 
 export const NewEmployee = ({ setLoggedInUser }) => {
@@ -51,7 +51,7 @@ export const NewEmployee = ({ setLoggedInUser }) => {
         }
 
         create(newEmployee, selectedRole.name).then(() => {
-            // navigate("/employees")
+            navigate("/employees")
         })
     }
 
