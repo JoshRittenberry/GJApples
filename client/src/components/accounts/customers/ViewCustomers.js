@@ -1,10 +1,10 @@
 import { Button, Table } from "reactstrap"
 import React, { useEffect, useState } from 'react'
-import { Footer } from "../Footer"
-import "../stylesheets/viewCustomers.css"
+import { Footer } from "../../Footer"
+import "../../stylesheets/viewCustomers.css"
 import { useNavigate } from "react-router-dom"
 import { ChangeCustomerPasswordModal } from "./ChangeCustomerPasswordModal"
-import { getAllCustomers } from "../../managers/customerManager"
+import { getAllCustomers } from "../../../managers/customerManager"
 
 export const ViewCustomers = ({ loggedInUser }) => {
     const [customers, setCustomers] = useState([])

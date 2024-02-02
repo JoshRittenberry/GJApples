@@ -14,7 +14,10 @@ export const NewOrder = ({ loggedInUser }) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        getAllApples().then(setApples)
+        getAllApples().then(res => {
+            let activeApples = res.filter(apple => apple.isActive)
+            setApples(activeApples)
+        })
         getUnsubmittedOrder().then(setOrder)
     }, [])
 
@@ -72,25 +75,27 @@ export const NewOrder = ({ loggedInUser }) => {
 
     return (
         <>
-            <header className="neworder_header">
-                <h1>Create New Order</h1>
-                <aside className="neworder_header_inputs">
-                    <Button onClick={() => {
-                        handleSubmitOrder()
-                    }}>
-                        My Cart
-                    </Button>
-                </aside>
-            </header>
-            <NewOrderSelections
-                apples={apples}
-                order={order}
-                setOrder={setOrder}
-                handleDisplayedItemPounds={handleDisplayedItemPounds}
-                handleAddOrIncreaseItem={handleAddOrIncreaseItem}
-                handleDecreaseItem={handleDecreaseItem}
-                handleSubmitOrder={handleSubmitOrder}
-            />
+            <div className="neworder">
+                <header className="neworder_header">
+                    <h1>Create New Order</h1>
+                    <aside className="neworder_header_inputs">
+                        <Button onClick={() => {
+                            handleSubmitOrder()
+                        }}>
+                            My Cart
+                        </Button>
+                    </aside>
+                </header>
+                <NewOrderSelections
+                    apples={apples}
+                    order={order}
+                    setOrder={setOrder}
+                    handleDisplayedItemPounds={handleDisplayedItemPounds}
+                    handleAddOrIncreaseItem={handleAddOrIncreaseItem}
+                    handleDecreaseItem={handleDecreaseItem}
+                    handleSubmitOrder={handleSubmitOrder}
+                />
+            </div>
             <Footer />
         </>
     )

@@ -23,7 +23,7 @@ public class ApplesController : ControllerBase
     [AllowAnonymous]
     public IActionResult Get()
     {
-        bool isEmployee = User.IsInRole("Admin,OrderPicker,Harvester");
+        bool isEmployee = User.IsInRole("Admin") || User.IsInRole("OrderPicker") || User.IsInRole("Harvester");
 
         return Ok(_dbContext
             .AppleVarieties
@@ -38,7 +38,6 @@ public class ApplesController : ControllerBase
                 CostPerPound = a.CostPerPound,
                 IsActive = a.IsActive,
                 Trees = isEmployee ? a.Trees
-                    .Where(t => t.DateRemoved == null)
                     .Select(t => new TreeDTO
                     {
                         Id = t.Id,
@@ -94,25 +93,25 @@ public class ApplesController : ControllerBase
             CostPerPound = appleVariety.CostPerPound,
             IsActive = appleVariety.IsActive,
             Trees = appleVariety.Trees
-                    .Where(t => t.DateRemoved == null)
-                    .Select(t => new TreeDTO
+                .Where(t => t.DateRemoved == null)
+                .Select(t => new TreeDTO
+                {
+                    Id = t.Id,
+                    AppleVarietyId = t.AppleVarietyId,
+                    AppleVariety = null,
+                    DatePlanted = t.DatePlanted,
+                    DateRemoved = t.DateRemoved,
+                    TreeHarvestReports = t.TreeHarvestReports.Select(thr => new TreeHarvestReportDTO
                     {
-                        Id = t.Id,
-                        AppleVarietyId = t.AppleVarietyId,
-                        AppleVariety = null,
-                        DatePlanted = t.DatePlanted,
-                        DateRemoved = t.DateRemoved,
-                        TreeHarvestReports = t.TreeHarvestReports.Select(thr => new TreeHarvestReportDTO
-                        {
-                            Id = thr.Id,
-                            TreeId = thr.TreeId,
-                            Tree = null,
-                            EmployeeUserProfileId = thr.EmployeeUserProfileId,
-                            Employee = null,
-                            HarvestDate = thr.HarvestDate,
-                            PoundsHarvested = thr.PoundsHarvested
-                        }).ToList()
-                    }).ToList(),
+                        Id = thr.Id,
+                        TreeId = thr.TreeId,
+                        Tree = null,
+                        EmployeeUserProfileId = thr.EmployeeUserProfileId,
+                        Employee = null,
+                        HarvestDate = thr.HarvestDate,
+                        PoundsHarvested = thr.PoundsHarvested
+                    }).ToList()
+                }).ToList(),
             OrderItems = appleVariety.OrderItems.Select(oi => new OrderItemDTO
             {
                 Id = oi.Id,

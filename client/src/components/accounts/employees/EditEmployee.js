@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
-import { Footer } from "../Footer"
-import "../stylesheets/editEmployee.css"
+import { Footer } from "../../Footer"
+import "../../stylesheets/editEmployee.css"
 import { useNavigate, useParams } from "react-router-dom";
-import { getEmployeeById, updateEmployee } from "../../managers/employeeManager";
+import { getEmployeeById, updateEmployee } from "../../../managers/employeeManager";
 
 export const EditEmployee = () => {
     const [employee, setEmployee] = useState({})

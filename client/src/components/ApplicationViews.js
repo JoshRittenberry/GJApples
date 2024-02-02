@@ -16,14 +16,17 @@ import { ViewTrees } from "./trees/ViewTrees"
 import ScrollToTop from "./ScrollToTop"
 import { EditTree } from "./trees/EditTree"
 import { NewTree } from "./trees/NewTree"
-import { ViewEmployees } from "./employees/ViewEmployees"
-import { EditEmployee } from "./employees/EditEmployee"
-import { NewEmployee } from "./employees/NewEmployee"
+import { ViewEmployees } from "./accounts/employees/ViewEmployees"
+import { EditEmployee } from "./accounts/employees/EditEmployee"
+import { NewEmployee } from "./accounts/employees/NewEmployee"
 import { UpdatePassword } from "./auth/UpdatePassword"
-import { ViewCustomers } from "./customers/ViewCustomers"
-import { EditCustomer } from "./customers/EditCustomer"
-import { NewCustomer } from "./customers/NewCustomer"
+import { ViewCustomers } from "./accounts/customers/ViewCustomers"
+import { EditCustomer } from "./accounts/customers/EditCustomer"
+import { NewCustomer } from "./accounts/customers/NewCustomer"
 import { AdminAccountsMenu } from "./accounts/AdminAccountsMenu"
+import { ViewApples } from "./apples/ViewApples"
+import { EditApple } from "./apples/EditApple"
+import { NewApple } from "./apples/newApple"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -105,23 +108,27 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           <Route
             path="trees/*"
             element={
-              <Routes>
-                <Route path="" element={
-                  <AuthorizedRoute roles={["Admin", "Harvester"]} loggedInUser={loggedInUser}>
-                    <ViewTrees loggedInUser={loggedInUser} />
-                  </AuthorizedRoute>
-                } />
-                <Route path="edit/:id" element={
-                  <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
-                    <EditTree loggedInUser={loggedInUser} />
-                  </AuthorizedRoute>
-                } />
-                <Route path="newtree" element={
-                  <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
-                    <NewTree loggedInUser={loggedInUser} />
-                  </AuthorizedRoute>
-                } />
-              </Routes>
+              <AuthorizedRoute roles={["Admin", "Harvester"]} loggedInUser={loggedInUser}>
+                <Routes>
+                  <Route path="" element={<ViewTrees loggedInUser={loggedInUser} />} />
+                  <Route path="edit/:id" element={<EditTree loggedInUser={loggedInUser} />} />
+                  <Route path="newtree" element={<NewTree loggedInUser={loggedInUser} />} />
+                </Routes>
+              </AuthorizedRoute>
+            }
+          />
+
+          {/* Apples Pages */}
+          <Route
+            path="apples/*"
+            element={
+              <AuthorizedRoute roles={["Admin", "Harvester"]} loggedInUser={loggedInUser}>
+                <Routes>
+                  <Route path="" element={<ViewApples loggedInUser={loggedInUser} />} />
+                  <Route path="edit/:id" element={<EditApple loggedInUser={loggedInUser} />} />
+                  <Route path="newapple" element={<NewApple loggedInUser={loggedInUser} />} />
+                </Routes>
+              </AuthorizedRoute>
             }
           />
 
