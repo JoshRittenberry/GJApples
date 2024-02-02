@@ -18,62 +18,35 @@ export const ViewApples = ({ loggedInUser }) => {
 
         // Function to update screenWidth state when the window is resized
         const handleResize = () => {
-            setScreenWidth(window.innerWidth);
-        };
+            setScreenWidth(window.innerWidth)
+        }
 
         // Attach the event listener for window resize
-        window.addEventListener('resize', handleResize);
+        window.addEventListener('resize', handleResize)
 
         // Clean up the event listener when the component unmounts
         return () => {
-            window.removeEventListener('resize', handleResize);
-        };
+            window.removeEventListener('resize', handleResize)
+        }
     }, [])
 
     // Calculate the index of the first and last apple to display on the current page
-    const indexOfLastApple = currentPage * applesPerPage;
-    const indexOfFirstApple = indexOfLastApple - applesPerPage;
-    const currentApples = apples.slice(indexOfFirstApple, indexOfLastApple);
+    const indexOfLastApple = currentPage * applesPerPage
+    const indexOfFirstApple = indexOfLastApple - applesPerPage
+    const currentApples = apples.slice(indexOfFirstApple, indexOfLastApple)
 
     // Function to handle next page
     const nextPage = () => {
         if (indexOfLastApple < apples.length) {
-            setCurrentPage(currentPage + 1);
+            setCurrentPage(currentPage + 1)
         }
-    };
+    }
 
     // Function to handle previous page
     const prevPage = () => {
         if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
+            setCurrentPage(currentPage - 1)
         }
-    };
-
-    const datePlanted = (apple) => {
-        return new Date(apple.datePlanted).toISOString().split('T')[0]
-    }
-
-    const dateRemoved = (apple) => {
-        if (apple.dateRemoved == null) {
-            return `-`
-        }
-        return new Date(apple.dateRemoved).toISOString().split('T')[0]
-    }
-
-    const lastHarvestDate = (appleHarvestReports) => {
-        if (appleHarvestReports.length < 1) {
-            return "-"
-        }
-        let harvest = appleHarvestReports.reduce((prev, current) => prev.id > current.id ? prev : current)
-        return new Date(harvest.harvestDate).toISOString().split('T')[0]
-    }
-
-    const lastHarvester = (appleHarvestReports) => {
-        if (appleHarvestReports.length < 1) {
-            return "-"
-        }
-        let harvest = appleHarvestReports.reduce((prev, current) => prev.id > current.id ? prev : current)
-        return `${harvest.employee.firstName} ${harvest.employee.lastName}`
     }
 
     const poundsProduced = (trees) => {
@@ -125,13 +98,13 @@ export const ViewApples = ({ loggedInUser }) => {
                         <tbody>
                             {currentApples?.map((a) => (
                                 <tr key={`order-${a.id}`}>
-                                    <th scope="row">{a.id}</th>
-                                    <th>{a.type}</th>
-                                    <th>{a.costPerPound}</th>
-                                    <th>{a.trees?.filter(tree => tree.dateRemoved == null).length}</th>
-                                    <th>{poundsProduced(a.trees)}</th>
-                                    <th>{poundsOrdered(a.orderItems)}</th>
-                                    <th>{poundsProduced(a.trees) - poundsOrdered(a.orderItems)}</th>
+                                    <th style={{ color: a.isActive ? 'black' : 'red' }} scope="row">{a.id}</th>
+                                    <th style={{ color: a.isActive ? 'black' : 'red' }}>{a.type}</th>
+                                    <th style={{ color: a.isActive ? 'black' : 'red' }}>{a.costPerPound}</th>
+                                    <th style={{ color: a.isActive ? 'black' : 'red' }}>{a.trees?.filter(tree => tree.dateRemoved == null).length}</th>
+                                    <th style={{ color: a.isActive ? 'black' : 'red' }}>{poundsProduced(a.trees)}</th>
+                                    <th style={{ color: a.isActive ? 'black' : 'red' }}>{poundsOrdered(a.orderItems)}</th>
+                                    <th style={{ color: a.isActive ? 'black' : 'red' }}>{poundsProduced(a.trees) - poundsOrdered(a.orderItems)}</th>
                                     {loggedInUser.roles.includes("Admin") && (
                                         <th>
                                             <Button className="viewapples_body_button" onClick={() => {

@@ -7,3 +7,17 @@ export const getAllApples = () => {
 export const getAppleVarieties = () => {
     return fetch(_apiUrl).then((res) => res.json())
 }
+
+export const getAppleById = (appleId) => {
+    return fetch(`${_apiUrl}/${appleId}`).then((res) => res.json())
+}
+
+export const editApple = (apple) => {
+    return fetch(`${_apiUrl}/${apple.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(apple),
+    })
+}

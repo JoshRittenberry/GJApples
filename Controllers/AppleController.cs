@@ -93,25 +93,25 @@ public class ApplesController : ControllerBase
             CostPerPound = appleVariety.CostPerPound,
             IsActive = appleVariety.IsActive,
             Trees = appleVariety.Trees
-                    .Where(t => t.DateRemoved == null)
-                    .Select(t => new TreeDTO
+                .Where(t => t.DateRemoved == null)
+                .Select(t => new TreeDTO
+                {
+                    Id = t.Id,
+                    AppleVarietyId = t.AppleVarietyId,
+                    AppleVariety = null,
+                    DatePlanted = t.DatePlanted,
+                    DateRemoved = t.DateRemoved,
+                    TreeHarvestReports = t.TreeHarvestReports.Select(thr => new TreeHarvestReportDTO
                     {
-                        Id = t.Id,
-                        AppleVarietyId = t.AppleVarietyId,
-                        AppleVariety = null,
-                        DatePlanted = t.DatePlanted,
-                        DateRemoved = t.DateRemoved,
-                        TreeHarvestReports = t.TreeHarvestReports.Select(thr => new TreeHarvestReportDTO
-                        {
-                            Id = thr.Id,
-                            TreeId = thr.TreeId,
-                            Tree = null,
-                            EmployeeUserProfileId = thr.EmployeeUserProfileId,
-                            Employee = null,
-                            HarvestDate = thr.HarvestDate,
-                            PoundsHarvested = thr.PoundsHarvested
-                        }).ToList()
-                    }).ToList(),
+                        Id = thr.Id,
+                        TreeId = thr.TreeId,
+                        Tree = null,
+                        EmployeeUserProfileId = thr.EmployeeUserProfileId,
+                        Employee = null,
+                        HarvestDate = thr.HarvestDate,
+                        PoundsHarvested = thr.PoundsHarvested
+                    }).ToList()
+                }).ToList(),
             OrderItems = appleVariety.OrderItems.Select(oi => new OrderItemDTO
             {
                 Id = oi.Id,

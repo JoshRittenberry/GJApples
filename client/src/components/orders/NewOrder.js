@@ -14,7 +14,10 @@ export const NewOrder = ({ loggedInUser }) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        getAllApples().then(setApples)
+        getAllApples().then(res => {
+            let activeApples = res.filter(apple => apple.isActive)
+            setApples(activeApples)
+        })
         getUnsubmittedOrder().then(setOrder)
     }, [])
 

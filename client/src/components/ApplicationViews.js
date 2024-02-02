@@ -25,6 +25,7 @@ import { EditCustomer } from "./accounts/customers/EditCustomer"
 import { NewCustomer } from "./accounts/customers/NewCustomer"
 import { AdminAccountsMenu } from "./accounts/AdminAccountsMenu"
 import { ViewApples } from "./apples/ViewApples"
+import { EditApple } from "./apples/EditApple"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -123,7 +124,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
               <AuthorizedRoute roles={["Admin", "Harvester"]} loggedInUser={loggedInUser}>
                 <Routes>
                   <Route path="" element={<ViewApples loggedInUser={loggedInUser} />} />
-                  {/* <Route path="edit/:id" element={<EditTree loggedInUser={loggedInUser} />} /> */}
+                  <Route path="edit/:id" element={<EditApple loggedInUser={loggedInUser} />} />
                   {/* <Route path="newtree" element={<NewTree loggedInUser={loggedInUser} />} /> */}
                 </Routes>
               </AuthorizedRoute>
