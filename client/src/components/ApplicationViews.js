@@ -22,7 +22,7 @@ import { NewEmployee } from "./employees/NewEmployee"
 import { AdminEmployeeMenu } from "./employees/AdminEmployeeMenu"
 import { UpdatePassword } from "./auth/UpdatePassword"
 import { ViewCustomers } from "./customers/ViewCustomers"
-// import { EditCustomer } from "./customers/EditCustomer"
+import { EditCustomer } from "./customers/EditCustomer"
 // import { NewCustomer } from "./customers/NewCustomer"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
@@ -147,7 +147,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
               <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
                 <Routes>
                   <Route path="view" element={<ViewCustomers loggedInUser={loggedInUser} />} />
-                  {/* <Route path="edit/:id" element={<EditCustomer loggedInUser={loggedInUser} />} /> */}
+                  <Route path="edit/:id" element={<EditCustomer loggedInUser={loggedInUser} />} />
                   {/* <Route path="new" element={<NewCustomer loggedInUser={loggedInUser} />} /> */}
                 </Routes>
               </AuthorizedRoute>

@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react"
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
 import { Footer } from "../Footer"
-import "../stylesheets/editEmployee.css"
+import "../stylesheets/editCustomer.css"
 import { useNavigate, useParams } from "react-router-dom";
-import { getEmployeeById, updateEmployee } from "../../managers/employeeManager";
+import { getCustomerById, updateCustomer } from "../../managers/customerManager";
 
 export const EditCustomer = () => {
-    const [employee, setEmployee] = useState({})
+    const [customer, setCustomer] = useState({})
     const [update, setUpdate] = useState({})
 
     const navigate = useNavigate()
-    const employeeId = useParams().id
+    const customerId = useParams().id
 
     useEffect(() => {
-        getEmployeeById(employeeId).then(res => {
-            setEmployee(res)
+        getCustomerById(customerId).then(res => {
+            setCustomer(res)
             setUpdate({
                 id: res.id,
                 firstName: res.firstName,
@@ -29,11 +29,11 @@ export const EditCustomer = () => {
 
     return (
         <>
-            <div className="editemployee">
-                <header className="editemployee_header">
-                    <h1>Edit Employee</h1>
+            <div className="editcustomer">
+                <header className="editcustomer_header">
+                    <h1>Edit Customer</h1>
                 </header>
-                <section className="editemployee_body">
+                <section className="editcustomer_body">
                     <FormGroup>
                         <Label>First Name</Label>
                         <Input
@@ -95,15 +95,15 @@ export const EditCustomer = () => {
                         />
                     </FormGroup>
                 </section>
-                <div className="editemployee_footer">
-                    <Button className="editemployee_footer_button" onClick={() => {
-                        updateEmployee(employeeId, update)
-                        navigate("/employees/view")
+                <div className="editcustomer_footer">
+                    <Button className="editcustomer_footer_button" onClick={() => {
+                        updateCustomer(customerId, update)
+                        navigate("/customers/view")
                     }}>
                         Submit
                     </Button>
-                    <Button className="editemployee_footer_button" onClick={() => {
-                        navigate("/employees/view")
+                    <Button className="editcustomer_footer_button" onClick={() => {
+                        navigate("/customers/view")
                     }}>
                         Cancel
                     </Button>
