@@ -185,9 +185,9 @@ public class AuthController : ControllerBase
         return StatusCode(500);
     }
 
-    [HttpPost("create")]
+    [HttpPost("createemployee")]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> Create(RegistrationDTO registration, [FromQuery] string? roleName)
+    public async Task<IActionResult> CreateEmployee(RegistrationDTO registration, [FromQuery] string? roleName)
     {
         var user = new IdentityUser
         {
@@ -207,6 +207,49 @@ public class AuthController : ControllerBase
         {
             newUserRole = _dbContext.Roles.SingleOrDefault(r => r.Name == "Harvester");
         }
+
+        if (result.Succeeded)
+        {
+            await _dbContext.UserProfiles.AddAsync(new UserProfile
+            {
+                FirstName = registration.FirstName,
+                LastName = registration.LastName,
+                Address = registration.Address,
+                IdentityUserId = user.Id,
+                ForcePasswordChange = true
+            });
+
+
+            await _dbContext.UserRoles.AddAsync(new IdentityUserRole<string>
+            {
+                UserId = user.Id,
+                RoleId = newUserRole.Id
+            });
+
+            await _dbContext.SaveChangesAsync();
+
+            return Ok();
+        }
+        return StatusCode(500);
+    }
+
+    [HttpPost("createcustomer")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> CreateCustomer(RegistrationDTO registration, [FromQuery] string? roleName)
+    {
+        var user = new IdentityUser
+        {
+            UserName = registration.UserName,
+            Email = registration.Email
+        };
+
+        var password = Encoding
+            .GetEncoding("iso-8859-1")
+            .GetString(Convert.FromBase64String(registration.Password));
+
+        var result = await _userManager.CreateAsync(user, password);
+
+        var newUserRole = _dbContext.Roles.SingleOrDefault(r => r.Name == "Customer");
 
         if (result.Succeeded)
         {

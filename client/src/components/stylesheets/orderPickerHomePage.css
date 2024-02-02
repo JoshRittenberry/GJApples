@@ -8,6 +8,10 @@
     margin: 20px;
 }
 
+.orderpickerhome_header h1 {
+    text-align: center;
+}
+
 .orderpickerhome_body {
     display: flex;
     justify-content: space-between;

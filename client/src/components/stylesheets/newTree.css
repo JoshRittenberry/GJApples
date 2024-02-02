@@ -6,6 +6,10 @@
     margin-top: 20px;
 }
 
+.newtree_header h1 {
+    text-align: center;
+}
+
 .newtree_body Form {
     width: 250px;
     margin: auto;

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-import { create, register } from "../../managers/authManager"
+import { createCustomer, register } from "../../managers/authManager"
 import { Link, useNavigate } from "react-router-dom"
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap"
 import { Footer } from "../Footer"
 import "../stylesheets/register.css"
 import { getAllRoles } from "../../managers/employeeManager"
 
-export const NewEmployee = ({ setLoggedInUser }) => {
+export const NewCustomer = ({ setLoggedInUser }) => {
     const [roles, setRoles] = useState([])
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
@@ -14,16 +14,8 @@ export const NewEmployee = ({ setLoggedInUser }) => {
     const [email, setEmail] = useState("")
     const [address, setAddress] = useState("")
     const [password, setPassword] = useState("")
-    const [selectedRole, setSelectedRole] = useState({})
 
     const navigate = useNavigate()
-
-    useEffect(() => {
-        getAllRoles().then(res => {
-            setRoles(res.filter(role => role.name !== 'Customer'))
-            setSelectedRole(res[0])
-        })
-    }, [])
 
     const generateRandomPassword = () => {
         const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*"
@@ -38,7 +30,7 @@ export const NewEmployee = ({ setLoggedInUser }) => {
     }
 
     const handleSubmit = (e) => {
-        let newEmployee = {
+        let newCustomer = {
             email: email,
             password: password,
             userName: userName ,
@@ -50,8 +42,8 @@ export const NewEmployee = ({ setLoggedInUser }) => {
             return
         }
 
-        create(newEmployee, selectedRole.name).then(() => {
-            // navigate("/employees")
+        createCustomer(newCustomer).then(() => {
+            navigate("/customers/view")
         })
     }
 
@@ -98,26 +90,6 @@ export const NewEmployee = ({ setLoggedInUser }) => {
                             setUserName(e.target.value)
                         }}
                     />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="position">
-                        Position
-                    </Label>
-                    <Input
-                        id="position"
-                        name="select"
-                        type="select"
-                        onChange={event => {
-                            let newRole = roles.find(role => role.id == event.target.value)
-                            setSelectedRole(newRole)
-                        }}
-                    >
-                        {roles.map((r, index) => (
-                            <option key={r.id} selected={index === 0} value={r.id}>
-                                {r.name}
-                            </option>
-                        ))}
-                    </Input>
                 </FormGroup>
                 <FormGroup>
                     <Label>Address</Label>

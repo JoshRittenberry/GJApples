@@ -26,9 +26,9 @@ export const AdminSelections = () => {
             id: 1,
             src: '/pictures/employees.jpg',
             alt: 'Garry Jones Picking Apples',
-            text: 'View and Edit Employees',
-            label: 'Employees',
-            path: '/employees'
+            text: 'View and Edit Accounts',
+            label: 'Accounts',
+            path: '/accounts'
         },
         {
             id: 2,

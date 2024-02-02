@@ -19,8 +19,11 @@ import { NewTree } from "./trees/NewTree"
 import { ViewEmployees } from "./employees/ViewEmployees"
 import { EditEmployee } from "./employees/EditEmployee"
 import { NewEmployee } from "./employees/NewEmployee"
-import { AdminEmployeeMenu } from "./employees/AdminEmployeeMenu"
 import { UpdatePassword } from "./auth/UpdatePassword"
+import { ViewCustomers } from "./customers/ViewCustomers"
+import { EditCustomer } from "./customers/EditCustomer"
+import { NewCustomer } from "./customers/NewCustomer"
+import { AdminAccountsMenu } from "./accounts/AdminAccountsMenu"
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -122,16 +125,28 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             }
           />
 
-          {/* Employee Pages */}
+          {/* Accounts Pages */}
           <Route
-            path="employees/*"
+            path="accounts/*"
             element={
               <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
                 <Routes>
-                  <Route path="" element={<AdminEmployeeMenu loggedInUser={loggedInUser} />} />
-                  <Route path="view" element={<ViewEmployees loggedInUser={loggedInUser} />} />
-                  <Route path="edit/:id" element={<EditEmployee loggedInUser={loggedInUser} />} />
-                  <Route path="new" element={<NewEmployee loggedInUser={loggedInUser} />} />
+                  {/* Landing Page */}
+                  <Route path="" element={<AdminAccountsMenu loggedInUser={loggedInUser} />} />
+
+                  {/* Employee Pages */}
+                  <Route path="employees/*">
+                    <Route path="view" element={<ViewEmployees loggedInUser={loggedInUser} />} />
+                    <Route path="edit/:id" element={<EditEmployee loggedInUser={loggedInUser} />} />
+                    <Route path="new" element={<NewEmployee loggedInUser={loggedInUser} />} />
+                  </Route>
+
+                  {/* Customer Pages */}
+                  <Route path="customers/*">
+                    <Route path="view" element={<ViewCustomers loggedInUser={loggedInUser} />} />
+                    <Route path="edit/:id" element={<EditCustomer loggedInUser={loggedInUser} />} />
+                    <Route path="new" element={<NewCustomer loggedInUser={loggedInUser} />} />
+                  </Route>
                 </Routes>
               </AuthorizedRoute>
             }

@@ -8,6 +8,10 @@
     margin-top: 20px;
 }
 
+.edittree_header h1 {
+    text-align: center;
+}
+
 .edittree_body Form {
     width: 250px;
     margin: auto;
