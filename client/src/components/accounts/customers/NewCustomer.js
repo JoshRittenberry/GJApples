@@ -128,7 +128,7 @@ export const NewCustomer = ({ setLoggedInUser }) => {
                     )}
                     <Button onClick={() => {
                         setPassword("")
-                        navigate("/employees")
+                        navigate("/accounts")
                     }}>
                         Cancel
                     </Button>

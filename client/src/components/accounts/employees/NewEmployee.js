@@ -41,7 +41,7 @@ export const NewEmployee = ({ setLoggedInUser }) => {
         let newEmployee = {
             email: email,
             password: password,
-            userName: userName ,
+            userName: userName,
             firstName: firstName,
             lastName: lastName,
             address: address
@@ -157,7 +157,7 @@ export const NewEmployee = ({ setLoggedInUser }) => {
                     )}
                     <Button onClick={() => {
                         setPassword("")
-                        navigate("/employees")
+                        navigate("/accounts")
                     }}>
                         Cancel
                     </Button>
