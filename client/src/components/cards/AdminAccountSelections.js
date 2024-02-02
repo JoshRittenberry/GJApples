@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import '../stylesheets/adminEmployeeSelections.css';
-import { AdminEmployeeSelectionItem } from './AdminEmployeeSelectionItem';
+import '../stylesheets/adminAccountSelections.css';
+import { AdminAccountSelectionItem } from './AdminAccountSelectionItem';
 
-export const AdminEmployeeSelections = () => {
+export const AdminAccountSelections = () => {
 
     let selections = [
         {
@@ -11,7 +10,7 @@ export const AdminEmployeeSelections = () => {
             alt: 'View Employees',
             text: 'View and Edit Employees',
             label: 'Employees',
-            path: '/employees/view'
+            path: 'employees/view'
         },
         {
             id: 2,
@@ -19,7 +18,7 @@ export const AdminEmployeeSelections = () => {
             alt: 'Create Employees',
             text: 'Create a New Employee Account',
             label: 'New Employee',
-            path: '/employees/new'
+            path: 'employees/new'
         },
         {
             id: 3,
@@ -27,7 +26,7 @@ export const AdminEmployeeSelections = () => {
             alt: 'View Customers',
             text: 'View and Edit Customers',
             label: 'Customers',
-            path: '/customers/view'
+            path: 'customers/view'
         },
         {
             id: 4,
@@ -35,7 +34,7 @@ export const AdminEmployeeSelections = () => {
             alt: 'Create Customer',
             text: 'Create a New Customer Account',
             label: 'New Customer',
-            path: '/customers/new'
+            path: 'customers/new'
         }
     ]
 
@@ -48,7 +47,7 @@ export const AdminEmployeeSelections = () => {
             selectionGroups.push(
                 <ul className='cards__adminselection__items' key={i}>
                     {group.map((selection, index) => (
-                        <AdminEmployeeSelectionItem
+                        <AdminAccountSelectionItem
                             src={selection.src}
                             alt={selection.alt}
                             text={selection.text}
@@ -64,9 +63,9 @@ export const AdminEmployeeSelections = () => {
     };
 
     return (
-        <div className='cards__adminemployeeselection'>
-            <div className='cards__adminemployeeselection__container'>
-                <div className='cards__adminemployeeselection__wrapper'>
+        <div className='cards__adminaccountselection'>
+            <div className='cards__adminaccountselection__container'>
+                <div className='cards__adminaccountselection__wrapper'>
                     {renderSelectionList()}
                 </div>
             </div>
@@ -74,4 +73,4 @@ export const AdminEmployeeSelections = () => {
     );
 }
 
-export default AdminEmployeeSelections;
+export default AdminAccountSelections;
