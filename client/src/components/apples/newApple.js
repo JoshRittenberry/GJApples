@@ -1,39 +1,34 @@
-import { useEffect, useState } from "react"
+import "../stylesheets/newApple.css"
 import { Footer } from "../Footer"
-import "../stylesheets/editApple.css"
-import { useNavigate, useParams } from "react-router-dom"
-import { editApple, getAppleById } from "../../managers/appleManager"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { Button, Form, FormGroup, Input, Label } from "reactstrap"
+import { getAppleVarieties } from "../../managers/appleManager"
+import { createNewApple } from "../../managers/appleManager"
 
-export const EditApple = ({ loggedInUser }) => {
-    const [apple, setApple] = useState({})
-    const [update, setUpdate] = useState({})
+export const NewApple = () => {
+    const [newApple, setNewApple] = useState({})
+    const [appleVarieties, setAppleVarieties] = useState([])
 
     const navigate = useNavigate()
-    const appleId = useParams().id
 
     useEffect(() => {
-        getAppleById(appleId).then(res => {
-            setApple(res)
-            setUpdate({
-                id: res.id,
-                type: res.type,
-                imageUrl: res.imageUrl,
-                costPerPound: res.costPerPound,
-                isActive: res.isActive
-            })
+        setNewApple({
+            type: "",
+            imageUrl: "",
+            costPerPound: 0.50,
+            isActive: true
         })
+        getAppleVarieties().then(setAppleVarieties)
     }, [])
 
     return (
         <>
-            <div className="editapple">
-                <header className="editapple_header">
-                    <div className="editapple_header_top">
-                        <h1>Apple Editor (Apple #{apple.id})</h1>
-                    </div>
+            <div className="newapple">
+                <header className="newapple_header">
+                    <h1>New Apple</h1>
                 </header>
-                <section className="editapple_body">
+                <section className="newapple_body">
                     <Form>
                         <FormGroup>
                             <Label for="appleVariety">
@@ -43,11 +38,11 @@ export const EditApple = ({ loggedInUser }) => {
                                 id="appleVariety"
                                 name="appleVariety"
                                 type="text"
-                                value={update.type}
+                                value={newApple.type}
                                 onChange={event => {
-                                    let newUpdate = { ...update }
+                                    let newUpdate = { ...newApple }
                                     newUpdate.type = event.target.value
-                                    setUpdate(newUpdate)
+                                    setNewApple(newUpdate)
                                 }}
                             />
                         </FormGroup>
@@ -59,11 +54,11 @@ export const EditApple = ({ loggedInUser }) => {
                                 id="appleImage"
                                 name="appleImage"
                                 type="text"
-                                value={update.imageUrl}
+                                value={newApple.imageUrl}
                                 onChange={event => {
-                                    let newUpdate = { ...update }
+                                    let newUpdate = { ...newApple }
                                     newUpdate.imageUrl = event.target.value
-                                    setUpdate(newUpdate)
+                                    setNewApple(newUpdate)
                                 }}
                             />
                         </FormGroup>
@@ -77,11 +72,11 @@ export const EditApple = ({ loggedInUser }) => {
                                 type="number"
                                 step="0.05"
                                 min="0.50"
-                                value={update.costPerPound}
+                                value={newApple.costPerPound}
                                 onChange={event => {
-                                    let newUpdate = { ...update }
+                                    let newUpdate = { ...newApple }
                                     newUpdate.costPerPound = event.target.value
-                                    setUpdate(newUpdate)
+                                    setNewApple(newUpdate)
                                 }}
                             />
                         </FormGroup>
@@ -93,26 +88,26 @@ export const EditApple = ({ loggedInUser }) => {
                                 type="checkbox"
                                 id="appleActiveStatus"
                                 label="Active Status"
-                                checked={update.isActive}
+                                checked={newApple.isActive}
                                 onChange={(event) => {
                                     const isChecked = event.target.checked;
-                                    let newUpdate = { ...update };
+                                    let newUpdate = { ...newApple };
                                     newUpdate.isActive = isChecked;
-                                    setUpdate(newUpdate);
+                                    setNewApple(newUpdate);
                                 }}
                             />
                         </FormGroup>
                     </Form>
                 </section>
-                <div className="editapple_footer">
-                    <Button className="editapple_footer_button" onClick={() => {
-                        editApple(update).then(() => {
+                <div className="newapple_footer">
+                    <Button className="newapple_footer_button" onClick={() => {
+                        createNewApple(newApple).then(() => {
                             navigate("/apples")
                         })
                     }}>
                         Submit
                     </Button>
-                    <Button className="editapple_footer_button" onClick={() => {
+                    <Button className="newapple_footer_button" onClick={() => {
                         navigate("/apples")
                     }}>
                         Cancel
