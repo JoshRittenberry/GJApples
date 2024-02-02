@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { create, register } from "../../managers/authManager"
+import { createEmployee, register } from "../../managers/authManager"
 import { Link, useNavigate } from "react-router-dom"
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap"
 import { Footer } from "../Footer"
@@ -50,7 +50,7 @@ export const NewEmployee = ({ setLoggedInUser }) => {
             return
         }
 
-        create(newEmployee, selectedRole.name).then(() => {
+        createEmployee(newEmployee, selectedRole.name).then(() => {
             navigate("/employees")
         })
     }

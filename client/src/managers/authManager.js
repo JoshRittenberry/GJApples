@@ -38,9 +38,21 @@ export const register = (userProfile) => {
     }).then(() => tryGetLoggedInUser());
 };
 
-export const create = (userProfile, roleName) => {
+export const createEmployee = (userProfile, roleName) => {
     userProfile.password = btoa(userProfile.password);
-    return fetch(`${_apiUrl}/create?roleName=${roleName}`, {
+    return fetch(`${_apiUrl}/createemployee?roleName=${roleName}`, {
+        credentials: "same-origin",
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userProfile),
+    })
+};
+
+export const createCustomer = (userProfile) => {
+    userProfile.password = btoa(userProfile.password);
+    return fetch(`${_apiUrl}/createcustomer`, {
         credentials: "same-origin",
         method: "POST",
         headers: {
