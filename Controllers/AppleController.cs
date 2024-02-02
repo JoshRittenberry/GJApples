@@ -23,7 +23,7 @@ public class ApplesController : ControllerBase
     [AllowAnonymous]
     public IActionResult Get()
     {
-        bool isEmployee = User.IsInRole("Admin,OrderPicker,Harvester");
+        bool isEmployee = User.IsInRole("Admin") || User.IsInRole("OrderPicker") || User.IsInRole("Harvester");
 
         return Ok(_dbContext
             .AppleVarieties
@@ -38,7 +38,6 @@ public class ApplesController : ControllerBase
                 CostPerPound = a.CostPerPound,
                 IsActive = a.IsActive,
                 Trees = isEmployee ? a.Trees
-                    .Where(t => t.DateRemoved == null)
                     .Select(t => new TreeDTO
                     {
                         Id = t.Id,
