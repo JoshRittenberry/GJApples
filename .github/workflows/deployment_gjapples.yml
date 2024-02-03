@@ -88,6 +88,9 @@ jobs:
           git config user.email "${{ github.actor }}@users.noreply.github.com"
           echo "Deploying to GitHub Pages..."
           git checkout --orphan gh-pages
+          git add .
+          git commit -m "Save Changes"
+          git push origin gh-pages
           git pull origin main
           git rm -rf .
           mv client/build/* .
