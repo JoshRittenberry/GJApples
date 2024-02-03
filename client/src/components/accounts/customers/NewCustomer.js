@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { createCustomer, register } from "../../../managers/authManager"
+import { createCustomer } from "../../../managers/authManager"
 import { useNavigate } from "react-router-dom"
 import { Button, FormGroup, Input, Label } from "reactstrap"
 import { Footer } from "../../Footer"
@@ -36,7 +36,7 @@ export const NewCustomer = ({ setLoggedInUser }) => {
             lastName: lastName,
             address: address
         }
-        if (firstName.trim() == "" || lastName.trim() == "" || userName.trim() == "" || email.trim() == "" || address.trim() == "" || password.trim() == "") {
+        if (firstName.trim() === "" || lastName.trim() === "" || userName.trim() === "" || email.trim() === "" || address.trim() === "" || password.trim() === "") {
             return
         }
 
@@ -118,7 +118,7 @@ export const NewCustomer = ({ setLoggedInUser }) => {
                             Generate
                         </Button>
                     )}
-                    {password != "" && (
+                    {password !== "" && (
                         <Button onClick={() => {
                             handleSubmit()
                         }}>

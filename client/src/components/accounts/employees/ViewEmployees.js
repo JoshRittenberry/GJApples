@@ -110,7 +110,7 @@ export const ViewEmployees = ({ loggedInUser }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {employees.map((e) => {
+                            {currentEmployees.map((e) => {
                                 return (
                                     <tr key={`employee-${e.id}`}>
                                         <th scope="row">

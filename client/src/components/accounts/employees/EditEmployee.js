@@ -6,7 +6,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getEmployeeById, updateEmployee } from "../../../managers/employeeManager";
 
 export const EditEmployee = () => {
-    const [employee, setEmployee] = useState({})
     const [update, setUpdate] = useState({})
 
     const navigate = useNavigate()
@@ -14,7 +13,6 @@ export const EditEmployee = () => {
 
     useEffect(() => {
         getEmployeeById(employeeId).then(res => {
-            setEmployee(res)
             setUpdate({
                 id: res.id,
                 firstName: res.firstName,

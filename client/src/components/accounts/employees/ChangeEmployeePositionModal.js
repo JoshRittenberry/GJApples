@@ -33,7 +33,7 @@ export const ChangeEmployeePositionModal = ({ positionModal, togglePositionModal
                             name="select"
                             type="select"
                             onChange={event => {
-                                let newRole = roles.find(role => role.id == event.target.value)
+                                let newRole = roles.find(role => role.id === event.target.value)
                                 setCurrentRole(newRole)
                             }}
                         >

@@ -4,12 +4,10 @@ import { Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFoot
 import { getUserWithRoles, updateEmployeePassword } from "../../../managers/employeeManager"
 
 export const ChangeCustomerPasswordModal = ({ passwordModal, togglePasswordModal, selectedCustomer, setSelectedCustomer, args }) => {
-    const [user, setUser] = useState({})
     const [password, setPassword] = useState({})
 
     useEffect(() => {
         getUserWithRoles(selectedCustomer.id).then(userRes => {
-            setUser(userRes)
             setPassword({
                 identityUserId: userRes.identityUserId,
                 password: null,

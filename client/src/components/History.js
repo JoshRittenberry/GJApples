@@ -69,20 +69,20 @@ export const History = () => {
                 <video className="history-container-video" src='/videos/hp_apples_v.mp4' playsInline autoPlay loop muted />
                 <div className="timeline">
                     {timelineElements.map(te => {
-                        if (position == "right" || position == "") {
+                        if (position === "right" || position === "") {
                             position = "left"
-                        } else if (position == "left") {
+                        } else if (position === "left") {
                             position = "right"
                         }
                         return (
                             <div className={`timeline-container ${position}-container`} key={te.id}>
-                                <img className={`${position}-dot`} src="/pictures/blank.png"></img>
+                                <img className={`${position}-dot`} alt="" src="/pictures/blank.png"></img>
                                 <div className="timeline-container-textbox">
                                     <h2>{te.title}</h2>
                                     <small>{te.date}</small>
                                     <div className="timeline-container-textbox-info">
                                         <p>{te.description}</p>
-                                        <img src={te.image}></img>
+                                        <img src={te.image} alt=""></img>
                                     </div>
                                     <span className={`${position}-container-arrow`}></span>
                                 </div>
