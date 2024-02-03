@@ -16,6 +16,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.18.2' # Use Node.js version 18.18.2
+          check-latest: true # Check for the latest matching version if not exact
+
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
@@ -66,7 +72,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14' # Adjust the Node.js version as needed
+          node-version: '18.18.2' # Use Node.js version 18.18.2
 
       - name: Install dependencies
         run: npm install
