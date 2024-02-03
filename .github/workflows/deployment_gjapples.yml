@@ -82,22 +82,44 @@ jobs:
         run: npm run build
         working-directory: client # Specify the path to your React app
 
-      - name: Deploy to GitHub Pages
-        run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
-          echo "Deploying to GitHub Pages..."
-          git checkout --orphan gh-pages
-          git pull origin gh-pages --rebase
-          git add .
-          git commit -m "Save Changes"
-          git push origin gh-pages
-          git pull origin main
-          git rm -rf .
-          mv client/build/* .
-          rm -r client
-          git add .
-          git commit -m "Deploy to GitHub Pages"
-          git push origin gh-pages
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
+- name: Deploy to GitHub Pages
+  run: |
+    git config user.name "${{ github.actor }}"
+    git config user.email "${{ github.actor }}@users.noreply.github.com"
+    echo "Deploying to GitHub Pages..."
+
+    # Create or checkout the gh-pages branch
+    if ! git show-ref --quiet refs/heads/gh-pages; then
+      git checkout --orphan gh-pages
+    else
+      git checkout gh-pages
+    fi
+
+    # Ensure a clean working directory
+    git reset --hard
+
+    # Pull latest changes from gh-pages branch (if any)
+    git pull origin gh-pages --rebase
+
+    # Add and commit the changes
+    git add .
+    git commit -m "Save Changes"
+
+    # Push changes to the gh-pages branch
+    git push origin gh-pages
+
+    # Switch back to the main branch (or your default branch)
+    git checkout main
+
+    # Remove the generated build files (if any)
+    git rm -rf .
+    mv client/build/* .
+
+    # Add and commit the changes for the main branch
+    git add .
+    git commit -m "Deploy to GitHub Pages (Main)"
+
+    # Push changes to the main branch (or your default branch)
+    git push origin main
+  env:
+    GH_PAT: ${{ secrets.GH_PAT }}
