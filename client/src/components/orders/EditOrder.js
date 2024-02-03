@@ -18,8 +18,11 @@ export const EditOrder = ({ loggedInUser }) => {
     useEffect(() => {
         getOrderById(orderId).then(order => {
             setOrder(order)
+            if (order.dateCompleted != null || order.employeeUserProfileId != null) {
+                navigate("/orderhistory")
+            }
             getAllApples().then(apples => {
-                let filteredApples = apples.filter(apple => !order.orderItems.some(oi => oi.appleVarietyId == apple.id))
+                let filteredApples = apples.filter(apple => !order.orderItems.some(oi => oi.appleVarietyId === apple.id))
                 setApples(filteredApples)
             })
             setNewOrderItem({
@@ -30,12 +33,6 @@ export const EditOrder = ({ loggedInUser }) => {
         })
 
     }, [])
-
-    useEffect(() => {
-        if (order.dateCompleted != null || order.employeeUserProfileId != null) {
-            navigate("/orderhistory")
-        }
-    }, [order])
 
     if (order.orderItems?.length < 1) {
         cancelOrder(orderId).then(() => {

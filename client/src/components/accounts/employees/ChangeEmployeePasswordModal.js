@@ -7,6 +7,7 @@ export const ChangeEmployeePasswordModal = ({ passwordModal, togglePasswordModal
     const [password, setPassword] = useState({})
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         getUserWithRoles(selectedEmployee.id).then(userRes => {
             setPassword({
                 identityUserId: userRes.identityUserId,

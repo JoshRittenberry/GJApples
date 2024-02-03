@@ -2,27 +2,10 @@ import "../stylesheets/homePageWelcome.css"
 import "../../App.css"
 import { Button } from "../Button"
 import { useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
 
 export const HomePageWelcome = ({ loggedInUser }) => {
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
     const navigate = useNavigate()
-
-    useEffect(() => {
-        // Function to update screenWidth state when the window is resized
-        const handleResize = () => {
-            setScreenWidth(window.innerWidth);
-        };
-
-        // Attach the event listener for window resize
-        window.addEventListener('resize', handleResize);
-
-        // Clean up the event listener when the component unmounts
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []); // Empty dependency array means this effect runs once after initial render
 
     return (
         <div className='homepagewelcome-container'>

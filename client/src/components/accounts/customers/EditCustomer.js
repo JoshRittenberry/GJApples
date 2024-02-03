@@ -23,7 +23,7 @@ export const EditCustomer = () => {
                 userName: res.userName
             })
         })
-    }, [])
+    }, [customerId])
 
     return (
         <>

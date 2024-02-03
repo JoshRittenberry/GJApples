@@ -3,12 +3,10 @@ import { Footer } from "../Footer"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button, Form, FormGroup, Input, Label } from "reactstrap"
-import { getAppleVarieties } from "../../managers/appleManager"
 import { createNewApple } from "../../managers/appleManager"
 
 export const NewApple = () => {
     const [newApple, setNewApple] = useState({})
-    const [appleVarieties, setAppleVarieties] = useState([])
 
     const navigate = useNavigate()
 
@@ -19,7 +17,6 @@ export const NewApple = () => {
             costPerPound: 0.50,
             isActive: true
         })
-        getAppleVarieties().then(setAppleVarieties)
     }, [])
 
     return (

@@ -7,6 +7,7 @@ export const ChangeCustomerPasswordModal = ({ passwordModal, togglePasswordModal
     const [password, setPassword] = useState({})
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         getUserWithRoles(selectedCustomer.id).then(userRes => {
             setPassword({
                 identityUserId: userRes.identityUserId,
