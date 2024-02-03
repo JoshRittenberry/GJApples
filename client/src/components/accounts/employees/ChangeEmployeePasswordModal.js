@@ -1,7 +1,7 @@
 import "../../stylesheets/changeEmployeePasswordModal.css"
 import { useEffect, useState } from "react"
 import { Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
-import { getAllRoles, getUserWithRoles, updateEmployeePassword, updateEmployeeRole } from "../../../managers/employeeManager"
+import { getUserWithRoles, updateEmployeePassword } from "../../../managers/employeeManager"
 
 export const ChangeEmployeePasswordModal = ({ passwordModal, togglePasswordModal, selectedEmployee, setSelectedEmployee, args }) => {
     const [user, setUser] = useState({})

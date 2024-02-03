@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
+import { Button, FormGroup, Input, Label } from "reactstrap";
 import { Footer } from "../../Footer"
 import "../../stylesheets/editEmployee.css"
 import { useNavigate, useParams } from "react-router-dom";

@@ -75,7 +75,7 @@ export const ViewCustomers = ({ loggedInUser }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {customers.map((e) => {
+                            {currentCustomers.map((e) => {
                                 return (
                                     <tr key={`customer-${e.id}`}>
                                         <th scope="row">

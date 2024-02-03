@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import "../stylesheets/cart.css"
 import { decreaseOrderItem, deleteOrderItem, getOrderById, getUnsubmittedOrder, increaseOrderItem, submitOrder } from "../../managers/orderManager"
-import { Button, Dropdown, DropdownToggle, Input, Table } from "reactstrap"
+import { Button, Input, Table } from "reactstrap"
 import { Footer } from "../Footer"
 import { useNavigate } from "react-router-dom"
 import { CartSelections } from "../cards/CartSelections"

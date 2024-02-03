@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import { Footer } from "./Footer"
 import "./stylesheets/history.css"
 

@@ -1,4 +1,4 @@
-import { Button, Input, Label, Table } from "reactstrap"
+import { Button, Input } from "reactstrap"
 import { completeHarvesterAssignment, deleteTreeHarvestReport, getAllUnassignedTrees, getHarvesterAssignment } from "../../managers/treeManager"
 import { useEffect, useState } from "react"
 

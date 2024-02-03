@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../managers/authManager";
 import "./stylesheets/navBar.css"
-import { Button } from "./Button";
 import { getUnsubmittedOrder } from "../managers/orderManager";
 
 export default function NavBar({ loggedInUser, setLoggedInUser }) {
