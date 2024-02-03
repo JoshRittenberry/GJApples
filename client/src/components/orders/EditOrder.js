@@ -31,8 +31,8 @@ export const EditOrder = ({ loggedInUser }) => {
                 pounds: 1,
             })
         })
-
-    }, [])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [orderId])
 
     if (order.orderItems?.length < 1) {
         cancelOrder(orderId).then(() => {
