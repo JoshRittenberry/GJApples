@@ -88,10 +88,12 @@ jobs:
           git config user.email "${{ github.actor }}@users.noreply.github.com"
           echo "Deploying to GitHub Pages..."
           git checkout --orphan gh-pages
-          git --set-upstream-to=origin/main
-          git pull
-          git add -f build
+          git pull origin main
+          git rm -rf .
+          mv client/build/* .
+          rm -r client
+          git add .
           git commit -m "Deploy to GitHub Pages"
-          git push origin HEAD:gh-pages
+          git push origin gh-pages
 
 # The rest of your workflow
