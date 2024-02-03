@@ -89,7 +89,7 @@ export const HarvesterAssignedTree = ({ loggedInUser, trees, setTrees, assignedT
             {assignedTreeHarvestReport.id == null && (
                 <div className="harvesterhome_body_assignment_empty">
                     <div>
-                        <img src="/pictures/tree_growing.gif"></img>
+                        <img src="/pictures/tree_growing.gif" alt="Tree With Apples"></img>
                         <h5>Assign an order to see the "Assigned Order" view</h5>
                     </div>
                 </div>
