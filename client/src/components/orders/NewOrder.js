@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import "../stylesheets/newOrder.css"
 import { getAllApples } from "../../managers/appleManager"
-import { Button, Input } from "reactstrap"
+import { Button } from "reactstrap"
 import { createOrderItem, decreaseOrderItem, getUnsubmittedOrder, increaseOrderItem } from "../../managers/orderManager"
 import { useNavigate } from "react-router-dom"
 import { Footer } from "../Footer"
@@ -22,8 +22,8 @@ export const NewOrder = ({ loggedInUser }) => {
     }, [])
 
     const handleDisplayedItemPounds = (appleId) => {
-        if (order.orderItems?.some(oi => oi.appleVarietyId == appleId)) {
-            let orderItem = order.orderItems.find(oi => oi.appleVarietyId == appleId)
+        if (order.orderItems?.some(oi => oi.appleVarietyId === appleId)) {
+            let orderItem = order.orderItems.find(oi => oi.appleVarietyId === appleId)
 
             return `${orderItem.pounds} lbs`
         } else {
@@ -33,15 +33,15 @@ export const NewOrder = ({ loggedInUser }) => {
 
     const handleAddOrIncreaseItem = (appleId) => {
         // If the Apple is already in the Order
-        if (order.orderItems.some(oi => oi.appleVarietyId == appleId)) {
-            let orderItem = order.orderItems.find(oi => oi.appleVarietyId == appleId)
+        if (order.orderItems.some(oi => oi.appleVarietyId === appleId)) {
+            let orderItem = order.orderItems.find(oi => oi.appleVarietyId === appleId)
 
             increaseOrderItem(orderItem.id).then(() => {
                 getUnsubmittedOrder().then(setOrder)
             })
         }
         // If the Apple is not already in the Order
-        else if (!order.orderItems.some(oi => oi.appleVarietyId == appleId)) {
+        else if (!order.orderItems.some(oi => oi.appleVarietyId === appleId)) {
             let orderItem = {
                 orderId: order.id,
                 appleVarietyId: appleId,
@@ -56,8 +56,8 @@ export const NewOrder = ({ loggedInUser }) => {
 
     const handleDecreaseItem = (appleId) => {
         // If the Apple is already in the Order
-        if (order.orderItems.some(oi => oi.appleVarietyId == appleId)) {
-            let orderItem = order.orderItems.find(oi => oi.appleVarietyId == appleId)
+        if (order.orderItems.some(oi => oi.appleVarietyId === appleId)) {
+            let orderItem = order.orderItems.find(oi => oi.appleVarietyId === appleId)
 
             decreaseOrderItem(orderItem.id).then(() => {
                 getUnsubmittedOrder().then(setOrder)

@@ -37,19 +37,19 @@ export const ViewApples = ({ loggedInUser }) => {
 
     const poundsProduced = (trees) => {
         let pounds = 0
-        trees.map(tree => {
-            tree.treeHarvestReports.map(thr => {
+        trees.map(tree => (
+            tree.treeHarvestReports.map(thr => (
                 pounds += thr.poundsHarvested
-            })
-        })
+            ))
+        ))
         return pounds
     }
 
     const poundsOrdered = (orderItems) => {
         let pounds = 0
-        orderItems.map(item => {
+        orderItems.map(item => (
             pounds += item.pounds
-        })
+        ))
         return pounds
     }
 

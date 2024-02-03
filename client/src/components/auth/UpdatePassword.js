@@ -29,10 +29,10 @@ export const UpdatePassword = ({ loggedInUser }) => {
     }
 
     useEffect(() => {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         getUserWithRoles(loggedInUser.id).then(userRes => {
             setUser(userRes)
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

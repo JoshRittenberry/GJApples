@@ -9,7 +9,6 @@ export const ChangeEmployeePositionModal = ({ positionModal, togglePositionModal
     const [currentRole, setCurrentRole] = useState({})
 
     useEffect(() => {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         getAllRoles().then(rolesRes => {
             setRoles(rolesRes.filter(role => role.name !== 'Customer'))
             getUserWithRoles(selectedEmployee.id).then(userRes => {
@@ -18,6 +17,7 @@ export const ChangeEmployeePositionModal = ({ positionModal, togglePositionModal
                 setCurrentRole(userRole)
             })
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [togglePositionModal])
 
     return (

@@ -45,8 +45,8 @@ export const EditOrder = ({ loggedInUser }) => {
     }
 
     const handleDisplayedItemPounds = (orderItemId) => {
-        if (order.orderItems?.some(oi => oi.appleVarietyId == orderItemId)) {
-            let orderItem = order.orderItems.find(oi => oi.appleVarietyId == orderItemId)
+        if (order.orderItems?.some(oi => oi.appleVarietyId === orderItemId)) {
+            let orderItem = order.orderItems.find(oi => oi.appleVarietyId === orderItemId)
 
             return `${orderItem.pounds} lbs`
         }
@@ -54,7 +54,7 @@ export const EditOrder = ({ loggedInUser }) => {
 
     const handleIncreaseItem = (orderItemId) => {
         // Make sure the Apple is already in the Order
-        if (order.orderItems.some(oi => oi.id == orderItemId)) {
+        if (order.orderItems.some(oi => oi.id === orderItemId)) {
             increaseOrderItem(orderItemId).then(() => {
                 getOrderById(orderId).then(setOrder)
             })
@@ -63,8 +63,8 @@ export const EditOrder = ({ loggedInUser }) => {
 
     const handleDecreaseItem = (orderItemId) => {
         // Make sure the Apple is already in the Order
-        if (order.orderItems.some(oi => oi.id == orderItemId)) {
-            let orderItem = order.orderItems.find(oi => oi.id == orderItemId)
+        if (order.orderItems.some(oi => oi.id === orderItemId)) {
+            let orderItem = order.orderItems.find(oi => oi.id === orderItemId)
             if (orderItem.pounds > 1) {
                 decreaseOrderItem(orderItem.id).then(() => {
                     getOrderById(orderId).then(setOrder)
@@ -84,7 +84,7 @@ export const EditOrder = ({ loggedInUser }) => {
             getOrderById(orderId).then(order => {
                 setOrder(order)
                 getAllApples().then(apples => {
-                    let filteredApples = apples.filter(apple => !order.orderItems.some(oi => oi.appleVarietyId == apple.id))
+                    let filteredApples = apples.filter(apple => !order.orderItems.some(oi => oi.appleVarietyId === apple.id))
                     setApples(filteredApples)
                 })
                 setNewOrderItem({

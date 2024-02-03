@@ -6,9 +6,9 @@ export const CartSelectionItem = ({ apple, order, setOrder, handleDisplayedItemP
     const [orderItem, setOrderItem] = useState({})
 
     useEffect(() => {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         let item = order.orderItems.find(oi => oi.appleVarietyId === apple.id)
         setOrderItem(item)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
     return (
