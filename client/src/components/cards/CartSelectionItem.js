@@ -6,8 +6,9 @@ export const CartSelectionItem = ({ apple, order, setOrder, handleDisplayedItemP
     const [orderItem, setOrderItem] = useState({})
 
     useEffect(() => {
-        let item = order.orderItems.find(oi => oi.appleVarietyId == apple.id)
+        let item = order.orderItems.find(oi => oi.appleVarietyId === apple.id)
         setOrderItem(item)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
     return (
@@ -17,7 +18,7 @@ export const CartSelectionItem = ({ apple, order, setOrder, handleDisplayedItemP
                     <figure className='cards__cartSelection__item__pic-wrap' data-category={`$${apple?.costPerPound}/lb`}>
                         <img
                             className='cards__cartSelection__item__img'
-                            alt={`${apple?.type} Image`}
+                            alt={`${apple?.type}`}
                             src={apple?.imageUrl}
                         />
                     </figure>

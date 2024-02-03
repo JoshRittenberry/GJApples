@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import "../stylesheets/cart.css"
 import { decreaseOrderItem, deleteOrderItem, getOrderById, getUnsubmittedOrder, increaseOrderItem, submitOrder } from "../../managers/orderManager"
-import { Button, Dropdown, DropdownToggle, Input, Table } from "reactstrap"
+import { Button, Input, Table } from "reactstrap"
 import { Footer } from "../Footer"
 import { useNavigate } from "react-router-dom"
 import { CartSelections } from "../cards/CartSelections"
@@ -34,8 +34,8 @@ export const Cart = ({ loggedInUser }) => {
     })
 
     const handleDisplayedItemPounds = (orderItemId) => {
-        if (order.orderItems?.some(oi => oi.appleVarietyId == orderItemId)) {
-            let orderItem = order.orderItems.find(oi => oi.appleVarietyId == orderItemId)
+        if (order.orderItems?.some(oi => oi.appleVarietyId === orderItemId)) {
+            let orderItem = order.orderItems.find(oi => oi.appleVarietyId === orderItemId)
 
             return `${orderItem.pounds} lbs`
         }
@@ -44,7 +44,7 @@ export const Cart = ({ loggedInUser }) => {
     const handleIncreaseItem = (orderItemId) => {
         // Make sure the Apple is already in the Order
         console.log("hello?")
-        if (order.orderItems.some(oi => oi.id == orderItemId)) {
+        if (order.orderItems.some(oi => oi.id === orderItemId)) {
             increaseOrderItem(orderItemId).then(() => {
                 getOrderById(order.id).then(setOrder)
             })
@@ -53,8 +53,8 @@ export const Cart = ({ loggedInUser }) => {
 
     const handleDecreaseItem = (orderItemId) => {
         // Make sure the Apple is already in the Order
-        if (order.orderItems.some(oi => oi.id == orderItemId)) {
-            let orderItem = order.orderItems.find(oi => oi.id == orderItemId)
+        if (order.orderItems.some(oi => oi.id === orderItemId)) {
+            let orderItem = order.orderItems.find(oi => oi.id === orderItemId)
             if (orderItem.pounds > 1 || screenWidth <= 650) {
                 decreaseOrderItem(orderItem.id).then(() => {
                     getOrderById(order.id).then(setOrder)

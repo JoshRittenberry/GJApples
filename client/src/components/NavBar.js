@@ -2,16 +2,13 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../managers/authManager";
 import "./stylesheets/navBar.css"
-import { Button } from "./Button";
 import { getUnsubmittedOrder } from "../managers/orderManager";
 
 export default function NavBar({ loggedInUser, setLoggedInUser }) {
     const [click, setClick] = useState(false)
-    const [button, setButton] = useState(true)
     const [order, setOrder] = useState({})
 
     useEffect(() => {
-        showButton()
         if (loggedInUser?.roles.includes("Customer")) {
             getUnsubmittedOrder().then(order => {
                 setOrder(order)
@@ -26,16 +23,6 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
     const closeMobileMenu = () => {
         setClick(false)
     }
-
-    const showButton = () => {
-        if (window.innerWidth <= 960) {
-            setButton(false)
-        } else {
-            setButton(true)
-        }
-    }
-
-    window.addEventListener('resize', showButton)
 
     return (
         <>

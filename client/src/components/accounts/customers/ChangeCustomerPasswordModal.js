@@ -1,20 +1,19 @@
 import "../../stylesheets/changeEmployeePasswordModal.css"
 import { useEffect, useState } from "react"
 import { Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
-import { getAllRoles, getUserWithRoles, updateEmployeePassword, updateEmployeeRole } from "../../../managers/employeeManager"
+import { getUserWithRoles, updateEmployeePassword } from "../../../managers/employeeManager"
 
 export const ChangeCustomerPasswordModal = ({ passwordModal, togglePasswordModal, selectedCustomer, setSelectedCustomer, args }) => {
-    const [user, setUser] = useState({})
     const [password, setPassword] = useState({})
 
     useEffect(() => {
         getUserWithRoles(selectedCustomer.id).then(userRes => {
-            setUser(userRes)
             setPassword({
                 identityUserId: userRes.identityUserId,
                 password: null,
             })
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [togglePasswordModal])
 
     const generateRandomPassword = () => {

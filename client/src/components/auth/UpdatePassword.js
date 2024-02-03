@@ -32,6 +32,7 @@ export const UpdatePassword = ({ loggedInUser }) => {
         getUserWithRoles(loggedInUser.id).then(userRes => {
             setUser(userRes)
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

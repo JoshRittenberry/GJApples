@@ -10,7 +10,7 @@ export const NewOrderSelectionItem = ({ apple, order, setOrder, handleDisplayedI
                     <figure className='cards__neworderselection__item__pic-wrap' data-category={`$${apple?.costPerPound}/lb`}>
                         <img
                             className='cards__neworderselection__item__img'
-                            alt={`${apple?.type} Image`}
+                            alt={`${apple?.type}`}
                             src={apple?.imageUrl}
                         />
                     </figure>

@@ -13,7 +13,7 @@ export const ViewOrder = ({ loggedInUser }) => {
 
     useEffect(() => {
         getOrderById(orderId).then(setOrder)
-    }, [])
+    }, [orderId])
 
     return (
         <>

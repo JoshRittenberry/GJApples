@@ -17,6 +17,7 @@ export const ChangeEmployeePositionModal = ({ positionModal, togglePositionModal
                 setCurrentRole(userRole)
             })
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [togglePositionModal])
 
     return (
@@ -33,7 +34,7 @@ export const ChangeEmployeePositionModal = ({ positionModal, togglePositionModal
                             name="select"
                             type="select"
                             onChange={event => {
-                                let newRole = roles.find(role => role.id == event.target.value)
+                                let newRole = roles.find(role => role.id === event.target.value)
                                 setCurrentRole(newRole)
                             }}
                         >

@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react"
-import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
+import { Button, FormGroup, Input, Label } from "reactstrap";
 import { Footer } from "../../Footer"
 import "../../stylesheets/editCustomer.css"
 import { useNavigate, useParams } from "react-router-dom";
 import { getCustomerById, updateCustomer } from "../../../managers/customerManager";
 
 export const EditCustomer = () => {
-    const [customer, setCustomer] = useState({})
     const [update, setUpdate] = useState({})
 
     const navigate = useNavigate()
@@ -14,7 +13,6 @@ export const EditCustomer = () => {
 
     useEffect(() => {
         getCustomerById(customerId).then(res => {
-            setCustomer(res)
             setUpdate({
                 id: res.id,
                 firstName: res.firstName,
@@ -25,7 +23,7 @@ export const EditCustomer = () => {
                 userName: res.userName
             })
         })
-    }, [])
+    }, [customerId])
 
     return (
         <>

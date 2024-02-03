@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom"
 
 export const ViewApples = ({ loggedInUser }) => {
     const [apples, setApples] = useState([])
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [currentPage, setCurrentPage] = useState(1)
 
     const applesPerPage = 10
@@ -15,19 +14,6 @@ export const ViewApples = ({ loggedInUser }) => {
 
     useEffect(() => {
         getAllApples().then(setApples)
-
-        // Function to update screenWidth state when the window is resized
-        const handleResize = () => {
-            setScreenWidth(window.innerWidth)
-        }
-
-        // Attach the event listener for window resize
-        window.addEventListener('resize', handleResize)
-
-        // Clean up the event listener when the component unmounts
-        return () => {
-            window.removeEventListener('resize', handleResize)
-        }
     }, [])
 
     // Calculate the index of the first and last apple to display on the current page
@@ -51,19 +37,19 @@ export const ViewApples = ({ loggedInUser }) => {
 
     const poundsProduced = (trees) => {
         let pounds = 0
-        trees.map(tree => {
-            tree.treeHarvestReports.map(thr => {
+        trees.map(tree => (
+            tree.treeHarvestReports.map(thr => (
                 pounds += thr.poundsHarvested
-            })
-        })
+            ))
+        ))
         return pounds
     }
 
     const poundsOrdered = (orderItems) => {
         let pounds = 0
-        orderItems.map(item => {
+        orderItems.map(item => (
             pounds += item.pounds
-        })
+        ))
         return pounds
     }
 

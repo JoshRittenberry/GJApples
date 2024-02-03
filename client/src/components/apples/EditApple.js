@@ -23,7 +23,7 @@ export const EditApple = ({ loggedInUser }) => {
                 isActive: res.isActive
             })
         })
-    }, [])
+    }, [appleId])
 
     return (
         <>

@@ -44,7 +44,7 @@ export const NewTree = () => {
                             >
                                 {appleVarieties.map(av => {
                                     return (
-                                        <option key={av.id} selected={av.id == newTree.appleVarietyId} value={av.id}>
+                                        <option key={av.id} selected={av.id === newTree.appleVarietyId} value={av.id}>
                                             {av.type}
                                         </option>
                                     )

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import '../stylesheets/adminSelections.css';
-import CardItem from './CardItem';
 import AdminSelectionItem from './AdminSelectionItem';
 
 export const AdminSelections = () => {

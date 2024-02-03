@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { createEmployee, register } from "../../../managers/authManager"
-import { Link, useNavigate } from "react-router-dom"
-import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap"
+import { createEmployee } from "../../../managers/authManager"
+import { useNavigate } from "react-router-dom"
+import { Button, FormGroup, Input, Label } from "reactstrap"
 import { Footer } from "../../Footer"
 import "../../stylesheets/newEmployee.css"
 import { getAllRoles } from "../../../managers/employeeManager"
@@ -46,7 +46,7 @@ export const NewEmployee = ({ setLoggedInUser }) => {
             lastName: lastName,
             address: address
         }
-        if (firstName.trim() == "" || lastName.trim() == "" || userName.trim() == "" || email.trim() == "" || address.trim() == "" || password.trim() == "") {
+        if (firstName.trim() === "" || lastName.trim() === "" || userName.trim() === "" || email.trim() === "" || address.trim() === "" || password.trim() === "") {
             return
         }
 
@@ -108,7 +108,7 @@ export const NewEmployee = ({ setLoggedInUser }) => {
                         name="select"
                         type="select"
                         onChange={event => {
-                            let newRole = roles.find(role => role.id == event.target.value)
+                            let newRole = roles.find(role => role.id === event.target.value)
                             setSelectedRole(newRole)
                         }}
                     >
@@ -148,7 +148,7 @@ export const NewEmployee = ({ setLoggedInUser }) => {
                             Generate
                         </Button>
                     )}
-                    {password != "" && (
+                    {password !== "" && (
                         <Button onClick={() => {
                             handleSubmit()
                         }}>

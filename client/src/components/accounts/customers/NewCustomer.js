@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react"
-import { createCustomer, register } from "../../../managers/authManager"
-import { Link, useNavigate } from "react-router-dom"
-import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap"
+import { useState } from "react"
+import { createCustomer } from "../../../managers/authManager"
+import { useNavigate } from "react-router-dom"
+import { Button, FormGroup, Input, Label } from "reactstrap"
 import { Footer } from "../../Footer"
 import "../../stylesheets/register.css"
 
 export const NewCustomer = ({ setLoggedInUser }) => {
-    const [roles, setRoles] = useState([])
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [userName, setUserName] = useState("")
@@ -37,7 +36,7 @@ export const NewCustomer = ({ setLoggedInUser }) => {
             lastName: lastName,
             address: address
         }
-        if (firstName.trim() == "" || lastName.trim() == "" || userName.trim() == "" || email.trim() == "" || address.trim() == "" || password.trim() == "") {
+        if (firstName.trim() === "" || lastName.trim() === "" || userName.trim() === "" || email.trim() === "" || address.trim() === "" || password.trim() === "") {
             return
         }
 
@@ -119,7 +118,7 @@ export const NewCustomer = ({ setLoggedInUser }) => {
                             Generate
                         </Button>
                     )}
-                    {password != "" && (
+                    {password !== "" && (
                         <Button onClick={() => {
                             handleSubmit()
                         }}>

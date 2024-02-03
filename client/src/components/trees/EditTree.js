@@ -25,19 +25,7 @@ export const EditTree = ({ loggedInUser }) => {
             })
         })
         getAppleVarieties().then(setAppleVarieties)
-    }, [])
-
-    const changeDateRemoved = () => {
-        if (update.dateRemoved == null) {
-            let newUpdate = { ...update }
-            newUpdate.dateRemoved = new Date().toISOString()
-            setUpdate(newUpdate)
-        } else if (update.dateRemoved != null) {
-            let newUpdate = { ...update }
-            newUpdate.dateRemoved = null
-            setUpdate(newUpdate)
-        }
-    }
+    }, [treeId])
 
     return (
         <>
@@ -65,7 +53,7 @@ export const EditTree = ({ loggedInUser }) => {
                             >
                                 {appleVarieties.map(av => {
                                     return (
-                                        <option key={av.id} selected={av.id == update.appleVarietyId} value={av.id}>
+                                        <option key={av.id} selected={av.id === update.appleVarietyId} value={av.id}>
                                             {av.type}
                                         </option>
                                     )
