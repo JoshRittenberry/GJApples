@@ -81,7 +81,7 @@ export const ViewTrees = ({ loggedInUser }) => {
             return "-"
         }
         let pounds = 0
-        let harvest = treeHarvestReports.map(thr => pounds += thr.poundsHarvested)
+        treeHarvestReports.map(thr => pounds += thr.poundsHarvested)
         return pounds
     }
 
