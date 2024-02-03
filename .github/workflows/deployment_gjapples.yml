@@ -76,9 +76,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: client # Specify the path to your React app
 
       - name: Build React app
         run: npm run build
+        working-directory: client # Specify the path to your React app
 
       - name: Deploy to GitHub Pages
         run: |
