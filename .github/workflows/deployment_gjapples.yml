@@ -16,6 +16,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.18.2' # Use Node.js version 18.18.2
+          check-latest: true # Check for the latest matching version if not exact
+
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
@@ -53,5 +59,39 @@ jobs:
         with:
           app-name: 'GJApples'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_488C02BD851E473DBB7B44C511E16483 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_13DDA5D7D08445B29646A4893485EE18 }}
           package: .
+
+  deploy-react:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.18.2' # Use Node.js version 18.18.2
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: client # Specify the path to your React app
+
+      - name: Build React app
+        run: npm run build
+        working-directory: client # Specify the path to your React app
+
+      - name: Deploy to GitHub Pages
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          echo "Deploying to GitHub Pages..."
+          git checkout --orphan gh-pages
+          git --set-upstream-to=origin/main
+          git pull
+          git add -f build
+          git commit -m "Deploy to GitHub Pages"
+          git push origin HEAD:gh-pages
+
+# The rest of your workflow
