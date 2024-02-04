@@ -88,12 +88,12 @@ jobs:
           git config user.email "${{ github.actor }}@users.noreply.github.com"
           echo "Deploying to GitHub Pages..."
           git checkout --orphan gh-pages
-          git pull origin main
           git rm -rf .
           mv client/build/* .
           rm -r client
           git add .
           git commit -m "Deploy to GitHub Pages"
+          git remote set-url origin https://github.com/${{ github.repository }}
           git push origin gh-pages
-
-# The rest of your workflow
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
