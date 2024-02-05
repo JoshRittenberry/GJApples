@@ -50,7 +50,14 @@ public class OrdersController : ControllerBase
                 CustomerUserProfileId = o.CustomerUserProfileId,
                 Customer = null,
                 EmployeeUserProfileId = o.EmployeeUserProfileId,
-                Employee = null,
+                Employee = o.EmployeeUserProfileId != null ? new OrderPickerDTO
+                {
+                    Id = o.Employee.Id,
+                    FirstName = o.Employee.FirstName,
+                    LastName = o.Employee.LastName,
+                    Address = o.Employee.Address,
+                    Email = o.Employee.IdentityUser.Email
+                } : null,
                 DateOrdered = o.DateOrdered,
                 DateCompleted = o.DateCompleted,
                 Canceled = o.Canceled,
@@ -107,7 +114,14 @@ public class OrdersController : ControllerBase
         {
             Id = order.Id,
             CustomerUserProfileId = order.CustomerUserProfileId,
-            Customer = null,
+            Customer = new CustomerDTO
+            {
+                Id = order.Customer.Id,
+                FirstName = order.Customer.FirstName,
+                LastName = order.Customer.LastName,
+                Address = order.Customer.Address,
+                Email = order.Customer.IdentityUser.Email
+            },
             EmployeeUserProfileId = order.EmployeeUserProfileId,
             Employee = null,
             DateOrdered = order.DateOrdered,
@@ -237,7 +251,14 @@ public class OrdersController : ControllerBase
         {
             Id = order.Id,
             CustomerUserProfileId = order.CustomerUserProfileId,
-            Customer = null,
+            Customer = new CustomerDTO
+            {
+                Id = order.Customer.Id,
+                FirstName = order.Customer.FirstName,
+                LastName = order.Customer.LastName,
+                Address = order.Customer.Address,
+                Email = order.Customer.IdentityUser.Email
+            },
             EmployeeUserProfileId = order.EmployeeUserProfileId,
             Employee = null,
             DateOrdered = order.DateOrdered,
