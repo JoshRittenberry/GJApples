@@ -29,7 +29,7 @@ export const ViewOrder = ({ loggedInUser }) => {
                     </div>
                     <h5>Customer: {order.customer?.firstName} {order.customer?.lastName}</h5>
                     <div className="vieworder_header_bottom">
-                        <h5>Phone: (XXX)-XXX-XXXX</h5>
+                        {/* <h5>Phone: (XXX)-XXX-XXXX</h5> */}
                         <h5>Email: {order.customer?.email}</h5>
                     </div>
                 </header>
